@@ -11,377 +11,318 @@
 @font-face{font-family:Archivo;src:url("{{ url_for('static', path='fonts/archivo-600-normal.woff2') }}") format("woff2");font-weight:600;font-stretch:100%;font-display:swap}
 @font-face{font-family:Archivo;src:url("{{ url_for('static', path='fonts/archivo-800-condensed.woff2') }}") format("woff2");font-weight:800;font-stretch:75%;font-display:swap}
 
-/* Chapters: kraft folder, white report sheet, grey file paper, dark folder, ink. One face (Archivo), condensed 800 for display. */
+/* One small planet: a city on a circle whose lower half sits below the screen. Scrolling turns it, scene by scene.
+   Flat drawing language: no outlines, no gradients, no shadows; light buildings on a dark ground; blue is the bus
+   route, red is what a decision took away. */
 :root{
-  --kraft:#c9aa80; --kraft-1:#3f2f20; --kraft-2:#5e4630; --kraft-3:#8a6a47; --kraft-4:#b08d64; --kraft-5:#d9c19f;
-  --sheet:#f6f6f3; --paper:#e6e8eb; --ink:#1b1712; --ink-2:#4a4238; --issue:#9e1f17; --tape:rgba(236,226,206,.82);
-  --m:clamp(16px,4vw,64px); --gap:clamp(20px,2.2vw,32px);
-  --f-xl:clamp(52px,7.2vw,124px); --f-l:clamp(34px,4.2vw,64px); --f-m:clamp(22px,2vw,30px); --f-b:clamp(17px,1.25vw,19px); --f-s:16px;
+  --sky:#e7eaed; --sky-winter:#d9e1e8; --ground:#23272c; --ink:#15181b; --ink-2:#3d434a; --paper:#f6f7f8;
+  --b1:#f3f4f5; --b2:#d3d8dd; --b3:#b4bbc3; --b4:#959ea8; --tree:#7d9a83; --route:#1d5fbf; --gone:#b02e22;
+  --m:clamp(16px,4vw,64px); --f-xl:clamp(46px,6.4vw,104px); --f-l:clamp(36px,4.4vw,68px); --f-b:clamp(17px,1.25vw,19px);
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
 html,body{overflow-x:clip}
-body{margin:0;background:var(--kraft);color:var(--ink);font:400 var(--f-b)/1.55 Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-img{display:block;max-width:100%;height:auto}
+body{margin:0;background:var(--sky);color:var(--ink);font:400 var(--f-b)/1.55 Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .8s}
+body.winter,body.winter .nav{background:var(--sky-winter)}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
-.skip{position:absolute;left:-999px}.skip:focus{left:var(--m);top:8px;z-index:9;background:var(--sheet);padding:8px 12px}
-h1,h2,h3{font-weight:800;font-stretch:75%;letter-spacing:-.02em;line-height:.92;margin:0;text-wrap:balance}
+.skip{position:absolute;left:-999px}.skip:focus{left:var(--m);top:8px;z-index:9;background:var(--paper);padding:8px 12px}
+h1,h2{font-weight:800;font-stretch:75%;letter-spacing:-.02em;line-height:.94;margin:0;text-wrap:balance}
 p{margin:0}
-.wrap{padding-inline:var(--m);max-width:1680px;margin-inline:auto}
-.chapter{position:relative;min-height:90svh}
-.edge{position:absolute;left:0;top:-38px;height:40px;width:max(100%,1440px);display:block;pointer-events:none}
 
-/* ---------- buttons: a dry-brush stroke ---------- */
-.brush{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:0 38px;font-weight:800;font-stretch:75%;
-  font-size:24px;letter-spacing:.005em;text-decoration:none;color:var(--sheet);isolation:isolate;transition:transform .18s var(--ease)}
-.brush svg{position:absolute;inset:0;width:100%;height:100%;z-index:-1;fill:var(--ink);transition:fill .18s}
-.brush:hover{transform:translateY(-2px) rotate(-.6deg)}.brush:active{transform:translateY(1px) scale(.98)}
-.brush.light{color:var(--ink)}.brush.light svg{fill:var(--kraft)}
-.brush.light:hover svg{fill:var(--kraft-5)}
+/* the planet stays put; the story scrolls over the sky above it */
+#world{position:fixed;inset:0;width:100vw;height:100svh;display:block;z-index:0}
+.nav{position:fixed;top:0;left:0;right:0;z-index:3;background:var(--sky);transition:background-color .8s;display:flex;justify-content:space-between;align-items:center;padding:22px var(--m)}
+.word{font-weight:800;font-stretch:75%;font-size:30px;text-decoration:none}
+.nav ul{display:flex;gap:clamp(16px,2.4vw,36px);list-style:none;margin:0;padding:0;font-weight:600;font-size:16px}
+.nav ul a{text-decoration:underline 2px transparent;text-underline-offset:6px;transition:text-decoration-color .2s}
+.nav ul a:hover{text-decoration-color:currentColor}
 
-/* ---------- nav ---------- */
-.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:24px;position:relative;z-index:3}
-.word{font-weight:800;font-stretch:75%;font-size:32px;letter-spacing:-.01em;text-decoration:none}
-.nav ul{display:flex;gap:clamp(14px,2.4vw,36px);list-style:none;margin:0;padding:0;font-size:var(--f-s);font-weight:600}
-.nav ul a{text-decoration:underline 2px transparent;text-underline-offset:6px;transition:text-decoration-color .2s,text-underline-offset .2s}
-.nav ul a:hover{text-decoration-color:currentColor;text-underline-offset:4px}
+main{position:relative;z-index:2}
+.scene{min-height:100svh;padding:clamp(96px,15svh,150px) var(--m) 0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;align-content:start}
+.scene .t{grid-column:1 / 6}
+.scene .s{grid-column:1 / 6;margin-top:30px}
+.scene h1{font-size:var(--f-xl)}
+.scene h2{font-size:var(--f-l)}
+.scene .t p{margin-top:22px;max-width:40ch;font-size:clamp(18px,1.4vw,21px)}
+.scene .s p{max-width:38ch}
 
-/* ---------- hero ---------- */
-.hero{min-height:100svh;overflow:hidden;display:grid}
-.hero .copy{position:relative;z-index:2;align-self:center;max-width:min(46vw,720px);padding-block:48px 96px}
-.hero h1{font-size:var(--f-xl)}
-.hero .lede{margin-top:32px;max-width:34ch;font-size:clamp(18px,1.4vw,21px)}
-.hero .act{margin-top:36px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
-.hero .act a.text{font-weight:600;font-size:var(--f-s)}
-.sheet{position:absolute;top:0;bottom:0;right:0;width:52vw;background:var(--sheet);clip-path:{{ sheet_clip }};z-index:1}
-.board{position:absolute;z-index:2;right:var(--m);top:clamp(96px,13vh,140px);width:min(42vw,640px);display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
-.print{position:relative;grid-column:1 / -1;width:78%;justify-self:end;transform:rotate(1.4deg)}
-.print img{width:100%;aspect-ratio:16/10;object-fit:cover;filter:grayscale(1) contrast(1.05)}
-.print.in .shutter img{animation:drift 30s 1.4s ease-in-out infinite alternate}
-.print figcaption{font-size:var(--f-s);margin-top:8px;color:var(--ink-2)}
-.tape{position:absolute;width:96px;height:28px;background:var(--tape);top:-12px;left:42%;transform:rotate(-4deg);z-index:2}
-.evidence{grid-column:1 / -1;position:relative;background:var(--paper);padding:26px 28px 24px;transform:rotate(-.8deg)}
-.evidence .tape{left:auto;right:30px;transform:rotate(5deg)}
-.evidence h2{font-size:var(--f-m);line-height:1.05}
-.riders{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 18px}
-.riders button{font:600 var(--f-s) Archivo,sans-serif;padding:10px 14px;min-height:44px;border:0;background:var(--sheet);color:var(--ink);cursor:pointer;transition:background .15s,transform .15s}
-.riders button:hover{background:#fff;transform:translateY(-1px)}
-.riders button[aria-pressed=true]{background:var(--ink);color:var(--sheet)}
-.walk{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;font-variant-numeric:tabular-nums}
-.walk b{font-weight:800;font-stretch:75%;font-size:clamp(44px,4.6vw,72px);line-height:1;letter-spacing:-.02em}
-.walk .was{color:var(--ink-2)}
-.walk .arrow{font-size:28px}
-.bar{position:relative;height:14px;background:var(--sheet);margin:16px 0 8px}
-.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--ink);transition:width .5s var(--ease)}
-.bar i.over{background:var(--issue)}
-.bar u{position:absolute;top:-6px;bottom:-6px;width:3px;background:var(--issue);text-decoration:none;transition:left .5s var(--ease)}
-.verdict{font-size:var(--f-s);min-height:3em}
-.verdict strong{color:var(--issue)}
-.cite{margin-top:14px;font-size:var(--f-s);color:var(--ink-2)}
+.btn{display:inline-flex;align-items:center;min-height:52px;padding:0 26px;background:var(--ink);color:var(--paper);font-weight:600;font-size:18px;text-decoration:none;border-radius:999px;transition:transform .18s var(--ease),background .18s}
+.btn:hover{transform:translateY(-2px);background:#000}.btn:active{transform:translateY(1px)}
+.act{margin-top:30px;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.act .text{font-weight:600}
 
-/* ---------- how a case is built: accordion ---------- */
-.how{background:var(--paper);padding-block:clamp(96px,12vw,180px) clamp(96px,10vw,160px)}
-.intro{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:end}
-.intro h2{grid-column:1 / 6;font-size:var(--f-l)}
-.intro p{grid-column:7 / 12;max-width:60ch}
-.acc{display:flex;margin-top:64px;height:540px}
-.stage{position:relative;flex:1 1 0;min-width:0;overflow:hidden;transition:flex-grow .45s var(--ease);cursor:pointer;color:var(--sheet)}
-.stage:nth-child(1){background:var(--kraft-1)}.stage:nth-child(2){background:var(--kraft-2)}
-.stage:nth-child(3){background:var(--kraft-3);color:var(--ink)}.stage:nth-child(4){background:var(--kraft-4);color:var(--ink)}
-.stage:nth-child(5){background:var(--kraft-5);color:var(--ink)}
-.stage[aria-expanded=true]{flex-grow:6;cursor:default}
-.stage button.sliver{all:unset;position:absolute;inset:0;cursor:pointer}
-.stage button.sliver:focus-visible{outline:3px solid currentColor;outline-offset:-6px}
-.stage .name{position:absolute;left:22px;bottom:22px;transform-origin:left bottom;transform:rotate(-90deg) translateY(100%);white-space:nowrap;font-weight:800;font-stretch:75%;font-size:24px;transition:opacity .2s}
-.stage[aria-expanded=true] .name{opacity:0}
-.stage .open{position:absolute;inset:0;padding:34px;display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);opacity:0;visibility:hidden;transition:opacity .3s .15s}
-.stage[aria-expanded=true] .open{opacity:1;visibility:visible}
-.open h3{font-size:clamp(34px,3vw,46px);grid-column:1}
-.open p{grid-column:1;align-self:end;max-width:36ch}
-.open .fig{grid-column:2;grid-row:1 / 3;align-self:stretch;overflow:hidden}
-.open .fig img{width:100%;height:100%;object-fit:cover;filter:grayscale(.35)}
-.open .num{font-weight:800;font-stretch:75%;font-size:clamp(64px,7vw,120px);line-height:.9;grid-column:2;grid-row:1 / 3;align-self:center}
+/* figures: the answer of each scene, large */
+.fig{font-weight:800;font-stretch:75%;font-size:clamp(52px,5.6vw,92px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.fig .was{color:var(--ink-2)}
+.fig .to{font-size:.4em}
+.fig .bad{color:var(--gone)}
+.riders{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
+.riders button{font:600 16px Archivo,sans-serif;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;transition:background .15s,color .15s}
+.riders button:hover{background:rgba(21,24,27,.08)}
+.riders button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.verdict{min-height:3.2em}
+.verdict strong{color:var(--gone)}
+blockquote{margin:24px 0 0;font-size:clamp(20px,1.7vw,26px);line-height:1.35;max-width:34ch}
+.src{margin-top:14px;font-size:16px;color:var(--ink-2)}
 
-/* ---------- cases: cards crossing a held photograph ---------- */
-.cases{position:relative;height:240svh;background:var(--ink)}
-.stagewrap{position:sticky;top:0;height:100svh;overflow:hidden}
-.held{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.42) grayscale(.5);animation:drift 24s ease-in-out infinite alternate}
-@keyframes drift{from{transform:scale(1.04) translateX(-1%)}to{transform:scale(1.1) translateX(1%)}}
-.cases h2{position:absolute;left:var(--m);top:clamp(48px,9vh,96px);color:var(--sheet);font-size:var(--f-l);z-index:2;max-width:12ch;transition:transform .2s linear,opacity .2s linear}
-.track{position:absolute;top:50%;left:0;display:flex;gap:40px;padding-left:46vw;transform:translateY(-50%);will-change:transform}
-.case{flex:none;width:min(680px,72vw);height:min(560px,64svh);display:grid;grid-template-rows:64% 36%;background:var(--sheet);text-decoration:none;color:var(--ink);transition:transform .25s var(--ease)}
-.case:hover{transform:translateY(-6px) rotate(-.4deg)}
-.case img{width:100%;height:100%;object-fit:cover;filter:grayscale(.2)}
-.case .lab{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:end;padding:22px 26px}
-.case:nth-child(1) .lab{background:var(--kraft)}.case:nth-child(2) .lab{background:var(--kraft-5)}
-.case:nth-child(3) .lab{background:var(--paper)}.case:nth-child(4) .lab{background:var(--kraft-4)}
-.case h3{font-size:clamp(30px,2.8vw,46px)}
-.case p{font-size:var(--f-s);text-align:right;line-height:1.4}
-.case p b{font-variant-numeric:tabular-nums}
-.case .tag{display:inline-block;font-weight:600}
+footer{position:relative;z-index:2;background:var(--ground);color:var(--b2);padding:56px var(--m) 40px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:24px;font-size:16px}
+footer .links{grid-column:1 / 6;display:grid;gap:6px}
+footer .links a{font-weight:800;font-stretch:75%;font-size:clamp(26px,2.4vw,36px);text-decoration:none;color:var(--paper)}
+footer .links a:hover{color:var(--b3)}
+footer .note{grid-column:7 / 13;display:grid;gap:12px;align-content:start}
 
-/* ---------- evidence sources: tiles ---------- */
-.proof{background:var(--sheet);padding-block:clamp(110px,12vw,180px)}
-.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.tile{aspect-ratio:3/2;background:var(--paper);padding:24px;display:flex;flex-direction:column;justify-content:flex-start;gap:12px}
-.tile.head{grid-column:span 2;aspect-ratio:auto;background:var(--kraft);}
-.tile.head h2{font-size:var(--f-l);max-width:11ch}
-.tile.head p{max-width:42ch}
-.tile h3{font-size:clamp(26px,2.2vw,34px);line-height:.98}
-.tile p{font-size:var(--f-s);color:var(--ink)}
-.tile.head{justify-content:space-between}
-.tile .n{font-weight:800;font-stretch:75%;font-size:clamp(40px,3.6vw,60px);line-height:1;font-variant-numeric:tabular-nums}
+/* snow: only in the winter scene, only when motion is allowed */
+#snow{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .8s}
+body.winter #snow{opacity:1}
+#snow i{position:absolute;top:-10px;width:6px;height:6px;border-radius:50%;background:#fff;animation:fall linear infinite}
+@keyframes fall{to{transform:translate3d(30px,105svh,0)}}
 
-/* ---------- close ---------- */
-.close{background:var(--ink);color:var(--sheet);min-height:92svh;display:grid;grid-template-rows:1fr auto;padding-block:clamp(110px,12vw,180px) 64px}
-.close h2{font-size:clamp(64px,10vw,180px);line-height:.88;max-width:9ch}
-.close .row{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:end;margin-top:64px}
-.close .row p{grid-column:1 / 6;font-size:clamp(18px,1.5vw,22px)}
-.close .row .brush{grid-column:9 / 13;justify-self:end}
+/* the drawing */
+.gone-sign{transition:transform .9s var(--ease),opacity .9s}
+.fallen .gone-sign{transform:rotate(-82deg);opacity:.55}
+.ring-x{opacity:0;transition:opacity .5s .5s}
+.fallen .ring-x{opacity:1}
+.walk-before,.walk-after{opacity:0;transition:opacity .6s}
+.show-before .walk-before{opacity:1}
+.fallen .walk-after{opacity:1}
 
-/* ---------- footer ---------- */
-footer{background:var(--kraft-1);color:var(--sheet);padding-top:72px;overflow:hidden}
-.places{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)}
-.places ul{list-style:none;margin:0;padding:0}
-.places .big{grid-column:1 / 6}.places .big a{display:block;font-weight:800;font-stretch:75%;font-size:clamp(28px,2.6vw,38px);line-height:1.2;text-decoration:none;color:var(--kraft-5)}
-.places .big a:hover{color:var(--sheet)}
-.places .small{grid-column:7 / 13;font-size:var(--f-s);display:grid;gap:10px}
-.places .small a{color:var(--kraft-5)}
-.legal{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:72px;font-size:var(--f-s);color:var(--kraft-5)}
-.giant{font-weight:800;font-stretch:75%;font-size:25.5vw;line-height:.74;letter-spacing:-.03em;margin:48px 0 -6.2vw;color:var(--kraft);white-space:nowrap}
-
-/* ---------- motion: entrances only when JS runs; reduced motion keeps everything still ---------- */
-.js [data-rise]{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i,0) * 80ms)}
-.js [data-rise].in{opacity:1;transform:none}
-.js .print .shutter{clip-path:inset(0 0 100% 0);transition:clip-path 1.1s var(--ease)}
-.js .print .shutter img{transform:scale(1.12);transition:transform 1.4s var(--ease)}
-.js .print.in .shutter{clip-path:inset(0)}.js .print.in .shutter img{transform:none}
-.print .shutter{overflow:hidden}
-@media (prefers-reduced-motion:reduce){
-  .js [data-rise]{opacity:1;transform:none;transition:none}
-  .js .print .shutter{clip-path:none}.js .print .shutter img{transform:none}
-  .stage,.bar i,.bar u,.case,.brush{transition:none}
-  .held,.print.in .shutter img{animation:none}
-}
-
-/* ---------- phone and tablet ---------- */
-@media (max-width:900px){
-  .hero .copy{max-width:none;padding-block:28px 24px}
-  .sheet{display:none}
-  .board{position:static;width:auto;grid-template-columns:1fr;background:var(--sheet);padding:56px var(--m) 72px}
+@media (prefers-reduced-motion:reduce){ #snow{display:none} .gone-sign,.ring-x,.walk-before,.walk-after{transition:none} }
+@media (max-width:860px){
+  .scene{padding-top:96px;grid-template-columns:1fr}
+  .scene .t,.scene .s{grid-column:1}
+  .scene .s{align-self:start;margin-top:20px}
   .nav ul li:not(:last-child){display:none}
-  .hero{display:block}
-  .intro h2,.intro p{grid-column:1 / -1}
-  .acc{flex-direction:column;height:auto}
-  .stage{flex:none;min-height:64px}
-  .stage .name{transform:none;bottom:auto;top:18px;left:var(--m);font-size:20px}
-  .stage .open{position:relative;display:block;padding:24px var(--m);opacity:1;visibility:visible;display:none}
-  .stage[aria-expanded=true] .open{display:block}
-  .stage[aria-expanded=true] .name{opacity:0;position:absolute}
-  .open .fig,.open .num{margin-top:20px}
-  .open .fig img{height:auto;aspect-ratio:4/3}
-  .open p{margin-top:12px}
-  .cases{height:auto;padding-block:96px}
-  .stagewrap{position:relative;height:auto;overflow:visible}
-  .held{position:relative;height:auto;aspect-ratio:4/5;filter:brightness(.6) grayscale(.5)}
-  .cases h2{position:relative;left:auto;top:auto;padding:0 var(--m) 24px}
-  .track{position:relative;transform:none!important;flex-direction:column;padding:24px var(--m) 0;top:auto;gap:24px}
-  .case{width:100%;height:auto;grid-template-rows:auto auto}
-  .case img{aspect-ratio:4/3}
-  .case .lab{grid-template-columns:1fr}.case p{text-align:left}
-  .tiles{grid-template-columns:1fr 1fr;gap:6px}
-  .tile.head{grid-column:1 / -1}
-  .tile{aspect-ratio:auto;min-height:150px;padding:18px}
-  .close .row p,.close .row .brush{grid-column:1 / -1;justify-self:stretch}
-  .places .big,.places .small{grid-column:1 / -1}
+  footer .links,footer .note{grid-column:1 / -1}
 }
 </style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#s0">Skip to content</a>
+<svg id="world" role="img" aria-label="A drawing of a small round city: buildings, trees, bus stops and City Hall stand around the edge of a planet that turns as you scroll."></svg>
+<div id="snow" aria-hidden="true"></div>
+<nav class="nav" aria-label="Main">
+  <a class="word" href="/">TripLens</a>
+  <ul><li><a href="#s1">How it works</a></li><li><a href="/decisions">Decisions</a></li><li><a href="/map">Open the map</a></li></ul>
+</nav>
 
-<!-- Chapter 1: the kraft case folder, with the report sheet torn open on the right -->
-<header class="chapter hero" id="main">
-  <div class="sheet" aria-hidden="true"></div>
-  <div class="wrap" style="position:relative;z-index:3;width:100%">
-    <nav class="nav" aria-label="Main">
-      <a class="word" href="/">TripLens</a>
-      <ul><li><a href="#how">How it works</a></li><li><a href="#cases">Cases</a></li><li><a href="/decisions">Decisions</a></li><li><a href="/map">Map</a></li></ul>
-    </nav>
-    <div class="copy">
-      <h1 data-rise>Council moved your bus stop.</h1>
-      <p class="lede" data-rise style="--i:1">TripLens checks Toronto council decisions against the bus trip you take every day, and shows what changed for a wheelchair user, a senior with a walker or a shift worker.</p>
-      <div class="act" data-rise style="--i:2">
-        <a class="brush" href="/map"><svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="{{ brush }}"/></svg>Open your case file</a>
-        <a class="text" href="#cases">See four real cases</a>
-      </div>
+{% set h = hero['senior_walker'] %}
+<main>
+  <section class="scene" id="s0" data-scene="0" aria-labelledby="h0">
+    <div class="t">
+      <h1 id="h0">Council moved your bus stop.</h1>
+      <p>TripLens checks Toronto council decisions against the bus trip you take every day, and shows what changed for a wheelchair user, a senior with a walker or a shift worker.</p>
+      <div class="act"><a class="btn" href="/map">Map your trip</a><a class="text" href="#s1">See how it works</a></div>
     </div>
-  </div>
+  </section>
 
-  {% set h = hero['senior_walker'] %}
-  <div class="board">
-    <figure class="print" data-rise>
-      <span class="tape" aria-hidden="true"></span>
-      <div class="shutter"><img src="{{ url_for('static', path='img/' ~ h.photo) }}" width="1280" height="1045" alt="{{ h.photo_alt }}" fetchpriority="high"></div>
-      <figcaption>Bathurst Street. In July 2025 council approved RapidTO bus lanes here, and the Heathdale Rd stop was removed.</figcaption>
-    </figure>
-    <section class="evidence" aria-labelledby="ev-h" data-rise style="--i:1">
-      <span class="tape" aria-hidden="true"></span>
-      <h2 id="ev-h">7 Bathurst, item {{ h.item_id }}: the walk to your stop</h2>
-      <div class="riders" role="group" aria-label="Who is travelling">
-        {% set short = {"senior_walker": "Senior with a walker", "wheelchair": "Wheelchair user", "shift_worker": "Shift worker"} %}{% for k, c in hero.items() %}<button type="button" data-r="{{ k }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ short[k] }}</button>{% endfor %}
-      </div>
-      <div class="walk" aria-live="polite"><b class="was" id="ev-b">{{ h.before_m }} m</b><span class="arrow" aria-hidden="true">→</span><b id="ev-a">{{ h.after_m }} m</b></div>
-      <div class="bar" aria-hidden="true"><i id="ev-bar"></i><u id="ev-lim"></u></div>
-      <p class="verdict" id="ev-v"></p>
-      <p class="cite">Before: {{ h.board_before | replace(' (removed stop; location reconstructed)', '') }} (reconstructed). Today: {{ h.board_after }}. From 1599 Bathurst St, on the City sidewalk network.</p>
-    </section>
-  </div>
-</header>
-
-<!-- Chapter 2: how a case is built -->
-<section class="chapter how" id="how" aria-labelledby="how-h">
-  <svg class="edge" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path fill="#e6e8eb" d="{{ torn(11) }}"/></svg>
-  <div class="wrap">
-    <div class="intro">
-      <h2 id="how-h" data-rise>How a case is built</h2>
-      <p data-rise style="--i:1">A council decision is a staff report with page numbers. Your trip is a walk, a wait and a ride. TripLens puts the two side by side, and every claim it shows can be traced to the page it came from.</p>
+  <section class="scene" id="s1" data-scene="1" aria-labelledby="h1">
+    <div class="t">
+      <h2 id="h1">This is her usual trip.</h2>
+      <p>A senior with a walker leaves 1599 Bathurst St and walks to the 7 Bathurst stop at Heathdale Rd. On the City's sidewalk network that walk is about {{ h.before_m }} m.</p>
     </div>
-    <div class="acc" data-rise style="--i:2">
-      {% set stages = [
-        ("Search the records", "TripLens searches " ~ "{:,}".format(counts.reports) ~ " City staff reports from " ~ counts.n_items ~ " council and committee items for the streets your route runs on.", "num", "{:,}".format(counts.reports)),
-        ("Check every quote", "An AI research agent may read the reports, but software keeps a finding only if its quote is on the page it cites, with no new numbers and no stronger words.", "img", "toronto-city-hall-council-chamber.jpg"),
-        ("Replay your trip", "Your walk follows the City pedestrian network, before and after the change, against the walking limit for your rider.", "img", "bay-ttc-renewed-bus-shelter.jpg"),
-        ("Ask the street", "Located 311 requests near your stops and walks (snow, ice, broken sidewalks), and reports from riders.", "num", "{:,}".format(counts.requests311)),
-        ("Send it on", "A plain report with the decision, the quotes and your own words, for your councillor, 311 or the TTC. Nothing is sent for you.", "img", "sidewalk-snow-plow-31975535047.jpg"),
-      ] %}
-      {% for name, text, kind, val in stages %}
-      <div class="stage" aria-expanded="{{ 'true' if loop.first else 'false' }}">
-        <button type="button" class="sliver" aria-label="{{ name }}" aria-expanded="{{ 'true' if loop.first else 'false' }}"></button>
-        <span class="name" aria-hidden="true">{{ name }}</span>
-        <div class="open">
-          <h3>{{ name }}</h3>
-          <p>{{ text }}</p>
-          {% if kind == 'num' %}<span class="num">{{ val }}</span>
-          {% else %}<div class="fig"><img src="{{ url_for('static', path='img/' ~ val) }}" width="1600" height="1100" alt="" loading="lazy"></div>{% endif %}
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
+    <div class="s"><p class="fig">{{ h.before_m }} m</p><p>to the stop, before the decision</p></div>
+  </section>
 
-<!-- Chapter 3: cases on file, crossing the council chamber -->
-<section class="cases" id="cases" aria-labelledby="cases-h">
-  <svg class="edge" style="z-index:3" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path fill="#1b1712" d="{{ torn(17) }}"/></svg>
-  <div class="stagewrap">
-    <img class="held" src="{{ url_for('static', path='img/toronto-city-hall-council-chamber.jpg') }}" width="1600" height="1200" alt="Toronto City Council chamber at City Hall" loading="lazy">
-    <h2 id="cases-h">Four cases on file</h2>
-    <div class="track" id="track">
-      {% for c in cases %}
-      <a class="case" href="/map?sample={{ c.key }}">
-        <img src="{{ url_for('static', path='img/' ~ c.photo) }}" width="1600" height="1000" alt="{{ c.photo_alt }}" loading="lazy">
-        <div class="lab">
-          <h3>{{ c.title }}</h3>
-          <p>{% if c.before_m != c.after_m %}Walk to the stop <b>{{ c.before_m }} m → {{ c.after_m }} m</b> for a {{ c.rider_label | lower }}.{% else %}Same walk, <b>{{ c.after_m }} m</b>, for a {{ c.rider_label | lower }}.{% endif %}
-            {% if c.improvements %}{{ c.improvements | length }} issue{{ 's' if c.improvements | length > 1 }} removed.{% elif c.new_issues %}{{ c.new_issues | length }} new issue{{ 's' if c.new_issues | length > 1 }}.{% endif %}
-            <br><span class="tag">{% if c.phase == 'implemented' %}Decided and built{% else %}{{ c.status | capitalize }}{% endif %}</span></p>
-        </div>
-      </a>
-      {% endfor %}
+  <section class="scene" id="s2" data-scene="2" aria-labelledby="h2">
+    <div class="t">
+      <h2 id="h2">Then council approved RapidTO.</h2>
+      <p>In July 2025 (item {{ h.item_id }}) bus lanes came to Bathurst and the Heathdale stop was removed. The nearest stop left is {{ h.board_after }}.</p>
     </div>
-  </div>
-</section>
-
-<!-- Chapter 4: where the evidence comes from -->
-<section class="chapter proof" aria-labelledby="proof-h">
-  <svg class="edge" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path fill="#fbfaf6" d="{{ torn(23) }}"/></svg>
-  <div class="wrap tiles">
-    <div class="tile head" data-rise>
-      <h2 id="proof-h">The evidence</h2>
-      <p>Every fact comes from public records. Each source is used for one job, and the page that shows a fact links back to it.</p>
+    <div class="s">
+      {% set short = {"senior_walker": "Senior with a walker", "wheelchair": "Wheelchair user", "shift_worker": "Shift worker"} %}
+      <div class="riders" role="group" aria-label="Who is travelling">{% for k in hero %}<button type="button" data-r="{{ k }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ short[k] }}</button>{% endfor %}</div>
+      <p class="fig" aria-live="polite"><span class="was" id="fb">{{ h.before_m }} m</span><span class="to" aria-hidden="true">→</span><span id="fa" class="bad">{{ h.after_m }} m</span></p>
+      <p class="verdict" id="fv"></p>
     </div>
-    <div class="tile" data-rise style="--i:1"><h3 class="n">{{ "{:,}".format(counts.reports) }}</h3><p>City staff reports, searched page by page</p></div>
-    <div class="tile" data-rise style="--i:2"><h3 class="n">{{ "{:,}".format(counts.requests311) }}</h3><p>311 requests about snow, ice, sidewalks and curbs, placed at their intersection</p></div>
-    <div class="tile" data-rise><h3>TTC schedule</h3><p>Routes, stops, departures and wheelchair boarding, from the open GTFS feed</p></div>
-    <div class="tile" data-rise style="--i:1"><h3>Pedestrian Network</h3><p>The City's sidewalks and crossings, for every walk</p></div>
-    <div class="tile" data-rise style="--i:2"><h3>Shelters and benches</h3><p>City street furniture, for the wait at each stop</p></div>
-    <div class="tile" data-rise style="--i:3"><h3>Council records</h3><p>Items, decisions and how to comment or speak, from the City's own pages</p></div>
-  </div>
-</section>
+  </section>
 
-<!-- Chapter 5: the close, inverted -->
-<section class="chapter close" aria-labelledby="close-h">
-  <div class="wrap"><h2 id="close-h" data-rise>Open your own case.</h2></div>
-  <div class="wrap row">
-    <p data-rise>Click where you start and where you are going, pick your bus and your stops, and see what council has changed along the way.</p>
-    <a class="brush light" href="/map" data-rise style="--i:1"><svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="{{ brush }}"/></svg>Open the map</a>
-  </div>
-</section>
+  <section class="scene" id="s3" data-scene="3" aria-labelledby="h3">
+    <div class="t">
+      <h2 id="h3">Some changes only show in winter.</h2>
+      <p>A stop with no shelter means waiting outside. TripLens places this year's 311 requests (snow at bus stops, icy and broken sidewalks) along your walk and your stops.</p>
+    </div>
+    <div class="s"><p class="fig">{{ "{:,}".format(counts.requests311) }}</p><p>311 requests from this year about snow, ice, sidewalks and curbs, each placed at its intersection.</p></div>
+  </section>
+
+  <section class="scene" id="s4" data-scene="4" aria-labelledby="h4">
+    <div class="t">
+      <h2 id="h4">Every claim has a page number.</h2>
+      <p>TripLens searches {{ "{:,}".format(counts.reports) }} City staff reports from {{ counts.n_items }} council items. An AI agent may read them, but a finding is shown only if its quote is on the page it cites.</p>
+    </div>
+    <div class="s">
+      <blockquote>“{{ h.quote }}”</blockquote>
+      <p class="src">Staff report for item {{ h.item_id }}. <a href="{{ h.source_url }}">Read the source</a></p>
+    </div>
+  </section>
+
+  <section class="scene" id="s5" data-scene="5" aria-labelledby="h5">
+    <div class="t">
+      <h2 id="h5">Now check your own trip.</h2>
+      <p>Click where you start and where you are going, choose your bus and your stops, and see what council has changed along the way. Then send a report to your councillor, 311 or the TTC.</p>
+      <div class="act"><a class="btn" href="/map">Open the map</a><a class="text" href="/decisions">Browse council decisions</a></div>
+    </div>
+  </section>
+</main>
 
 <footer>
-  <div class="wrap places">
-    <ul class="big">
-      <li><a href="/map">Map your trip</a></li>
-      <li><a href="/decisions">Council decisions</a></li>
-      <li><a href="/route">Text-only trip check</a></li>
-    </ul>
-    <div class="small">
-      <p>A working prototype for CIVIC Hack 2026. Not an official City of Toronto or TTC service. Walking limits are illustrative, not medical or legal definitions.</p>
-      <p>Photographs: {% for c in credits %}<a href="{{ c.page }}">{{ c.title | truncate(48) }}</a> by {{ c.creator or 'unknown' }}, {{ c.license }}{{ '; ' if not loop.last else '.' }}{% endfor %}</p>
-      <p>Data: City of Toronto Open Data (Open Government Licence – Toronto); TTC GTFS.</p>
-    </div>
+  <div class="links"><a href="/map">Map your trip</a><a href="/decisions">Council decisions</a><a href="/route">Text-only trip check</a></div>
+  <div class="note">
+    <p>A working prototype for CIVIC Hack 2026. Not an official City of Toronto or TTC service. Walking limits are illustrative, not medical or legal definitions. Distances are from the City pedestrian network; the removed stop's place is reconstructed.</p>
+    <p>Data: City of Toronto Open Data (Open Government Licence – Toronto), TTC GTFS, City of Toronto staff reports. Drawings made for this page.</p>
   </div>
-  <div class="wrap legal"><span>TripLens</span><a href="#main">Back to top</a></div>
-  <div class="wrap" aria-hidden="true"><div class="giant">TripLens</div></div>
 </footer>
 
 <script>
-document.documentElement.classList.add('js');
 const HERO = {{ hero | tojson }};
+const NS = 'http://www.w3.org/2000/svg';
 const $ = id => document.getElementById(id);
+const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const svg = $('world');
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent && parent.appendChild(e); return e; };
 
-/* the live element: switch rider, see the same decision against that rider's walking limit */
+/* ---------- the planet, drawn at radius 400; angles are degrees clockwise from the top ---------- */
+const R = 400;
+const root = el('g', {}, svg), spin = el('g', {}, root);
+el('circle', {r: R, fill: 'var(--ground)'}, spin);
+el('circle', {r: R - 7, fill: 'none', stroke: '#3a4047', 'stroke-width': 8}, spin);            // the road
+el('circle', {r: R - 7, fill: 'none', stroke: 'var(--route)', 'stroke-width': 2.2}, spin);    // the bus route
+const at = (deg, parent, lift = 0) => el('g', {transform: `rotate(${deg}) translate(0 ${-(R + lift)})`}, parent || spin);
+const pt = (deg, r) => [r * Math.sin(deg * Math.PI / 180), -r * Math.cos(deg * Math.PI / 180)];
+const arc = (a1, a2, r, attrs) => { const [x1, y1] = pt(a1, r), [x2, y2] = pt(a2, r);
+  return el('path', {d: `M${x1} ${y1} A${r} ${r} 0 0 ${a2 > a1 ? 1 : 0} ${x2} ${y2}`, fill: 'none', ...attrs}, spin); };
+
+// a seeded random, so the city is the same on every visit
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const SHADES = ['var(--b1)', 'var(--b2)', 'var(--b3)', 'var(--b4)'];
+
+function building(deg, w, h, shade){
+  const g = at(deg);
+  el('rect', {x: -w / 2, y: -h, width: w, height: h, fill: shade}, g);
+  for (let y = -h + 8; y < -10; y += 12) for (let x = -w / 2 + 6; x < w / 2 - 6; x += 10)
+    if (rnd() > .35) el('rect', {x, y, width: 4, height: 6, fill: 'var(--ground)', opacity: .22}, g);
+  return g;
+}
+function tree(deg, s = 1){ const g = at(deg); el('rect', {x: -1.5, y: -10 * s, width: 3, height: 10 * s, fill: 'var(--b4)'}, g);
+  el('circle', {cx: 0, cy: -18 * s, r: 9 * s, fill: 'var(--tree)'}, g); return g; }
+function stop(deg, cls){ const g = at(deg); const s = el('g', {class: cls || '', style: 'transform-box:fill-box;transform-origin:50% 100%'}, g);
+  el('rect', {x: -1.6, y: -46, width: 3.2, height: 46, fill: 'var(--b2)'}, s);
+  el('rect', {x: -8, y: -58, width: 16, height: 14, rx: 2, fill: cls ? 'var(--gone)' : 'var(--route)'}, s);
+  el('rect', {x: -4, y: -54, width: 8, height: 2.4, fill: 'var(--paper)'}, s); return g; }
+function shelter(deg){ const g = at(deg); el('rect', {x: -18, y: -30, width: 36, height: 3, fill: 'var(--b1)'}, g);
+  el('rect', {x: -18, y: -30, width: 2.5, height: 30, fill: 'var(--b1)'}, g); el('rect', {x: 15.5, y: -30, width: 2.5, height: 30, fill: 'var(--b1)'}, g);
+  el('rect', {x: -15, y: -27, width: 30, height: 20, fill: 'var(--b1)', opacity: .28}, g); el('rect', {x: -10, y: -10, width: 20, height: 3, fill: 'var(--b3)'}, g); return g; }
+function house(deg){ const g = at(deg); el('path', {d: 'M-16 0 V-24 L0 -38 L16 -24 V0 Z', fill: 'var(--b1)'}, g);
+  el('rect', {x: -4, y: -14, width: 8, height: 14, fill: 'var(--ground)', opacity: .5}, g); return g; }
+function walker(deg){ const g = at(deg); // a person with a walker, facing the direction of travel
+  el('circle', {cx: 0, cy: -27, r: 4, fill: 'var(--paper)'}, g); el('path', {d: 'M0 -22 L1 -9 M1 -9 L-3 0 M1 -9 L5 0 M0 -19 L7 -14', stroke: 'var(--paper)', 'stroke-width': 3, 'stroke-linecap': 'round', fill: 'none'}, g);
+  el('path', {d: 'M7 -15 H14 M8 -15 L7 0 M14 -15 L15 0', stroke: 'var(--b3)', 'stroke-width': 2, fill: 'none', 'stroke-linecap': 'round'}, g); return g; }
+function person(deg){ const g = at(deg); el('circle', {cx: 0, cy: -27, r: 4, fill: 'var(--paper)'}, g);
+  el('path', {d: 'M0 -22 V-9 M0 -9 L-3 0 M0 -9 L3 0', stroke: 'var(--paper)', 'stroke-width': 3, 'stroke-linecap': 'round', fill: 'none'}, g); return g; }
+function cityHall(deg){ // two curved towers around a low round council chamber
+  const g = at(deg);
+  el('path', {d: 'M-70 0 V-120 Q-52 -136 -30 -142 V0 Z', fill: 'var(--b2)'}, g);
+  el('path', {d: 'M70 0 V-150 Q48 -166 22 -172 V0 Z', fill: 'var(--b1)'}, g);
+  el('rect', {x: -60, y: -18, width: 120, height: 18, fill: 'var(--b3)'}, g);
+  el('ellipse', {cx: 0, cy: -26, rx: 28, ry: 11, fill: 'var(--b1)'}, g);
+  for (let y = -132; y < -8; y += 9) { el('rect', {x: -64, y, width: 30, height: 2, fill: 'var(--ground)', opacity: .14}, g); el('rect', {x: 28, y: y - 22, width: 38, height: 2, fill: 'var(--ground)', opacity: .14}, g); }
+  return g; }
+function pin(deg){ const g = at(deg); el('path', {d: 'M0 0 C-14 -26 -20 -34 -20 -46 A20 20 0 1 1 20 -46 C20 -34 14 -26 0 0 Z', fill: 'var(--route)'}, g);
+  el('circle', {cx: 0, cy: -46, r: 7, fill: 'var(--paper)'}, g); return g; }
+
+/* scenes: the angle each scene turns to the top */
+const SCENE = [0, 58, 64, 140, 210, 290];
+
+// filler city all the way round, kept clear of the scenes' own drawings
+const busy = [[-14, 14], [46, 82], [128, 152], [192, 228], [278, 302]];
+for (let a = 0; a < 360; a += 4 + rnd() * 5) {
+  if (busy.some(([x, y]) => a > (x + 360) % 360 && a < y) || (a > 346)) continue;
+  rnd() > .3 ? building(a, 16 + rnd() * 26, 30 + rnd() * 90, SHADES[Math.floor(rnd() * 4)]) : tree(a, .8 + rnd() * .5);
+}
+// scene 0: a corner of the city with a bus stop and shelter
+building(-11, 30, 110, 'var(--b2)'); building(-5, 20, 70, 'var(--b1)'); shelter(2); stop(5.5); tree(9); building(12, 26, 84, 'var(--b3)');
+// scenes 1 and 2: her home, the Heathdale stop (removed), the Claxton stop (left)
+house(51); walker(54.5); stop(59, 'gone-sign'); building(63, 22, 60, 'var(--b2)'); tree(67); building(71, 18, 46, 'var(--b1)'); stop(75.5); building(79, 24, 96, 'var(--b3)');
+const xmark = at(59, spin, 8); el('circle', {r: 9, fill: 'none', stroke: 'var(--gone)', 'stroke-width': 3, class: 'ring-x'}, xmark);
+arc(51.5, 58.6, R + 4, {stroke: 'var(--paper)', 'stroke-width': 3, 'stroke-dasharray': '2 6', 'stroke-linecap': 'round', class: 'walk-before'});
+arc(51.5, 75.2, R + 4, {stroke: 'var(--gone)', 'stroke-width': 3, 'stroke-dasharray': '2 6', 'stroke-linecap': 'round', class: 'walk-after'});
+// scene 3: a stop with no shelter, someone waiting
+building(131, 24, 64, 'var(--b2)'); tree(135); stop(140); person(143); building(147, 30, 100, 'var(--b1)'); tree(151, 1.1);
+// scene 4: City Hall
+tree(199); cityHall(210); tree(221, 1.2); building(226, 18, 52, 'var(--b3)');
+// scene 5: your trip, a pin on the map
+building(281, 22, 80, 'var(--b2)'); tree(285); pin(290); stop(295); building(299, 26, 66, 'var(--b1)');
+
+// the bus drives round the route, always, behind the scenes' drawings
+const bus = el('g', {}), busBody = at(0, bus, -2); spin.insertBefore(bus, spin.children[3]);
+el('rect', {x: -22, y: -16, width: 44, height: 16, rx: 3, fill: 'var(--route)'}, busBody);
+for (let x = -17; x < 16; x += 9) el('rect', {x, y: -13, width: 6, height: 6, fill: 'var(--paper)', opacity: .85}, busBody);
+
+/* ---------- layout: the circle's centre sits on the bottom edge, so its lower half is off screen ---------- */
+let W, H, scale, base = {}, zoom = 1;
+const ZOOM = [1, 2.6, 2.6, 1.8, 1.3, 1];      // how close the camera is in each scene
+function place(){
+  const r = base.r * zoom, cy = base.top + r;
+  root.setAttribute('transform', `translate(${base.cx} ${cy}) scale(${r / R})`);
+}
+function layout(){
+  W = innerWidth; H = innerHeight; svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const phone = W < 860;
+  const r = phone ? Math.min(W * 0.92, H * 0.44) : Math.min(H * 0.48, W * 0.3);
+  const cy = phone ? H * 0.62 + r : H + r * 0.02, cx = phone ? W / 2 : W * 0.7;
+  base = {r, cx, top: cy - r}; place();
+}
+addEventListener('resize', layout); layout();
+
+/* ---------- scroll turns the planet ---------- */
+const scenes = [...document.querySelectorAll('.scene')];
+let rot = 0, target = 0, busA = 20, last = performance.now(), active = -1;
+function progress(){
+  const y = scrollY + innerHeight * 0.45;
+  for (let i = 0; i < scenes.length; i++) {
+    const top = scenes[i].offsetTop, h = scenes[i].offsetHeight;
+    if (y < top + h || i === scenes.length - 1) { const f = Math.min(1, Math.max(0, (y - top) / h)); return Math.min(scenes.length - 1, i + f); }
+  }
+  return 0;
+}
+function setScene(i){
+  if (i === active) return; active = i;
+  spin.classList.toggle('show-before', i >= 1); spin.classList.toggle('fallen', i >= 2);
+  document.body.classList.toggle('winter', i === 3);
+}
+function frame(now){
+  const dt = Math.min(64, now - last); last = now;
+  const p = progress(), i = Math.floor(p), f = p - i;
+  const a = SCENE[i], b = SCENE[Math.min(i + 1, SCENE.length - 1)];
+  const ease = f < .55 ? 0 : (f - .55) / .45;                     // hold on each scene, then turn to the next
+  target = -(a + (b - a) * (ease * ease * (3 - 2 * ease)));
+  rot += (target - rot) * (calm ? 1 : Math.min(1, dt / 140));
+  const za = ZOOM[i], zb = ZOOM[Math.min(i + 1, ZOOM.length - 1)];
+  const zt = za + (zb - za) * (ease * ease * (3 - 2 * ease));
+  zoom += (zt - zoom) * (calm ? 1 : Math.min(1, dt / 160)); place();
+  spin.setAttribute('transform', `rotate(${rot})`);
+  if (!calm) busA = (busA + dt * 0.006) % 360;
+  busBody.setAttribute('transform', `rotate(${busA}) translate(0 ${-(R - 2)})`);
+  setScene(Math.round(p - .1));
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+/* ---------- the live thing: the same decision, for a different rider ---------- */
 function showRider(k){
-  const c = HERO[k], max = Math.max(c.after_m, c.before_m, c.limit_m) * 1.12;
-  $('ev-b').textContent = c.before_m + ' m'; $('ev-a').textContent = c.after_m + ' m';
-  const bar = $('ev-bar'); bar.style.width = (100 * c.after_m / max) + '%'; bar.classList.toggle('over', c.after_m > c.limit_m);
-  $('ev-lim').style.left = (100 * c.limit_m / max) + '%';
-  $('ev-v').innerHTML = c.after_m > c.limit_m
-    ? `<strong>Over the ${c.limit_m} m limit</strong> assumed for a ${c.rider_label.toLowerCase()}. Before the decision the walk was ${c.before_m} m.`
-    : `Within the ${c.limit_m} m limit assumed for a ${c.rider_label.toLowerCase()}, though ${c.after_m - c.before_m} m longer than before.`;
+  const c = HERO[k], over = c.after_m > c.limit_m;
+  $('fb').textContent = c.before_m + ' m'; $('fa').textContent = c.after_m + ' m'; $('fa').classList.toggle('bad', over);
+  $('fv').innerHTML = over ? `<strong>Over the ${c.limit_m} m limit</strong> assumed for a ${c.rider_label.toLowerCase()}.`
+                           : `Within the ${c.limit_m} m limit assumed for a ${c.rider_label.toLowerCase()}, but ${c.after_m - c.before_m} m further than before.`;
   document.querySelectorAll('.riders button').forEach(b => b.setAttribute('aria-pressed', b.dataset.r === k));
 }
 document.querySelectorAll('.riders button').forEach(b => b.onclick = () => showRider(b.dataset.r));
 showRider('senior_walker');
 
-/* accordion */
-const stages = [...document.querySelectorAll('.stage')];
-stages.forEach(s => s.querySelector('.sliver').onclick = () => stages.forEach(t => {
-  const on = t === s; t.setAttribute('aria-expanded', on); t.querySelector('.sliver').setAttribute('aria-expanded', on);
-  t.querySelector('.sliver').hidden = on;
-}));
-stages.forEach(t => t.querySelector('.sliver').hidden = t.getAttribute('aria-expanded') === 'true');
-
-/* entrances */
-const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold: .15});
-document.querySelectorAll('[data-rise]').forEach(el => io.observe(el));
-
-/* cases: cards cross the held photograph as the section scrolls */
-const sec = document.querySelector('.cases'), track = $('track'), head = $('cases-h');
-const wide = matchMedia('(min-width: 901px)'), calm = matchMedia('(prefers-reduced-motion: reduce)');
-function scrub(){
-  if (!wide.matches) return;
-  const r = sec.getBoundingClientRect(), span = sec.offsetHeight - innerHeight;
-  const p = Math.min(1, Math.max(0, -r.top / span));
-  const dist = track.scrollWidth - innerWidth * 0.18;
-  track.style.transform = `translate(${-p * dist}px, -50%)`;
-  head.style.opacity = String(Math.max(0, 1 - p * 3.2)); head.style.transform = `translateX(${-p * 240}px)`;
-}
-if (!calm.matches) { addEventListener('scroll', () => requestAnimationFrame(scrub), {passive: true}); scrub(); }
-else { track.style.cssText += ';position:relative;transform:none;flex-wrap:wrap;padding:200px var(--m) 48px'; sec.style.height = 'auto'; document.querySelector('.stagewrap').style.cssText = 'position:relative;height:auto'; }
+/* ---------- snow for the winter scene ---------- */
+if (!calm) { const s = $('snow'); for (let k = 0; k < 70; k++) { const d = document.createElement('i');
+  d.style.left = (rnd() * 100) + 'vw'; d.style.animationDuration = (6 + rnd() * 8) + 's'; d.style.animationDelay = (-rnd() * 12) + 's';
+  d.style.opacity = .5 + rnd() * .5; d.style.transform = `scale(${.5 + rnd()})`; s.appendChild(d); } }
 </script>
 </body>
 </html>
