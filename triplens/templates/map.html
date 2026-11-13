@@ -19,6 +19,9 @@
     .routes button[aria-pressed=true],.toggle button[aria-pressed=true]{border-color:var(--accent);font-weight:700}
     .legend span{display:inline-block;width:1.4rem;height:.35rem;vertical-align:middle;margin-right:.3rem}
     .err{color:#b91c1c}
+    .pin{font:700 13px system-ui;color:#fff;padding:.25rem .55rem;border-radius:999px;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4);white-space:nowrap}
+    .pin.a{background:#111}.pin.b{background:#15803d}.pin.on{background:#0b4f9c}.pin.off{background:#7c3aed}.pin.gone{background:#dc2626}
+    .samples button{margin:.2rem .2rem 0 0;font-size:.85rem;padding:.35rem .6rem}
     .panel table{display:table;font-size:.8rem}
   </style>
 </head>
@@ -31,6 +34,9 @@
     <h1 style="font-size:1.3rem">Map your trip</h1>
     <p class="privacy"><strong>Privacy:</strong> the points you click go only to this computer. To draw the map, your browser downloads map tiles from OpenFreeMap, which can see the area you are viewing. Nothing is saved.</p>
 
+    <div class="samples"><strong>Try a sample:</strong><br>
+      <button type="button" data-s="stclair">512 St Clair: stops proposed for removal (senior with a walker)</button>
+      <button type="button" data-s="queen">501 Queen: simulated shelter removal (wheelchair user)</button></div>
     <div class="step on" id="s1"><h2>1. Click your start on the map</h2><p id="s1t" class="meta">Not set</p></div>
     <div class="step" id="s2"><h2>2. Click your destination</h2><p id="s2t" class="meta">Not set</p></div>
     <div class="step" id="s3"><h2>3. Choose the bus or streetcar you take</h2>
@@ -58,6 +64,10 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;
 function step(n){ for (let i=1;i<=5;i++) $('s'+i).classList.toggle('on', i===n); }
 function src(id, data){ if (map.getSource(id)) map.getSource(id).setData(data); else map.addSource(id, {type:'geojson', data}); }
 const EMPTY = {type:'FeatureCollection', features:[]};
+function pin(cls, text, lngLat){ const el = document.createElement('div'); el.className = 'pin ' + cls; el.textContent = text;
+  return new maplibregl.Marker({element: el, anchor: 'bottom', offset: [0, -6]}).setLngLat(lngLat).addTo(map); }
+const PINS = [];
+function clearRidePins(){ while (PINS.length) PINS.pop().remove(); }
 
 function box(lon, lat, wm, hm, dx){ // small rectangle in metres, for 3D shelters and benches
   const k = 111320, kx = k*Math.cos(lat*Math.PI/180), x = lon + dx/kx;
@@ -80,7 +90,7 @@ map.on('load', () => {
       paint:{'fill-extrusion-color':'#d6dbe3', 'fill-extrusion-height':['coalesce',['get','render_height'],8],
              'fill-extrusion-base':['coalesce',['get','render_min_height'],0], 'fill-extrusion-opacity':0.55}});
   }
-  for (const id of ['routeline','stops','furn','before','after','removed','decisions','works']) src(id, EMPTY);
+  for (const id of ['routeline','stops','furn','before','after','removed','decisions','works','ridestops']) src(id, EMPTY);
   map.addLayer({id:'routeline', type:'line', source:'routeline', paint:{'line-color':'#94a3b8','line-width':3,'line-opacity':0.7}});
   map.addLayer({id:'furn', type:'fill-extrusion', source:'furn', paint:{'fill-extrusion-color':['get','c'],'fill-extrusion-height':['get','h'],'fill-extrusion-opacity':0.95}});
   map.addLayer({id:'before-walk', type:'line', source:'before', filter:['==',['get','kind'],'walk'], paint:{'line-color':'#475569','line-width':4,'line-dasharray':[1.2,1.2]}});
@@ -89,6 +99,9 @@ map.on('load', () => {
   map.addLayer({id:'after-ride', type:'line', source:'after', filter:['==',['get','kind'],'transit'], paint:{'line-color':'#ea580c','line-width':4,'line-offset':5}});
   map.addLayer({id:'stops', type:'circle', source:'stops', paint:{'circle-radius':6,'circle-color':'#fff','circle-stroke-width':2,
     'circle-stroke-color':['case',['to-boolean',['get','removed_by']],'#dc2626','#0f172a']}});
+  map.addLayer({id:'ridestops', type:'circle', source:'ridestops', paint:{'circle-radius':9,'circle-color':'#0b4f9c','circle-stroke-color':'#fff','circle-stroke-width':2}});
+  map.addLayer({id:'ridestops-n', type:'symbol', source:'ridestops', layout:{'text-field':['get','n'],'text-size':11,'text-font':['Noto Sans Bold'],'text-allow-overlap':true},
+    paint:{'text-color':'#fff'}});
   map.addLayer({id:'removed', type:'circle', source:'removed', paint:{'circle-radius':11,'circle-color':'rgba(0,0,0,0)','circle-stroke-width':3,'circle-stroke-color':'#dc2626'}});
   map.addLayer({id:'decisions', type:'circle', source:'decisions', paint:{'circle-radius':9,'circle-color':['case',['get','upcoming'],'#dc2626','#6b7280'],'circle-stroke-color':'#fff','circle-stroke-width':2}});
   map.addLayer({id:'works', type:'circle', source:'works', paint:{'circle-radius':6,'circle-color':'#f59e0b','circle-stroke-color':'#000','circle-stroke-width':1}});
@@ -103,9 +116,9 @@ map.on('load', () => {
   map.on('click', 'stops', e => {
     if (!S.stops) return;
     const id = e.features[0].properties.id, order = S.stops.features.map(f => f.properties.id), name = e.features[0].properties.name;
-    if (!S.board || S.alight) { S.board = id; S.alight = null; $('s4t').innerHTML = `Get on: <strong>${esc(name)}</strong>. Now click where you get off.`; $('go').disabled = true; }
+    if (!S.board || S.alight) { clearRidePins(); PINS.push(pin('on', 'Get on: ' + name, e.features[0].geometry.coordinates)); S.board = id; S.alight = null; $('s4t').innerHTML = `Get on: <strong>${esc(name)}</strong>. Now click where you get off.`; $('go').disabled = true; }
     else if (order.indexOf(id) <= order.indexOf(S.board)) { $('s4t').innerHTML = `<span class="err">Choose a stop after your boarding stop, in the direction of travel.</span>`; }
-    else { S.alight = id; $('s4t').innerHTML += `<br>Get off: <strong>${esc(name)}</strong>.`; step(5); $('go').disabled = false; }
+    else { PINS.push(pin('off', 'Get off: ' + name, e.features[0].geometry.coordinates)); S.alight = id; $('s4t').innerHTML += `<br>Get off: <strong>${esc(name)}</strong>.`; step(5); $('go').disabled = false; }
     e.preventDefault();
   });
 });
@@ -113,8 +126,8 @@ map.on('load', () => {
 map.on('click', async e => {
   if (e.defaultPrevented || (S.a && S.b)) return;
   const ll = [e.lngLat.lat, e.lngLat.lng];
-  if (!S.a) { S.a = ll; S.mA = new maplibregl.Marker({color:'#111'}).setLngLat(e.lngLat).addTo(map); $('s1t').textContent = 'Start set.'; step(2); return; }
-  S.b = ll; S.mB = new maplibregl.Marker({color:'#15803d'}).setLngLat(e.lngLat).addTo(map); $('s2t').textContent = 'Destination set.'; step(3);
+  if (!S.a) { S.a = ll; S.mA = pin('a', 'Start', e.lngLat); $('s1t').textContent = 'Start set.'; step(2); return; }
+  S.b = ll; S.mB = pin('b', 'Destination', e.lngLat); $('s2t').textContent = 'Destination set.'; step(3);
   const r = await fetch(`/api/routes_near?alat=${S.a[0]}&alon=${S.a[1]}&blat=${S.b[0]}&blon=${S.b[1]}`).then(x => x.json());
   $('routes').innerHTML = r.length ? r.map((x, i) => `<button type="button" data-i="${i}" aria-pressed="false">${esc(x.route)} ${esc(x.name)}<br><small>${esc(x.headsign)}</small></button>`).join('')
     : '<p class="err">No single route has stops near both points. Try points closer to a route, or use the text version for transfers.</p>';
@@ -139,17 +152,26 @@ $('go').onclick = async () => {
   S.data = d; src('before', d.before); src('decisions', d.decisions); src('works', d.works);
   const c = d.comparisons[0];
   src('after', c ? c.after : EMPTY); src('removed', c ? c.removed : EMPTY);
+  const ids = S.stops.features.map(f => f.properties.id), i0 = ids.indexOf(S.board), i1 = ids.indexOf(S.alight);
+  src('ridestops', {type:'FeatureCollection', features: S.stops.features.slice(i0, i1 + 1).map((f, k) => ({...f, properties: {...f.properties, n: String(k + 1)}}))});
+  clearRidePins();
+  PINS.push(pin('on', 'Get on', S.stops.features[i0].geometry.coordinates), pin('off', 'Get off', S.stops.features[i1].geometry.coordinates));
+  if (c) for (const f of c.after.features.filter(f => f.properties.kind === 'transit')) {
+    const st = f.geometry.coordinates[0], en = f.geometry.coordinates.at(-1);
+    if (Math.hypot(st[0] - S.stops.features[i0].geometry.coordinates[0], st[1] - S.stops.features[i0].geometry.coordinates[1]) > 1e-5) PINS.push(pin('gone', 'After change: get on here', st));
+    if (Math.hypot(en[0] - S.stops.features[i1].geometry.coordinates[0], en[1] - S.stops.features[i1].geometry.coordinates[1]) > 1e-5) PINS.push(pin('gone', 'After change: get off here', en));
+  }
   render(d);
   const xs = d.before.features.flatMap(f => f.geometry.coordinates).concat(c ? c.after.features.flatMap(f => f.geometry.coordinates) : []);
   const bb = xs.reduce((b, p) => [[Math.min(b[0][0],p[0]),Math.min(b[0][1],p[1])],[Math.max(b[1][0],p[0]),Math.max(b[1][1],p[1])]], [[180,90],[-180,-90]]);
-  map.fitBounds(bb, {padding: {top: 120, bottom: 120, left: 80, right: 80}, pitch: 50, duration: 800}); $('out').scrollIntoView({behavior: 'smooth'});
+  map.fitBounds(bb, {padding: {top: 140, bottom: 140, left: 220, right: 120}, pitch: 50, duration: 800}); $('out').scrollIntoView({behavior: 'smooth'});
 };
 
 function flagHTML(f){ const lab = {barrier:'Limit', watch:'Worth knowing', info:'Info'}[f.severity];
   return `<li><span class="sev ${f.severity}">${lab}</span> ${esc(f.text)}<details><summary>Evidence</summary>${f.evidence.map(e => `<blockquote class="official small">${esc(e)}</blockquote>`).join('')}</details></li>`; }
 
 function render(d){
-  let h = `<h2>Your trip (${esc(d.persona)})</h2><ol>` + d.before.features.map(f => `<li>${esc(f.properties.label)}: about ${f.properties.length_m} m${f.properties.kind==='walk' ? (f.properties.routed ? ' on sidewalks' : ' (straight-line estimate)') : ''}</li>`).join('') + '</ol>';
+  let h = `<h2>Your trip (${esc(d.persona)})</h2><p class="meta">Numbered blue dots are the stops you pass on your ride.</p><ol>` + d.before.features.map(f => `<li>${esc(f.properties.label)}: about ${f.properties.length_m} m${f.properties.kind==='walk' ? (f.properties.routed ? ' on sidewalks' : ' (straight-line estimate)') : ''}</li>`).join('') + '</ol>';
   for (const c of d.comparisons) {
     h += `<section class="compare"><h3>Before and after: ${esc(c.title)}</h3>` + (c.simulated ? `<p class="warn"><strong>Simulation.</strong> ${esc(c.status_note)}</p>` :
       `<p class="meta">Status: ${esc(c.status)}. ${esc(c.status_note)} <a href="${esc(c.source_url)}">Source</a></p>` + c.quotes.map(q => `<blockquote class="official small">${esc(q)}</blockquote>`).join(''));
@@ -171,10 +193,31 @@ function render(d){
   });
 }
 
+const SAMPLES = {
+  stclair: {a: [43.68626, -79.40464], b: [43.68778, -79.39435], route: '512', match: 'St Clair Sta', board: '14351', alight: '15305', rider: 'senior_walker'},
+  queen:   {a: [43.64083, -79.43392], b: [43.65317, -79.39409], route: '501', variant: 1, board: '6835', alight: '6829', rider: 'wheelchair'},
+};
+async function loadSample(key){
+  $('reset').onclick();
+  const s = SAMPLES[key];
+  S.a = s.a; S.b = s.b;
+  S.mA = pin('a', 'Start', [s.a[1], s.a[0]]); S.mB = pin('b', 'Destination', [s.b[1], s.b[0]]);
+  $('s1t').textContent = 'Start set (sample).'; $('s2t').textContent = 'Destination set (sample).';
+  const r = await fetch(`/api/routes_near?alat=${s.a[0]}&alon=${s.a[1]}&blat=${s.b[0]}&blon=${s.b[1]}`).then(x => x.json());
+  const rt = r.find(x => x.route === s.route && (s.variant === undefined ? x.headsign.includes(s.match) : x.variant === s.variant));
+  $('routes').innerHTML = `<button type="button" aria-pressed="true">${esc(rt.route)} ${esc(rt.name)}<br><small>${esc(rt.headsign)}</small></button>`;
+  await pickRoute(rt, $('routes').querySelector('button'));
+  S.board = s.board; S.alight = s.alight; $('rider').value = s.rider; $('go').disabled = false; step(5);
+  $('s4t').textContent = 'Stops set by the sample.';
+  await $('go').onclick();
+}
+document.querySelectorAll('.samples button').forEach(b => b.onclick = () => loadSample(b.dataset.s));
+
 $('reset').onclick = () => {
   S.mA && S.mA.remove(); S.mB && S.mB.remove();
   Object.assign(S, {a:null, b:null, ride:null, stops:null, board:null, alight:null, data:null});
-  for (const id of ['routeline','stops','furn','before','after','removed','decisions','works']) src(id, EMPTY);
+  for (const id of ['routeline','stops','furn','before','after','removed','decisions','works','ridestops']) src(id, EMPTY);
+  clearRidePins();
   $('routes').innerHTML = ''; $('out').innerHTML = ''; $('s1t').textContent = 'Not set'; $('s2t').textContent = 'Not set'; $('go').disabled = true; step(1);
 };
 </script>
