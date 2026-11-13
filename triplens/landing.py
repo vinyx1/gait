@@ -51,7 +51,7 @@ def case(key: str, rider: str | None = None) -> dict:
     p = access.PERSONAS[rider]
     return {"key": key, "title": c["title"], "decision": ch["title"], "status": ch["status"], "phase": ch.get("phase", "proposed"),
             "simulated": ch["simulated"], "quote": ch["quotes"][0], "source_url": ch["source_url"], "item_url": ch.get("item_url"),
-            "item_id": (ch.get("item_url") or "").rsplit("=", 1)[-1] or None,
+            "item_id": (ch.get("item_url") or "").rsplit("=", 1)[-1] or None, "page": (ch.get("source_pages") or [None])[0],
             "rider": rider, "rider_label": p.label, "limit_m": p.max_walk_m, "before_m": before, "after_m": after,
             "new_issues": [f["text"] for f in cmp["new_issues"]], "improvements": [f["text"] for f in cmp["improvements"]],
             "photo": c["photo"], "photo_alt": c["photo_alt"],
