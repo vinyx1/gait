@@ -1,0 +1,141 @@
+{
+ "route": "19",
+ "name": "Bay",
+ "terms": {
+  "route": "19",
+  "name": "Bay",
+  "main": [
+   "Bay St",
+   "Davenport Rd"
+  ],
+  "cross": [
+   "Adelaide St West",
+   "Albert St",
+   "Avenue Rd",
+   "Bay St",
+   "Bedford Rd",
+   "Belmont St",
+   "Bloor St West",
+   "Charles St West",
+   "College St",
+   "Cumberland St",
+   "Davenport Rd",
+   "Dundas St West",
+   "Dupont St",
+   "Elm St",
+   "Front St West",
+   "Gerrard St West",
+   "Grosvenor St",
+   "Hagerman St",
+   "King St West",
+   "New St",
+   "Queen St West",
+   "Scollard St",
+   "St Joseph St",
+   "Wellesley St West",
+   "Wellington St West"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2024.IE14.4",
+   "item_title": "See also 2025.MM30.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245712.pdf",
+   "page": 41,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Davenport Rd"
+   ],
+   "quote": "On Davenport Road between Marchmount Road and Winona Drive, Transportation Services recommends implementing a raised integrated accessible bus/bike stop at the former decommissioned nearside south side eastbound bus stop at Shaw Street and removing the substandard bus stop on the far-side of the intersection 70 metres away.",
+   "rule": "stop at the former decommissioned nearside south side eastbound bus stop at Shaw Street and removing",
+   "score": 5
+  },
+  {
+   "item_id": "2025.IE23.6",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ie/bgrd/backgroundfile-256881.pdf",
+   "page": 15,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Davenport Rd"
+   ],
+   "quote": "Cycling Network Plan: 2025 Cycling Infrastructure & Missing Sidewalk Installation - Second Quarter Update Page 15 of 22 Existing Conditions - Davenport Road at Bathurst Street In August 2024 Transportation Services installed raised westbound far-side and eastbound near-side bus-bike accessible platforms at Davenport Road and Bathurst Street.",
+   "rule": "far-side",
+   "score": 5
+  },
+  {
+   "item_id": "2024.IE14.4",
+   "item_title": "See also 2025.MM30.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245712.pdf",
+   "page": 13,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Avenue Rd"
+   ],
+   "quote": "Continuous cycling infrastructure through approved construction staging area at 33- 49 Avenue Road/136-148 Yorkville Avenue requiring the removal of on-street parking spaces between Yorkville Avenue and Lowther Avenue and removal of the TTC bus stop on the northwest side of the Yorkville Avenue and Avenue Road intersection;",
+   "rule": "removal of the TTC bus stop",
+   "score": 4
+  },
+  {
+   "item_id": "2024.IE14.4",
+   "item_title": "See also 2025.MM30.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245712.pdf",
+   "page": 13,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Avenue Rd"
+   ],
+   "quote": "New TTC bus stop in front of 87 Avenue Road and removal of the bus stops at 55 and 101 Avenue Road (to be implemented following the clearance of development construction lane occupancies);",
+   "rule": "bus stop in front of 87 Avenue Road and removal",
+   "score": 4
+  },
+  {
+   "item_id": "2024.IE14.4",
+   "item_title": "See also 2025.MM30.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245712.pdf",
+   "page": 13,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Avenue Rd"
+   ],
+   "quote": "New TTC bus stop in front of 88 Avenue Road and removal of the bus stop at 96 Avenue Road;",
+   "rule": "bus stop in front of 88 Avenue Road and removal",
+   "score": 4
+  },
+  {
+   "item_id": "2025.IE23.6",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ie/bgrd/backgroundfile-256881.pdf",
+   "page": 14,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Avenue Rd"
+   ],
+   "quote": "The design proposes to relocate the existing TTC eastbound bus stop from the near- side of Oakwood Avenue to the near-side of Dovercourt Road and raises bus stops to integrated accessible bus/bike platforms.",
+   "rule": "relocate the existing TTC eastbound bus stop",
+   "score": 4
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 23,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Figure 7 shows the proposed stops along the roadway, including those proposed to be removed.",
+   "rule": "stops along the roadway, including those proposed to be removed",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 23,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Note that the proposed priority transit lanes, parking and turning prohibitions and stop removals are part of the ongoing consultation with local Councillors and the public and are subject to change based on feedback received.",
+   "rule": "stop removals",
+   "score": 2
+  }
+ ]
+}

@@ -1,0 +1,51 @@
+{
+ "route": "66",
+ "name": "Prince Edward",
+ "terms": {
+  "route": "66",
+  "name": "Prince Edward",
+  "main": [
+   "Prince Edward Dr",
+   "Berry Rd",
+   "Park Lawn Rd"
+  ],
+  "cross": [
+   "Ashton Manor",
+   "Ballacaine Dr",
+   "Bell Manor Dr",
+   "Berry Rd",
+   "Bloor St West",
+   "Brookers Lane",
+   "Bus Bay 2",
+   "Bus Bay 3",
+   "Cannon Rd",
+   "Cloverhill Rd",
+   "Edgemore Dr",
+   "Edwalter Ave",
+   "Fairmar Ave",
+   "Gardiner Expressway",
+   "Glenaden Ave East",
+   "Glenellen Dr West",
+   "Glenn Murray Dr",
+   "Glenroy Ave",
+   "Keywell Crt",
+   "Kingslea Gardens",
+   "Kinsdale Blvd",
+   "Kirk Bradden Rd East",
+   "Lake Shore Blvd West",
+   "Lorne Ave",
+   "Meadowvale Dr",
+   "Minstrel Dr",
+   "Park Lane",
+   "Park Lawn Rd",
+   "Prince Edward Dr South",
+   "Silver Moon Dr",
+   "Stephen Dr",
+   "Sunnylea Ave West",
+   "The Kingsway",
+   "The Queensway",
+   "Whitworth Ave"
+  ]
+ },
+ "findings": []
+}

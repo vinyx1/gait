@@ -1,0 +1,331 @@
+{
+ "route": "54",
+ "name": "Lawrence East",
+ "terms": {
+  "route": "54",
+  "name": "Lawrence East",
+  "main": [
+   "Lawrence Ave",
+   "Don Mills Rd",
+   "Wynford Dr"
+  ],
+  "cross": [
+   "Barber Greene Rd",
+   "Barrymore Rd",
+   "Bathgate Dr",
+   "Beechgrove Dr",
+   "Bellamy Rd North",
+   "Ben Stanton Blvd",
+   "Bennett Rd",
+   "Birchmount Rd",
+   "Bridgeport Dr",
+   "Brimley Rd",
+   "Brockley Dr",
+   "Burnview Cres",
+   "Bus Bay 2",
+   "Bus Bay 3",
+   "Bus Bay 4",
+   "Carnforth Rd",
+   "Cedarbrae Mall",
+   "Centennial Rd",
+   "Charlottetown Blvd",
+   "Cherryhill Ave",
+   "Clock Tower Rd",
+   "Collinsgrove Rd",
+   "Crockford Blvd",
+   "Curlew Dr",
+   "Danielle Moore Cir",
+   "Don Mills Rd",
+   "East Ave",
+   "Elinor Ave",
+   "Ellington Dr",
+   "Fern Meadow Rd",
+   "Flerimac Rd",
+   "Fortune Gate",
+   "Galloway Rd",
+   "Gervais Dr",
+   "Goldberry Sq",
+   "Green Belt Dr",
+   "Greenbrae Circt",
+   "Greencedar Circt",
+   "Greencrest Circt",
+   "Greenholm Circt",
+   "Greenland Rd",
+   "Homestead Rd",
+   "Howden Rd",
+   "Kennedy Rd",
+   "Kingston Rd",
+   "Lawrence Ave East",
+   "Ling Rd",
+   "Manse Rd",
+   "Marcos Blvd",
+   "Markham Rd",
+   "McCowan Rd Westside Scarborough General",
+   "Meadowvale Rd",
+   "Megan Ave",
+   "Midland Ave",
+   "Morning Dew Rd",
+   "Morningside Ave",
+   "Mossbank Dr",
+   "Opposite Cedarbrae Mall",
+   "Opposite Walkway to Ridgewood Rd",
+   "Orton Park Rd",
+   "Overture Rd",
+   "Paulander Ave",
+   "Pharmacy Ave",
+   "Port Union Rd",
+   "Prudential Dr",
+   "Railside Rd",
+   "Scarborough Golf Club Rd",
+   "Stotts Ter",
+   "Susan St",
+   "The Donway East",
+   "The Donway West",
+   "Townley Ave",
+   "Underhill Dr",
+   "Underwriters Rd",
+   "Valia Rd",
+   "Valparaiso Ave Scarborough General Hospita",
+   "Victoria Park Ave",
+   "Walkway to Ridgewood Rd",
+   "Warden Ave",
+   "West Hill Dr",
+   "Woodcliff Pl"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2024.SC18.17",
+   "item_title": "See also By-law",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250844.pdf",
+   "page": 6,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "East Ave",
+    "Fern Meadow Rd",
+    "Lawrence Ave East",
+    "Valia Rd"
+   ],
+   "quote": "The TTC recommends relocating the existing westbound stop at Fern Meadow Road to to the new proposed traffic control signals at Lawrence Avenue East and Valia Road/private driveway.",
+   "rule": "relocating the existing westbound stop",
+   "score": 6
+  },
+  {
+   "item_id": "2024.SC18.17",
+   "item_title": "See also By-law",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250844.pdf",
+   "page": 6,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Megan Ave",
+    "Valia Rd"
+   ],
+   "quote": "Additionally, TTC also recommends consolidating the eastbound stop at Megan Avenue with the stop at Valia Road.",
+   "rule": "consolidating the eastbound stop at Megan Avenue with the stop",
+   "score": 5
+  },
+  {
+   "item_id": "2024.SC18.17",
+   "item_title": "See also By-law",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250844.pdf",
+   "page": 6,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Megan Ave",
+    "Valia Rd"
+   ],
+   "quote": "Removing the stop at Megan Avenue and maintaining the stop at Valia Road will provide a centralized protected pedestrian crossing as well as a more reliable service through efficient stop spacing, meeting TTC service standards, and optimally placed TTC stop locations to support both the current needs of customers in this area.",
+   "rule": "Removing the stop at Megan Avenue and maintaining the stop",
+   "score": 5
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 26,
+   "change_type": "reroute",
+   "stops_named": [
+    "East Ave",
+    "Lawrence Ave East"
+   ],
+   "quote": "Construction of the McCowan Road Diversion and associated infrastructure on Metrolinx-owned property within the south-east corner of the intersection of McCowan Road and Lawrence Avenue East.",
+   "rule": "Diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 32,
+   "change_type": "reroute",
+   "stops_named": [
+    "East Ave",
+    "Lawrence Ave East"
+   ],
+   "quote": "Metrolinx SSE - Long-term Temporary Road Closures and Public Highway Dedication Page 32 of 43 Stages 2 and 3: During Stages 2 and 3, construction activities will focus on the phased installation of temporary decking on Lawrence Avenue East, just west of its intersection with the McCowan Road diversion.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "East Ave",
+    "Lawrence Ave East"
+   ],
+   "quote": "City Council prohibit stopping at all times on both sides of McCowan Road Diversion, between Lawrence Avenue East and a point 162 metres south, from October 1, 2025 to December 31, 2030, inclusive.",
+   "rule": "Diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "East Ave",
+    "Lawrence Ave East"
+   ],
+   "quote": "City Council designate a 40 km/h speed limit on McCowan Road Diversion, between Lawrence Avenue East and a point 162 metres south, from October 1, 2025 to December 31, 2030, inclusive.",
+   "rule": "Diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "East Ave",
+    "Lawrence Ave East"
+   ],
+   "quote": "City Council prohibit eastbound and westbound left-turns (emergency vehicles excepted) at all times at Lawrence Avenue East and McCowan Road/McCowan Road Diversion, from August 1, 2025 to January 31, 2027, inclusive.",
+   "rule": "Diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 31,
+   "change_type": "reroute",
+   "stops_named": [
+    "East Ave",
+    "Lawrence Ave East"
+   ],
+   "quote": "Metrolinx SSE - Long-term Temporary Road Closures and Public Highway Dedication Page 31 of 43 The temporary lane closure impacts during various construction stages are discussed below: Auto Access Impacts Pre-Stage 1 works: Pre-Stage 1 works, expected to last approximately three months, will involve constructing the McCowan Road Diversion in the south-east quadrant of the intersection of Lawrence Avenue East and McCowan Road.",
+   "rule": "Diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 31,
+   "change_type": "reroute",
+   "stops_named": [
+    "East Ave",
+    "Lawrence Ave East"
+   ],
+   "quote": "Stage 1 works: Stage 1 works, anticipated to last about one month, will involve shifting the intersection of Lawrence Avenue East and McCowan Road eastward and connecting it to the newly constructed McCowan Road Diversion.",
+   "rule": "Diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 31,
+   "change_type": "reroute",
+   "stops_named": [
+    "East Ave",
+    "Lawrence Ave East"
+   ],
+   "quote": "A portion of the McCowan Road Diversion will traverse lands at 685-697 McCowan Road and 3091 Lawrence Avenue East, currently owned by Metrolinx.",
+   "rule": "Diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "East Ave",
+    "Midland Ave"
+   ],
+   "quote": "City Council authorize public highway designation for the diversion road, to be known as the “Eglinton Avenue East diversion road”, between Midland Avenue and a point 143 metres west, as shown in Attachment 1 to the report (November 20, 2024) from the Deputy General Manager, Transportation Services to become effective upon the transfer to the City of the required interest in lands forming the diversion road and the registration of the highway dedication bylaw on those lands.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "East Ave",
+    "Midland Ave"
+   ],
+   "quote": "City Council prohibit stopping at all times on both sides of Eglinton Avenue East diversion road, between Midland Avenue and a point 143 metres west, from January 1, 2027, to December 31, 2030, inclusive.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "East Ave",
+    "Midland Ave"
+   ],
+   "quote": "City Council designate a 40 km/h speed limit on Eglinton Avenue East diversion road, between Midland Avenue and a point 143 metres west, from January 1, 2027 to December 31, 2030, inclusive.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2023.IE1.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ie/bgrd/backgroundfile-233866.pdf",
+   "page": 3,
+   "change_type": "reroute",
+   "stops_named": [
+    "East Ave"
+   ],
+   "quote": "The ActiveTO pilot on Bayview Avenue was implemented between Front Street East and River Street to provide a safe and direct detour to the Lower Don Trail closures.",
+   "rule": "detour",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 33,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "TTC and Metrolinx will coordinate to ensure that relocated bus stops meets temporary bus stop design and placement criteria, ensuring passenger safety, accessibility, and convenience during construction.",
+   "rule": "relocated bus stops meets temporary bus stop",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 26,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "To facilitate the station box excavation and construction, a portion of McCowan Road at Lawrence Avenue will be temporarily diverted to the east.",
+   "rule": "diverted",
+   "score": 1
+  }
+ ]
+}

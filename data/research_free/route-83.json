@@ -1,0 +1,31 @@
+{
+ "route": "83",
+ "name": "Jones",
+ "terms": {
+  "route": "83",
+  "name": "Jones",
+  "main": [
+   "Jones Ave",
+   "Leslie St"
+  ],
+  "cross": [
+   "Baird Ave",
+   "Boultbee Ave",
+   "Bus Bay 3",
+   "Commissioners St",
+   "Danforth Ave",
+   "Dundas St East",
+   "Eastern Ave",
+   "Gerrard St East",
+   "Jones Ave",
+   "Lake Shore Blvd East",
+   "Mosley St",
+   "Myrtle Ave",
+   "Queen St East",
+   "Shudell Ave",
+   "Sproat Ave",
+   "Strathcona Ave"
+  ]
+ },
+ "findings": []
+}

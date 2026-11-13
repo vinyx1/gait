@@ -1,0 +1,154 @@
+{
+ "route": "28",
+ "name": "Bayview South",
+ "terms": {
+  "route": "28",
+  "name": "Bayview South",
+  "main": [
+   "Davisville Ave",
+   "Bayview Ave"
+  ],
+  "cross": [
+   "Acacia Rd",
+   "Bayview Ave",
+   "Belle Ayre Blvd",
+   "Bus Bay 3",
+   "Bus Bay 5",
+   "Cleveland St",
+   "Forman Ave",
+   "McRae Dr",
+   "Merton St",
+   "Moore Ave",
+   "Mt Pleasant Rd",
+   "Nesbitt Dr",
+   "Pailton Cres",
+   "Yonge St"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2026.IE30.2",
+   "item_title": "See also 2026.IE27.9",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/ie/bgrd/backgroundfile-287392.pdf",
+   "page": 19,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Davisville Avenue"
+   ],
+   "quote": "The consultation considered TTC stops that could be consolidated to enhance bus operations and speed-up transit vehicle travel time on Davisville Avenue.",
+   "rule": "TTC stops that could be consolidated",
+   "score": 5
+  },
+  {
+   "item_id": "2023.IE1.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ie/bgrd/backgroundfile-233866.pdf",
+   "page": 3,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bayview Ave"
+   ],
+   "quote": "The ActiveTO pilot on Bayview Avenue was implemented between Front Street East and River Street to provide a safe and direct detour to the Lower Don Trail closures.",
+   "rule": "detour",
+   "score": 3
+  },
+  {
+   "item_id": "2023.IE1.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ie/bgrd/backgroundfile-233866.pdf",
+   "page": 3,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bayview Ave"
+   ],
+   "quote": "While the ActiveTO Bayview pilot project was initially conceived as a temporary detour route for the Lower Don Trail, it has now been in operation in tandem with the trail.",
+   "rule": "detour",
+   "score": 3
+  },
+  {
+   "item_id": "2023.IE1.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ie/bgrd/backgroundfile-233866.pdf",
+   "page": 25,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bayview Ave"
+   ],
+   "quote": "ActiveTO 2021 Lower Don Trail Construction Closure Detour on Bayview Avenue The ActiveTO pilot on Bayview Avenue was implemented between River Street and Front Street East to provide a safe and direct detour to the Lower Don Trail closures.",
+   "rule": "Detour",
+   "score": 3
+  },
+  {
+   "item_id": "2024.PH13.4",
+   "item_title": "Collapse All 2024.PH13.4",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ph/bgrd/backgroundfile-246325.pdf",
+   "page": 11,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bayview Ave"
+   ],
+   "quote": "642 Planning & Housing Committee May 29, 2024 Pages with CR Overlay AreasCurrent Page 0 40 80 Meters Lands zoned CR subject to height label amendments Map tile boundary 642 LAKE ONTARIO Broadview Ave Lake Shore Blvd E Eastern Ave Diversion Eastern Ave Queen St E Adelaide St E Bayview Ave Bayview Ave Logan Ave Don R oadwa y Commissioners St DVP Gardiner XWY HT: 20.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.PH13.4",
+   "item_title": "Collapse All 2024.PH13.4",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ph/bgrd/backgroundfile-246302.pdf",
+   "page": 14,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bayview Ave"
+   ],
+   "quote": "642 Planning & Housing Committee May 28, 2024 Pages with CR Overlay AreasCurrent Page 0 40 80 Meters Lands zoned CR subject to zone label amendments Map tile boundary 642 LAKE ONTARIO Broadview Ave Lake Shore Blvd E Eastern Ave Diversion Eastern Ave Queen St E Adelaide St E Bayview Ave Bayview Ave Logan Ave Don R oadwa y Commissioners St DVP Gardiner XWY CR 5.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.PH16.1",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ph/bgrd/backgroundfile-249796.pdf",
+   "page": 22,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bayview Ave"
+   ],
+   "quote": "642 Planning & Housing Committee May 29, 2024 Pages with CR Overlay AreasCurrent Page 04 0 8 0 M e t e r s Lands zoned CR subject to height label amendments Map tile boundary 642 LAKE ONTARIO e v A w e i v d a o rB Lake ShoreB l v dE Eastern Ave Diversion Eastern Ave Queen StE Adelaide St E Bayview Ave Bayview Ave Logan Ave Don R oadwa y Commissioners St DVP Gardiner XWY HT 20.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2026.IE30.2",
+   "item_title": "See also 2026.IE27.9",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/ie/bgrd/backgroundfile-287416.pdf",
+   "page": 3,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Additional concerns included potential traffic diversion to nearby residential streets due to cycle tracks and lane width narrowing, transit stop consolidation, snow maintenance, and access to driveways and loading areas.",
+   "rule": "transit stop consolidation",
+   "score": 2
+  },
+  {
+   "item_id": "2026.IE30.2",
+   "item_title": "See also 2026.IE27.9",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/ie/bgrd/backgroundfile-287756.pdf",
+   "page": 3,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "0 metres on the far side of the crosswalk measured on each side of the highway in the direction of travel of vehicles on that side of the highway;",
+   "rule": "far side",
+   "score": 2
+  },
+  {
+   "item_id": "2026.IE30.2",
+   "item_title": "See also 2026.IE27.9",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/ie/bgrd/backgroundfile-287416.pdf",
+   "page": 2,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "A key concern expressed through public consultation was potential for traffic diversion from Davisville Avenue to neighbouring parallel streets, due to proposed westbound left-turn prohibitions.",
+   "rule": "diversion",
+   "score": 1
+  }
+ ]
+}

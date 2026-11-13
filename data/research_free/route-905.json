@@ -1,0 +1,191 @@
+{
+ "route": "905",
+ "name": "Eglinton East Express",
+ "terms": {
+  "route": "905",
+  "name": "Eglinton East Express",
+  "main": [
+   "Kingston Rd",
+   "Eglinton Ave",
+   "Morningside Ave"
+  ],
+  "cross": [
+   "Bellamy Rd North",
+   "Bus Bay 5",
+   "Celeste Dr",
+   "Cromwell Rd",
+   "Danforth Rd",
+   "Ellesmere Rd",
+   "Galloway Rd",
+   "Guildwood Pkwy",
+   "Kingston Rd",
+   "Lawrence Ave East",
+   "Markham Rd",
+   "Military Trail",
+   "Morningside Ave",
+   "Pan Am Dr"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2023.EX10.17",
+   "item_title": "Expand All 2023.EX10.17",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-241046.pdf",
+   "page": 2,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "Removing the stops along Kingston Road and Eglinton Avenue would likely trigger a need for local bus service which could negate the travel time benefits in the business case of removing those stops.",
+   "rule": "Removing the stops",
+   "score": 5
+  },
+  {
+   "item_id": "2023.EX10.17",
+   "item_title": "Expand All 2023.EX10.17",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-241046.pdf",
+   "page": 2,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "2 stops removed along Eglinton Avenue Option 3: Removal of 5 stops along Sheppard Avenue.",
+   "rule": "stops removed along Eglinton Avenue Option 3: Removal",
+   "score": 3
+  },
+  {
+   "item_id": "2023.EX10.17",
+   "item_title": "Expand All 2023.EX10.17",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-241047.pdf",
+   "page": 41,
+   "change_type": "reroute",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "0315 CO2e/passenger/km (Compared to hybrid and diesel 12 metre bus)** Major environmental challenges None * The change in auto mode share and change in vehicle-kilometres-travelled (VKT) assumes that a portion of buses would be rerouted from the Eglinton-Kingston corridor once the EELRT is operational.",
+   "rule": "rerouted",
+   "score": 3
+  },
+  {
+   "item_id": "2023.EX10.17",
+   "item_title": "Expand All 2023.EX10.17",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-241046.pdf",
+   "page": 2,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Option 2: Removal of 9 stops out of 31 along the corridor.",
+   "rule": "Removal of 9 stops",
+   "score": 2
+  },
+  {
+   "item_id": "2023.EX4.10",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-235966.pdf",
+   "page": 10,
+   "change_type": "reroute",
+   "stops_named": [
+    "Ellesmere Rd"
+   ],
+   "quote": "A new traffic control signal is proposed at Ellesmere Road and Borough Approach West to facilitate diverting eastbound traffic turning north towards Scarborough Town Centre or Highway 401.",
+   "rule": "diverting",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 23,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "TTC and Metrolinx will work together to ensure that relocated bus stops comply with temporary bus stop design and placement criteria, prioritizing passenger safety, accessibility, and convenience during construction.",
+   "rule": "relocated bus stops comply with temporary bus stop",
+   "score": 2
+  },
+  {
+   "item_id": "2024.IE13.2",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245152.pdf",
+   "page": 18,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "While some motorists may return to Eglinton Avenue after construction is complete, based on 2024 motor vehicle counts some of the diversion is expected to become permanent;",
+   "rule": "diversion",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 16,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "The Stage 1 works will not impact the intersection of Eglinton Avenue East and Midland Avenue, which will continue to operate with existing lane configurations and the east leg diversion to the north.",
+   "rule": "diversion",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 16,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "To accommodate the expanded work zone, the west leg of the intersection of Eglinton Avenue East and Midland Avenue will be diverted to the north (refer to Figure 5).",
+   "rule": "diverted",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 16,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "Together, the diversion of both the west and east legs will form an integrated section of the Eglinton Avenue East diversion road.",
+   "rule": "diversion",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 16,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "A portion of the west leg will be diverted onto privately-owned lands at 2480-2480A Eglinton Avenue East, over which Metrolinx holds a temporary easement.",
+   "rule": "diverted",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 16,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "The dedication by-law and any proposed traffic by- law amendments will come into effect once Metrolinx has completed the construction of the west leg of the Eglinton Avenue diversion road to the satisfaction of the City’s Transportation Services Division and after the road is accepted, commissioned, and the necessary land interest in the diversion road transferred to the City.",
+   "rule": "diversion",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 16,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "Figure 7 shows the Eglinton Avenue East diversion with respect to the Metrolinx work zone on Eglinton Avenue East.",
+   "rule": "diversion",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 15,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "During this temporary closure, the eastbound and westbound traffic will be maintained on the Eglinton Avenue East diversion road.",
+   "rule": "diversion",
+   "score": 1
+  }
+ ]
+}

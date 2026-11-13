@@ -1,0 +1,84 @@
+{
+ "route": "404",
+ "name": "East York",
+ "terms": {
+  "route": "404",
+  "name": "East York",
+  "main": [
+   "Dawes Rd",
+   "Victoria Park Ave",
+   "Coxwell Ave"
+  ],
+  "cross": [
+   "Barker Ave",
+   "Barrington Ave",
+   "Beech Ave",
+   "Beth St",
+   "Bingham Ave",
+   "Bracebridge Ave",
+   "Brenton St",
+   "Bus Bay 3",
+   "Cedarvale Ave",
+   "Cosburn Ave",
+   "Crescent Town Rd",
+   "Danforth Ave",
+   "Denton Ave",
+   "Donora Dr",
+   "Dunkirk Rd",
+   "Ferris Rd",
+   "Glebeholme Blvd",
+   "Glebemount Ave",
+   "Gledhill Ave",
+   "Glen Manor Dr",
+   "Goodwood Park Cres",
+   "Goodwood Park Crt",
+   "Gower St",
+   "Hamstead Ave",
+   "Knight St",
+   "Main St",
+   "Massey Sq East",
+   "Meadow Ave",
+   "Mortimer Ave",
+   "Park Vista",
+   "Plains Rd",
+   "Sammon Ave",
+   "Scarborough Rd",
+   "Secord Ave",
+   "Springdale Blvd",
+   "Stan Wadlow Park",
+   "Swanwick Ave",
+   "Victoria Park Ave",
+   "Westlake Cres",
+   "Winston Ave",
+   "Woodale Ave",
+   "Woodbine Ave",
+   "Woodmount Ave"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+   "page": 26,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Participants were asked to identify the most important criteria for evaluating transit priority solutions, to provide feedback on five design options, and to comment on the proposed removal of ten bus stops.",
+   "rule": "removal of ten bus stops",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Danforth Ave"
+   ],
+   "quote": "Street East and Church Street Intersection Closures Date: February 3, 2025 To: Toronto and East York Community Council From: Director, Traffic Management, Transportation Services Wards: Wards 10 – Spadina-Fort York, 13 – Toronto Centre, and 14 – Toronto- Danforth SUMMARY Transportation Services is requesting approval, on behalf of the Toronto Transit Commission (TTC), to install transit priority measures (TPMs) to support the diversion routes associated with the closure of King Street East and Church Street intersection for watermain and streetcar track maintenance from May 2025 to August 2025",
+   "rule": "diversion",
+   "score": 2
+  }
+ ]
+}

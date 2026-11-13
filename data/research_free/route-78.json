@@ -1,0 +1,48 @@
+{
+ "route": "78",
+ "name": "St Andrews",
+ "terms": {
+  "route": "78",
+  "name": "St Andrews",
+  "main": [
+   "Upper Canada Dr",
+   "York Mills Rd",
+   "Upper Highland Cres"
+  ],
+  "cross": [
+   "Aldershot Cres",
+   "Bus Bay 5",
+   "Caldy Crt",
+   "Fairmeadow Ave",
+   "Fifeshire Rd",
+   "Hedgewood Rd",
+   "Lord Seaton Rd",
+   "Montressor Dr",
+   "Munro Blvd",
+   "Normandale Cres",
+   "Old Yonge St",
+   "Old York Mills Rd",
+   "Owen Blvd",
+   "The Links Rd",
+   "Tournament Dr",
+   "Troon Crt",
+   "Upper Canada Dr",
+   "Upper Highland Cres",
+   "York Mills Rd",
+   "York Ridge Rd"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2026.IE30.2",
+   "item_title": "See also 2026.IE27.9",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/ie/bgrd/backgroundfile-287421.pdf",
+   "page": 8,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "There is potential for impacts (injury and/or removal) to approximately three (3) trees to due to shifting transit stops to meet required clearances to the crossing.",
+   "rule": "removal) to approximately three (3) trees to due to shifting transit stops",
+   "score": 2
+  }
+ ]
+}

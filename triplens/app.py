@@ -444,7 +444,9 @@ async def trip_api(request: Request):
 
 @app.get("/research/{route}", response_class=HTMLResponse)
 def research_page(request: Request, route: str):
-    p = DATA / "research" / f"route-{route}.json"
-    if not p.exists():
+    pa, pf = DATA / "research" / f"route-{route}.json", DATA / "research_free" / f"route-{route}.json"
+    if not pa.exists() and not pf.exists():
         raise HTTPException(404, "No research has been run for that route.")
-    return templates.TemplateResponse(request, "research.html", {"r": json.loads(p.read_text())})
+    r = json.loads(pa.read_text()) if pa.exists() else None
+    free = json.loads(pf.read_text()) if pf.exists() else None
+    return templates.TemplateResponse(request, "research.html", {"r": r, "free": free, "route": route})

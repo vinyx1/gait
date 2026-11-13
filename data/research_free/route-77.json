@@ -1,0 +1,28 @@
+{
+ "route": "77",
+ "name": "Swansea",
+ "terms": {
+  "route": "77",
+  "name": "Swansea",
+  "main": [
+   "Runnymede Rd",
+   "Windermere Ave"
+  ],
+  "cross": [
+   "Bloor St West",
+   "Bus Bay 4",
+   "Coe Hill Dr",
+   "Deforest Rd",
+   "Lavinia Ave",
+   "Morningside Ave",
+   "Ormskirk Ave",
+   "Ripley Ave",
+   "South Kingsway",
+   "St Olaves Rd",
+   "The Queensway",
+   "Windermere Ave",
+   "Windermere Pl"
+  ]
+ },
+ "findings": []
+}

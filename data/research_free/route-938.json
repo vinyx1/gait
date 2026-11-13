@@ -1,0 +1,105 @@
+{
+ "route": "938",
+ "name": "Highland Creek Express",
+ "terms": {
+  "route": "938",
+  "name": "Highland Creek Express",
+  "main": [
+   "Ellesmere Rd"
+  ],
+  "cross": [
+   "Borough Dr",
+   "Brimley Rd",
+   "Bus Bay 12",
+   "Bus Bay 8",
+   "Markham Rd",
+   "Midland Ave",
+   "Military Trail",
+   "Morningside Ave",
+   "Neilson Rd"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2023.EX4.10",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-235966.pdf",
+   "page": 18,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Brimley Rd"
+   ],
+   "quote": "The existing local northbound far side stop on Brimley Road will be relocated to the nearside to free up the required space for the queue jump lane.",
+   "rule": "far side",
+   "score": 4
+  },
+  {
+   "item_id": "2023.EX4.10",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-235966.pdf",
+   "page": 10,
+   "change_type": "reroute",
+   "stops_named": [
+    "Borough Dr"
+   ],
+   "quote": "A new traffic control signal is proposed at Ellesmere Road and Borough Approach West to facilitate diverting eastbound traffic turning north towards Scarborough Town Centre or Highway 401.",
+   "rule": "diverting",
+   "score": 3
+  },
+  {
+   "item_id": "2023.EX10.17",
+   "item_title": "Expand All 2023.EX10.17",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-241046.pdf",
+   "page": 2,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Option 2: Removal of 9 stops out of 31 along the corridor.",
+   "rule": "Removal of 9 stops",
+   "score": 2
+  },
+  {
+   "item_id": "2023.EX4.10",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-235966.pdf",
+   "page": 13,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "The 43 Kennedy northbound bus stop would be relocated to the far side of the intersection to prevent it from blocking express buses approaching the intersection.",
+   "rule": "bus stop would be relocated",
+   "score": 2
+  },
+  {
+   "item_id": "2026.IE30.2",
+   "item_title": "See also 2026.IE27.9",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/ie/bgrd/backgroundfile-287421.pdf",
+   "page": 7,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Relocating these stops will improve customer safety by providing them with a protected pedestrian crossing, a more reliable service through efficient stop spacing meeting TTC service standards, and optimally placed TTC stop locations to support both the current needs of customers and future development in this area.",
+   "rule": "Relocating these stops",
+   "score": 2
+  },
+  {
+   "item_id": "2026.IE30.2",
+   "item_title": "See also 2026.IE27.9",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/ie/bgrd/backgroundfile-287421.pdf",
+   "page": 10,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "There is potential for impacts (injury and/or removal) to approximately two (2) trees due to shifting transit stops to meet required clearances to the crossing.",
+   "rule": "removal) to approximately two (2) trees due to shifting transit stops",
+   "score": 2
+  },
+  {
+   "item_id": "2026.IE30.2",
+   "item_title": "See also 2026.IE27.9",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/ie/bgrd/backgroundfile-287421.pdf",
+   "page": 8,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "There is potential for impacts (injury and/or removal) to approximately three (3) trees to due to shifting transit stops to meet required clearances to the crossing.",
+   "rule": "removal) to approximately three (3) trees to due to shifting transit stops",
+   "score": 2
+  }
+ ]
+}

@@ -1,0 +1,64 @@
+{
+ "route": "109",
+ "name": "Ranee",
+ "terms": {
+  "route": "109",
+  "name": "Ranee",
+  "main": [
+   "Marlee Ave",
+   "Varna Dr",
+   "Flemington Rd"
+  ],
+  "cross": [
+   "Ameer Ave",
+   "Bathurst St",
+   "Baycrest Ave",
+   "Blossomfield Dr",
+   "Bus Bay 1",
+   "Bus Bay 2",
+   "Bus Bay 8",
+   "Dell Park Ave",
+   "Dynasty Lane",
+   "Elway Crt",
+   "Flemington Rd",
+   "Glencairn Ave",
+   "Glengrove Ave",
+   "Lawrence Ave West",
+   "Lawrence Heights Way",
+   "Livingstone Ave",
+   "Marlee Ave",
+   "Mikado Ave",
+   "Neptune Dr",
+   "Rajah St",
+   "Ranee Ave",
+   "Replin Rd",
+   "Ridelle Ave",
+   "Rondale Blvd",
+   "Roselawn Ave",
+   "Shermount Ave",
+   "Stayner Ave",
+   "Stockton Rd",
+   "Sultana Ave",
+   "Tundra Lane",
+   "Varna Dr",
+   "Viewmount Ave",
+   "Wenderly Dr",
+   "Whitmore Ave"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.NY25.8",
+   "item_title": "Expand All 2025.NY25.8",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ny/bgrd/backgroundfile-256273.pdf",
+   "page": 11,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Marlee Ave"
+   ],
+   "quote": "One of the bus stops on Eglinton Avenue is to be consolidated with the bus stop on Marlee Avenue, which will be moved closer to Nicastro Lane.",
+   "rule": "bus stops on Eglinton Avenue is to be consolidated",
+   "score": 5
+  }
+ ]
+}

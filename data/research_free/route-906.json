@@ -1,0 +1,35 @@
+{
+ "route": "906",
+ "name": "Airport-Humber College Express",
+ "terms": {
+  "route": "906",
+  "name": "Airport-Humber College Express",
+  "main": [
+   "Humberline Dr",
+   "Humberwood Blvd",
+   "Dixon Rd"
+  ],
+  "cross": [
+   "Attwell Dr",
+   "Bresler Dr",
+   "Carlingview Dr",
+   "Elmbank Rd",
+   "Highway 27",
+   "Holyoake Cres",
+   "Honeyview Pl",
+   "Humber College Blvd",
+   "Humberline Dr",
+   "Jetliner Rd",
+   "Morning Star Dr",
+   "Pinecone Dr",
+   "Queen's Plate Dr",
+   "Skyway Ave",
+   "Topbank Dr",
+   "View Green Cres",
+   "Viewcrest Cir",
+   "Viscount Rd",
+   "Woodlot Cres"
+  ]
+ },
+ "findings": []
+}

@@ -1,0 +1,25 @@
+{
+ "route": "184",
+ "name": "Ancaster Park",
+ "terms": {
+  "route": "184",
+  "name": "Ancaster Park",
+  "main": [
+   "Maniza Rd"
+  ],
+  "cross": [
+   "Dufferin St",
+   "Garratt Blvd",
+   "Gilley Rd",
+   "Home Rd",
+   "Katherine Rd",
+   "Lady York Ave",
+   "Lower Bus Bay 8",
+   "Plewes Rd",
+   "Powell Rd",
+   "Regent Rd",
+   "Spalding Rd"
+  ]
+ },
+ "findings": []
+}

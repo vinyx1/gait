@@ -1,0 +1,50 @@
+{
+ "route": "123",
+ "name": "Sherway",
+ "terms": {
+  "route": "123",
+  "name": "Sherway",
+  "main": [
+   "Brown's Line",
+   "North Queen St",
+   "Evans Ave"
+  ],
+  "cross": [
+   "Acorn Ave",
+   "Atomic Ave",
+   "Aukland Rd",
+   "Brown's Line",
+   "Bus Bay 5",
+   "Coules Crt",
+   "Dundas St West",
+   "Eastside Dr",
+   "Evans Ave",
+   "Finsbury Cres",
+   "Fortieth St",
+   "Gair Dr",
+   "Horner Ave",
+   "Index Rd",
+   "Jellicoe Ave",
+   "Lake Shore Blvd West",
+   "Lockport Ave",
+   "Manstor Rd",
+   "Medulla Ave",
+   "Newbridge Rd",
+   "North Queen St",
+   "Nova Rd",
+   "Poplar Ave",
+   "Rimilton Ave",
+   "Samuel Wood Way",
+   "Sheldon Ave",
+   "Sherway Dr",
+   "Sherway Gate",
+   "Sherway Gate Mall)",
+   "The East Mall",
+   "The Queensway",
+   "Valermo Dr",
+   "Wilmar Rd",
+   "Woodbury Rd"
+  ]
+ },
+ "findings": []
+}

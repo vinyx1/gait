@@ -1,0 +1,176 @@
+{
+ "route": "106",
+ "name": "Sentinel",
+ "terms": {
+  "route": "106",
+  "name": "Sentinel",
+  "main": [
+   "Sentinel Rd",
+   "Sheppard Ave"
+  ],
+  "cross": [
+   "Arboretum Lane",
+   "Bakersfield St Westside",
+   "Bus Bay 3",
+   "Chesswood Dr",
+   "Cook Rd",
+   "Derrydown Rd",
+   "Dovehouse Ave",
+   "Dufferin St",
+   "Finch Ave West",
+   "Fountainhead Rd",
+   "Fredrick Mowat Lane",
+   "Grandravine Dr",
+   "Hucknall Rd",
+   "John Drury Dr",
+   "Keele St",
+   "Kodiak Cres",
+   "Lamberton Blvd",
+   "Murray Ross Pkwy",
+   "Sentinel Rd",
+   "Sheppard Ave West",
+   "Shoreham Dr",
+   "Stilecroft Dr",
+   "Stilecroft Dr North",
+   "The Pond Rd",
+   "Tuscan Gate",
+   "Vitti St",
+   "Walkway to Norman Wesley Way",
+   "Yukon Lane"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2023.EX10.17",
+   "item_title": "Expand All 2023.EX10.17",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-241046.pdf",
+   "page": 2,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "2 stops removed along Eglinton Avenue Option 3: Removal of 5 stops along Sheppard Avenue.",
+   "rule": "stops removed along Eglinton Avenue Option 3: Removal",
+   "score": 3
+  },
+  {
+   "item_id": "2023.EX10.17",
+   "item_title": "Expand All 2023.EX10.17",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-241045.pdf",
+   "page": 11,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "As a result of this assessment, 5 stops were removed along Sheppard Avenue as it aligns Sheppard more closely with the average LRT stop spacing for the overall project.",
+   "rule": "stops were removed",
+   "score": 3
+  },
+  {
+   "item_id": "2023.EX10.17",
+   "item_title": "Expand All 2023.EX10.17",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-241045.pdf",
+   "page": 11,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "The stops removed along Sheppard Avenue will be served by planned parallel local bus service to Meadowvale.",
+   "rule": "stops removed",
+   "score": 3
+  },
+  {
+   "item_id": "2023.EX10.17",
+   "item_title": "Expand All 2023.EX10.17",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-241046.pdf",
+   "page": 2,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Option 2: Removal of 9 stops out of 31 along the corridor.",
+   "rule": "Removal of 9 stops",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 2,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "Metrolinx SSE - Time Extension of temporary sidewalk closure on McCowan Road Page 2 of 5 on McCowan Road, between Sheppard Avenue East and Nugget Avenue, from April 1, 2024, to December 31, 2025, inclusive, to facilitate the Scarborough Subway Extension tunnel construction work.",
+   "rule": "sidewalk closure",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 2,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "12, entitled \"Metrolinx Scarborough Subway Extension - Closure of Sidewalk on McCowan Road\" and in so doing, authorized the temporary closure the east sidewalk on McCowan Road, between Sheppard Avenue East and Nugget Avenue from April 1, 2022, to March 31, 2024: https://secure.",
+   "rule": "Sidewalk on McCowan Road\" and in so doing, authorized the temporary closure",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 1,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "Subject to City Council approval of the requested time extension, with the east sidewalk closure in place, pedestrians will continue to utilize the west sidewalk on McCowan Road by safely crossing at the signalized intersections of McCowan Road and Sheppard Avenue East and McCowan Road and Nugget Avenue.",
+   "rule": "sidewalk closure",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 3,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "With the east sidewalk closure in place, pedestrians are directed to the west sidewalk by safely crossing at the signalized intersections of McCowan Road at Sheppard Avenue East and Nugget Avenue.",
+   "rule": "sidewalk closure",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 4,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "With the east sidewalk closure in place, pedestrians will continue to use the west sidewalk by safely crossing at the signalized intersections of McCowan Road at Sheppard Avenue East and Nugget Avenue.",
+   "rule": "sidewalk closure",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 11,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "Temporary Sidewalk Closure on McCowan Road Metrolinx is requesting an additional extension of the temporary closure of the east sidewalk on McCowan Road, between Sheppard Avenue East and Nugget Avenue, to support ongoing TBM operations at the launch shaft site.",
+   "rule": "Sidewalk Closure",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 7,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "12 \"Metrolinx Scarborough Subway Extension - Closure of Sidewalk on McCowan Road\" and authorized the temporary closure of the east sidewalk on McCowan Road, between Sheppard Avenue East and Nugget Avenue, from April 1, 2022, to March 31, 2024, to facilitate the Scarborough Subway Extension tunnel construction work.",
+   "rule": "Sidewalk on McCowan Road\" and authorized the temporary closure",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 7,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "12 \"Metrolinx Scarborough Subway Extension - Time Extension of Temporary Sidewalk Closure on McCowan Road\" and authorized continuation of the temporary closure of the east sidewalk on McCowan Road, between Sheppard Avenue East and Nugget Avenue, from April 1, 2024, to December 31, 2024.",
+   "rule": "Sidewalk Closure",
+   "score": 1
+  }
+ ]
+}

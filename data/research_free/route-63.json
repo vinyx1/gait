@@ -1,0 +1,69 @@
+{
+ "route": "63",
+ "name": "Ossington",
+ "terms": {
+  "route": "63",
+  "name": "Ossington",
+  "main": [
+   "Ossington Ave",
+   "Oakwood Ave",
+   "Ossington Station"
+  ],
+  "cross": [
+   "Argyle St",
+   "Atlantic Ave",
+   "Burlington Cres",
+   "Bus Bay 2",
+   "Bus Bay 6",
+   "Bus Bay 7",
+   "Canniff St",
+   "Churchill Ave",
+   "Clovelly Ave",
+   "College St",
+   "Conway Ave",
+   "Davenport Rd",
+   "Dewson St",
+   "Dundas St West",
+   "Dupont St",
+   "Earlsdale Ave",
+   "East Liberty St",
+   "Eglinton Ave West",
+   "Essex St",
+   "Hallam St",
+   "Harbord St",
+   "Hepbourne St",
+   "Highview Cres",
+   "Jesmond Ave",
+   "King St West",
+   "Leeds St",
+   "Lynn Williams St",
+   "Marlee Ave",
+   "Oakwood Ave",
+   "Pendrith St",
+   "Pirandello St",
+   "Queen St West",
+   "Rogers Rd",
+   "Rosemount Ave",
+   "Salvador Allende Crt",
+   "Shaw St",
+   "St Clair Ave West",
+   "Sudbury St",
+   "Vaughan Rd"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.IE23.6",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ie/bgrd/backgroundfile-256881.pdf",
+   "page": 14,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Oakwood Ave"
+   ],
+   "quote": "The design proposes to relocate the existing TTC eastbound bus stop from the near- side of Oakwood Avenue to the near-side of Dovercourt Road and raises bus stops to integrated accessible bus/bike platforms.",
+   "rule": "relocate the existing TTC eastbound bus stop",
+   "score": 5
+  }
+ ]
+}

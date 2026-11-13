@@ -1,0 +1,109 @@
+{
+ "route": "135",
+ "name": "Gerrard",
+ "terms": {
+  "route": "135",
+  "name": "Gerrard",
+  "main": [
+   "Gerrard St",
+   "Warden Ave",
+   "Clonmore Dr"
+  ],
+  "cross": [
+   "Blantyre Ave",
+   "Burn Hill Rd",
+   "Bus Bay 4",
+   "Cataraqui Cres",
+   "Clonmore Dr",
+   "Cornell Ave",
+   "Danforth Ave",
+   "Danforth Rd",
+   "Dengate Rd",
+   "Firvalley Crt",
+   "Gerrard St East",
+   "Hollis Ave",
+   "Mack Ave",
+   "Main St",
+   "Malvern Ave",
+   "Osborne Ave",
+   "Queensbury Ave",
+   "Rathmore Ave",
+   "Scarborough Rd",
+   "Temporary Bus Bay 5",
+   "Victoria Park Ave",
+   "Warden Ave"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.SC26.13",
+   "item_title": "Expand All 2025.SC26.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259405.pdf",
+   "page": 5,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Clonmore Dr"
+   ],
+   "quote": "Consultation with TTC The TTC has expressed interest in consolidating other nearby midblock stops on Clonmore Drive into stops at the subject intersection, should the requested traffic control signal be approved.",
+   "rule": "consolidating other nearby midblock stops on Clonmore Drive into stops",
+   "score": 5
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 51,
+   "change_type": "reroute",
+   "stops_named": [
+    "Gerrard St East"
+   ],
+   "quote": "At least one sidewalk will remain open at all times, with signed detours and controlled crossings at Gerrard Street East and the PXO at Langley Avenue.",
+   "rule": "detours",
+   "score": 3
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 52,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "The northbound far side transit stop on Carlaw Avenue at Gerrard Street will be temporarily located to the south side of the intersection in front of 375 Carlaw Avenue.",
+   "rule": "far side",
+   "score": 3
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 57,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Temporary relocation of transit stops will be required at some locations to avoid conflicts with active work zones.",
+   "rule": "relocation of transit stops",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 51,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "Temporary road and sidewalk closures for these activities will be coordinated with the Gerrard Portal traffic management plan to maintain safe and continuous access for local residents, emergency services, and construction vehicles.",
+   "rule": "sidewalk closures",
+   "score": 1
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 51,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "As Gerrard Portal construction progresses (Stages 1A to 1C), temporary sidewalk closures will occur along Carlaw Avenue, between Gerrard Avenue and Langley Avenue for driveway modifications and temporary traffic signal installation.",
+   "rule": "sidewalk closures",
+   "score": 1
+  }
+ ]
+}

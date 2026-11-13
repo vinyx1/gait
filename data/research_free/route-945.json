@@ -1,0 +1,58 @@
+{
+ "route": "945",
+ "name": "Kipling Express",
+ "terms": {
+  "route": "945",
+  "name": "Kipling Express",
+  "main": [
+   "Kipling Ave"
+  ],
+  "cross": [
+   "Albion Rd",
+   "Annabelle Dr",
+   "Beaconhill Rd",
+   "Belfield Rd",
+   "Bethridge Rd",
+   "Brookmere Rd",
+   "Burnhamthorpe Rd",
+   "Bus Bay 3",
+   "Dixon Rd",
+   "Eglinton Ave West",
+   "Farr Ave",
+   "Finch Ave West",
+   "Genthorn Ave",
+   "Henley Cres",
+   "Hinton Rd",
+   "John Garland Blvd",
+   "Kidron Valley Dr",
+   "Mount Olive Dr",
+   "Panorama Crt",
+   "Penlea Ave",
+   "Rathburn Rd",
+   "Redwater Dr",
+   "Rexdale Blvd",
+   "Rowntree Rd",
+   "Snaresbrook Dr",
+   "Steeles Ave West",
+   "Stevenson Rd",
+   "Taber Rd",
+   "The Westway",
+   "Westhumber Blvd"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2024.EY12.17",
+   "item_title": "See also By-law",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ey/bgrd/backgroundfile-244402.pdf",
+   "page": 2,
+   "change_type": "reroute",
+   "stops_named": [
+    "Burnhamthorpe Rd"
+   ],
+   "quote": "Reducing the number of lanes on Burnhamthorpe Road would result in significantly more congestion, delays and vehicle queuing and may, in turn, divert motorists to adjoining local roadways, which are not designed to accommodate this traffic.",
+   "rule": "divert",
+   "score": 2
+  }
+ ]
+}

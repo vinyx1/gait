@@ -1,0 +1,315 @@
+{
+ "route": "87",
+ "name": "Cosburn",
+ "terms": {
+  "route": "87",
+  "name": "Cosburn",
+  "main": [
+   "Cosburn Ave",
+   "Broadview Ave",
+   "Westlake Ave"
+  ],
+  "cross": [
+   "Barrington Ave",
+   "Bater Ave",
+   "Binswood Ave",
+   "Broadview Ave",
+   "Browning Ave",
+   "Bus Bay 3",
+   "Bus Bay 5",
+   "Cedarvale Ave",
+   "Chester Hill Rd",
+   "Cosburn Ave",
+   "Coxwell Ave",
+   "Doncaster Ave",
+   "Donlands Ave",
+   "Glebemount Ave",
+   "Gledhill Ave",
+   "Goodwood Park Cres",
+   "Greenwood Ave",
+   "Haldon Ave",
+   "Hamstead Ave",
+   "Hillside Dr",
+   "Linsmore Cres",
+   "Logan Ave",
+   "Lumsden Ave",
+   "Main St",
+   "Mortimer Ave",
+   "Palmer Ave",
+   "Pape Ave",
+   "Pottery Rd",
+   "Pretoria Ave",
+   "Roblin Ave",
+   "Roosevelt Rd",
+   "Secord Ave",
+   "Todmorden Lane",
+   "Wallington Ave",
+   "Westlake Cres",
+   "Woodbine Ave",
+   "Woodmount Ave"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 22,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Cosburn Ave",
+    "Pape Ave"
+   ],
+   "quote": "The southbound nearside transit stop on Pape Avenue at Cosburn Avenue will be temporarily relocated to south of Gowan Avenue.",
+   "rule": "transit stop on Pape Avenue at Cosburn Avenue will be temporarily relocated",
+   "score": 6
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 22,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Cosburn Ave",
+    "Pape Ave"
+   ],
+   "quote": "Additionally, the eastbound nearside transit stop on Cosburn Avenue at Pape Avenue will be temporarily relocated approximately 40 metres west of its original location.",
+   "rule": "transit stop on Cosburn Avenue at Pape Avenue will be temporarily relocated",
+   "score": 6
+  },
+  {
+   "item_id": "2024.PH13.4",
+   "item_title": "Collapse All 2024.PH13.4",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ph/bgrd/backgroundfile-246325.pdf",
+   "page": 11,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave",
+    "Logan Ave"
+   ],
+   "quote": "642 Planning & Housing Committee May 29, 2024 Pages with CR Overlay AreasCurrent Page 0 40 80 Meters Lands zoned CR subject to height label amendments Map tile boundary 642 LAKE ONTARIO Broadview Ave Lake Shore Blvd E Eastern Ave Diversion Eastern Ave Queen St E Adelaide St E Bayview Ave Bayview Ave Logan Ave Don R oadwa y Commissioners St DVP Gardiner XWY HT: 20.",
+   "rule": "Diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.PH13.4",
+   "item_title": "Collapse All 2024.PH13.4",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ph/bgrd/backgroundfile-246302.pdf",
+   "page": 14,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave",
+    "Logan Ave"
+   ],
+   "quote": "642 Planning & Housing Committee May 28, 2024 Pages with CR Overlay AreasCurrent Page 0 40 80 Meters Lands zoned CR subject to zone label amendments Map tile boundary 642 LAKE ONTARIO Broadview Ave Lake Shore Blvd E Eastern Ave Diversion Eastern Ave Queen St E Adelaide St E Bayview Ave Bayview Ave Logan Ave Don R oadwa y Commissioners St DVP Gardiner XWY CR 5.",
+   "rule": "Diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 8,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Cosburn Ave",
+    "Pape Ave"
+   ],
+   "quote": "These PXOs will ensure continuous and accessible pedestrian routes during upcoming temporary sidewalk closures along Pape Avenue and Cosburn Avenue.",
+   "rule": "sidewalk closures",
+   "score": 4
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 18,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Cosburn Ave",
+    "Pape Ave"
+   ],
+   "quote": "west sidewalk closed (east sidewalk open) 4 Sept 2027 (1 weekend) Connect north & south traffic decks Full closure of Cosburn Ave, between Pape Avenue and 35 m west;",
+   "rule": "sidewalk closed",
+   "score": 4
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 9,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Cosburn Ave"
+   ],
+   "quote": "curb and sidewalk modifications Short-term curb lane closures on both sides of Cosburn Avenue;",
+   "rule": "sidewalk modifications Short-term curb lane closures",
+   "score": 3
+  },
+  {
+   "item_id": "2025.IE23.6",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ie/bgrd/backgroundfile-256881.pdf",
+   "page": 8,
+   "change_type": "reroute",
+   "stops_named": [
+    "Browning Ave",
+    "Logan Ave"
+   ],
+   "quote": "Option B included a southbound contra-flow bike lane on Logan Avenue along with traffic diversion on Logan Avenue at Browning Avenue and Fulton Avenue.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 8,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave"
+   ],
+   "quote": "For the duration of the diversion the 504 King will be modified to run on a single branch from Dundas West Station to Broadview Station.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 2,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave"
+   ],
+   "quote": "In addition to the proposed TPMs, the TTC will work with City staff to support the diversion using the Traffic Agent program and signal timing optimizations where possible As TTC operates transit service on Broadview Avenue, Queen Street, Richmond Street, Adelaide Street, Church Street and York Street, City Council approval of this report is required.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave"
+   ],
+   "quote": "The diversion will result in 25 streetcars in the peak hour, up from seven streetcars in existing conditions, using Queen Street east of Spadina Avenue to Broadview Avenue and the existing diversion associated with the Ontario Line construction.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave"
+   ],
+   "quote": "This report proposes a suite of transit priority measures to support the diversion including new parking restrictions on Queen Street, additional no stopping zones, increased duration of turning restrictions, restrictions on CaféTO curb lane installations and, implementing a short eastbound transit-only lane at the intersection of Queen Street East and Broadview Avenue to support streetcar and general traffic operations.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 3,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave"
+   ],
+   "quote": "The 504 King and 503 Kingston Road routes will continue to provide transit service, diverting along Queen Street, Richmond Street and Adelaide Street between Broadview Avenue and York Street throughout the duration of the construction period.",
+   "rule": "diverting",
+   "score": 3
+  },
+  {
+   "item_id": "2024.IE14.4",
+   "item_title": "See also 2025.MM30.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245712.pdf",
+   "page": 25,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Bus stop relocations to provide stops near protected crossings;",
+   "rule": "Bus stop relocations",
+   "score": 2
+  },
+  {
+   "item_id": "2024.IE14.4",
+   "item_title": "See also 2025.MM30.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245712.pdf",
+   "page": 26,
+   "change_type": "reroute",
+   "stops_named": [
+    "Logan Ave"
+   ],
+   "quote": "Among the options presented for Logan Avenue, Option A (contra- flow bike lane without any traffic diversion) was the most preferred for people living in the M4K postal code.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 9,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Pape Ave"
+   ],
+   "quote": "curb and sidewalk modifications Short-term curb lane closures on both sides of Pape Avenue;",
+   "rule": "sidewalk modifications Short-term curb lane closures",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 22,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Metrolinx and TTC will coordinate to ensure that relocated bus stops meet temporary bus stop design and placement criteria, ensuring passenger safety, accessibility, and convenience during construction.",
+   "rule": "relocated bus stops meet temporary bus stop",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 12,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Pape Ave"
+   ],
+   "quote": "Temporary closure of the north sidewalk between Pape Avenue and a point 35 metres west, with pedestrians detoured to a 1.",
+   "rule": "pedestrians detoured",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 12,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Pape Ave"
+   ],
+   "quote": "Temporary closure of the west sidewalk on Pape Avenue, between Gamble Avenue and Gowan Avenue, with pedestrians detoured to the east sidewalk.",
+   "rule": "pedestrians detoured",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 57,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Temporary relocation of transit stops will be required at some locations to avoid conflicts with active work zones.",
+   "rule": "relocation of transit stops",
+   "score": 2
+  }
+ ]
+}

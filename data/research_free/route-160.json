@@ -1,0 +1,142 @@
+{
+ "route": "160",
+ "name": "Bathurst North",
+ "terms": {
+  "route": "160",
+  "name": "Bathurst North",
+  "main": [
+   "Bathurst St",
+   "Atkinson Ave",
+   "Wilson Ave"
+  ],
+  "cross": [
+   "Antibes Dr",
+   "Bainbridge Ave",
+   "Bathurst St",
+   "Beverley Glen Blvd",
+   "Blue Flag Gate",
+   "Campbell Ave",
+   "Carscadden Dr",
+   "Cedarcroft Blvd",
+   "Centre St",
+   "Chabad Gate",
+   "Clark Ave West",
+   "Codsell Ave",
+   "Cordoba Dr",
+   "Danby Ave",
+   "Dewlane Dr",
+   "Drewry Ave",
+   "Dundurn Cres",
+   "East Promenade",
+   "Ellerslie Ave",
+   "Faywood Blvd",
+   "Finch Ave West",
+   "Fisherville Rd",
+   "Greenwin Village Rd",
+   "Horsham Ave",
+   "Invermay Ave",
+   "Katerina Ave",
+   "King High Ave",
+   "Laurelcrest Ave",
+   "Lower Bus Bay 4",
+   "Lyonsgate Dr",
+   "Mascot Pl",
+   "Mcallister Rd",
+   "Milner Gate",
+   "New Westminster Dr",
+   "Patricia Ave",
+   "Promenade Cir (Mall North Entrance",
+   "Raeburn Ave",
+   "Reiner Rd",
+   "Rockford Rd",
+   "Rodeo Dr",
+   "Rosedale Heights Dr",
+   "Sheppard Ave West",
+   "Southbourne Ave",
+   "Spring Gate Blvd",
+   "Stafford Rd",
+   "Steeles Ave West",
+   "Timberlane Dr",
+   "Townsgate Dr",
+   "Walkway to Crown Heights Cres",
+   "Walkway to Mullen Dr",
+   "York Downs Dr",
+   "York Hill Blvd",
+   "Yorkview Dr"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.IE23.6",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ie/bgrd/backgroundfile-256881.pdf",
+   "page": 15,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Bathurst St"
+   ],
+   "quote": "Cycling Network Plan: 2025 Cycling Infrastructure & Missing Sidewalk Installation - Second Quarter Update Page 15 of 22 Existing Conditions - Davenport Road at Bathurst Street In August 2024 Transportation Services installed raised westbound far-side and eastbound near-side bus-bike accessible platforms at Davenport Road and Bathurst Street.",
+   "rule": "far-side",
+   "score": 5
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+   "page": 23,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bathurst St"
+   ],
+   "quote": "west to site Inbound Routes Outbound Routes Work Area Vehicle Routes: King-Bathurst Station Exit site onto Bathurst nonh to Adelaide , east to Spadina, south to Lake Shore/Gardiner Exit site east on King east to Spadina, south to lake Shore/Gardiner Divert south from King on Portland St, join 3 Ex1t site to Stewart St.",
+   "rule": "Divert",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/cc/bgrd/backgroundfile-254824.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bathurst St"
+   ],
+   "quote": "Prohibited Turn Amendment at King Street West and Portland Street: The 511B Bathurst replacement bus will be rerouted during the extent of the King Street East and Church Street intersection closures to make Wolseley Loop available for use by the 504 King replacement bus.",
+   "rule": "rerouted",
+   "score": 3
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 23,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Figure 7 shows the proposed stops along the roadway, including those proposed to be removed.",
+   "rule": "stops along the roadway, including those proposed to be removed",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 23,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Note that the proposed priority transit lanes, parking and turning prohibitions and stop removals are part of the ongoing consultation with local Councillors and the public and are subject to change based on feedback received.",
+   "rule": "stop removals",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+   "page": 26,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Participants were asked to identify the most important criteria for evaluating transit priority solutions, to provide feedback on five design options, and to comment on the proposed removal of ten bus stops.",
+   "rule": "removal of ten bus stops",
+   "score": 2
+  }
+ ]
+}

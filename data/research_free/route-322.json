@@ -1,0 +1,309 @@
+{
+ "route": "322",
+ "name": "Coxwell",
+ "terms": {
+  "route": "322",
+  "name": "Coxwell",
+  "main": [
+   "Coxwell Ave",
+   "Kingston Rd",
+   "Cosburn Ave"
+  ],
+  "cross": [
+   "Barker Ave",
+   "Bater Ave",
+   "Beech Ave",
+   "Bingham Ave",
+   "Broadview Ave",
+   "Brookside Dr",
+   "Browning Ave",
+   "Casci Ave",
+   "Chester Hill Rd",
+   "Columbine Ave",
+   "Cosburn Ave",
+   "Coxwell Ave",
+   "Danforth Ave",
+   "Dixon Ave",
+   "Donlands Ave",
+   "Dundas St East",
+   "Earl Haig Ave",
+   "Eastwood Rd",
+   "Elmer Ave",
+   "Erindale Ave",
+   "Fairford Ave",
+   "Gerrard St East",
+   "Glebeholme Blvd",
+   "Glen Manor Dr",
+   "Greenwood Ave",
+   "Hanson St",
+   "Hillside Dr",
+   "Kingston Rd",
+   "Lee Ave",
+   "Linsmore Cres",
+   "Logan Ave",
+   "Lower Gerrard St East",
+   "Main St",
+   "Memorial Park Ave",
+   "Mortimer Ave",
+   "Pape Ave",
+   "Pottery Rd",
+   "Pretoria Ave",
+   "Queen St East",
+   "Robbins Ave",
+   "Roosevelt Rd",
+   "Sammon Ave",
+   "Scarborough Rd",
+   "Southwood Dr",
+   "Springdale Blvd",
+   "Todmorden Lane",
+   "Waverley Rd",
+   "Woodbine Ave"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 22,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Cosburn Ave",
+    "Pape Ave"
+   ],
+   "quote": "The southbound nearside transit stop on Pape Avenue at Cosburn Avenue will be temporarily relocated to south of Gowan Avenue.",
+   "rule": "transit stop on Pape Avenue at Cosburn Avenue will be temporarily relocated",
+   "score": 6
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 22,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Cosburn Ave",
+    "Pape Ave"
+   ],
+   "quote": "Additionally, the eastbound nearside transit stop on Cosburn Avenue at Pape Avenue will be temporarily relocated approximately 40 metres west of its original location.",
+   "rule": "transit stop on Cosburn Avenue at Pape Avenue will be temporarily relocated",
+   "score": 6
+  },
+  {
+   "item_id": "2023.EX10.17",
+   "item_title": "Expand All 2023.EX10.17",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-241046.pdf",
+   "page": 2,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "Removing the stops along Kingston Road and Eglinton Avenue would likely trigger a need for local bus service which could negate the travel time benefits in the business case of removing those stops.",
+   "rule": "Removing the stops",
+   "score": 5
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 8,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Cosburn Ave",
+    "Pape Ave"
+   ],
+   "quote": "These PXOs will ensure continuous and accessible pedestrian routes during upcoming temporary sidewalk closures along Pape Avenue and Cosburn Avenue.",
+   "rule": "sidewalk closures",
+   "score": 4
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 18,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Cosburn Ave",
+    "Pape Ave"
+   ],
+   "quote": "west sidewalk closed (east sidewalk open) 4 Sept 2027 (1 weekend) Connect north & south traffic decks Full closure of Cosburn Ave, between Pape Avenue and 35 m west;",
+   "rule": "sidewalk closed",
+   "score": 4
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 9,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Cosburn Ave"
+   ],
+   "quote": "curb and sidewalk modifications Short-term curb lane closures on both sides of Cosburn Avenue;",
+   "rule": "sidewalk modifications Short-term curb lane closures",
+   "score": 3
+  },
+  {
+   "item_id": "2025.IE23.6",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ie/bgrd/backgroundfile-256881.pdf",
+   "page": 8,
+   "change_type": "reroute",
+   "stops_named": [
+    "Browning Ave",
+    "Logan Ave"
+   ],
+   "quote": "Option B included a southbound contra-flow bike lane on Logan Avenue along with traffic diversion on Logan Avenue at Browning Avenue and Fulton Avenue.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "Additionally, the diversion of the 503 Kingston Road and 504 King streetcar routes along Queen Street will serve the Regent Park Neighbourhood Improvement Area (NIA), providing residents and equity-deserving groups increased levels of service throughout the duration of the diversion.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "There are four planned phases of construction, Phase 1 and Phase 2, which allows for east-west traffic to continue, including a bus overlay service for the 504 King, and Phase 3 and 4, which results in a full closure, The diversion plan for impacted service, 503 Kingston Road, 504 King, and 508 Lakeshore, is shown in Figure 1 (Phase 1 and 2) and Figure 2 (Phase 3 and Phase 4).",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2023.EX10.17",
+   "item_title": "Expand All 2023.EX10.17",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-241046.pdf",
+   "page": 2,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Option 2: Removal of 9 stops out of 31 along the corridor.",
+   "rule": "Removal of 9 stops",
+   "score": 2
+  },
+  {
+   "item_id": "2023.EX4.10",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-235966.pdf",
+   "page": 10,
+   "change_type": "reroute",
+   "stops_named": [
+    "Scarborough Rd"
+   ],
+   "quote": "A new traffic control signal is proposed at Ellesmere Road and Borough Approach West to facilitate diverting eastbound traffic turning north towards Scarborough Town Centre or Highway 401.",
+   "rule": "diverting",
+   "score": 2
+  },
+  {
+   "item_id": "2024.IE14.4",
+   "item_title": "See also 2025.MM30.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245712.pdf",
+   "page": 26,
+   "change_type": "reroute",
+   "stops_named": [
+    "Logan Ave"
+   ],
+   "quote": "Among the options presented for Logan Avenue, Option A (contra- flow bike lane without any traffic diversion) was the most preferred for people living in the M4K postal code.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2024.IE14.4",
+   "item_title": "See also 2025.MM30.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245712.pdf",
+   "page": 25,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Bus stop relocations to provide stops near protected crossings;",
+   "rule": "Bus stop relocations",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 9,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Pape Ave"
+   ],
+   "quote": "curb and sidewalk modifications Short-term curb lane closures on both sides of Pape Avenue;",
+   "rule": "sidewalk modifications Short-term curb lane closures",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 22,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Metrolinx and TTC will coordinate to ensure that relocated bus stops meet temporary bus stop design and placement criteria, ensuring passenger safety, accessibility, and convenience during construction.",
+   "rule": "relocated bus stops meet temporary bus stop",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 12,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Pape Ave"
+   ],
+   "quote": "Temporary closure of the north sidewalk between Pape Avenue and a point 35 metres west, with pedestrians detoured to a 1.",
+   "rule": "pedestrians detoured",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 12,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Pape Ave"
+   ],
+   "quote": "Temporary closure of the west sidewalk on Pape Avenue, between Gamble Avenue and Gowan Avenue, with pedestrians detoured to the east sidewalk.",
+   "rule": "pedestrians detoured",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 57,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Temporary relocation of transit stops will be required at some locations to avoid conflicts with active work zones.",
+   "rule": "relocation of transit stops",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 8,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave"
+   ],
+   "quote": "For the duration of the diversion the 504 King will be modified to run on a single branch from Dundas West Station to Broadview Station.",
+   "rule": "diversion",
+   "score": 2
+  }
+ ]
+}

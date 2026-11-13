@@ -1,0 +1,26 @@
+{
+ "route": "92",
+ "name": "Woodbine South",
+ "terms": {
+  "route": "92",
+  "name": "Woodbine South",
+  "main": [
+   "Woodbine Ave"
+  ],
+  "cross": [
+   "Bus Bay 3",
+   "Cassels Ave",
+   "Columbine Ave",
+   "Corley Ave",
+   "Eastwood Rd",
+   "Gerrard St East",
+   "Kewbeach Ave",
+   "Kingston Rd",
+   "Lake Shore Blvd East",
+   "Merrill Ave",
+   "Norway Ave",
+   "Queen St East"
+  ]
+ },
+ "findings": []
+}

@@ -1,0 +1,169 @@
+{
+ "route": "17",
+ "name": "Birchmount",
+ "terms": {
+  "route": "17",
+  "name": "Birchmount",
+  "main": [
+   "Birchmount Rd",
+   "Danforth Rd",
+   "Warden Ave"
+  ],
+  "cross": [
+   "Allanford Rd",
+   "Anaconda Ave",
+   "Ashtonbee Rd",
+   "Bay Mills Blvd",
+   "Bertrand Ave",
+   "Birchmount Rd",
+   "Bonis Ave",
+   "Bonniewood Rd",
+   "Burcana Rd",
+   "Canadian Rd",
+   "Carncastle Gate",
+   "Cass Ave",
+   "Cataraqui Cres",
+   "Chaldean St",
+   "Chelwood Rd",
+   "Comstock Rd",
+   "Crouse Rd",
+   "Danforth Rd",
+   "Dulverton Rd",
+   "Eglinton Ave East",
+   "Ellesmere Rd",
+   "Exford Dr",
+   "Finch Ave East",
+   "Firvalley Crt",
+   "Flora Dr",
+   "Foxridge Dr",
+   "Fundy Bay Blvd",
+   "Glendower Circt",
+   "Harleyford Gate",
+   "Huntingwood Dr",
+   "Ivy Bush Ave",
+   "L'Amoreaux Dr",
+   "Laura Secord Walk",
+   "Lawrence Ave East",
+   "Mack Ave",
+   "McNicoll Ave",
+   "Merryfield Dr",
+   "Modern Rd",
+   "Mountcastle Gate",
+   "Newlands Ave",
+   "Opposite Walkway to Ambercroft Blvd",
+   "Opposite Walkway to River Grove Dr",
+   "Pilkington Dr",
+   "Ranstone Gardens",
+   "River Grove Dr",
+   "Rolark Dr",
+   "Santamonica Blvd",
+   "Sanwood Blvd",
+   "Scarden Ave",
+   "Seminoff St",
+   "Sheppard Ave East",
+   "Silver Springs Blvd",
+   "St Clair Ave East",
+   "Staley Ter",
+   "Steeles Ave",
+   "Steeles Ave East",
+   "Temporary Bus Bay 5",
+   "Timberbank Blvd",
+   "Vauxhall Dr",
+   "Walkway to Ambercroft Blvd",
+   "Walkway to River Grove Dr",
+   "Warden Ave",
+   "Wintermute Blvd",
+   "Zenith Dr"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.SC26.14",
+   "item_title": "Expand All 2025.SC26.14",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259528.pdf",
+   "page": 2,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Birchmount Rd",
+    "Rolark Dr"
+   ],
+   "quote": "FINANCIAL IMPACT The estimated cost for installing traffic control signals at the intersection of Birchmount Road and Rolark Drive/Private Access and the associated work, including the relocation of the southbound TTC bus stop and potential tree removal, is $330,000.",
+   "rule": "bus stop and potential tree removal",
+   "score": 6
+  },
+  {
+   "item_id": "2025.SC26.14",
+   "item_title": "Expand All 2025.SC26.14",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259066.pdf",
+   "page": 2,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Birchmount Rd",
+    "Rolark Dr"
+   ],
+   "quote": "Traffic Control Signals and Traffic Regulations - Birchmount Road and Rolark Drive/Private Access Page 2 of 10 FINANCIAL IMPACT The estimated cost for installing traffic control signals at the intersection of Birchmount Road and Rolark Drive/Private Access and the associated work, including the relocation of the southbound TTC bus stop and potential tree removal, is $330,000.",
+   "rule": "bus stop and potential tree removal",
+   "score": 6
+  },
+  {
+   "item_id": "2025.SC26.14",
+   "item_title": "Expand All 2025.SC26.14",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259528.pdf",
+   "page": 7,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Birchmount Rd",
+    "Rolark Dr"
+   ],
+   "quote": "The TTC recommends relocating the existing southbound stop at the northwest corner of Birchmount Road and Rolark Drive to the southwest corner of Birchmount Road and Rolark Drive.",
+   "rule": "relocating the existing southbound stop",
+   "score": 6
+  },
+  {
+   "item_id": "2025.SC26.14",
+   "item_title": "Expand All 2025.SC26.14",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259528.pdf",
+   "page": 7,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Rolark Dr"
+   ],
+   "quote": "Relocating this stop will mitigate potential conflicts of bus stop service and truck movements north of Rolark Drive.",
+   "rule": "Relocating this stop will mitigate potential conflicts of bus stop",
+   "score": 4
+  },
+  {
+   "item_id": "2025.SC26.14",
+   "item_title": "Expand All 2025.SC26.14",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259528.pdf",
+   "page": 7,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "The relocation of the bus stop will require removal of one tree.",
+   "rule": "bus stop will require removal",
+   "score": 2
+  },
+  {
+   "item_id": "2025.SC26.14",
+   "item_title": "Expand All 2025.SC26.14",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259528.pdf",
+   "page": 9,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "~ PROPOSED TRAFFIC CONTROL SIGNAL Ill PROPOSEO NO RIGHT TURN ON RED e PROPOSEO TTC BUS STOP RELOCATION 1880 EX.",
+   "rule": "BUS STOP RELOCATION",
+   "score": 2
+  },
+  {
+   "item_id": "2025.SC26.14",
+   "item_title": "Expand All 2025.SC26.14",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259528.pdf",
+   "page": 9,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "ISTINGTTC I BUS STOP TOBf I RELOCAT ED \\ ' y PROPOSEO 1 BUS STOP RELOCATION NEWTTC I 0 <l: 0 a: f­ z ~ 0 ::;",
+   "rule": "BUS STOP TOBf I RELOCAT ED \\ ' y PROPOSEO 1 BUS STOP RELOCATION",
+   "score": 2
+  }
+ ]
+}

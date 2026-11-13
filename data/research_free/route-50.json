@@ -1,0 +1,51 @@
+{
+ "route": "50",
+ "name": "Burnhamthorpe",
+ "terms": {
+  "route": "50",
+  "name": "Burnhamthorpe",
+  "main": [
+   "Burnhamthorpe Rd"
+  ],
+  "cross": [
+   "Appleby Rd",
+   "Ashbourne Dr",
+   "Bloor St West",
+   "Botfield Ave",
+   "Burnhamthorpe Cres",
+   "Burnhamthorpe Loop",
+   "Burnhamthorpe Park Blvd",
+   "Bus Bay 12",
+   "Central Park Roadway",
+   "Dundas St West",
+   "Echo Valley Rd",
+   "Holloway Rd",
+   "Islington Ave",
+   "Kipling Ave",
+   "Martin Grove Rd",
+   "Mulgrove Dr",
+   "Old Burnhamthorpe Rd",
+   "Renforth Dr",
+   "Saturn Rd",
+   "Shaver Ave North",
+   "Silver Shadow Path",
+   "The East Mall",
+   "The West Mall"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2024.EY12.17",
+   "item_title": "See also By-law",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ey/bgrd/backgroundfile-244402.pdf",
+   "page": 2,
+   "change_type": "reroute",
+   "stops_named": [
+    "Burnhamthorpe Cres"
+   ],
+   "quote": "Reducing the number of lanes on Burnhamthorpe Road would result in significantly more congestion, delays and vehicle queuing and may, in turn, divert motorists to adjoining local roadways, which are not designed to accommodate this traffic.",
+   "rule": "divert",
+   "score": 3
+  }
+ ]
+}

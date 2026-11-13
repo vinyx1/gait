@@ -1,0 +1,146 @@
+{
+ "route": "113",
+ "name": "Danforth",
+ "terms": {
+  "route": "113",
+  "name": "Danforth",
+  "main": [
+   "Danforth Rd",
+   "Kennedy Rd",
+   "Danforth Ave"
+  ],
+  "cross": [
+   "Birchmount Rd",
+   "Bus Bay 13",
+   "Bus Bay 2",
+   "Byng Ave",
+   "Corvette Ave",
+   "Cotton Ave",
+   "Danforth Rd",
+   "Dawes Rd",
+   "Eglinton Ave",
+   "Eglinton Ave East",
+   "Foxridge Dr",
+   "Hubert Ave",
+   "Kenmark Blvd",
+   "Landry Ave",
+   "Leyton Ave",
+   "Mack Ave",
+   "Marsh Rd",
+   "McDonald Ave",
+   "Medford Ave",
+   "Merrian Rd",
+   "North Woodrow Blvd",
+   "Pharmacy Ave",
+   "Pilkington Dr",
+   "Seminoff St",
+   "Sibley Ave",
+   "St Clair Ave East",
+   "Summer Dr",
+   "Victoria Park Ave",
+   "Warden Ave"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 18,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave",
+    "Eglinton Ave East"
+   ],
+   "quote": "Transit Impacts Due to the expanded work zone for the Kennedy Station Connection and the resulting diversion road, there is insufficient space to maintain the three-lane-per-direction configuration on Eglinton Avenue East, Midland Avenue and a point 275 metres west of Midland Avenue.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2023.EX4.10",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-235966.pdf",
+   "page": 13,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "The 43 Kennedy northbound bus stop would be relocated to the far side of the intersection to prevent it from blocking express buses approaching the intersection.",
+   "rule": "bus stop would be relocated",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 19,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave",
+    "Eglinton Ave East"
+   ],
+   "quote": "During Stages 2 and 3, as shown in Figures 5 and 6, Metrolinx will establish temporary pedestrian walkways along the Eglinton Avenue East diversion Road.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 11,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave",
+    "Eglinton Ave East"
+   ],
+   "quote": "A time extension of the temporary road diversion of Eglinton Avenue East, between Midland Avenue and Huntington Avenue, to facilitate the extraction shaft construction.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 11,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave",
+    "Eglinton Ave East"
+   ],
+   "quote": "During the temporary closure of a portion of Eglinton Avenue East, east and westbound vehicular traffic will continue to be maintained on the Eglinton Avenue East diversion road.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 18,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "TTC and Metrolinx will coordinate to ensure that relocated bus stops meet temporary bus stop design and placement criteria, ensuring passenger safety, accessibility, and convenience during construction.",
+   "rule": "relocated bus stops meet temporary bus stop",
+   "score": 2
+  },
+  {
+   "item_id": "2023.EX4.10",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-235966.pdf",
+   "page": 21,
+   "change_type": "service_change",
+   "stops_named": [],
+   "quote": "Anticipated Transit Benefits The replacement service benefits transit customers by eliminating the need for a transfer for trips between Scarborough Town Centre and Kennedy Station, enhancing the customer experience.",
+   "rule": "service benefits transit customers by eliminating",
+   "score": 1
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 18,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "To ensure continued pedestrian access to the DMCRC, Kennedy GO Station and residential buildings to the north, Metrolinx will establish a detour along the south and west sides of the work zone.",
+   "rule": "detour",
+   "score": 1
+  }
+ ]
+}

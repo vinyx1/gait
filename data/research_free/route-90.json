@@ -1,0 +1,45 @@
+{
+ "route": "90",
+ "name": "Vaughan",
+ "terms": {
+  "route": "90",
+  "name": "Vaughan",
+  "main": [
+   "Vaughan Rd",
+   "Oakwood Ave"
+  ],
+  "cross": [
+   "Arlington Ave",
+   "Bathurst St",
+   "Bus Bay 5",
+   "Bus Bay 7",
+   "Clovelly Ave",
+   "Eglinton Ave West",
+   "Glenora Ave",
+   "Humewood Dr",
+   "Kenwood Ave",
+   "Louise Ave",
+   "Maplewood Ave",
+   "Marlee Ave",
+   "Oakwood Ave",
+   "St Clair Ave West",
+   "Vaughan Rd",
+   "Winona Dr"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.IE23.6",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ie/bgrd/backgroundfile-256881.pdf",
+   "page": 14,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Oakwood Ave"
+   ],
+   "quote": "The design proposes to relocate the existing TTC eastbound bus stop from the near- side of Oakwood Avenue to the near-side of Dovercourt Road and raises bus stops to integrated accessible bus/bike platforms.",
+   "rule": "relocate the existing TTC eastbound bus stop",
+   "score": 5
+  }
+ ]
+}

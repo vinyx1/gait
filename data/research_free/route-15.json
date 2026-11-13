@@ -1,0 +1,51 @@
+{
+ "route": "15",
+ "name": "Evans",
+ "terms": {
+  "route": "15",
+  "name": "Evans",
+  "main": [
+   "Evans Ave",
+   "Royal York Rd"
+  ],
+  "cross": [
+   "Arnold St",
+   "Bellman Ave",
+   "Bloor St West",
+   "Brown's Line",
+   "Bus Bay 3",
+   "Carnarvon Ave",
+   "Castlebar Rd",
+   "Coney Rd",
+   "Cremorne Ave",
+   "Dalesford Rd",
+   "Eastwick Rd",
+   "Evans Ave",
+   "Frankwood Rd",
+   "Gair Dr",
+   "Gamma St",
+   "Garroch Pl",
+   "Glenroy Ave",
+   "Horner Ave",
+   "Islington Ave",
+   "Kipling Ave",
+   "Norseman St",
+   "North Carson St",
+   "Oakfield Dr",
+   "Ourland Ave",
+   "Sheldon Ave",
+   "Sherway Dr",
+   "Sherway Gate",
+   "Sherway Gate Mall)",
+   "Sinclair St",
+   "Tenby St",
+   "The East Mall",
+   "The Queensway",
+   "Thompson Ave",
+   "Treeview Dr",
+   "Van Dusen Blvd",
+   "York View Dr"
+  ]
+ },
+ "findings": []
+}

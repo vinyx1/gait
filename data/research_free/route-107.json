@@ -1,0 +1,92 @@
+{
+ "route": "107",
+ "name": "Alness-Chesswood",
+ "terms": {
+  "route": "107",
+  "name": "Alness-Chesswood",
+  "main": [
+   "Alness St",
+   "Martin Ross Ave",
+   "Petrolia Rd"
+  ],
+  "cross": [
+   "Alness St",
+   "Brisbane Rd",
+   "Bus Bay 5",
+   "Canarctic Dr",
+   "Capstan Gate",
+   "Champagne Dr",
+   "Chesswood Dr",
+   "Dolomite Dr",
+   "Dufferin St",
+   "Finch Ave West",
+   "Flint Rd",
+   "Keele St",
+   "Kodiak Cres",
+   "Martin Ross Ave",
+   "Murray Ross Pkwy",
+   "Petrolia Rd",
+   "Rimrock Rd",
+   "Shale Gate",
+   "Sheppard Ave West",
+   "Steeles Ave West",
+   "Steeprock Dr",
+   "Supertest Rd",
+   "The Pond Rd",
+   "Vanley Cres",
+   "Whitehorse Rd",
+   "Wildcat Rd",
+   "York Univeristy Busway"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2024.IE10.2",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-241748.pdf",
+   "page": 7,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Martin Ross Ave"
+   ],
+   "quote": "New stops are proposed at the Finch Hydro Corridor and Martin Ross Avenue to compensate for the mid-block stop removal.",
+   "rule": "stop removal",
+   "score": 5
+  },
+  {
+   "item_id": "2024.EY14.1",
+   "item_title": "See also EY11.1",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ey/bgrd/backgroundfile-243794.pdf",
+   "page": 24,
+   "change_type": "reroute",
+   "stops_named": [
+    "Finch Ave West"
+   ],
+   "quote": "and f) investigating measures to divert heavy truck traffic off Finch Avenue West so it can function as a street oriented to higher-order transit and supportive of walking and cycling to and from LRT stops.",
+   "rule": "divert",
+   "score": 2
+  },
+  {
+   "item_id": "2024.IE10.2",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-241748.pdf",
+   "page": 7,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "TTC Bus Stop Changes: TTC staff have proposed that several TTC bus stops be consolidated and upgraded.",
+   "rule": "Bus Stop Changes: TTC staff have proposed that several TTC bus stops be consolidated",
+   "score": 2
+  },
+  {
+   "item_id": "2024.IE10.2",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-241748.pdf",
+   "page": 6,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Protected Cycle Track Raised Cycle Track+ Sidewalk Upgrades New Sidewalk 9 Existing TTC Bus Stop to be Upgraded ~ Removed TTC Bus Stop 9 Relocated TTC Bus Stop 9 New TTC Bus Stop Through this report, Transportation Services is seeking authority for a number of bikeway projects that are proposed to be installed in the near term (2022-2024) for which design and consultation have been completed.",
+   "rule": "Bus Stop to be Upgraded ~ Removed",
+   "score": 2
+  }
+ ]
+}

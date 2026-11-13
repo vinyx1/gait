@@ -1,0 +1,27 @@
+{
+ "route": "82",
+ "name": "Rosedale",
+ "terms": {
+  "route": "82",
+  "name": "Rosedale",
+  "main": [
+   "Crescent Rd"
+  ],
+  "cross": [
+   "Bus Bay 2",
+   "Cluny Dr",
+   "Douglas Dr",
+   "Glen Rd",
+   "Highland Ave",
+   "Jean St",
+   "Lamport Ave",
+   "Maclennan Ave",
+   "May St",
+   "Mt Pleasant Rd",
+   "Rosedale Rd",
+   "South Dr",
+   "Whitney Ave"
+  ]
+ },
+ "findings": []
+}

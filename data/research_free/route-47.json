@@ -1,0 +1,40 @@
+{
+ "route": "47",
+ "name": "Lansdowne",
+ "terms": {
+  "route": "47",
+  "name": "Lansdowne",
+  "main": [
+   "Lansdowne Ave",
+   "Caledonia Rd"
+  ],
+  "cross": [
+   "Bloor St West",
+   "Brandon Ave",
+   "Bus Bay 3",
+   "Caledonia Rd",
+   "College St",
+   "Corby Ave",
+   "Davenport Rd",
+   "Dundas St West",
+   "Dupont St",
+   "Innes Ave",
+   "Keith Ave",
+   "Kitchener Ave",
+   "Lansdowne Ave",
+   "Lappin Ave",
+   "Norman Ave",
+   "Paton Rd",
+   "Queen St West",
+   "Rideau Ave",
+   "Rogers Rd",
+   "Seaforth Ave",
+   "St Clair Ave West",
+   "Summit Ave",
+   "Wade Ave",
+   "Wallace Ave",
+   "Whytock Ave"
+  ]
+ },
+ "findings": []
+}

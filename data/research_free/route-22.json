@@ -1,0 +1,27 @@
+{
+ "route": "22",
+ "name": "Coxwell",
+ "terms": {
+  "route": "22",
+  "name": "Coxwell",
+  "main": [
+   "Coxwell Ave"
+  ],
+  "cross": [
+   "Bus Bay 4",
+   "Casci Ave",
+   "Danforth Ave",
+   "Dundas St East",
+   "Earl Haig Ave",
+   "Eastwood Rd",
+   "Fairford Ave",
+   "Gerrard St East",
+   "Hanson St",
+   "Kingston Rd",
+   "Lower Gerrard St East",
+   "Queen St East",
+   "Robbins Ave"
+  ]
+ },
+ "findings": []
+}

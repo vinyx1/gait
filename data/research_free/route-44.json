@@ -1,0 +1,33 @@
+{
+ "route": "44",
+ "name": "Kipling South",
+ "terms": {
+  "route": "44",
+  "name": "Kipling South",
+  "main": [
+   "Kipling Ave"
+  ],
+  "cross": [
+   "Advance Rd",
+   "Birmingham St",
+   "Bus Bay 8",
+   "Evans Ave",
+   "Horner Ave",
+   "Humber College Cottages C",
+   "Jutland Rd",
+   "Lake Shore Blvd West",
+   "New Toronto St",
+   "Norseman St",
+   "North Queen St",
+   "Olivewood Rd",
+   "Opposite Humber College Cottages C",
+   "Six Point Rd",
+   "St Albans Rd",
+   "The Queensway",
+   "Torlake Cres",
+   "Warnica Ave",
+   "West Service Rd"
+  ]
+ },
+ "findings": []
+}

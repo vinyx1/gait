@@ -1,0 +1,36 @@
+{
+ "route": "989",
+ "name": "Weston Express",
+ "terms": {
+  "route": "989",
+  "name": "Weston Express",
+  "main": [
+   "Weston Rd"
+  ],
+  "cross": [
+   "Albion Rd",
+   "Bradstock Rd",
+   "Bus Bay 12",
+   "Bus Bay 4",
+   "Bus Bay 5",
+   "Church St",
+   "Dundas St West",
+   "Finch Ave West",
+   "Jane St",
+   "Jubilee Cres",
+   "Lanyard Rd",
+   "Lawrence Ave West",
+   "Oak St",
+   "Ormont Dr",
+   "Ray Ave",
+   "Rogers Rd",
+   "Sheppard Ave West",
+   "St Clair Ave West",
+   "Starview Lane",
+   "Steeles Ave West",
+   "Walsh Ave",
+   "Weston Rd"
+  ]
+ },
+ "findings": []
+}

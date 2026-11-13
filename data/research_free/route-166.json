@@ -1,0 +1,102 @@
+{
+ "route": "166",
+ "name": "Toryork",
+ "terms": {
+  "route": "166",
+  "name": "Toryork",
+  "main": [
+   "Steeles Ave",
+   "Millwick Dr",
+   "Finch Ave"
+  ],
+  "cross": [
+   "Adesso Dr",
+   "Fenmar Dr",
+   "Gaudaur Rd",
+   "Humber Summit Lane",
+   "Irondale Dr",
+   "Islington Ave",
+   "Jane St",
+   "Jayzel Dr",
+   "Klondike Dr",
+   "Milvan Dr",
+   "Murray Ross Pkwy",
+   "Norfinch Dr",
+   "Northwest Gate",
+   "Old Weston Rd",
+   "Ormont Dr",
+   "Pearce Rd",
+   "Penn Drive S",
+   "Peter Kaiser Gate",
+   "Pine Valley Dr",
+   "Plunkett Rd",
+   "Rossdean Dr",
+   "Scholes Rd/Barmac Dr",
+   "Signet Dr",
+   "Steeles Ave West",
+   "Thorold Gate",
+   "Turbine Dr",
+   "Walkway to Plunkett Rd",
+   "Weston Rd"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2024.EY14.1",
+   "item_title": "See also EY11.1",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ey/bgrd/backgroundfile-243799.pdf",
+   "page": 20,
+   "change_type": "reroute",
+   "stops_named": [
+    "Jane St"
+   ],
+   "quote": "21 The study proposed rerouting Jane Street and Finch Avenue to support a new undivided commercial centre, but was never implemented (Figure 22).",
+   "rule": "rerouting",
+   "score": 3
+  },
+  {
+   "item_id": "2024.IE10.2",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-241748.pdf",
+   "page": 7,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "New stops are proposed at the Finch Hydro Corridor and Martin Ross Avenue to compensate for the mid-block stop removal.",
+   "rule": "stop removal",
+   "score": 3
+  },
+  {
+   "item_id": "2024.IE10.2",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-241748.pdf",
+   "page": 7,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "TTC Bus Stop Changes: TTC staff have proposed that several TTC bus stops be consolidated and upgraded.",
+   "rule": "Bus Stop Changes: TTC staff have proposed that several TTC bus stops be consolidated",
+   "score": 2
+  },
+  {
+   "item_id": "2024.IE10.2",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-241748.pdf",
+   "page": 6,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Protected Cycle Track Raised Cycle Track+ Sidewalk Upgrades New Sidewalk 9 Existing TTC Bus Stop to be Upgraded ~ Removed TTC Bus Stop 9 Relocated TTC Bus Stop 9 New TTC Bus Stop Through this report, Transportation Services is seeking authority for a number of bikeway projects that are proposed to be installed in the near term (2022-2024) for which design and consultation have been completed.",
+   "rule": "Bus Stop to be Upgraded ~ Removed",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+   "page": 26,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Participants were asked to identify the most important criteria for evaluating transit priority solutions, to provide feedback on five design options, and to comment on the proposed removal of ten bus stops.",
+   "rule": "removal of ten bus stops",
+   "score": 2
+  }
+ ]
+}

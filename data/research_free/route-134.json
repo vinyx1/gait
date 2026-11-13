@@ -1,0 +1,81 @@
+{
+ "route": "134",
+ "name": "Progress",
+ "terms": {
+  "route": "134",
+  "name": "Progress",
+  "main": [
+   "Progress Ave",
+   "Washburn Way",
+   "Tapscott Rd"
+  ],
+  "cross": [
+   "300 Consilium Pl",
+   "Baldoon Rd",
+   "Bellamy Rd North",
+   "Berner Trail",
+   "Bradstone Sq",
+   "Bus Bay 2",
+   "Carrying Pl",
+   "Crittenden Sq",
+   "Crow Trail",
+   "Estate Dr",
+   "Finch Ave East",
+   "Finchdene Sq",
+   "Gateforth Dr",
+   "Griffen Dr",
+   "Horseley Hill Dr",
+   "Lee Centre Dr",
+   "Lighthall Cres",
+   "Mammoth Hall Trail",
+   "Markham Rd",
+   "McCowan Rd",
+   "McLevin Ave",
+   "Melford Dr",
+   "Milner Ave",
+   "Milner Business Crt",
+   "Nahanni Ter",
+   "Newgale Gate",
+   "Opposite Roadway to Centennial College",
+   "Production Dr",
+   "Progress Ave",
+   "Pullman Crt",
+   "Roadway to Centennial College",
+   "Rosebank Dr",
+   "Sheppard Ave East",
+   "Tapscott Rd",
+   "Torham Pl",
+   "Tunmead Sq",
+   "Washburn Way"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 11,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd",
+    "Sheppard Ave East"
+   ],
+   "quote": "Temporary Sidewalk Closure on McCowan Road Metrolinx is requesting an additional extension of the temporary closure of the east sidewalk on McCowan Road, between Sheppard Avenue East and Nugget Avenue, to support ongoing TBM operations at the launch shaft site.",
+   "rule": "Sidewalk Closure",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 32,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "Metrolinx SSE - Long-term Temporary Road Closures and Public Highway Dedication Page 32 of 43 Stages 2 and 3: During Stages 2 and 3, construction activities will focus on the phased installation of temporary decking on Lawrence Avenue East, just west of its intersection with the McCowan Road diversion.",
+   "rule": "diversion",
+   "score": 2
+  }
+ ]
+}

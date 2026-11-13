@@ -1,0 +1,121 @@
+{
+ "route": "121",
+ "name": "Esplanade-River",
+ "terms": {
+  "route": "121",
+  "name": "Esplanade-River",
+  "main": [
+   "The Esplanade",
+   "River St",
+   "Front St"
+  ],
+  "cross": [
+   "Bayview Ave",
+   "Berkeley St",
+   "Blackburn St",
+   "Blue Rodeo Dr",
+   "Cherry St",
+   "Church St",
+   "Dundas St East",
+   "Front St East",
+   "Gerrard St East",
+   "King St East",
+   "Lower Jarvis St",
+   "Lower Sherbourne St",
+   "Parliament St",
+   "Princess St",
+   "Queen St East",
+   "River St",
+   "St Matthews Rd",
+   "The Esplanade",
+   "Trinity St",
+   "Yonge St"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2023.IE1.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ie/bgrd/backgroundfile-233866.pdf",
+   "page": 3,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bayview Ave",
+    "Front St East",
+    "River St"
+   ],
+   "quote": "The ActiveTO pilot on Bayview Avenue was implemented between Front Street East and River Street to provide a safe and direct detour to the Lower Don Trail closures.",
+   "rule": "detour",
+   "score": 4
+  },
+  {
+   "item_id": "2023.IE1.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ie/bgrd/backgroundfile-233866.pdf",
+   "page": 25,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bayview Ave",
+    "Front St East",
+    "River St"
+   ],
+   "quote": "ActiveTO 2021 Lower Don Trail Construction Closure Detour on Bayview Avenue The ActiveTO pilot on Bayview Avenue was implemented between River Street and Front Street East to provide a safe and direct detour to the Lower Don Trail closures.",
+   "rule": "Detour",
+   "score": 4
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St",
+    "King St East"
+   ],
+   "quote": "Diversion Routing for King Street East and Church Street intersection closure Phase 1 and 2 Figure 2.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 12,
+   "change_type": "reroute",
+   "stops_named": [
+    "King St East",
+    "Queen St East"
+   ],
+   "quote": "As there are more routes travelling along Queen Street East, increasing from seven to 25 streetcars per hour per direction (as non-diverted routes would typically split off at King Street East), even the existing time-of-day restrictions do not adequately protect service.",
+   "rule": "diverted",
+   "score": 3
+  },
+  {
+   "item_id": "2023.IE1.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ie/bgrd/backgroundfile-233866.pdf",
+   "page": 3,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bayview Ave"
+   ],
+   "quote": "While the ActiveTO Bayview pilot project was initially conceived as a temporary detour route for the Lower Don Trail, it has now been in operation in tandem with the trail.",
+   "rule": "detour",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "10 UP >- Legend -ml- -d1- & King & Church Construction Diverted Route Bus Replacement Route O Dundas St w O Dundas ~ St Patrick g ~.",
+   "rule": "Diverted",
+   "score": 2
+  }
+ ]
+}

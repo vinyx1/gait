@@ -1,0 +1,111 @@
+{
+ "route": "75",
+ "name": "Sherbourne",
+ "terms": {
+  "route": "75",
+  "name": "Sherbourne",
+  "main": [
+   "Sherbourne St",
+   "Lower Jarvis St"
+  ],
+  "cross": [
+   "Adelaide St East",
+   "Bloor St East",
+   "Carlton St",
+   "Dundas St East",
+   "Earl St",
+   "Elm Ave",
+   "Front St East",
+   "Gerrard St East",
+   "Glen Rd",
+   "Isabella St",
+   "King St East",
+   "Lake Shore Blvd East",
+   "Lower Sherbourne St",
+   "Maple Ave",
+   "Queen St East",
+   "Queens Quay East",
+   "Richmond St East",
+   "Sherbourne St",
+   "Shuter St",
+   "The Esplanade",
+   "Wellesley St East"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2023.IE1.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ie/bgrd/backgroundfile-233866.pdf",
+   "page": 3,
+   "change_type": "reroute",
+   "stops_named": [
+    "Front St East"
+   ],
+   "quote": "The ActiveTO pilot on Bayview Avenue was implemented between Front Street East and River Street to provide a safe and direct detour to the Lower Don Trail closures.",
+   "rule": "detour",
+   "score": 2
+  },
+  {
+   "item_id": "2023.IE1.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ie/bgrd/backgroundfile-233866.pdf",
+   "page": 25,
+   "change_type": "reroute",
+   "stops_named": [
+    "Front St East"
+   ],
+   "quote": "ActiveTO 2021 Lower Don Trail Construction Closure Detour on Bayview Avenue The ActiveTO pilot on Bayview Avenue was implemented between River Street and Front Street East to provide a safe and direct detour to the Lower Don Trail closures.",
+   "rule": "Detour",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX21.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-253638.pdf",
+   "page": 22,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "As such, this bus stop is proposed to be removed.",
+   "rule": "bus stop is proposed to be removed",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX21.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-253638.pdf",
+   "page": 22,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Approximately 90 customers would be impacted with a longer walk with the removal of this stop.",
+   "rule": "removal of this stop",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX21.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-253732.pdf",
+   "page": 2,
+   "change_type": "reroute",
+   "stops_named": [
+    "Queens Quay East"
+   ],
+   "quote": "Interim priority bus lanes will provide immediate improvements to the three bus routes operating on Queens Quay East and may be further utilized by other bus routes for future diversion routing, during construction of the various infrastructure and development projects in the surrounding area.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 11,
+   "change_type": "reroute",
+   "stops_named": [
+    "Queen St East"
+   ],
+   "quote": "Westbound left at Queen Street East and Church Street: This represents one of the major turns for the diversion service.",
+   "rule": "diversion",
+   "score": 2
+  }
+ ]
+}

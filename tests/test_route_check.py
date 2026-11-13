@@ -225,3 +225,19 @@ def test_service_cut_reported_for_late_traveller():
 def test_sidewalk_closure_lengthens_walk():
     c = _cmp("1599 Bathurst St", "800 Bathurst St", "shift_worker", "day", ["7"], [(1, "107", "14617")], "sim-bathurst-sidewalk-closure")
     assert any("sidewalk closure" in n for n in c["notes"]) and any(r["changed"] for r in c["rows"])
+
+
+def test_free_finder_finds_real_removals_without_ai():
+    import json, sqlite3
+    from triplens import finder
+    if not finder.DB.exists():
+        pytest.skip("run scripts/build_corpus.py first")
+    r7 = json.loads((ROOT / "data/research_free/route-7.json").read_text())
+    r29 = json.loads((ROOT / "data/research_free/route-29.json").read_text())
+    assert any("Dewbourne Avenue, Ardmore Road, Heathdale Road" in f["quote"] for f in r7["findings"])
+    assert any("Croatia Street" in f["quote"] and f["change_type"] == "remove_stop" for f in r29["findings"])
+    assert not any("Eversfield Road and Croatia Street" in f["quote"] for f in r7["findings"])   # Dufferin stops not attributed to Bathurst
+    con = sqlite3.connect(finder.DB)
+    for f in r7["findings"][:5]:                     # every quote is real page text
+        txt = con.execute("SELECT text FROM pages WHERE url = ? AND page = ?", (f["document_url"], f["page"])).fetchone()[0]
+        assert f["quote"][:200] in txt

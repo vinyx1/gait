@@ -1,0 +1,51 @@
+{
+ "route": "48",
+ "name": "Rathburn",
+ "terms": {
+  "route": "48",
+  "name": "Rathburn",
+  "main": [
+   "Rathburn Rd",
+   "Royal York Rd",
+   "Anglesey Blvd"
+  ],
+  "cross": [
+   "Anglesey Blvd",
+   "Ashley Park Rd",
+   "Ashley Rd",
+   "Birchcroft Rd",
+   "Bus Bay 2",
+   "Cedarland Dr",
+   "Dundas St West",
+   "Edenwood Dr",
+   "Elmcrest Rd",
+   "Haliburton Ave",
+   "Islington Ave",
+   "King Georges Rd",
+   "Kingsgrove Blvd",
+   "Kipling Ave",
+   "Lloyd Manor Rd",
+   "Lynngrove Ave",
+   "Martin Grove Rd",
+   "Melbert Rd",
+   "Pheasant Lane",
+   "Pinehurst Cres",
+   "Rathburn Rd Loop",
+   "Ravenscrest Dr",
+   "Remington Dr",
+   "Renforth Dr",
+   "Royal York Rd",
+   "Strath Humber Crt",
+   "The East Mall",
+   "The Kingsway",
+   "The West Mall",
+   "The Wynd",
+   "Tremayne Ave",
+   "Usher Ave",
+   "Walkway to Alanmeade Cres",
+   "Walkway to Merrygale Crescent",
+   "Wimbleton Rd"
+  ]
+ },
+ "findings": []
+}

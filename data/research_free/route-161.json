@@ -1,0 +1,63 @@
+{
+ "route": "161",
+ "name": "Rogers Rd",
+ "terms": {
+  "route": "161",
+  "name": "Rogers Rd",
+  "main": [
+   "Rogers Rd",
+   "Dovercourt Rd",
+   "Oakwood Ave"
+  ],
+  "cross": [
+   "Bicknell Ave",
+   "Bloor St West",
+   "Boon Ave",
+   "Burlington Cres",
+   "Bus Bay 10",
+   "Bus Bay 3",
+   "Caledonia Rd",
+   "Conway Ave",
+   "Davenport Rd",
+   "Day Ave",
+   "Dufferin St",
+   "Dupont St",
+   "Earlsdale Ave",
+   "Geary Ave",
+   "Gilbert Ave",
+   "Glenholme Ave",
+   "Hallam St",
+   "Highview Cres",
+   "Kane Ave",
+   "Keele St",
+   "Nairn Ave",
+   "Northcliffe Blvd",
+   "Northumberland St",
+   "Oakwood Ave",
+   "Old Weston Rd",
+   "Prospect Cemetery",
+   "Rogers Rd",
+   "Rosemount Ave",
+   "Scott Rd",
+   "Shanly St",
+   "Silverthorn Ave",
+   "St Clair Ave West",
+   "Weston Rd"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.IE23.6",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ie/bgrd/backgroundfile-256881.pdf",
+   "page": 14,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Oakwood Ave"
+   ],
+   "quote": "The design proposes to relocate the existing TTC eastbound bus stop from the near- side of Oakwood Avenue to the near-side of Dovercourt Road and raises bus stops to integrated accessible bus/bike platforms.",
+   "rule": "relocate the existing TTC eastbound bus stop",
+   "score": 5
+  }
+ ]
+}

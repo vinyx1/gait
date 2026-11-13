@@ -1,0 +1,88 @@
+{
+ "route": "120",
+ "name": "Calvington",
+ "terms": {
+  "route": "120",
+  "name": "Calvington",
+  "main": [
+   "Wilson Ave",
+   "Calvington Dr",
+   "Jane St"
+  ],
+  "cross": [
+   "Apex Lane",
+   "Buckland Rd",
+   "Bus Bay 8",
+   "Calico Dr",
+   "Calvington Dr",
+   "Chalkfarm Dr",
+   "Chesham Dr",
+   "Dalsby Rd",
+   "Datchet Rd",
+   "Dubray Ave",
+   "Dufferin St",
+   "Exbury Rd",
+   "Forthbridge Cres",
+   "Garratt Blvd",
+   "Giltspur Dr",
+   "Heathrow Dr",
+   "Jane St",
+   "Keele St",
+   "Lady York Ave",
+   "Lexfield Ave",
+   "Magellan Dr",
+   "Min Ave",
+   "Murray Rd",
+   "Northgate Dr",
+   "Paxtonia Blvd",
+   "Peterdale Rd",
+   "Renshaw St",
+   "Roding St",
+   "Sheppard Ave West",
+   "Slater Crt",
+   "Tilbury Dr",
+   "Troutbrooke Dr",
+   "Victory Dr",
+   "Wandle Ave"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2024.EC10.1",
+   "item_title": "This item was considered by the Economic and Community Development Committee on February 20, 2024 and adopted without amendment. It will be considered by City Council on March 20 and 21, 2024.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ec/bgrd/backgroundfile-242913.pdf",
+   "page": 20,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Jane St"
+   ],
+   "quote": "Residents expressed strong concern that all of the options for the RapidTO: Jane Street project propose bus stop removals, and firmly opposed bus stop removals even if they increase overall travel times.",
+   "rule": "bus stop removals, and firmly opposed bus stop removals",
+   "score": 5
+  },
+  {
+   "item_id": "2024.EY14.1",
+   "item_title": "See also EY11.1",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ey/bgrd/backgroundfile-243799.pdf",
+   "page": 20,
+   "change_type": "reroute",
+   "stops_named": [
+    "Jane St"
+   ],
+   "quote": "21 The study proposed rerouting Jane Street and Finch Avenue to support a new undivided commercial centre, but was never implemented (Figure 22).",
+   "rule": "rerouting",
+   "score": 3
+  },
+  {
+   "item_id": "2024.EC10.1",
+   "item_title": "This item was considered by the Economic and Community Development Committee on February 20, 2024 and adopted without amendment. It will be considered by City Council on March 20 and 21, 2024.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ec/bgrd/backgroundfile-242913.pdf",
+   "page": 20,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Residents were especially opposed to removing bus stops near medical and community centers.",
+   "rule": "removing bus stops",
+   "score": 2
+  }
+ ]
+}

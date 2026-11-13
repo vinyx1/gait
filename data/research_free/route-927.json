@@ -1,0 +1,68 @@
+{
+ "route": "927",
+ "name": "Highway 27 Express",
+ "terms": {
+  "route": "927",
+  "name": "Highway 27 Express",
+  "main": [
+   "Martin Grove Rd",
+   "Finch Ave",
+   "Humber College Blvd"
+  ],
+  "cross": [
+   "Albion Rd",
+   "Attwell Dr",
+   "Betteridge Lane",
+   "Brockport Dr",
+   "Brunello Gate",
+   "Bus Bay 10",
+   "Cabernet Cir",
+   "Carlson Crt",
+   "East Mall Cres",
+   "Farnboro Rd",
+   "Finch Ave West",
+   "Garfella Dr",
+   "Gihon Spring Dr",
+   "Halesia Dr",
+   "Highway 27",
+   "Humber College Blvd",
+   "Humberline Dr",
+   "John Garland Blvd",
+   "Lexington Ave",
+   "Marmac Dr",
+   "Martin Grove Rd",
+   "McLachlan Dr",
+   "Queen's Plate Dr",
+   "Royalcrest Rd",
+   "Silverstone Dr",
+   "Smithfield Park",
+   "Walkway to 308 Silverstone Dr",
+   "Westmore Dr",
+   "Woodbine Downs Blvd"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2024.IE10.2",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-241748.pdf",
+   "page": 7,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "New stops are proposed at the Finch Hydro Corridor and Martin Ross Avenue to compensate for the mid-block stop removal.",
+   "rule": "stop removal",
+   "score": 3
+  },
+  {
+   "item_id": "2024.IE10.2",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-241748.pdf",
+   "page": 7,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "TTC Bus Stop Changes: TTC staff have proposed that several TTC bus stops be consolidated and upgraded.",
+   "rule": "Bus Stop Changes: TTC staff have proposed that several TTC bus stops be consolidated",
+   "score": 2
+  }
+ ]
+}

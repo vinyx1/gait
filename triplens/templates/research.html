@@ -1,15 +1,31 @@
 {% extends "base.html" %}
-{% block title %}Past decisions for route {{ r.route }} - TripLens{% endblock %}
+{% block title %}Past decisions for route {{ route }} - TripLens{% endblock %}
 {% block content %}
 <p><a href="/map">&larr; Map</a></p>
-<h1>Past decisions that changed route {{ r.route }} {{ r.name }}</h1>
-<p class="aibox"><strong>Found by an AI research agent (Claude), then checked by software.</strong> The agent searched the City's Voting Record and Report Request Log, opened the linked staff reports and quoted them. A finding is kept only if its quote appears word for word on the cited page and the item exists in City records. A person reviews findings before they become a before/after change.</p>
-<h2>Findings ({{ r.kept | length }} kept, {{ r.dropped | length }} discarded)</h2>
+<h1>Past decisions that may have changed route {{ route }}{% if free %} {{ free.name }}{% elif r %} {{ r.name }}{% endif %}</h1>
+
+{% if free %}
+<section aria-labelledby="free">
+  <h2 id="free">Found by the free search ({{ free.findings | length }} candidate passages)</h2>
+  <p class="privacy"><strong>No AI.</strong> A full-text search over {{ 'staff reports linked from transit and street items' }} for {{ free.terms.main | join(', ') }}, then fixed patterns for stop removals, relocations and closures, shelters, service cuts, sidewalk closures and detours. Each passage is copied exactly from the page. Candidates need a person's review.</p>
+  <ul class="findings">{% for f in free.findings %}
+    <li><span class="sev {{ 'watch' if f.score >= 3 else 'info' }}">{{ f.change_type | replace('_', ' ') }}</span>
+      <a href="https://secure.toronto.ca/council/agenda-item.do?item={{ f.item_id }}">{{ f.item_id }}</a> <span class="meta">{{ f.item_title }}</span>
+      <blockquote class="official small">{{ f.quote }}</blockquote>
+      <p class="meta"><a href="{{ f.document_url }}">Document</a>, page {{ f.page }} · matched: "{{ f.rule }}"{% if f.stops_named %} · stops on this route named: {{ f.stops_named | join(', ') }}{% endif %}</p></li>
+  {% endfor %}</ul>
+</section>
+{% endif %}
+
+{% if r %}
+<section aria-labelledby="agent">
+<h2 id="agent">Found by the AI research agent ({{ r.kept | length }} kept, {{ r.dropped | length }} discarded)</h2>
+<p class="aibox"><strong>AI agent (Claude), checked by software.</strong> The agent searched the Voting Record and Report Request Log, opened staff reports and quoted them. A finding is kept only if its quote is word for word on the cited page.</p>
 <ul class="findings">{% for f in r.kept %}
   <li><span class="sev watch">{{ f.change_type | replace('_', ' ') }}</span> <strong>{{ f.decision_summary }}</strong>
     <p class="meta">Item <a href="https://secure.toronto.ca/council/agenda-item.do?item={{ f.item_id }}">{{ f.item_id }}</a> · <a href="{{ f.document_url }}">document</a>, page {{ f.page }}{% if f.stops_named %} · stops named: {{ f.stops_named | join(', ') }}{% endif %}</p>
     <blockquote class="official small">{{ f.quote }}</blockquote></li>{% endfor %}</ul>
-<details><summary>What the agent looked up ({{ r.calls | length }} tool calls)</summary>
-  <ol>{% for c in r.calls %}<li><code>{{ c.tool }}</code> {{ c.args }}</li>{% endfor %}</ol></details>
-<p class="meta">Model {{ r.model }}, run {{ r.generated_at[:10] }}. Not an official City or TTC record.</p>
+<details><summary>What the agent looked up ({{ r.calls | length }} tool calls)</summary><ol>{% for c in r.calls %}<li><code>{{ c.tool }}</code> {{ c.args }}</li>{% endfor %}</ol></details>
+</section>
+{% endif %}
 {% endblock %}

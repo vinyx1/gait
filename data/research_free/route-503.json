@@ -1,0 +1,522 @@
+{
+ "route": "503",
+ "name": "Kingston Rd",
+ "terms": {
+  "route": "503",
+  "name": "Kingston Rd",
+  "main": [
+   "King St",
+   "Kingston Rd",
+   "Queen St"
+  ],
+  "cross": [
+   "Atlantic Ave",
+   "Bathurst St",
+   "Bay St",
+   "Beech Ave",
+   "Bingham Ave",
+   "Blue Jays Way",
+   "Boulton Ave",
+   "Broadview Ave",
+   "Brooklyn Ave",
+   "Brookside Dr",
+   "Carlaw Ave",
+   "Caroline Ave",
+   "Carroll St",
+   "Church St",
+   "Columbine Ave",
+   "Connaught Ave",
+   "Coxwell Ave",
+   "Dixon Ave",
+   "Dundas St East",
+   "Elmer Ave",
+   "Empire Ave",
+   "Glen Manor Dr",
+   "Jarvis St",
+   "Jefferson Ave",
+   "Joe Shuster Way",
+   "John St",
+   "Jones Ave",
+   "King St West",
+   "Kingston Rd",
+   "Knox Ave",
+   "Lee Ave",
+   "Leslie St",
+   "Liberty St",
+   "Logan Ave",
+   "Lower River St",
+   "Main St",
+   "Minto St",
+   "Niagara St",
+   "Ontario St",
+   "Pape Ave",
+   "Parliament St",
+   "Peter St",
+   "Portland St",
+   "Queen St East",
+   "River St",
+   "Sackville St",
+   "Saulter St",
+   "Scarborough Rd",
+   "Shaw St",
+   "Sherbourne St",
+   "Simcoe St",
+   "Southwood Dr",
+   "Spadina Ave",
+   "Springhurst Ave",
+   "Strachan Ave",
+   "Sudbury St",
+   "Sumach St",
+   "Tecumseth St",
+   "University Ave",
+   "Waverley Rd",
+   "Woodbine Ave",
+   "Yonge St"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.EX21.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-253638.pdf",
+   "page": 6,
+   "change_type": "reroute",
+   "stops_named": [
+    "Carlaw Ave",
+    "Yonge St"
+   ],
+   "quote": "Table 1: Scheduled Travel Time from Yonge Street to Carlaw Avenue in minutes by Bus (delta in parentheses) Eastbound Westbound Peak Off Peak Peak Off Peak 2021 13 6 10 7 2022 9 (-4) 9 (+3) 17 (+7) 13 (+6) 2023 9 (0) 9 (0) 17 (0) 13 (0) 2024 15 (+6) 13 (+4) 21 (+4) 17 (+4) Total Change +2 +7 +11 +10 The causes for the increase in travel time include major rehabilitation of the Gardiner Expressway, and in the downtown in general, causing more traffic to divert to Queens Quay East.",
+   "rule": "divert",
+   "score": 4
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+   "page": 23,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bathurst St",
+    "Portland St",
+    "Spadina Ave"
+   ],
+   "quote": "west to site Inbound Routes Outbound Routes Work Area Vehicle Routes: King-Bathurst Station Exit site onto Bathurst nonh to Adelaide , east to Spadina, south to Lake Shore/Gardiner Exit site east on King east to Spadina, south to lake Shore/Gardiner Divert south from King on Portland St, join 3 Ex1t site to Stewart St.",
+   "rule": "Divert",
+   "score": 4
+  },
+  {
+   "item_id": "2025.MM31.18",
+   "item_title": "651-2025,",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/mm/bgrd/backgroundfile-256547.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Ontario St",
+    "Yonge St"
+   ],
+   "quote": "As a result, three streetcar lines – carrying up to 25 streetcars per hour – have been diverted onto Queen, Richmond, and Adelaide streets, which also serve as detour routes due to ongoing Ontario Line construction at Queen and Yonge.",
+   "rule": "diverted",
+   "score": 4
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 6,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bay St",
+    "Church St",
+    "Ontario St"
+   ],
+   "quote": "· O i ~ i 6 ~ The diversion overlaps with the existing Queen Street diversion on Richmond Street and Adelaide Street, from York Street to Church Street that is associated with the Ontario Line construction, which has closed Queen Street, from Bay Street to Victoria Street until approximately 2027.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St",
+    "Spadina Ave"
+   ],
+   "quote": "Street East and Church Street Intersection Closures Date: February 3, 2025 To: Toronto and East York Community Council From: Director, Traffic Management, Transportation Services Wards: Wards 10 – Spadina-Fort York, 13 – Toronto Centre, and 14 – Toronto- Danforth SUMMARY Transportation Services is requesting approval, on behalf of the Toronto Transit Commission (TTC), to install transit priority measures (TPMs) to support the diversion routes associated with the closure of King Street East and Church Street intersection for watermain and streetcar track maintenance from May 2025 to August 2025",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave",
+    "Ontario St",
+    "Spadina Ave"
+   ],
+   "quote": "The diversion will result in 25 streetcars in the peak hour, up from seven streetcars in existing conditions, using Queen Street east of Spadina Avenue to Broadview Avenue and the existing diversion associated with the Ontario Line construction.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bay St",
+    "Church St"
+   ],
+   "quote": "The Queen Street diversion uses tracks on Richmond Street and Adelaide Street, between York Street and Church Street to by-pass the closure of Queen Street from Bay Street to Victoria Street.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave",
+    "Queen St East"
+   ],
+   "quote": "This report proposes a suite of transit priority measures to support the diversion including new parking restrictions on Queen Street, additional no stopping zones, increased duration of turning restrictions, restrictions on CaféTO curb lane installations and, implementing a short eastbound transit-only lane at the intersection of Queen Street East and Broadview Avenue to support streetcar and general traffic operations.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 3,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave",
+    "Kingston Rd"
+   ],
+   "quote": "The 504 King and 503 Kingston Road routes will continue to provide transit service, diverting along Queen Street, Richmond Street and Adelaide Street between Broadview Avenue and York Street throughout the duration of the construction period.",
+   "rule": "diverting",
+   "score": 4
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 2,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave",
+    "Church St"
+   ],
+   "quote": "In addition to the proposed TPMs, the TTC will work with City staff to support the diversion using the Traffic Agent program and signal timing optimizations where possible As TTC operates transit service on Broadview Avenue, Queen Street, Richmond Street, Adelaide Street, Church Street and York Street, City Council approval of this report is required.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 11,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St",
+    "Queen St East"
+   ],
+   "quote": "Westbound left at Queen Street East and Church Street: This represents one of the major turns for the diversion service.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/cc/bgrd/backgroundfile-254824.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bathurst St",
+    "Church St",
+    "King St West",
+    "Portland St"
+   ],
+   "quote": "Prohibited Turn Amendment at King Street West and Portland Street: The 511B Bathurst replacement bus will be rerouted during the extent of the King Street East and Church Street intersection closures to make Wolseley Loop available for use by the 504 King replacement bus.",
+   "rule": "rerouted",
+   "score": 4
+  },
+  {
+   "item_id": "2024.IE14.4",
+   "item_title": "See also 2025.MM30.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245712.pdf",
+   "page": 30,
+   "change_type": "reroute",
+   "stops_named": [
+    "Sudbury St"
+   ],
+   "quote": "People cycling would be required to travel along King Street or Queen, with an average detour length of 200 metres or could attempt to continue on Sudbury Street illegally in the wrong direction, with active construction taking place.",
+   "rule": "detour",
+   "score": 3
+  },
+  {
+   "item_id": "2025.MM31.17",
+   "item_title": "630-2025",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/mm/bgrd/backgroundfile-256545.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "The above amendments will significantly improve the King Street and Church Street transit detour operations.",
+   "rule": "detour",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 8,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "The full diversion routings of the impacted routes are listed below, inclusive of the bus overlay service for the 504 King (which was provided for Phase 3-4 as the more restrictive routing requiring the full closure of the King Street and Church Street intersection).",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 8,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave"
+   ],
+   "quote": "For the duration of the diversion the 504 King will be modified to run on a single branch from Dundas West Station to Broadview Station.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 6,
+   "change_type": "reroute",
+   "stops_named": [
+    "Ontario St"
+   ],
+   "quote": "Diversion Routing for 501 Queen due to Ontario Line construction Based on previous experience with longer duration closures (greater than a month), TTC and the City of Toronto has determined that a comprehensive and proactive strategy is required to reduce the impact to transit customers.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "Additionally, the diversion of the 503 Kingston Road and 504 King streetcar routes along Queen Street will serve the Regent Park Neighbourhood Improvement Area (NIA), providing residents and equity-deserving groups increased levels of service throughout the duration of the diversion.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "There are four planned phases of construction, Phase 1 and Phase 2, which allows for east-west traffic to continue, including a bus overlay service for the 504 King, and Phase 3 and 4, which results in a full closure, The diversion plan for impacted service, 503 Kingston Road, 504 King, and 508 Lakeshore, is shown in Figure 1 (Phase 1 and 2) and Figure 2 (Phase 3 and Phase 4).",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "The 503 Kingston Road, 504 King, and 508 Lakeshore will be diverted due to the closure.",
+   "rule": "diverted",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "10 UP >- Legend -ml- -d1- & King & Church Construction Diverted Route Bus Replacement Route O Dundas St w O Dundas ~ St Patrick g ~.",
+   "rule": "Diverted",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "Diversion Routing for King Street East and Church Street intersection closure Phase 1 and 2 Figure 2.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 12,
+   "change_type": "reroute",
+   "stops_named": [
+    "Queen St East"
+   ],
+   "quote": "As there are more routes travelling along Queen Street East, increasing from seven to 25 streetcars per hour per direction (as non-diverted routes would typically split off at King Street East), even the existing time-of-day restrictions do not adequately protect service.",
+   "rule": "diverted",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/cc/bgrd/backgroundfile-254824.pdf",
+   "page": 2,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "City Council authorize to when regular Toronto Transit Commission streetcar service has resumed at the intersection of King Street and Church Street, inclusive, restriction of permits for Curb Lane CaféTO installations during the diversion routing along the following roadway sections: a.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 13,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "Consultation The consultation plan for the King-Church TPMs was developed with a focus on engaging local area councillors and impacted Business Improvement Areas (BIAs) to provide information on the diversion and the improvements outlined in this report.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.IE12.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-244108.pdf",
+   "page": 20,
+   "change_type": "reroute",
+   "stops_named": [
+    "Portland St"
+   ],
+   "quote": "Implementing a traffic diverter at the Portland Street and Wellington Street intersection.",
+   "rule": "diverter",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 23,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Figure 7 shows the proposed stops along the roadway, including those proposed to be removed.",
+   "rule": "stops along the roadway, including those proposed to be removed",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 23,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Note that the proposed priority transit lanes, parking and turning prohibitions and stop removals are part of the ongoing consultation with local Councillors and the public and are subject to change based on feedback received.",
+   "rule": "stop removals",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.31",
+   "item_title": "Expand All 2025.TE20.31",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-253011.pdf",
+   "page": 3,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Currently, the vehicular space functions as a de facto right-turn lane since there is a streetcar transit stop on the same block immediately upstream (to the west) of the segment under review, and on-street parking -- seasonally converted to a CaféTO patio -- on the far side of the intersection immediately downstream of the segment under review (to the east).",
+   "rule": "far side",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.31",
+   "item_title": "Expand All 2025.TE20.31",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-253011.pdf",
+   "page": 4,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "The TTC has confirmed that the transit stop has been discontinued.",
+   "rule": "transit stop has been discontinued",
+   "score": 2
+  },
+  {
+   "item_id": "2025.MM31.18",
+   "item_title": "651-2025,",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/mm/bgrd/backgroundfile-256547.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "Meanwhile, King Street – designated as a Transit Priority Corridor since 2019 – will sit underutilized through the downtown core, as streetcars are diverted off the route.",
+   "rule": "diverted",
+   "score": 1
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "Additional measures to reduce delays include increasing parking duration restrictions and no stopping zones, primarily on Queen Street, as well as restricting permits for curb lane CaféTO installations along the diversion.",
+   "rule": "diversion",
+   "score": 1
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "Although there are four phases of construction, only two diversion plans are required with the primary difference being the 504 King bus service overlay which requires a greater diversion in Phase 3 and 4.",
+   "rule": "diversion",
+   "score": 1
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "Therefore, the existing 501 Queen service will also be impacted by the diversion due to the increased number of streetcars using this route.",
+   "rule": "diversion",
+   "score": 1
+  }
+ ]
+}

@@ -1,0 +1,83 @@
+{
+ "route": "115",
+ "name": "Silver Hills",
+ "terms": {
+  "route": "115",
+  "name": "Silver Hills",
+  "main": [
+   "York Mills Rd",
+   "Bannatyne Dr",
+   "Woodsworth Rd"
+  ],
+  "cross": [
+   "Banbury Rd",
+   "Bannatyne Dr",
+   "Bayview Ave",
+   "Beaverhall Dr",
+   "Birchwood Ave",
+   "Bus Bay 5",
+   "Cedarwood Ave",
+   "Chipstead Rd",
+   "Coldwater Rd",
+   "Davean Dr",
+   "Dunlace Dr",
+   "Farmstead Rd",
+   "Fenn Ave",
+   "Glenridge Ave",
+   "Harrison Rd",
+   "Hedgewood Rd",
+   "Highland Cres",
+   "Hopperton Dr",
+   "Kirkwood Rd",
+   "Leslie St",
+   "Northey Dr",
+   "Old Yonge St",
+   "Old York Mills Rd",
+   "Riderwood Dr",
+   "Sandfield Rd",
+   "Silvergrove Rd",
+   "Upper Highland Cres",
+   "Woodsworth Rd",
+   "York Ridge Rd"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2023.IE1.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ie/bgrd/backgroundfile-233866.pdf",
+   "page": 3,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bayview Ave"
+   ],
+   "quote": "The ActiveTO pilot on Bayview Avenue was implemented between Front Street East and River Street to provide a safe and direct detour to the Lower Don Trail closures.",
+   "rule": "detour",
+   "score": 2
+  },
+  {
+   "item_id": "2023.IE1.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ie/bgrd/backgroundfile-233866.pdf",
+   "page": 3,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bayview Ave"
+   ],
+   "quote": "While the ActiveTO Bayview pilot project was initially conceived as a temporary detour route for the Lower Don Trail, it has now been in operation in tandem with the trail.",
+   "rule": "detour",
+   "score": 2
+  },
+  {
+   "item_id": "2026.IE30.2",
+   "item_title": "See also 2026.IE27.9",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/ie/bgrd/backgroundfile-287421.pdf",
+   "page": 8,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "There is potential for impacts (injury and/or removal) to approximately three (3) trees to due to shifting transit stops to meet required clearances to the crossing.",
+   "rule": "removal) to approximately three (3) trees to due to shifting transit stops",
+   "score": 2
+  }
+ ]
+}

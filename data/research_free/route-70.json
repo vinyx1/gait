@@ -1,0 +1,62 @@
+{
+ "route": "70",
+ "name": "O'Connor",
+ "terms": {
+  "route": "70",
+  "name": "O'Connor",
+  "main": [
+   "O'Connor Dr",
+   "Coxwell Ave",
+   "Craigton Dr"
+  ],
+  "cross": [
+   "Amsterdam Ave",
+   "Barker Ave",
+   "Bermondsey Rd",
+   "Binswood Ave",
+   "Bus Bay 1",
+   "Cosburn Ave",
+   "Cranborne Ave",
+   "Curity Ave",
+   "Dohme Ave",
+   "Eglinton Ave East",
+   "Gardens Cres",
+   "Glebeholme Blvd",
+   "Glebemount Ave",
+   "Glenwood Cres",
+   "Hutton Ave",
+   "Memorial Park Ave",
+   "Mortimer Ave",
+   "O'Connor Dr",
+   "Pharmacy Ave",
+   "Plains Rd",
+   "Ralston Ave",
+   "Rannock St",
+   "Sammon Ave",
+   "Sandra Rd",
+   "Springdale Blvd",
+   "St Clair Ave East",
+   "Sunrise Ave",
+   "Taylor Dr",
+   "Victoria Park Ave",
+   "Wakunda Pl",
+   "Woodbine Ave",
+   "Woodmount Ave",
+   "Woodvale Cres",
+   "Yardley Ave"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2024.IE14.4",
+   "item_title": "See also 2025.MM30.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245712.pdf",
+   "page": 25,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Bus stop relocations to provide stops near protected crossings;",
+   "rule": "Bus stop relocations",
+   "score": 2
+  }
+ ]
+}

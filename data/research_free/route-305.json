@@ -1,0 +1,270 @@
+{
+ "route": "305",
+ "name": "Dundas",
+ "terms": {
+  "route": "305",
+  "name": "Dundas",
+  "main": [
+   "Dundas St",
+   "Broadview Ave"
+  ],
+  "cross": [
+   "Bathurst St",
+   "Bay St",
+   "Beverley St",
+   "Bloor St West",
+   "Broadview Ave",
+   "Brock Ave",
+   "Chestnut St",
+   "Church St",
+   "Danforth Ave",
+   "Denison Ave",
+   "Dovercourt Rd",
+   "Dufferin St",
+   "Dundas St East",
+   "Dundas St West",
+   "Gerrard St East",
+   "Gladstone Ave",
+   "Grace St",
+   "Howard Park Ave",
+   "Jack Layton Way",
+   "Jarvis St",
+   "Langley Ave",
+   "Lansdowne Ave",
+   "Lisgar St",
+   "Manning Ave",
+   "McCaul St",
+   "Mccaul St",
+   "Millbrook Cres",
+   "Mountstephen St",
+   "Ontario St",
+   "Ossington Ave",
+   "Parliament St",
+   "Regent Park Blvd",
+   "River St",
+   "Roncesvalles Ave",
+   "Rusholme Rd",
+   "Shaw St",
+   "Sherbourne St",
+   "Sorauren Ave",
+   "Spadina Ave",
+   "Sterling Rd",
+   "University Ave",
+   "Withrow Ave",
+   "Wolfrey Ave",
+   "Yonge St"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 2,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave",
+    "Church St"
+   ],
+   "quote": "In addition to the proposed TPMs, the TTC will work with City staff to support the diversion using the Traffic Agent program and signal timing optimizations where possible As TTC operates transit service on Broadview Avenue, Queen Street, Richmond Street, Adelaide Street, Church Street and York Street, City Council approval of this report is required.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave",
+    "Ontario St",
+    "Spadina Ave"
+   ],
+   "quote": "The diversion will result in 25 streetcars in the peak hour, up from seven streetcars in existing conditions, using Queen Street east of Spadina Avenue to Broadview Avenue and the existing diversion associated with the Ontario Line construction.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.PH13.4",
+   "item_title": "Collapse All 2024.PH13.4",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ph/bgrd/backgroundfile-246325.pdf",
+   "page": 11,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave"
+   ],
+   "quote": "642 Planning & Housing Committee May 29, 2024 Pages with CR Overlay AreasCurrent Page 0 40 80 Meters Lands zoned CR subject to height label amendments Map tile boundary 642 LAKE ONTARIO Broadview Ave Lake Shore Blvd E Eastern Ave Diversion Eastern Ave Queen St E Adelaide St E Bayview Ave Bayview Ave Logan Ave Don R oadwa y Commissioners St DVP Gardiner XWY HT: 20.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.PH13.4",
+   "item_title": "Collapse All 2024.PH13.4",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ph/bgrd/backgroundfile-246302.pdf",
+   "page": 14,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave"
+   ],
+   "quote": "642 Planning & Housing Committee May 28, 2024 Pages with CR Overlay AreasCurrent Page 0 40 80 Meters Lands zoned CR subject to zone label amendments Map tile boundary 642 LAKE ONTARIO Broadview Ave Lake Shore Blvd E Eastern Ave Diversion Eastern Ave Queen St E Adelaide St E Bayview Ave Bayview Ave Logan Ave Don R oadwa y Commissioners St DVP Gardiner XWY CR 5.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 8,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave"
+   ],
+   "quote": "For the duration of the diversion the 504 King will be modified to run on a single branch from Dundas West Station to Broadview Station.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 3,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave"
+   ],
+   "quote": "The 504 King and 503 Kingston Road routes will continue to provide transit service, diverting along Queen Street, Richmond Street and Adelaide Street between Broadview Avenue and York Street throughout the duration of the construction period.",
+   "rule": "diverting",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St",
+    "Danforth Ave",
+    "Spadina Ave"
+   ],
+   "quote": "Street East and Church Street Intersection Closures Date: February 3, 2025 To: Toronto and East York Community Council From: Director, Traffic Management, Transportation Services Wards: Wards 10 – Spadina-Fort York, 13 – Toronto Centre, and 14 – Toronto- Danforth SUMMARY Transportation Services is requesting approval, on behalf of the Toronto Transit Commission (TTC), to install transit priority measures (TPMs) to support the diversion routes associated with the closure of King Street East and Church Street intersection for watermain and streetcar track maintenance from May 2025 to August 2025",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Bay St",
+    "Church St"
+   ],
+   "quote": "The Queen Street diversion uses tracks on Richmond Street and Adelaide Street, between York Street and Church Street to by-pass the closure of Queen Street from Bay Street to Victoria Street.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Broadview Ave"
+   ],
+   "quote": "This report proposes a suite of transit priority measures to support the diversion including new parking restrictions on Queen Street, additional no stopping zones, increased duration of turning restrictions, restrictions on CaféTO curb lane installations and, implementing a short eastbound transit-only lane at the intersection of Queen Street East and Broadview Avenue to support streetcar and general traffic operations.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "10 UP >- Legend -ml- -d1- & King & Church Construction Diverted Route Bus Replacement Route O Dundas St w O Dundas ~ St Patrick g ~.",
+   "rule": "Diverted",
+   "score": 3
+  },
+  {
+   "item_id": "2026.TE34.104",
+   "item_title": "Expand All 2026.TE34.104",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf",
+   "page": 2,
+   "change_type": "reroute",
+   "stops_named": [
+    "Dundas St East"
+   ],
+   "quote": "and, there were also periods where other routes were diverting onto Dundas Street East/West thereby impacting travel times of the route.",
+   "rule": "diverting",
+   "score": 3
+  },
+  {
+   "item_id": "2024.IE14.4",
+   "item_title": "See also 2025.MM30.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245712.pdf",
+   "page": 25,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Bus stop relocations to provide stops near protected crossings;",
+   "rule": "Bus stop relocations",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 8,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "The full diversion routings of the impacted routes are listed below, inclusive of the bus overlay service for the 504 King (which was provided for Phase 3-4 as the more restrictive routing requiring the full closure of the King Street and Church Street intersection).",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "Diversion Routing for King Street East and Church Street intersection closure Phase 1 and 2 Figure 2.",
+   "rule": "Diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/cc/bgrd/backgroundfile-254824.pdf",
+   "page": 2,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "City Council authorize to when regular Toronto Transit Commission streetcar service has resumed at the intersection of King Street and Church Street, inclusive, restriction of permits for Curb Lane CaféTO installations during the diversion routing along the following roadway sections: a.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2026.TE34.104",
+   "item_title": "Expand All 2026.TE34.104",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf",
+   "page": 2,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "After March 30, when the TPM installations were complete, the 505 Dundas had periods where it was diverting off-route;",
+   "rule": "diverting",
+   "score": 1
+  }
+ ]
+}

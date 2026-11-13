@@ -1,0 +1,47 @@
+{
+ "route": "830",
+ "name": "Henry Kelsey - Middlefield",
+ "terms": {
+  "route": "830",
+  "name": "Henry Kelsey - Middlefield",
+  "main": [
+   "Middlefield Rd",
+   "Huntingwood Dr"
+  ],
+  "cross": [
+   "Arbor Low Gate",
+   "Brimley Rd",
+   "Commander Blvd",
+   "Compass Crt",
+   "Dibgate Blvd",
+   "Finch Ave East",
+   "Ingleton Blvd",
+   "McCowan Rd",
+   "McNicoll Ave",
+   "Nashdene Rd",
+   "Newmill Gate",
+   "Opposite Walkway to Buckhurst Cres",
+   "Opposite Walkway to Bushcroft Grove",
+   "Orator Gate",
+   "Passmore Ave",
+   "Pebblewood Ave",
+   "Richmond Park Blvd",
+   "Select Ave",
+   "Steeles Ave East",
+   "Walkway to Buckhurst Cres"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+   "page": 26,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Participants were asked to identify the most important criteria for evaluating transit priority solutions, to provide feedback on five design options, and to comment on the proposed removal of ten bus stops.",
+   "rule": "removal of ten bus stops",
+   "score": 2
+  }
+ ]
+}

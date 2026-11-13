@@ -1,0 +1,32 @@
+{
+ "route": "18",
+ "name": "Caledonia",
+ "terms": {
+  "route": "18",
+  "name": "Caledonia",
+  "main": [
+   "Caledonia Rd"
+  ],
+  "cross": [
+   "Bentworth Ave",
+   "Bowie Ave",
+   "Bridgeland Ave",
+   "Bus Bay 1",
+   "Cartwright Ave",
+   "Castlefield Ave",
+   "Dufferin St",
+   "Eglinton Ave West",
+   "GO Terminal",
+   "Glencairn Ave",
+   "Glengrove Ave",
+   "Jane Osler Blvd",
+   "Lawrence Ave West",
+   "Leswyn Rd",
+   "Orfus Rd",
+   "Playfair Ave",
+   "Raitherm Rd",
+   "Yorkdale Mall"
+  ]
+ },
+ "findings": []
+}

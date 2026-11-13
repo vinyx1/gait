@@ -1,0 +1,188 @@
+{
+ "route": "329",
+ "name": "Dufferin",
+ "terms": {
+  "route": "329",
+  "name": "Dufferin",
+  "main": [
+   "Dufferin St",
+   "William R Allen Rd",
+   "Princes' Gates Loop"
+  ],
+  "cross": [
+   "Alma Ave",
+   "Apex Rd",
+   "Ascot Ave",
+   "Auburn Ave",
+   "Bentworth Ave",
+   "Billy Bishop Way",
+   "Bloor St West",
+   "Bowie Ave",
+   "Brandon Ave",
+   "Briar Hill Ave",
+   "Bridgeland Ave",
+   "Bus Bay 10",
+   "Canada Blvd",
+   "Castlefield Ave",
+   "Celt Ave",
+   "College St",
+   "Dane Ave",
+   "Davenport Rd",
+   "Dolomite Dr",
+   "Dufferin Park Ave",
+   "Dufferin St",
+   "Dundas St West",
+   "Dupont St",
+   "Eglinton Ave West",
+   "Eversfield Rd",
+   "Finch Ave West",
+   "Gerry Fitzgerald Dr",
+   "Gibson St",
+   "Glencairn Ave",
+   "Glengrove Ave",
+   "Gordon St",
+   "Holmesdale Rd",
+   "Hope St",
+   "Jane Osler Blvd",
+   "King St West",
+   "Lappin Ave",
+   "Lawrence Ave West",
+   "Liberty St",
+   "Lower Bus Bay 1",
+   "Manitoba Dr",
+   "Martin Ross Ave",
+   "Martin St",
+   "Melbourne Ave",
+   "Newfoundland Rd",
+   "Ontario Dr",
+   "Orfus Rd",
+   "Overbrook Pl",
+   "Playfair Ave",
+   "Preston Rd",
+   "Queen St West",
+   "Ramsden Rd",
+   "Ranee Ave",
+   "Rimrock Rd",
+   "Rogers Rd",
+   "Rowan Ave",
+   "Samor Rd",
+   "Shanly St",
+   "Sheppard Ave West",
+   "Springhurst Ave",
+   "St Clair Ave West",
+   "Stanstead Dr",
+   "Stayner Ave",
+   "Steeles Ave West",
+   "Steeprock Dr",
+   "Supertest Rd",
+   "Sylvan Ave",
+   "Transit Rd",
+   "Wenderly Dr",
+   "Whitley Ave",
+   "Whitmore Ave",
+   "Wilson Ave",
+   "Wingold Ave",
+   "Yorkdale Rd"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 6,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Eversfield Rd"
+   ],
+   "quote": "The following low-ridership bus stops are proposed to be removed: Eversfield Road and Croatia Street.",
+   "rule": "bus stops are proposed to be removed",
+   "score": 4
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+   "page": 13,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Croatia Street"
+   ],
+   "quote": "Bus Stops TTC has recommended one stop for removal at Croatia Street.",
+   "rule": "Bus Stops TTC has recommended one stop for removal",
+   "score": 4
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 16,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Figure 3 shows the proposed stops along the roadway, including those proposed to be removed.",
+   "rule": "stops along the roadway, including those proposed to be removed",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 16,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Note that the proposed priority bus lanes, parking and turning prohibitions and stop removals are part of the ongoing consultation with local Councillors and the public and are subject to change based on feedback received.",
+   "rule": "stop removals",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 14,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Reasons to remove or relocate stops include safety concerns – in particular for mid-block stops without a protected pedestrian crossing – improved transit speeds and reliability and an adherence to TTC service standards as some existing stops are located closer than the standard requires.",
+   "rule": "remove or relocate stops",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 6,
+   "change_type": "reroute",
+   "stops_named": [
+    "Ontario Dr"
+   ],
+   "quote": "· O i ~ i 6 ~ The diversion overlaps with the existing Queen Street diversion on Richmond Street and Adelaide Street, from York Street to Church Street that is associated with the Ontario Line construction, which has closed Queen Street, from Bay Street to Victoria Street until approximately 2027.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 6,
+   "change_type": "reroute",
+   "stops_named": [
+    "Ontario Dr"
+   ],
+   "quote": "Diversion Routing for 501 Queen due to Ontario Line construction Based on previous experience with longer duration closures (greater than a month), TTC and the City of Toronto has determined that a comprehensive and proactive strategy is required to reduce the impact to transit customers.",
+   "rule": "Diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/cc/bgrd/backgroundfile-254824.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "King St West"
+   ],
+   "quote": "Prohibited Turn Amendment at King Street West and Portland Street: The 511B Bathurst replacement bus will be rerouted during the extent of the King Street East and Church Street intersection closures to make Wolseley Loop available for use by the 504 King replacement bus.",
+   "rule": "rerouted",
+   "score": 2
+  }
+ ]
+}

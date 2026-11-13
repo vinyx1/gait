@@ -1,0 +1,152 @@
+{
+ "route": "12",
+ "name": "Kingston Rd",
+ "terms": {
+  "route": "12",
+  "name": "Kingston Rd",
+  "main": [
+   "Kingston Rd",
+   "Brimley Rd",
+   "Victoria Park Ave"
+  ],
+  "cross": [
+   "Anson Ave",
+   "Birchcliff Ave",
+   "Birchmount Rd",
+   "Blantyre Ave",
+   "Brimley Rd",
+   "Bus Bay 3",
+   "Bus Bay 4",
+   "Chine Dr",
+   "Claremore Ave",
+   "Cliffside Dr",
+   "Comrie Ter",
+   "Danforth Ave",
+   "Danforth Rd",
+   "Denton Ave",
+   "Eastwood Ave",
+   "Eglinton Ave East",
+   "Fallingbrook Rd",
+   "Falmouth Ave",
+   "Gerrard St East",
+   "Gilder Dr",
+   "Glen Everest Rd",
+   "Hollis Ave",
+   "Hunt Club Dr",
+   "Kildonan Dr",
+   "Kingston Rd",
+   "Lakehurst Dr",
+   "Lombardy Cres",
+   "Mandarin Rd",
+   "Manderley Dr",
+   "Meadow Ave",
+   "Midland Ave",
+   "Minerva Ave",
+   "Oakridge Dr",
+   "Parkette Pl",
+   "Queensbury Ave",
+   "Resthaven Memorial Gardens",
+   "Ridgemoor Ave",
+   "Sandown Ave",
+   "Sharpe St",
+   "Skagway Ave",
+   "St Clair Ave East",
+   "Swanwick Ave",
+   "Victoria Park Ave",
+   "Warden Ave",
+   "Winston Ave",
+   "Wood Glen Rd",
+   "Woodale Ave"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2023.EX4.10",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-235966.pdf",
+   "page": 18,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Brimley Rd"
+   ],
+   "quote": "The existing local northbound far side stop on Brimley Road will be relocated to the nearside to free up the required space for the queue jump lane.",
+   "rule": "far side",
+   "score": 5
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Danforth Ave",
+    "Danforth Rd"
+   ],
+   "quote": "Street East and Church Street Intersection Closures Date: February 3, 2025 To: Toronto and East York Community Council From: Director, Traffic Management, Transportation Services Wards: Wards 10 – Spadina-Fort York, 13 – Toronto Centre, and 14 – Toronto- Danforth SUMMARY Transportation Services is requesting approval, on behalf of the Toronto Transit Commission (TTC), to install transit priority measures (TPMs) to support the diversion routes associated with the closure of King Street East and Church Street intersection for watermain and streetcar track maintenance from May 2025 to August 2025",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "The 503 Kingston Road, 504 King, and 508 Lakeshore will be diverted due to the closure.",
+   "rule": "diverted",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "Additionally, the diversion of the 503 Kingston Road and 504 King streetcar routes along Queen Street will serve the Regent Park Neighbourhood Improvement Area (NIA), providing residents and equity-deserving groups increased levels of service throughout the duration of the diversion.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "There are four planned phases of construction, Phase 1 and Phase 2, which allows for east-west traffic to continue, including a bus overlay service for the 504 King, and Phase 3 and 4, which results in a full closure, The diversion plan for impacted service, 503 Kingston Road, 504 King, and 508 Lakeshore, is shown in Figure 1 (Phase 1 and 2) and Figure 2 (Phase 3 and Phase 4).",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2026.IE30.2",
+   "item_title": "See also 2026.IE27.9",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/ie/bgrd/backgroundfile-287420.pdf",
+   "page": 4,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "TTC does not currently have plans to remove or relocate these stops, as the catchment they serve extends deep into the surrounding neighbourhoods.",
+   "rule": "remove or relocate these stops",
+   "score": 2
+  },
+  {
+   "item_id": "2026.IE30.2",
+   "item_title": "See also 2026.IE27.9",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/ie/bgrd/backgroundfile-287420.pdf",
+   "page": 4,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "There is potential for impacts (injury and/or removal) to approximately four (4) trees to due to shifting transit stops to meet required clearances to the crossing.",
+   "rule": "removal) to approximately four (4) trees to due to shifting transit stops",
+   "score": 2
+  }
+ ]
+}

@@ -1,0 +1,56 @@
+{
+ "route": "941",
+ "name": "Keele Express",
+ "terms": {
+  "route": "941",
+  "name": "Keele Express",
+  "main": [
+   "Keele St"
+  ],
+  "cross": [
+   "Avon Cres",
+   "Bus Bay 2",
+   "Bus Bay 4",
+   "Donald Ave",
+   "Downsview Park Blvd",
+   "Dundas St West",
+   "Eglinton Ave West",
+   "Falstaff Ave",
+   "Finch Ave West",
+   "Four Winds Dr",
+   "Gulliver Rd",
+   "Ingram Dr",
+   "Lawrence Ave West",
+   "Rogers Rd",
+   "Sheppard Ave West",
+   "St Clair Ave West",
+   "St Regis Cres",
+   "Whitburn Cres",
+   "Wilson Ave"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2024.IE13.2",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245152.pdf",
+   "page": 17,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "In coordination with TTC, and in preparation for the opening of the Eglinton Crosstown LRT, 21 existing bus stop locations are proposed to be removed and consolidated with nearby existing stops, and four stop locations are proposed to be adjusted.",
+   "rule": "bus stop locations are proposed to be removed and consolidated",
+   "score": 2
+  },
+  {
+   "item_id": "2024.IE13.2",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245152.pdf",
+   "page": 17,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "The consolidation of stops is intended to improve travel time for buses that will continue to access the Eglinton corridor as well as overnight service.",
+   "rule": "consolidation of stops",
+   "score": 2
+  }
+ ]
+}

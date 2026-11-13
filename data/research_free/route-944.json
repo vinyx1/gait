@@ -1,0 +1,22 @@
+{
+ "route": "944",
+ "name": "Kipling South Express",
+ "terms": {
+  "route": "944",
+  "name": "Kipling South Express",
+  "main": [
+   "Kipling Ave"
+  ],
+  "cross": [
+   "Birmingham St",
+   "Bus Bay 8",
+   "Evans Ave",
+   "Horner Ave",
+   "Humber College Cottages C",
+   "Lake Shore Blvd West",
+   "Opposite Humber College Cottages C",
+   "The Queensway"
+  ]
+ },
+ "findings": []
+}

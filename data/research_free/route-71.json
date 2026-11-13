@@ -1,0 +1,74 @@
+{
+ "route": "71",
+ "name": "Runnymede",
+ "terms": {
+  "route": "71",
+  "name": "Runnymede",
+  "main": [
+   "Runnymede Rd",
+   "Rockcliffe Blvd",
+   "Weston Rd"
+  ],
+  "cross": [
+   "Alliance Ave",
+   "Annette St",
+   "Bartonville Ave East",
+   "Bertal Rd",
+   "Bus Bay 2",
+   "Bus Bay 6",
+   "Bus Bay 9",
+   "Caesar Ave",
+   "Cashman Cres",
+   "Castleton Ave",
+   "Colbeck St",
+   "Corbett Ave",
+   "Dennis Ave",
+   "Dundas St West",
+   "Eglinton Ave West",
+   "Glenwood Ave",
+   "Guestville Ave",
+   "Henrietta St",
+   "Homer Ave",
+   "Lambton Ave",
+   "Mac Gregor Ave",
+   "Maher Ave",
+   "Mt Dennis Station",
+   "Outlook Ave",
+   "Oxford Dr",
+   "Ray Ave",
+   "Runnymede Rd",
+   "St Clair Ave West",
+   "St John's Rd",
+   "Todd Baylis Blvd",
+   "Webb Ave",
+   "Weston Rd",
+   "York Ave"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2023.EY4.9",
+   "item_title": "Expand All 2023.EY4.9",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ey/bgrd/backgroundfile-235014.pdf",
+   "page": 4,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Rockcliffe Boulevard"
+   ],
+   "quote": " TTC bus stops be relocated to Rockcliffe Boulevard and Rockcliffe Court.",
+   "rule": "bus stops be relocated",
+   "score": 5
+  },
+  {
+   "item_id": "2023.EY4.9",
+   "item_title": "Expand All 2023.EY4.9",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ey/bgrd/backgroundfile-235014.pdf",
+   "page": 3,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "TTC will either eliminate the transit stops or shift them to provide better coverage of Rockcliffe Court.",
+   "rule": "eliminate the transit stops",
+   "score": 3
+  }
+ ]
+}

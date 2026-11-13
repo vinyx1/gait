@@ -1,0 +1,358 @@
+{
+ "route": "100",
+ "name": "Flemingdon Park",
+ "terms": {
+  "route": "100",
+  "name": "Flemingdon Park",
+  "main": [
+   "Pape Ave",
+   "Overlea Blvd",
+   "Wynford Dr"
+  ],
+  "cross": [
+   "Bus Bay 2",
+   "Canning Ave",
+   "Concorde Gate",
+   "Concorde Pl",
+   "Concorde Pl Cul De Sac",
+   "Cosburn Ave",
+   "Don Mills Rd",
+   "Donlands Ave",
+   "East York Town Centre",
+   "Eglinton Ave East",
+   "Eglinton Ave East Access Ramp",
+   "Floyd Ave",
+   "Fulton Ave",
+   "Gamble Ave",
+   "Garamond Crt",
+   "Grenoble Dr",
+   "Hopedale Ave",
+   "Leaside Park Dr",
+   "Linkwood Lane",
+   "McDonald's Pl",
+   "Millwood Rd",
+   "Mortimer Ave",
+   "O'Connor Dr",
+   "Opposite 195",
+   "Selkirk St",
+   "Spanbridge Rd",
+   "St Dennis Dr",
+   "Sunny Glenway",
+   "Temporary Bus Bay 2",
+   "Thorncliffe Park Dr",
+   "Torrens Ave",
+   "Vendome Pl",
+   "William Morgan Dr",
+   "Wynford Dr",
+   "Wynford Heights Cres"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 22,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Cosburn Ave"
+   ],
+   "quote": "The southbound nearside transit stop on Pape Avenue at Cosburn Avenue will be temporarily relocated to south of Gowan Avenue.",
+   "rule": "transit stop on Pape Avenue at Cosburn Avenue will be temporarily relocated",
+   "score": 5
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 22,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Cosburn Ave"
+   ],
+   "quote": "Additionally, the eastbound nearside transit stop on Cosburn Avenue at Pape Avenue will be temporarily relocated approximately 40 metres west of its original location.",
+   "rule": "transit stop on Cosburn Avenue at Pape Avenue will be temporarily relocated",
+   "score": 5
+  },
+  {
+   "item_id": "2024.IE14.4",
+   "item_title": "See also 2025.MM30.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245712.pdf",
+   "page": 25,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Hopedale Ave"
+   ],
+   "quote": "Bus stop relocation to new traffic control signal at Hopedale Avenue.",
+   "rule": "Bus stop relocation",
+   "score": 4
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 52,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Carlaw Avenue"
+   ],
+   "quote": "The northbound far side transit stop on Carlaw Avenue at Gerrard Street will be temporarily located to the south side of the intersection in front of 375 Carlaw Avenue.",
+   "rule": "far side",
+   "score": 4
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 12,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Gamble Ave"
+   ],
+   "quote": "Temporary closure of the west sidewalk on Pape Avenue, between Gamble Avenue and Gowan Avenue, with pedestrians detoured to the east sidewalk.",
+   "rule": "pedestrians detoured",
+   "score": 3
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 18,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Cosburn Ave"
+   ],
+   "quote": "west sidewalk closed (east sidewalk open) 4 Sept 2027 (1 weekend) Connect north & south traffic decks Full closure of Cosburn Ave, between Pape Avenue and 35 m west;",
+   "rule": "sidewalk closed",
+   "score": 3
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 8,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Cosburn Ave"
+   ],
+   "quote": "These PXOs will ensure continuous and accessible pedestrian routes during upcoming temporary sidewalk closures along Pape Avenue and Cosburn Avenue.",
+   "rule": "sidewalk closures",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.55",
+   "item_title": "This item was considered by the Toronto and East York Community Council on February 20, 2025 and adopted without amendment. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-253354.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Mortimer Ave"
+   ],
+   "quote": "TEYCC request the City Manager to: 1) report directly to the March 26, 27 and 28, 2025 meeting of City Council on the following Charges laid by Toronto Police against the driver of the dump truck and the trucking company involved in a life altering collision at Mortimer and Pape because the truck had diverted from the official Metrolinx haul route.",
+   "rule": "diverted",
+   "score": 3
+  },
+  {
+   "item_id": "2024.IE14.4",
+   "item_title": "See also 2025.MM30.13",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-245712.pdf",
+   "page": 25,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Bus stop relocations to provide stops near protected crossings;",
+   "rule": "Bus stop relocations",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 15,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Gamble Ave"
+   ],
+   "quote": "Ongoing temporary closure of the west sidewalk between Gamble Avenue and Gowan Avenue, with pedestrians detoured to the available east sidewalk.",
+   "rule": "pedestrians detoured",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 9,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Cosburn Ave"
+   ],
+   "quote": "curb and sidewalk modifications Short-term curb lane closures on both sides of Cosburn Avenue;",
+   "rule": "sidewalk modifications Short-term curb lane closures",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 22,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Metrolinx and TTC will coordinate to ensure that relocated bus stops meet temporary bus stop design and placement criteria, ensuring passenger safety, accessibility, and convenience during construction.",
+   "rule": "relocated bus stops meet temporary bus stop",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 57,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "Temporary relocation of transit stops will be required at some locations to avoid conflicts with active work zones.",
+   "rule": "relocation of transit stops",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.55",
+   "item_title": "This item was considered by the Toronto and East York Community Council on February 20, 2025 and adopted without amendment. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/cc/bgrd/backgroundfile-254166.pdf",
+   "page": 5,
+   "change_type": "close_stop_temporary",
+   "stops_named": [],
+   "quote": "--+- Temporary pedestr ian path c:::®:J Parking closure IIJ TTC stop temporary closure ~ Lane merging and direction -► - Site driveways and truck haul routes ~ Pedestrian path closure [ -°\"\"\"\"\" .",
+   "rule": "TTC stop temporary closure",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 51,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "Additionally, the north sidewalk on Langley Avenue, between Pape Avenue and the public laneway (Ln W Pape S Langley) will be temporarily closed, with pedestrians detoured to the south sidewalk.",
+   "rule": "pedestrians detoured",
+   "score": 1
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 51,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "Concurrently, temporary sidewalk closures associated with the advanced utility relocation works will continue along Pape Avenue, Langley Avenue, and Riverdale Avenue.",
+   "rule": "sidewalk closures",
+   "score": 1
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 51,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "Pedestrian detours will be maintained on the east sidewalk on Pape Avenue and south sidewalk on Langley Avenue, supported by a temporary pedestrian crossing at the north side of Pape Avenue and Langley Avenue, supervised by a PDO during working hours.",
+   "rule": "Pedestrian detours",
+   "score": 1
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 50,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "Sidewalk closures on Pape and Langley.",
+   "rule": "Sidewalk closures",
+   "score": 1
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 50,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "Southbound vehicular traffic on Pape Avenue will be detoured via Riverdale Avenue and Carlaw Avenue.",
+   "rule": "detoured",
+   "score": 1
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 35,
+   "change_type": "reroute",
+   "stops_named": [],
+   "quote": "As a result, southbound TTC buses are being detoured through Dingwall Avenue to Carlaw Avenue, a diversion already in place under the Pape-Riverdale advance utility works traffic plan.",
+   "rule": "detoured",
+   "score": 1
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 12,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "Temporary closure of the north sidewalk between Pape Avenue and a point 35 metres west, with pedestrians detoured to a 1.",
+   "rule": "pedestrians detoured",
+   "score": 1
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 27,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "To maintain pedestrian connectivity around the temporary sidewalk closure, Metrolinx will install a temporary pedestrian crossing at Pape Avenue and Dingwall Avenue.",
+   "rule": "sidewalk closure",
+   "score": 1
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 34,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "On Pape Avenue, the east sidewalk adjacent to the Bain EEB site will be closed for the duration of construction.",
+   "rule": "sidewalk adjacent to the Bain EEB site will be closed",
+   "score": 1
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 49,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "3A & 3B Feb to Apr 2027, inclusive, (3 mo) Road and sidewalk restoration on Pape and Langley Same closures as Stage 2B.",
+   "rule": "sidewalk restoration on Pape and Langley Same closures",
+   "score": 1
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 9,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "curb and sidewalk modifications Short-term curb lane closures on both sides of Pape Avenue;",
+   "rule": "sidewalk modifications Short-term curb lane closures",
+   "score": 1
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 31,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "Ongoing temporary closure of the north sidewalk on Bain Avenue, between Pape Avenue and a point 30 metres east, with pedestrians detoured to the south sidewalk via the temporary pedestrian crossing east of the site.",
+   "rule": "pedestrians detoured",
+   "score": 1
+  }
+ ]
+}

@@ -1,0 +1,83 @@
+{
+ "route": "94",
+ "name": "Wellesley",
+ "terms": {
+  "route": "94",
+  "name": "Wellesley",
+  "main": [
+   "Wellesley St",
+   "Harbord St",
+   "Parliament St"
+  ],
+  "cross": [
+   "Bathurst St",
+   "Bay St",
+   "Bloor St East",
+   "Brunswick Ave",
+   "Bus Bay 1",
+   "Bus Bay 2",
+   "Bus Bay 4",
+   "Church St",
+   "Clinton St",
+   "Hepbourne St",
+   "Hoskin Ave",
+   "Howard St",
+   "Jarvis St",
+   "Montrose Ave",
+   "Ontario St",
+   "Ossington Ave",
+   "Palmerston Blvd",
+   "Parliament Building",
+   "Parliament St",
+   "Queen's Park Cres East",
+   "Sherbourne St",
+   "Spadina Ave",
+   "St George St",
+   "St James Ave",
+   "Tower Rd",
+   "Wellesley St East",
+   "Yonge St"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2023.EX9.14",
+   "item_title": "See also 2025.EX20.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-240130.pdf",
+   "page": 62,
+   "change_type": "reroute",
+   "stops_named": [
+    "Parliament St"
+   ],
+   "quote": " This project intends to use most of Segment 2 (QQ Bay to Parliament) as an interim detour/overflow route.",
+   "rule": "detour",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 11,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "Westbound left at Queen Street East and Church Street: This represents one of the major turns for the diversion service.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2026.TE32.46",
+   "item_title": "Expand All 2026.TE32.46",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-286571.pdf",
+   "page": 2,
+   "change_type": "reroute",
+   "stops_named": [
+    "Yonge St"
+   ],
+   "quote": "Potential impacts to TTC operations, including the night network along Yonge Street and bus shuttle services that rely on Yonge Street during subway closures on TTC Line 1, due to increased diverted traffic onto the corridor.",
+   "rule": "diverted",
+   "score": 2
+  }
+ ]
+}

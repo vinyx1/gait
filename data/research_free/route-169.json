@@ -1,0 +1,568 @@
+{
+ "route": "169",
+ "name": "Huntingwood",
+ "terms": {
+  "route": "169",
+  "name": "Huntingwood",
+  "main": [
+   "Huntingwood Dr",
+   "McCowan Rd",
+   "Van Horne Ave"
+  ],
+  "cross": [
+   "300 Consilium Pl",
+   "Altair Ave",
+   "Belgreen Ave",
+   "Bickerton Cres",
+   "Birchmount Rd",
+   "Brian Dr",
+   "Brimley Rd",
+   "Bus Bay 12",
+   "Bus Bay 14",
+   "Clipper Rd",
+   "Clydesdale Dr",
+   "Colinayre Cres",
+   "Commander Blvd",
+   "Consumers Rd",
+   "Crockamhill Dr",
+   "Deerford Rd",
+   "Dibgate Blvd",
+   "Don Mills Rd",
+   "Edmonton Dr",
+   "Edmonton Rd",
+   "Esterbrooke Ave",
+   "Fairglen Ave",
+   "Fairview Mall Dr",
+   "Garrybrook Dr",
+   "Godstone Rd",
+   "Goodview Rd",
+   "Harfleur Rd",
+   "Highway 401",
+   "Hobart Dr",
+   "Houston Cres",
+   "Huntingwood Dr",
+   "Invergordon Ave",
+   "Kennedy Rd",
+   "Kilkenny Dr",
+   "Kimberdale Cres",
+   "Kingslake Rd",
+   "Kittery Blvd",
+   "Leith Hill Rd",
+   "Lucifer Dr",
+   "Margaret Ave",
+   "McCowan Rd",
+   "Midland Ave",
+   "Milner Ave",
+   "North Wind Pl",
+   "Nugget Ave",
+   "Parkway Forest Dr",
+   "Patrick Blvd",
+   "Pharmacy Ave",
+   "Pitfield Rd",
+   "Pleasant View Dr",
+   "Ridgecrest Dr",
+   "Settlers Rd",
+   "Sheppard Ave East",
+   "Triton Rd",
+   "Van Horne Ave",
+   "Victoria Park Ave",
+   "Walkway to O'Shea Crescent",
+   "Warden Ave"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2023.EX4.10",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-235966.pdf",
+   "page": 18,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Brimley Rd"
+   ],
+   "quote": "The existing local northbound far side stop on Brimley Road will be relocated to the nearside to free up the required space for the queue jump lane.",
+   "rule": "far side",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 3,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd",
+    "Nugget Ave",
+    "Sheppard Ave East"
+   ],
+   "quote": "With the east sidewalk closure in place, pedestrians are directed to the west sidewalk by safely crossing at the signalized intersections of McCowan Road at Sheppard Avenue East and Nugget Avenue.",
+   "rule": "sidewalk closure",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 1,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd",
+    "Nugget Ave",
+    "Sheppard Ave East"
+   ],
+   "quote": "Subject to City Council approval of the requested time extension, with the east sidewalk closure in place, pedestrians will continue to utilize the west sidewalk on McCowan Road by safely crossing at the signalized intersections of McCowan Road and Sheppard Avenue East and McCowan Road and Nugget Avenue.",
+   "rule": "sidewalk closure",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 2,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd",
+    "Nugget Ave",
+    "Sheppard Ave East"
+   ],
+   "quote": "Metrolinx SSE - Time Extension of temporary sidewalk closure on McCowan Road Page 2 of 5 on McCowan Road, between Sheppard Avenue East and Nugget Avenue, from April 1, 2024, to December 31, 2025, inclusive, to facilitate the Scarborough Subway Extension tunnel construction work.",
+   "rule": "sidewalk closure",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 2,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd",
+    "Nugget Ave",
+    "Sheppard Ave East"
+   ],
+   "quote": "12, entitled \"Metrolinx Scarborough Subway Extension - Closure of Sidewalk on McCowan Road\" and in so doing, authorized the temporary closure the east sidewalk on McCowan Road, between Sheppard Avenue East and Nugget Avenue from April 1, 2022, to March 31, 2024: https://secure.",
+   "rule": "Sidewalk on McCowan Road\" and in so doing, authorized the temporary closure",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 4,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd",
+    "Nugget Ave",
+    "Sheppard Ave East"
+   ],
+   "quote": "With the east sidewalk closure in place, pedestrians will continue to use the west sidewalk by safely crossing at the signalized intersections of McCowan Road at Sheppard Avenue East and Nugget Avenue.",
+   "rule": "sidewalk closure",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 11,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd",
+    "Nugget Ave",
+    "Sheppard Ave East"
+   ],
+   "quote": "Temporary Sidewalk Closure on McCowan Road Metrolinx is requesting an additional extension of the temporary closure of the east sidewalk on McCowan Road, between Sheppard Avenue East and Nugget Avenue, to support ongoing TBM operations at the launch shaft site.",
+   "rule": "Sidewalk Closure",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 7,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd",
+    "Nugget Ave",
+    "Sheppard Ave East"
+   ],
+   "quote": "12 \"Metrolinx Scarborough Subway Extension - Closure of Sidewalk on McCowan Road\" and authorized the temporary closure of the east sidewalk on McCowan Road, between Sheppard Avenue East and Nugget Avenue, from April 1, 2022, to March 31, 2024, to facilitate the Scarborough Subway Extension tunnel construction work.",
+   "rule": "Sidewalk on McCowan Road\" and authorized the temporary closure",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 7,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd",
+    "Nugget Ave",
+    "Sheppard Ave East"
+   ],
+   "quote": "12 \"Metrolinx Scarborough Subway Extension - Time Extension of Temporary Sidewalk Closure on McCowan Road\" and authorized continuation of the temporary closure of the east sidewalk on McCowan Road, between Sheppard Avenue East and Nugget Avenue, from April 1, 2024, to December 31, 2024.",
+   "rule": "Sidewalk Closure",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 3,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "Metrolinx SSE - Time Extension of temporary sidewalk closure on McCowan Road Page 3 of 5 The site operates on a 12-hour shift schedule, Monday to Friday, and generates a significant volume of inbound and outbound truck trips (approximately 31 per hour) for spoil removal, delivery of precast tunnel liners, concrete, and other construction materials.",
+   "rule": "sidewalk closure",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 3,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "Figure 2 below shows the pedestrian detour around the closed east sidewalk on McCowan Road.",
+   "rule": "pedestrian detour",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 1,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "Metrolinx SSE - Time Extension of temporary sidewalk closure on McCowan Road Page 1 of 5 REPORT FOR ACTION Metrolinx Scarborough Subway Extension - Time Extension of Temporary Sidewalk Closure on McCowan Road Date: January 31, 2024 To: Scarborough Community Council From: Deputy General Manager, Transportation Services Wards: Ward 23 - Scarborough North SUMMARY As the Toronto Transit Commission (TTC) operates a transit service on McCowan Road, City Council approval of this report is required.",
+   "rule": "sidewalk closure",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 4,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "Metrolinx SSE - Time Extension of temporary sidewalk closure on McCowan Road Page 4 of 5 Metrolinx has advised that the original tunnel boring operations schedule required adjustment due to unforeseen challenges in the tunnel boring machine operation and maintenance.",
+   "rule": "sidewalk closure",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 4,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "Consequently, a time extension of the east sidewalk closure along McCowan Road is requested from April 1, 2024, to December 31, 2025.",
+   "rule": "sidewalk closure",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC11.10",
+   "item_title": "Expand All 2024.SC11.10",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242744.pdf",
+   "page": 5,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "Metrolinx SSE - Time Extension of temporary sidewalk closure on McCowan Road Page 5 of 5 CONTACT Navi Tathgar Manager, Transit Infrastructure Projects Transportation Services 416-397-4588, navi.",
+   "rule": "sidewalk closure",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 31,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "Metrolinx SSE - Long-term Temporary Road Closures and Public Highway Dedication Page 31 of 43 The temporary lane closure impacts during various construction stages are discussed below: Auto Access Impacts Pre-Stage 1 works: Pre-Stage 1 works, expected to last approximately three months, will involve constructing the McCowan Road Diversion in the south-east quadrant of the intersection of Lawrence Avenue East and McCowan Road.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 31,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "Stage 1 works: Stage 1 works, anticipated to last about one month, will involve shifting the intersection of Lawrence Avenue East and McCowan Road eastward and connecting it to the newly constructed McCowan Road Diversion.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 31,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "A portion of the McCowan Road Diversion will traverse lands at 685-697 McCowan Road and 3091 Lawrence Avenue East, currently owned by Metrolinx.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 31,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "The realignment of McCowan Road will temporarily impact access for single-family residential properties located at 628-640 McCowan Road, as their driveway will no longer directly connect to the McCowan Road Diversion.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 31,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "This temporary driveway lane will connect to the McCowan Road Diversion and will include a temporary stop sign at its intersection with the McCowan Road Diversion to ensure safe merging of vehicles onto the main roadway.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "City Council prohibit stopping at all times on both sides of McCowan Road Diversion, between Lawrence Avenue East and a point 162 metres south, from October 1, 2025 to December 31, 2030, inclusive.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "City Council designate a 40 km/h speed limit on McCowan Road Diversion, between Lawrence Avenue East and a point 162 metres south, from October 1, 2025 to December 31, 2030, inclusive.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "City Council authorize a temporary compulsory stop control for eastbound traffic at the intersection of McCowan Road Diversion and the temporary driveway lane serving the properties at 628 to 640 McCowan Road, from October 1, 2025 to December 31, 2030, inclusive.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "City Council prohibit eastbound and westbound left-turns (emergency vehicles excepted) at all times at Lawrence Avenue East and McCowan Road/McCowan Road Diversion, from August 1, 2025 to January 31, 2027, inclusive.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 30,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "During this temporary closure, the northbound and southbound traffic will be maintained on the McCowan Road Diversion.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 26,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "To facilitate the station box excavation and construction, a portion of McCowan Road at Lawrence Avenue will be temporarily diverted to the east.",
+   "rule": "diverted",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 26,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "Construction of the McCowan Road Diversion and associated infrastructure on Metrolinx-owned property within the south-east corner of the intersection of McCowan Road and Lawrence Avenue East.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 32,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "Metrolinx SSE - Long-term Temporary Road Closures and Public Highway Dedication Page 32 of 43 Stages 2 and 3: During Stages 2 and 3, construction activities will focus on the phased installation of temporary decking on Lawrence Avenue East, just west of its intersection with the McCowan Road diversion.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 27,
+   "change_type": "reroute",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "Connection of McCowan Road Diversion to existing roadways.",
+   "rule": "Diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 2,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "McCowan Rd"
+   ],
+   "quote": "RECOMMENDATIONS The Deputy General Manager, Transportation Services recommends that: East Sidewalk Closure on McCowan Road: 1.",
+   "rule": "Sidewalk Closure",
+   "score": 3
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 11,
+   "change_type": "reroute",
+   "stops_named": [
+    "Midland Ave"
+   ],
+   "quote": "A time extension of the temporary road diversion of Eglinton Avenue East, between Midland Avenue and Huntington Avenue, to facilitate the extraction shaft construction.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 7,
+   "change_type": "reroute",
+   "stops_named": [
+    "Midland Ave"
+   ],
+   "quote": "Additionally, City Council approved the public highway designation for the diversion road, known as the Eglinton Avenue East diversion road, between Midland Avenue and Huntington Avenue.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 33,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "TTC and Metrolinx will coordinate to ensure that relocated bus stops meets temporary bus stop design and placement criteria, ensuring passenger safety, accessibility, and convenience during construction.",
+   "rule": "relocated bus stops meets temporary bus stop",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Midland Ave"
+   ],
+   "quote": "City Council authorize public highway designation for the diversion road, to be known as the “Eglinton Avenue East diversion road”, between Midland Avenue and a point 143 metres west, as shown in Attachment 1 to the report (November 20, 2024) from the Deputy General Manager, Transportation Services to become effective upon the transfer to the City of the required interest in lands forming the diversion road and the registration of the highway dedication bylaw on those lands.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Midland Ave"
+   ],
+   "quote": "City Council prohibit stopping at all times on both sides of Eglinton Avenue East diversion road, between Midland Avenue and a point 143 metres west, from January 1, 2027, to December 31, 2030, inclusive.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Midland Ave"
+   ],
+   "quote": "City Council designate a 40 km/h speed limit on Eglinton Avenue East diversion road, between Midland Avenue and a point 143 metres west, from January 1, 2027 to December 31, 2030, inclusive.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+   "page": 26,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Participants were asked to identify the most important criteria for evaluating transit priority solutions, to provide feedback on five design options, and to comment on the proposed removal of ten bus stops.",
+   "rule": "removal of ten bus stops",
+   "score": 2
+  }
+ ]
+}

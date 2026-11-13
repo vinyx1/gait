@@ -1,0 +1,250 @@
+{
+ "route": "506",
+ "name": "Carlton",
+ "terms": {
+  "route": "506",
+  "name": "Carlton",
+  "main": [
+   "Gerrard St",
+   "College St",
+   "Dundas St"
+  ],
+  "cross": [
+   "Alton Ave",
+   "Ashdale Ave",
+   "Augusta Ave",
+   "Bathurst St",
+   "Bay 7",
+   "Bay St",
+   "Beaton Ave",
+   "Beverley St",
+   "Blackburn St",
+   "Bloor St West",
+   "Borden St",
+   "Bowmore Rd",
+   "Broadview Ave",
+   "Brock Ave",
+   "Bus Bay 2",
+   "Carlaw Ave",
+   "Carlton St",
+   "Church St",
+   "College St",
+   "Coxwell Ave",
+   "Crawford St",
+   "Danforth Ave",
+   "De Grassi St",
+   "Dovercourt Rd",
+   "Dufferin St",
+   "Dundas St East",
+   "Dundas St West",
+   "Elizabeth St",
+   "Elm St",
+   "Euclid Ave",
+   "Gerrard St East",
+   "Gerrard St West",
+   "Glenmount Park Rd",
+   "Golfview Ave",
+   "Grace St",
+   "Greenwood Ave",
+   "Grosvenor St",
+   "Harbord St",
+   "Havelock St",
+   "Howard Park Ave",
+   "Indian Rd",
+   "Jarvis St",
+   "Jones Ave",
+   "Kingsmount Park Rd",
+   "Lansdowne Ave",
+   "Leslie St",
+   "Logan Ave",
+   "Lower Gerrard St East",
+   "Main St",
+   "Marjory Ave",
+   "McCaul St",
+   "Norwood Rd",
+   "Oak St",
+   "Ontario St",
+   "Ossington Ave",
+   "Pape Ave",
+   "Parkside Dr",
+   "Parliament St",
+   "Prust Ave",
+   "Queens Park",
+   "River St",
+   "Roncesvalles Ave",
+   "Rusholme Park Cres",
+   "Sackville St",
+   "Sherbourne St",
+   "Sorauren Ave",
+   "Spadina Ave",
+   "St George St",
+   "St Matthews Rd",
+   "Sterling Rd",
+   "Sumach St",
+   "Sussex Ave",
+   "University Ave (Queen's Park Station",
+   "Wellesley St West",
+   "Willcocks St",
+   "Willcoks St",
+   "Woodbine Ave",
+   "Woodfield Rd",
+   "Yonge St"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 52,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Carlaw Ave"
+   ],
+   "quote": "The northbound far side transit stop on Carlaw Avenue at Gerrard Street will be temporarily located to the south side of the intersection in front of 375 Carlaw Avenue.",
+   "rule": "far side",
+   "score": 5
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 51,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Carlaw Ave"
+   ],
+   "quote": "As Gerrard Portal construction progresses (Stages 1A to 1C), temporary sidewalk closures will occur along Carlaw Avenue, between Gerrard Avenue and Langley Avenue for driveway modifications and temporary traffic signal installation.",
+   "rule": "sidewalk closures",
+   "score": 3
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 51,
+   "change_type": "reroute",
+   "stops_named": [
+    "Gerrard St East"
+   ],
+   "quote": "At least one sidewalk will remain open at all times, with signed detours and controlled crossings at Gerrard Street East and the PXO at Langley Avenue.",
+   "rule": "detours",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "10 UP >- Legend -ml- -d1- & King & Church Construction Diverted Route Bus Replacement Route O Dundas St w O Dundas ~ St Patrick g ~.",
+   "rule": "Diverted",
+   "score": 3
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 51,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Pape Ave"
+   ],
+   "quote": "Additionally, the north sidewalk on Langley Avenue, between Pape Avenue and the public laneway (Ln W Pape S Langley) will be temporarily closed, with pedestrians detoured to the south sidewalk.",
+   "rule": "pedestrians detoured",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 51,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Pape Ave"
+   ],
+   "quote": "Concurrently, temporary sidewalk closures associated with the advanced utility relocation works will continue along Pape Avenue, Langley Avenue, and Riverdale Avenue.",
+   "rule": "sidewalk closures",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 51,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Pape Ave"
+   ],
+   "quote": "Pedestrian detours will be maintained on the east sidewalk on Pape Avenue and south sidewalk on Langley Avenue, supported by a temporary pedestrian crossing at the north side of Pape Avenue and Langley Avenue, supervised by a PDO during working hours.",
+   "rule": "Pedestrian detours",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 40,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Carlaw Ave"
+   ],
+   "quote": "Each sub-stage will require temporary localized lane or sidewalk closures but will maintain traffic operations on Carlaw Avenue.",
+   "rule": "sidewalk closures",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 49,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Pape Ave"
+   ],
+   "quote": "3A & 3B Feb to Apr 2027, inclusive, (3 mo) Road and sidewalk restoration on Pape and Langley Same closures as Stage 2B.",
+   "rule": "sidewalk restoration on Pape and Langley Same closures",
+   "score": 2
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 5,
+   "change_type": "reroute",
+   "stops_named": [
+    "Church St"
+   ],
+   "quote": "Diversion Routing for King Street East and Church Street intersection closure Phase 1 and 2 Figure 2.",
+   "rule": "Diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2026.TE32.46",
+   "item_title": "Expand All 2026.TE32.46",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-286571.pdf",
+   "page": 2,
+   "change_type": "reroute",
+   "stops_named": [
+    "Yonge St"
+   ],
+   "quote": "Potential impacts to TTC operations, including the night network along Yonge Street and bus shuttle services that rely on Yonge Street during subway closures on TTC Line 1, due to increased diverted traffic onto the corridor.",
+   "rule": "diverted",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX27.3",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+   "page": 51,
+   "change_type": "close_sidewalk",
+   "stops_named": [],
+   "quote": "Temporary road and sidewalk closures for these activities will be coordinated with the Gerrard Portal traffic management plan to maintain safe and continuous access for local residents, emergency services, and construction vehicles.",
+   "rule": "sidewalk closures",
+   "score": 1
+  }
+ ]
+}

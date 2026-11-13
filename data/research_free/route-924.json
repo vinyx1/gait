@@ -1,0 +1,44 @@
+{
+ "route": "924",
+ "name": "Victoria Park Express",
+ "terms": {
+  "route": "924",
+  "name": "Victoria Park Express",
+  "main": [
+   "Victoria Park Ave"
+  ],
+  "cross": [
+   "Bus Bay 6",
+   "Consumers Rd",
+   "Eglinton Ave East",
+   "Eglinton Sq",
+   "Ellesmere Rd",
+   "Finch Ave East",
+   "Gordon Baker Rd",
+   "Lawrence Ave East",
+   "McNicoll Ave",
+   "Meadowacres Dr",
+   "O'Connor Dr",
+   "Pachino Blvd",
+   "Parkwoods Village Dr",
+   "Rowena Dr",
+   "Sheppard Ave East",
+   "St Clair Ave East",
+   "Steeles Ave East",
+   "York Mills Rd"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+   "page": 26,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Participants were asked to identify the most important criteria for evaluating transit priority solutions, to provide feedback on five design options, and to comment on the proposed removal of ten bus stops.",
+   "rule": "removal of ten bus stops",
+   "score": 2
+  }
+ ]
+}

@@ -1,0 +1,350 @@
+{
+ "route": "57",
+ "name": "Midland",
+ "terms": {
+  "route": "57",
+  "name": "Midland",
+  "main": [
+   "Midland Ave",
+   "Steeles Ave"
+  ],
+  "cross": [
+   "Artillery St",
+   "Baylawn Dr",
+   "Boarhill Dr",
+   "Broadbent Ave",
+   "Brockley Dr",
+   "Bus Bay 14",
+   "Copthorne Ave",
+   "Dorcot Ave",
+   "Duxbury Dr",
+   "Eglinton Ave East",
+   "Ellesmere Rd",
+   "Emblem Crt",
+   "Emmeline Cres",
+   "Finch Ave East",
+   "Finch Corridor Trail",
+   "Gilder Dr",
+   "Goodland Gate",
+   "Havendale Rd",
+   "Huntingwood Dr",
+   "Kilcullen Castle Gate",
+   "Lawrence Ave East",
+   "Lockie Ave",
+   "Lord Roberts Dr",
+   "Marcos Blvd",
+   "McNicoll Ave",
+   "Midland Ave",
+   "Midland Station",
+   "Midwest Rd",
+   "Millbridge Gate",
+   "Milliken Go Station",
+   "Montgomery Ave",
+   "Norbury Cres",
+   "Old Kennedy Rd",
+   "Passmore Ave",
+   "Pitfield Rd",
+   "Progress Ave",
+   "Prudential Dr",
+   "Romulus Dr",
+   "Rural Ave",
+   "Salome Dr",
+   "Sheppard Ave East",
+   "Silver Star Blvd",
+   "South Shields Ave",
+   "Stansbury Cres",
+   "Steeles Ave East",
+   "Stubbswood Sq",
+   "Treewood St",
+   "Wainfleet Rd"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East",
+    "Midland Ave"
+   ],
+   "quote": "City Council authorize public highway designation for the diversion road, to be known as the “Eglinton Avenue East diversion road”, between Midland Avenue and a point 143 metres west, as shown in Attachment 1 to the report (November 20, 2024) from the Deputy General Manager, Transportation Services to become effective upon the transfer to the City of the required interest in lands forming the diversion road and the registration of the highway dedication bylaw on those lands.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East",
+    "Midland Ave"
+   ],
+   "quote": "City Council prohibit stopping at all times on both sides of Eglinton Avenue East diversion road, between Midland Avenue and a point 143 metres west, from January 1, 2027, to December 31, 2030, inclusive.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East",
+    "Midland Ave"
+   ],
+   "quote": "City Council designate a 40 km/h speed limit on Eglinton Avenue East diversion road, between Midland Avenue and a point 143 metres west, from January 1, 2027 to December 31, 2030, inclusive.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 18,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East",
+    "Midland Ave"
+   ],
+   "quote": "Transit Impacts Due to the expanded work zone for the Kennedy Station Connection and the resulting diversion road, there is insufficient space to maintain the three-lane-per-direction configuration on Eglinton Avenue East, Midland Avenue and a point 275 metres west of Midland Avenue.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 11,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East",
+    "Midland Ave"
+   ],
+   "quote": "A time extension of the temporary road diversion of Eglinton Avenue East, between Midland Avenue and Huntington Avenue, to facilitate the extraction shaft construction.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 16,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East",
+    "Midland Ave"
+   ],
+   "quote": "The Stage 1 works will not impact the intersection of Eglinton Avenue East and Midland Avenue, which will continue to operate with existing lane configurations and the east leg diversion to the north.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 16,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East",
+    "Midland Ave"
+   ],
+   "quote": "To accommodate the expanded work zone, the west leg of the intersection of Eglinton Avenue East and Midland Avenue will be diverted to the north (refer to Figure 5).",
+   "rule": "diverted",
+   "score": 4
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 7,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East",
+    "Midland Ave"
+   ],
+   "quote": "Additionally, City Council approved the public highway designation for the diversion road, known as the Eglinton Avenue East diversion road, between Midland Avenue and Huntington Avenue.",
+   "rule": "diversion",
+   "score": 4
+  },
+  {
+   "item_id": "2023.EX4.10",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2023/ex/bgrd/backgroundfile-235966.pdf",
+   "page": 10,
+   "change_type": "reroute",
+   "stops_named": [
+    "Ellesmere Rd"
+   ],
+   "quote": "A new traffic control signal is proposed at Ellesmere Road and Borough Approach West to facilitate diverting eastbound traffic turning north towards Scarborough Town Centre or Highway 401.",
+   "rule": "diverting",
+   "score": 2
+  },
+  {
+   "item_id": "2024.IE10.2",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-241748.pdf",
+   "page": 7,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "TTC Bus Stop Changes: TTC staff have proposed that several TTC bus stops be consolidated and upgraded.",
+   "rule": "Bus Stop Changes: TTC staff have proposed that several TTC bus stops be consolidated",
+   "score": 2
+  },
+  {
+   "item_id": "2024.IE10.2",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-241748.pdf",
+   "page": 6,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Protected Cycle Track Raised Cycle Track+ Sidewalk Upgrades New Sidewalk 9 Existing TTC Bus Stop to be Upgraded ~ Removed TTC Bus Stop 9 Relocated TTC Bus Stop 9 New TTC Bus Stop Through this report, Transportation Services is seeking authority for a number of bikeway projects that are proposed to be installed in the near term (2022-2024) for which design and consultation have been completed.",
+   "rule": "Bus Stop to be Upgraded ~ Removed",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 18,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "TTC and Metrolinx will coordinate to ensure that relocated bus stops meet temporary bus stop design and placement criteria, ensuring passenger safety, accessibility, and convenience during construction.",
+   "rule": "relocated bus stops meet temporary bus stop",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 15,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East"
+   ],
+   "quote": "During this temporary closure, the eastbound and westbound traffic will be maintained on the Eglinton Avenue East diversion road.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 11,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Sheppard Ave East"
+   ],
+   "quote": "Temporary Sidewalk Closure on McCowan Road Metrolinx is requesting an additional extension of the temporary closure of the east sidewalk on McCowan Road, between Sheppard Avenue East and Nugget Avenue, to support ongoing TBM operations at the launch shaft site.",
+   "rule": "Sidewalk Closure",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 11,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East"
+   ],
+   "quote": "During the temporary closure of a portion of Eglinton Avenue East, east and westbound vehicular traffic will continue to be maintained on the Eglinton Avenue East diversion road.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 16,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East"
+   ],
+   "quote": "Together, the diversion of both the west and east legs will form an integrated section of the Eglinton Avenue East diversion road.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 16,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East"
+   ],
+   "quote": "A portion of the west leg will be diverted onto privately-owned lands at 2480-2480A Eglinton Avenue East, over which Metrolinx holds a temporary easement.",
+   "rule": "diverted",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 16,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East"
+   ],
+   "quote": "Figure 7 shows the Eglinton Avenue East diversion with respect to the Metrolinx work zone on Eglinton Avenue East.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 7,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Sheppard Ave East"
+   ],
+   "quote": "12 \"Metrolinx Scarborough Subway Extension - Closure of Sidewalk on McCowan Road\" and authorized the temporary closure of the east sidewalk on McCowan Road, between Sheppard Avenue East and Nugget Avenue, from April 1, 2022, to March 31, 2024, to facilitate the Scarborough Subway Extension tunnel construction work.",
+   "rule": "Sidewalk on McCowan Road\" and authorized the temporary closure",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 7,
+   "change_type": "close_sidewalk",
+   "stops_named": [
+    "Sheppard Ave East"
+   ],
+   "quote": "12 \"Metrolinx Scarborough Subway Extension - Time Extension of Temporary Sidewalk Closure on McCowan Road\" and authorized continuation of the temporary closure of the east sidewalk on McCowan Road, between Sheppard Avenue East and Nugget Avenue, from April 1, 2024, to December 31, 2024.",
+   "rule": "Sidewalk Closure",
+   "score": 2
+  },
+  {
+   "item_id": "2024.SC18.12",
+   "item_title": "See also 2026.SC31.12",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-250862.pdf",
+   "page": 19,
+   "change_type": "reroute",
+   "stops_named": [
+    "Eglinton Ave East"
+   ],
+   "quote": "During Stages 2 and 3, as shown in Figures 5 and 6, Metrolinx will establish temporary pedestrian walkways along the Eglinton Avenue East diversion Road.",
+   "rule": "diversion",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+   "page": 26,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Participants were asked to identify the most important criteria for evaluating transit priority solutions, to provide feedback on five design options, and to comment on the proposed removal of ten bus stops.",
+   "rule": "removal of ten bus stops",
+   "score": 2
+  }
+ ]
+}

@@ -1,0 +1,177 @@
+{
+ "route": "117",
+ "name": "Birchmount South",
+ "terms": {
+  "route": "117",
+  "name": "Birchmount South",
+  "main": [
+   "Birchmount Rd",
+   "Kingston Rd",
+   "Victoria Park Ave"
+  ],
+  "cross": [
+   "Birchcliff Ave",
+   "Birchmount Rd",
+   "Blantyre Ave",
+   "Bus Bay 3",
+   "Danforth Ave",
+   "Danforth Rd",
+   "Denton Ave",
+   "Eastwood Ave",
+   "Elfreda Blvd",
+   "Fallingbrook Rd",
+   "Gerrard St East",
+   "Highview Ave",
+   "Hollis Ave",
+   "Hunt Club Dr",
+   "Kildonan Dr",
+   "Kingston Rd",
+   "Manderley Dr",
+   "Meadow Ave",
+   "Newlands Ave",
+   "Parkette Pl",
+   "Parnell Ave",
+   "Pinegrove Ave",
+   "Queensbury Ave",
+   "Raleigh Ave",
+   "Sadler Dr",
+   "Santamonica Blvd",
+   "St Clair Ave East",
+   "Swanwick Ave",
+   "Temporary Bus Bay 1",
+   "Victoria Park Ave",
+   "Warden Ave",
+   "Winston Ave",
+   "Wood Glen Rd",
+   "Woodale Ave",
+   "Zenith Dr"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.SC26.14",
+   "item_title": "Expand All 2025.SC26.14",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259528.pdf",
+   "page": 2,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Birchmount Rd"
+   ],
+   "quote": "FINANCIAL IMPACT The estimated cost for installing traffic control signals at the intersection of Birchmount Road and Rolark Drive/Private Access and the associated work, including the relocation of the southbound TTC bus stop and potential tree removal, is $330,000.",
+   "rule": "bus stop and potential tree removal",
+   "score": 5
+  },
+  {
+   "item_id": "2025.SC26.14",
+   "item_title": "Expand All 2025.SC26.14",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259066.pdf",
+   "page": 2,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Birchmount Rd"
+   ],
+   "quote": "Traffic Control Signals and Traffic Regulations - Birchmount Road and Rolark Drive/Private Access Page 2 of 10 FINANCIAL IMPACT The estimated cost for installing traffic control signals at the intersection of Birchmount Road and Rolark Drive/Private Access and the associated work, including the relocation of the southbound TTC bus stop and potential tree removal, is $330,000.",
+   "rule": "bus stop and potential tree removal",
+   "score": 5
+  },
+  {
+   "item_id": "2025.SC26.14",
+   "item_title": "Expand All 2025.SC26.14",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259528.pdf",
+   "page": 7,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Birchmount Rd"
+   ],
+   "quote": "The TTC recommends relocating the existing southbound stop at the northwest corner of Birchmount Road and Rolark Drive to the southwest corner of Birchmount Road and Rolark Drive.",
+   "rule": "relocating the existing southbound stop",
+   "score": 5
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Danforth Ave",
+    "Danforth Rd"
+   ],
+   "quote": "Street East and Church Street Intersection Closures Date: February 3, 2025 To: Toronto and East York Community Council From: Director, Traffic Management, Transportation Services Wards: Wards 10 – Spadina-Fort York, 13 – Toronto Centre, and 14 – Toronto- Danforth SUMMARY Transportation Services is requesting approval, on behalf of the Toronto Transit Commission (TTC), to install transit priority measures (TPMs) to support the diversion routes associated with the closure of King Street East and Church Street intersection for watermain and streetcar track maintenance from May 2025 to August 2025",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 1,
+   "change_type": "reroute",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "The 503 Kingston Road, 504 King, and 508 Lakeshore will be diverted due to the closure.",
+   "rule": "diverted",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "Additionally, the diversion of the 503 Kingston Road and 504 King streetcar routes along Queen Street will serve the Regent Park Neighbourhood Improvement Area (NIA), providing residents and equity-deserving groups increased levels of service throughout the duration of the diversion.",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.TE20.40",
+   "item_title": "This item was considered by Toronto and East York Community Council on February 20, 2025. It is being forwarded to City Council without recommendations. It will be considered by City Council on March 26 and 27, 2025.",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-252918.pdf",
+   "page": 4,
+   "change_type": "reroute",
+   "stops_named": [
+    "Kingston Rd"
+   ],
+   "quote": "There are four planned phases of construction, Phase 1 and Phase 2, which allows for east-west traffic to continue, including a bus overlay service for the 504 King, and Phase 3 and 4, which results in a full closure, The diversion plan for impacted service, 503 Kingston Road, 504 King, and 508 Lakeshore, is shown in Figure 1 (Phase 1 and 2) and Figure 2 (Phase 3 and Phase 4).",
+   "rule": "diversion",
+   "score": 3
+  },
+  {
+   "item_id": "2025.SC26.14",
+   "item_title": "Expand All 2025.SC26.14",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259528.pdf",
+   "page": 7,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "The relocation of the bus stop will require removal of one tree.",
+   "rule": "bus stop will require removal",
+   "score": 2
+  },
+  {
+   "item_id": "2025.SC26.14",
+   "item_title": "Expand All 2025.SC26.14",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259528.pdf",
+   "page": 9,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "~ PROPOSED TRAFFIC CONTROL SIGNAL Ill PROPOSEO NO RIGHT TURN ON RED e PROPOSEO TTC BUS STOP RELOCATION 1880 EX.",
+   "rule": "BUS STOP RELOCATION",
+   "score": 2
+  },
+  {
+   "item_id": "2025.SC26.14",
+   "item_title": "Expand All 2025.SC26.14",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-259528.pdf",
+   "page": 9,
+   "change_type": "relocate_stop",
+   "stops_named": [],
+   "quote": "ISTINGTTC I BUS STOP TOBf I RELOCAT ED \\ ' y PROPOSEO 1 BUS STOP RELOCATION NEWTTC I 0 <l: 0 a: f­ z ~ 0 ::;",
+   "rule": "BUS STOP TOBf I RELOCAT ED \\ ' y PROPOSEO 1 BUS STOP RELOCATION",
+   "score": 2
+  }
+ ]
+}

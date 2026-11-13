@@ -1,0 +1,89 @@
+{
+ "route": "132",
+ "name": "Milner",
+ "terms": {
+  "route": "132",
+  "name": "Milner",
+  "main": [
+   "Milner Ave",
+   "Brenyon Way",
+   "Sewells Rd"
+  ],
+  "cross": [
+   "300 Consilium Pl",
+   "Alford Cres",
+   "Breckon Gate",
+   "Burrows Hall Blvd",
+   "Bus Bay 12",
+   "Cinemart Dr",
+   "Empringham Dr",
+   "Executive Crt",
+   "Foregate Ave",
+   "Highway 401",
+   "Horseshoe Cres",
+   "Hupfield Trail",
+   "John Tabor Trail",
+   "Lady Bower Cres",
+   "Markham Rd",
+   "McCowan Rd",
+   "McLevin Ave",
+   "Mid",
+   "Milner Ave",
+   "Neilson Rd",
+   "Novopharm Crt",
+   "Overlord Cres",
+   "Pennyhill Dr",
+   "Pioneer Pathway",
+   "Progress Ave",
+   "Scunthorpe Rd",
+   "Sewells Rd",
+   "Shadowood Crt",
+   "Sheppard Ave East",
+   "Split Maple Crt",
+   "Triton Rd",
+   "Usherwood Crt",
+   "Walkway to John Tabor Trail",
+   "Walkway to Lowry Sq",
+   "Wickson Trail"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.SC25.9",
+   "item_title": "See also By-law",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-258178.pdf",
+   "page": 6,
+   "change_type": "relocate_stop",
+   "stops_named": [
+    "Milner Ave"
+   ],
+   "quote": "There will be a loss of approximately eight on-street parking spaces on Milner Avenue associated with the installation of the traffic control signals and the bus stop relocation.",
+   "rule": "bus stop relocation",
+   "score": 5
+  },
+  {
+   "item_id": "2025.SC25.9",
+   "item_title": "See also By-law",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-258178.pdf",
+   "page": 2,
+   "change_type": "remove_stop",
+   "stops_named": [
+    "Milner Ave"
+   ],
+   "quote": "If Scarborough Community Council amends the recommendations in this report and authorizes the installation of traffic control signals at the intersection of Milner Avenue and Executive Court/Mid-Dominion Acres, the estimated cost for the traffic signals and the associated works, including the relocation of the eastbound TTC bus stop and potential tree removal, is $250,000.",
+   "rule": "bus stop and potential tree removal",
+   "score": 5
+  },
+  {
+   "item_id": "2025.SC25.9",
+   "item_title": "See also By-law",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-258178.pdf",
+   "page": 6,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "The relocation of the bus stop will require removal of one tree.",
+   "rule": "bus stop will require removal",
+   "score": 2
+  }
+ ]
+}

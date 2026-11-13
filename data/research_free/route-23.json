@@ -1,0 +1,59 @@
+{
+ "route": "23",
+ "name": "Dawes",
+ "terms": {
+  "route": "23",
+  "name": "Dawes",
+  "main": [
+   "Dawes Rd",
+   "St Clair Ave",
+   "Ferris Rd"
+  ],
+  "cross": [
+   "Beth St",
+   "Brenton St",
+   "Bus Bay 1",
+   "Crescent Town Rd",
+   "Danforth Ave",
+   "Dawes Rd",
+   "Dentonia Park Ave",
+   "Donora Dr",
+   "Ferris Cres",
+   "Ferris Rd",
+   "Glen Eden Cres",
+   "Glenburn Ave",
+   "Goodwood Park Crt",
+   "Gower St",
+   "Park Vista",
+   "Plaxton Dr",
+   "Secord Ave",
+   "Squires Ave",
+   "St Clair Ave East",
+   "Victoria Park Ave"
+  ]
+ },
+ "findings": [
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 23,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Figure 7 shows the proposed stops along the roadway, including those proposed to be removed.",
+   "rule": "stops along the roadway, including those proposed to be removed",
+   "score": 2
+  },
+  {
+   "item_id": "2025.EX25.4",
+   "item_title": "See also By-laws",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 23,
+   "change_type": "remove_stop",
+   "stops_named": [],
+   "quote": "Note that the proposed priority transit lanes, parking and turning prohibitions and stop removals are part of the ongoing consultation with local Councillors and the public and are subject to change based on feedback received.",
+   "rule": "stop removals",
+   "score": 2
+  }
+ ]
+}
