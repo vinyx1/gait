@@ -10,7 +10,7 @@ from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
 
-from . import access
+from . import access, walk
 
 ROUTES = Path(__file__).resolve().parent.parent / "data/geo/routes.json"
 
@@ -37,6 +37,7 @@ class Leg:
     route: str | None = None
     board: dict | None = None     # stop record from stops.json
     alight: dict | None = None
+    stats: dict | None = None     # walking legs: sidewalk-network stats, or None when it is a straight-line estimate
 
     @property
     def length_m(self) -> int:
@@ -63,14 +64,28 @@ def build_transit_leg(route: str, vi: int, board_id: str, alight_id: str) -> Leg
                rec.get(alight_id) or {"stop_id": alight_id, "name": a["name"], "lat": a["lat"], "lon": a["lon"]})
 
 
-def build_trip(origin: tuple[float, float], dest: tuple[float, float], rides: list[tuple[str, int, str, str]]) -> list[Leg]:
+def walk_leg(a: tuple[float, float], b: tuple[float, float], label: str, avoid_no_sidewalk: bool = False) -> Leg:
+    """Walk on the City's pedestrian network when possible; otherwise a straight line (marked by stats=None)."""
+    r = walk.route(a, b, avoid_no_sidewalk)
+    if r:
+        return Leg("walk", label, [tuple(p) for p in r["points"]], stats={k: v for k, v in r.items() if k != "points"})
+    return Leg("walk", label, [a, b])
+
+
+def walk_estimate_m(leg: Leg) -> int:
+    """Network length when routed, else straight line times the detour factor."""
+    return leg.stats["length_m"] if leg.stats else round(leg.length_m * access.DETOUR)
+
+
+def build_trip(origin: tuple[float, float], dest: tuple[float, float], rides: list[tuple[str, int, str, str]],
+               avoid_no_sidewalk: bool = False) -> list[Leg]:
     legs: list[Leg] = []
     cur = origin
     for route, vi, board_id, alight_id in rides:
         t = build_transit_leg(route, vi, board_id, alight_id)
         b = (t.board["lat"], t.board["lon"])
-        legs.append(Leg("walk", f"Walk to {t.board['name']}", [cur, b]))
+        legs.append(walk_leg(cur, b, f"Walk to {t.board['name']}", avoid_no_sidewalk))
         legs.append(t)
         cur = (t.alight["lat"], t.alight["lon"])
-    legs.append(Leg("walk", "Walk to your destination", [cur, dest]))
+    legs.append(walk_leg(cur, dest, "Walk to your destination", avoid_no_sidewalk))
     return legs

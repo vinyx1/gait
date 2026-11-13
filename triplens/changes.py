@@ -11,7 +11,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from . import access, exposure
-from .trip import Leg, load_routes, stop_records
+from .trip import Leg, load_routes, stop_records, walk_leg, walk_estimate_m
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -39,7 +39,7 @@ def _removed(change: dict, route: str) -> set[str]:
     return {s for e in change["effects"] if e["type"] == "remove_stop" and e["route"] == route for s in e["stop_ids"]}
 
 
-def apply(legs: list[Leg], change: dict) -> tuple[list[Leg], list[str]]:
+def apply(legs: list[Leg], change: dict, avoid_no_sidewalk: bool = False) -> tuple[list[Leg], list[str]]:
     """Return the trip after the change, and plain notes on what moved."""
     notes, new = [], [copy.deepcopy(l) for l in legs]
     recs = stop_records()
@@ -70,12 +70,11 @@ def apply(legs: list[Leg], change: dict) -> tuple[list[Leg], list[str]]:
         l.board = copy.deepcopy(recs.get(b["id"], {"stop_id": b["id"], "name": b["name"], "lat": b["lat"], "lon": b["lon"]}))
         l.alight = copy.deepcopy(recs.get(a["id"], {"stop_id": a["id"], "name": a["name"], "lat": a["lat"], "lon": a["lon"]}))
         l.points = [tuple(p) for p in var["shape"][b["v"]:a["v"] + 1]]
-        # walking legs either side follow the new stops
+        # walking legs either side are re-routed to the new stops
         if i > 0 and new[i - 1].kind == "walk":
-            new[i - 1].points = [new[i - 1].points[0], (l.board["lat"], l.board["lon"])]
-            new[i - 1].label = f"Walk to {l.board['name']}"
+            new[i - 1] = walk_leg(new[i - 1].points[0], (l.board["lat"], l.board["lon"]), f"Walk to {l.board['name']}", avoid_no_sidewalk)
         if i + 1 < len(new) and new[i + 1].kind == "walk":
-            new[i + 1].points = [(l.alight["lat"], l.alight["lon"]), new[i + 1].points[-1]]
+            new[i + 1] = walk_leg((l.alight["lat"], l.alight["lon"]), new[i + 1].points[-1], new[i + 1].label, avoid_no_sidewalk)
     for e in change["effects"]:
         field = {"remove_shelter": "shelter_listed", "remove_bench": "bench_listed"}.get(e["type"])
         if not field:
@@ -90,7 +89,7 @@ def apply(legs: list[Leg], change: dict) -> tuple[list[Leg], list[str]]:
 
 
 def compare(legs: list[Leg], change: dict, rider: str, band: str, day: str) -> dict:
-    after_legs, notes = apply(legs, change)
+    after_legs, notes = apply(legs, change, rider in ("wheelchair", "senior_walker"))
     before = exposure.analyze(legs, rider, band, day, stop_override=_overrides(legs))
     after = exposure.analyze(after_legs, rider, band, day, stop_override=_overrides(after_legs))
     key = lambda f: (f["severity"], f["text"])
@@ -99,8 +98,8 @@ def compare(legs: list[Leg], change: dict, rider: str, band: str, day: str) -> d
     rows = []
     for lb, la in zip(legs, after_legs):
         if lb.kind == "walk":
-            rows.append({"what": lb.label, "before": f"about {round(lb.length_m * access.DETOUR)} m walk",
-                         "after": f"about {round(la.length_m * access.DETOUR)} m walk", "changed": lb.length_m != la.length_m})
+            rows.append({"what": la.label, "before": f"about {walk_estimate_m(lb)} m walk",
+                         "after": f"about {walk_estimate_m(la)} m walk", "changed": walk_estimate_m(lb) != walk_estimate_m(la)})
         else:
             for role, sb, sa in (("Get on at", lb.board, la.board), ("Get off at", lb.alight, la.alight)):
                 fb = lambda s: f"{s['name']} (shelter {'listed' if s.get('shelter_listed') else 'not listed'}, bench {'listed' if s.get('bench_listed') else 'not listed'})"

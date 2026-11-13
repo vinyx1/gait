@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Route map - TripLens</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+  <style>
+    body{margin:0}
+    .mapwrap{display:grid;grid-template-columns:1fr;min-height:100vh}
+    @media(min-width:900px){.mapwrap{grid-template-columns:minmax(0,1fr) 25rem}}
+    #map{min-height:60vh;height:100%}
+    .panel{padding:1rem 16px;overflow:auto;max-height:100vh;border-left:1px solid var(--line);background:var(--bg)}
+    .step{border:1px solid var(--line);border-radius:8px;padding:.6rem .8rem;margin:.6rem 0}
+    .step.on{border:2px solid var(--accent)}
+    .step h2{font-size:1rem;margin:0 0 .3rem}
+    .routes button,.toggle button{margin:.2rem .2rem 0 0;font-size:.85rem;padding:.35rem .6rem;background:var(--card);color:var(--fg);border:2px solid var(--line)}
+    .routes button[aria-pressed=true],.toggle button[aria-pressed=true]{border-color:var(--accent);font-weight:700}
+    .legend span{display:inline-block;width:1.4rem;height:.35rem;vertical-align:middle;margin-right:.3rem}
+    .err{color:#b91c1c}
+    .panel table{display:table;font-size:.8rem}
+  </style>
+</head>
+<body>
+<a class="skip" href="#panel">Skip to the trip panel</a>
+<div class="mapwrap">
+  <div id="map" role="application" aria-label="3D map of Toronto. Click to place your start and destination. A text version is in the panel."></div>
+  <aside class="panel" id="panel" aria-live="polite">
+    <p><a href="/">TripLens</a> · <a href="/route">Text-only version</a></p>
+    <h1 style="font-size:1.3rem">Map your trip</h1>
+    <p class="privacy"><strong>Privacy:</strong> the points you click go only to this computer. To draw the map, your browser downloads map tiles from OpenFreeMap, which can see the area you are viewing. Nothing is saved.</p>
+
+    <div class="step on" id="s1"><h2>1. Click your start on the map</h2><p id="s1t" class="meta">Not set</p></div>
+    <div class="step" id="s2"><h2>2. Click your destination</h2><p id="s2t" class="meta">Not set</p></div>
+    <div class="step" id="s3"><h2>3. Choose the bus or streetcar you take</h2>
+      <p class="meta">Routes with a stop within 800 m of both points, listed by number.</p><div class="routes" id="routes"></div></div>
+    <div class="step" id="s4"><h2>4. Click the stop where you get on, then where you get off</h2>
+      <p id="s4t" class="meta">Blue boxes are bus shelters listed in City data, brown are benches. Red rings are stops a change would remove.</p></div>
+    <div class="step" id="s5"><h2>5. Who is travelling, and when?</h2>
+      <label>Rider <select id="rider">{% for k, p in personas.items() %}<option value="{{ k }}">{{ p.label }}</option>{% endfor %}</select></label><br>
+      <label>Day <select id="day">{% for k, n in days.items() %}<option value="{{ k }}">{{ n | capitalize }}</option>{% endfor %}</select></label>
+      <label>Time <select id="band">{% for k, n in bands.items() %}<option value="{{ k }}" {% if k == 'day' %}selected{% endif %}>{{ n }}</option>{% endfor %}</select></label>
+      <p><button id="go" disabled>Show my trip</button> <button id="reset" type="button" style="background:var(--card);color:var(--fg)">Start over</button></p></div>
+    <div id="out"></div>
+    <p class="legend meta"><span style="background:#475569"></span>walking (sidewalk network) <span style="background:#0b4f9c"></span>your route
+      <span style="background:#ea580c"></span>after a change</p>
+  </aside>
+</div>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const S = {a: null, b: null, ride: null, stops: null, board: null, alight: null, mA: null, mB: null, data: null};
+const map = new maplibregl.Map({container: 'map', style: 'https://tiles.openfreemap.org/styles/liberty',
+  center: [-79.40, 43.67], zoom: 12.5, pitch: 55, bearing: -17, maxPitch: 70});
+map.addControl(new maplibregl.NavigationControl({visualizePitch: true}));
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function step(n){ for (let i=1;i<=5;i++) $('s'+i).classList.toggle('on', i===n); }
+function src(id, data){ if (map.getSource(id)) map.getSource(id).setData(data); else map.addSource(id, {type:'geojson', data}); }
+const EMPTY = {type:'FeatureCollection', features:[]};
+
+function box(lon, lat, wm, hm, dx){ // small rectangle in metres, for 3D shelters and benches
+  const k = 111320, kx = k*Math.cos(lat*Math.PI/180), x = lon + dx/kx;
+  const w = wm/2/kx, h = hm/2/k;
+  return [[[x-w,lat-h],[x+w,lat-h],[x+w,lat+h],[x-w,lat+h],[x-w,lat-h]]];
+}
+function furniture(stops){
+  const f = [];
+  for (const s of stops.features){
+    const [lon, lat] = s.geometry.coordinates;
+    if (s.properties.shelter) f.push({type:'Feature', properties:{h:7, c:'#2563eb'}, geometry:{type:'Polygon', coordinates: box(lon, lat, 9, 3.5, 0)}});
+    if (s.properties.bench) f.push({type:'Feature', properties:{h:2, c:'#92400e'}, geometry:{type:'Polygon', coordinates: box(lon, lat, 4, 1.5, 7)}});
+  }
+  return {type:'FeatureCollection', features: f};
+}
+
+map.on('load', () => {
+  if (!map.getLayer('building-3d') && map.getSource('openmaptiles')) {
+    map.addLayer({id:'bld3d', type:'fill-extrusion', source:'openmaptiles', 'source-layer':'building', minzoom:13,
+      paint:{'fill-extrusion-color':'#d6dbe3', 'fill-extrusion-height':['coalesce',['get','render_height'],8],
+             'fill-extrusion-base':['coalesce',['get','render_min_height'],0], 'fill-extrusion-opacity':0.55}});
+  }
+  for (const id of ['routeline','stops','furn','before','after','removed','decisions','works']) src(id, EMPTY);
+  map.addLayer({id:'routeline', type:'line', source:'routeline', paint:{'line-color':'#94a3b8','line-width':3,'line-opacity':0.7}});
+  map.addLayer({id:'furn', type:'fill-extrusion', source:'furn', paint:{'fill-extrusion-color':['get','c'],'fill-extrusion-height':['get','h'],'fill-extrusion-opacity':0.95}});
+  map.addLayer({id:'before-walk', type:'line', source:'before', filter:['==',['get','kind'],'walk'], paint:{'line-color':'#475569','line-width':4,'line-dasharray':[1.2,1.2]}});
+  map.addLayer({id:'before-ride', type:'line', source:'before', filter:['==',['get','kind'],'transit'], paint:{'line-color':'#0b4f9c','line-width':6}});
+  map.addLayer({id:'after-walk', type:'line', source:'after', filter:['==',['get','kind'],'walk'], paint:{'line-color':'#ea580c','line-width':4,'line-dasharray':[1.2,1.2]}});
+  map.addLayer({id:'after-ride', type:'line', source:'after', filter:['==',['get','kind'],'transit'], paint:{'line-color':'#ea580c','line-width':4,'line-offset':5}});
+  map.addLayer({id:'stops', type:'circle', source:'stops', paint:{'circle-radius':6,'circle-color':'#fff','circle-stroke-width':2,
+    'circle-stroke-color':['case',['to-boolean',['get','removed_by']],'#dc2626','#0f172a']}});
+  map.addLayer({id:'removed', type:'circle', source:'removed', paint:{'circle-radius':11,'circle-color':'rgba(0,0,0,0)','circle-stroke-width':3,'circle-stroke-color':'#dc2626'}});
+  map.addLayer({id:'decisions', type:'circle', source:'decisions', paint:{'circle-radius':9,'circle-color':['case',['get','upcoming'],'#dc2626','#6b7280'],'circle-stroke-color':'#fff','circle-stroke-width':2}});
+  map.addLayer({id:'works', type:'circle', source:'works', paint:{'circle-radius':6,'circle-color':'#f59e0b','circle-stroke-color':'#000','circle-stroke-width':1}});
+  const pop = new maplibregl.Popup({closeButton:false, closeOnClick:false});
+  for (const id of ['stops','decisions','works']) {
+    map.on('mouseenter', id, e => { map.getCanvas().style.cursor = 'pointer'; const p = e.features[0].properties;
+      const html = id==='stops' ? `<strong>${esc(p.name)}</strong><br>Boarding: ${esc(p.boarding)}<br>Shelter listed: ${p.shelter?'yes':'no'} · Bench listed: ${p.bench?'yes':'no'}${p.removed_by?'<br><strong>Would be removed:</strong> '+esc(p.removed_by):''}`
+        : id==='decisions' ? `<strong>Decision:</strong> ${esc(p.title)}<br>${esc(p.label)}` : `<strong>Works:</strong> ${esc(p.project)}, ${esc(p.location)}<br>${esc(p.timeline)}`;
+      pop.setLngLat(e.lngLat).setHTML(html).addTo(map); });
+    map.on('mouseleave', id, () => { map.getCanvas().style.cursor = ''; pop.remove(); });
+  }
+  map.on('click', 'stops', e => {
+    if (!S.stops) return;
+    const id = e.features[0].properties.id, order = S.stops.features.map(f => f.properties.id), name = e.features[0].properties.name;
+    if (!S.board || S.alight) { S.board = id; S.alight = null; $('s4t').innerHTML = `Get on: <strong>${esc(name)}</strong>. Now click where you get off.`; $('go').disabled = true; }
+    else if (order.indexOf(id) <= order.indexOf(S.board)) { $('s4t').innerHTML = `<span class="err">Choose a stop after your boarding stop, in the direction of travel.</span>`; }
+    else { S.alight = id; $('s4t').innerHTML += `<br>Get off: <strong>${esc(name)}</strong>.`; step(5); $('go').disabled = false; }
+    e.preventDefault();
+  });
+});
+
+map.on('click', async e => {
+  if (e.defaultPrevented || (S.a && S.b)) return;
+  const ll = [e.lngLat.lat, e.lngLat.lng];
+  if (!S.a) { S.a = ll; S.mA = new maplibregl.Marker({color:'#111'}).setLngLat(e.lngLat).addTo(map); $('s1t').textContent = 'Start set.'; step(2); return; }
+  S.b = ll; S.mB = new maplibregl.Marker({color:'#15803d'}).setLngLat(e.lngLat).addTo(map); $('s2t').textContent = 'Destination set.'; step(3);
+  const r = await fetch(`/api/routes_near?alat=${S.a[0]}&alon=${S.a[1]}&blat=${S.b[0]}&blon=${S.b[1]}`).then(x => x.json());
+  $('routes').innerHTML = r.length ? r.map((x, i) => `<button type="button" data-i="${i}" aria-pressed="false">${esc(x.route)} ${esc(x.name)}<br><small>${esc(x.headsign)}</small></button>`).join('')
+    : '<p class="err">No single route has stops near both points. Try points closer to a route, or use the text version for transfers.</p>';
+  $('routes').querySelectorAll('button').forEach(btn => btn.onclick = () => pickRoute(r[+btn.dataset.i], btn));
+});
+
+async function pickRoute(rt, btn){
+  $('routes').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b === btn));
+  S.ride = rt; S.board = S.alight = null; $('go').disabled = true;
+  const d = await fetch(`/api/route_stops?route=${encodeURIComponent(rt.route)}&variant=${rt.variant}`).then(x => x.json());
+  S.stops = d.stops; src('routeline', d.line); src('stops', d.stops); src('furn', furniture(d.stops));
+  $('s4t').innerHTML = 'Click the stop where you get on. Blue boxes are shelters, brown are benches (drawn larger than life; City data, may be incomplete).'; step(4);
+}
+
+$('go').onclick = async () => {
+  $('out').innerHTML = '<p>Checking your trip…</p>';
+  const body = {a: S.a, b: S.b, rider: $('rider').value, day: $('day').value, band: $('band').value,
+                rides: [{route: S.ride.route, variant: S.ride.variant, board: S.board, alight: S.alight}]};
+  const res = await fetch('/api/trip', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(body)});
+  const d = await res.json();
+  if (!res.ok) { $('out').innerHTML = `<p class="err">${esc(d.error)}</p>`; return; }
+  S.data = d; src('before', d.before); src('decisions', d.decisions); src('works', d.works);
+  const c = d.comparisons[0];
+  src('after', c ? c.after : EMPTY); src('removed', c ? c.removed : EMPTY);
+  render(d);
+  const xs = d.before.features.flatMap(f => f.geometry.coordinates).concat(c ? c.after.features.flatMap(f => f.geometry.coordinates) : []);
+  const bb = xs.reduce((b, p) => [[Math.min(b[0][0],p[0]),Math.min(b[0][1],p[1])],[Math.max(b[1][0],p[0]),Math.max(b[1][1],p[1])]], [[180,90],[-180,-90]]);
+  map.fitBounds(bb, {padding: {top: 120, bottom: 120, left: 80, right: 80}, pitch: 50, duration: 800}); $('out').scrollIntoView({behavior: 'smooth'});
+};
+
+function flagHTML(f){ const lab = {barrier:'Limit', watch:'Worth knowing', info:'Info'}[f.severity];
+  return `<li><span class="sev ${f.severity}">${lab}</span> ${esc(f.text)}<details><summary>Evidence</summary>${f.evidence.map(e => `<blockquote class="official small">${esc(e)}</blockquote>`).join('')}</details></li>`; }
+
+function render(d){
+  let h = `<h2>Your trip (${esc(d.persona)})</h2><ol>` + d.before.features.map(f => `<li>${esc(f.properties.label)}: about ${f.properties.length_m} m${f.properties.kind==='walk' ? (f.properties.routed ? ' on sidewalks' : ' (straight-line estimate)') : ''}</li>`).join('') + '</ol>';
+  for (const c of d.comparisons) {
+    h += `<section class="compare"><h3>Before and after: ${esc(c.title)}</h3>` + (c.simulated ? `<p class="warn"><strong>Simulation.</strong> ${esc(c.status_note)}</p>` :
+      `<p class="meta">Status: ${esc(c.status)}. ${esc(c.status_note)} <a href="${esc(c.source_url)}">Source</a></p>` + c.quotes.map(q => `<blockquote class="official small">${esc(q)}</blockquote>`).join(''));
+    h += `<div class="toggle" role="group" aria-label="Show on map"><button type="button" data-v="both" aria-pressed="true">Both</button><button type="button" data-v="before" aria-pressed="false">Before</button><button type="button" data-v="after" aria-pressed="false">After</button></div>`;
+    h += (c.notes.length ? '<ul>' + c.notes.map(n => `<li>${esc(n)}</li>`).join('') + '</ul>' : '<p>This change does not touch your stops.</p>');
+    h += '<table><thead><tr><th>Part</th><th>Before</th><th>After</th></tr></thead><tbody>' + c.rows.map(r => `<tr${r.changed?' class="changed"':''}><th scope="row">${esc(r.what)}</th><td>${esc(r.before)}</td><td>${esc(r.after)}</td></tr>`).join('') + '</tbody></table>';
+    h += '<h4>New accessibility issues</h4>' + (c.new_issues.length ? '<ul class="findings">' + c.new_issues.map(flagHTML).join('') + '</ul>' : '<p>None found by the fixed rules.</p>') + '</section>';
+  }
+  const main = d.flags.filter(f => f.kind !== 'works'), works = d.flags.filter(f => f.kind === 'works');
+  h += '<h3>What the data shows</h3><ul class="findings">' + main.map(flagHTML).join('') + '</ul>';
+  if (works.length) h += `<details><summary>Works near your trip (${works.length})</summary><ul class="findings">${works.map(flagHTML).join('')}</ul></details>`;
+  h += '<p class="meta">Walks follow the City pedestrian network where possible; curbs, slopes and snow are not checked. Only fixed rules mark a limit. Not an official City or TTC assessment.</p>';
+  $('out').innerHTML = h;
+  $('out').querySelectorAll('.toggle button').forEach(b => b.onclick = () => {
+    $('out').querySelectorAll('.toggle button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    const v = b.dataset.v;
+    for (const id of ['before-walk','before-ride']) map.setLayoutProperty(id, 'visibility', v === 'after' ? 'none' : 'visible');
+    for (const id of ['after-walk','after-ride','removed']) map.setLayoutProperty(id, 'visibility', v === 'before' ? 'none' : 'visible');
+  });
+}
+
+$('reset').onclick = () => {
+  S.mA && S.mA.remove(); S.mB && S.mB.remove();
+  Object.assign(S, {a:null, b:null, ride:null, stops:null, board:null, alight:null, data:null});
+  for (const id of ['routeline','stops','furn','before','after','removed','decisions','works']) src(id, EMPTY);
+  $('routes').innerHTML = ''; $('out').innerHTML = ''; $('s1t').textContent = 'Not set'; $('s2t').textContent = 'Not set'; $('go').disabled = true; step(1);
+};
+</script>
+</body>
+</html>

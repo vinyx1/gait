@@ -6,7 +6,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Query, Form
 from fastapi.requests import Request
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -242,7 +242,8 @@ def make_report(origin_text, dest_text, rider, band, day, route_keys, chosen):
         return None, errors
     try:
         legs = tripmod.build_trip((o.lat, o.lon), (d.lat, d.lon),
-                                  [(r, vi, b, a) for r, (vi, b, a) in zip(route_keys, chosen)])
+                                  [(r, vi, b, a) for r, (vi, b, a) in zip(route_keys, chosen)],
+                                  avoid_no_sidewalk=rider in ("wheelchair", "senior_walker"))
     except ValueError as e:
         return None, [str(e)]
     res = exposure.analyze(legs, rider, band, day)
@@ -337,3 +338,98 @@ async def route_result(request: Request):
         return templates.TemplateResponse(request, "route_form.html", _form_ctx(errors=errs))
     return templates.TemplateResponse(request, "route_result.html", {"rep": rep, "persona": rider, "personas": access.PERSONAS,
                                                                        "example": None, "q": origin + " to " + dest})
+
+
+# ---------- interactive map (JSON endpoints used by /map) ----------
+
+def _ll(points):
+    return [[round(p[1], 6), round(p[0], 6)] for p in points]
+
+
+def _legs_geojson(legs):
+    feats = []
+    for l in legs:
+        props = {"kind": l.kind, "label": l.label, "length_m": tripmod.walk_estimate_m(l) if l.kind == "walk" else l.length_m,
+                 "route": l.route, "routed": bool(l.stats), "no_sidewalk_m": (l.stats or {}).get("no_sidewalk_m"),
+                 "crossings": (l.stats or {}).get("crossings")}
+        feats.append({"type": "Feature", "properties": props, "geometry": {"type": "LineString", "coordinates": _ll(l.points)}})
+    return {"type": "FeatureCollection", "features": feats}
+
+
+def _removed_stop_ids():
+    out = {}
+    for c in changes.load_changes().values():
+        for e in c["effects"]:
+            if e["type"] == "remove_stop":
+                for s in e["stop_ids"]:
+                    out[s] = c["title"]
+    return out
+
+
+@app.get("/map", response_class=HTMLResponse)
+def map_page(request: Request):
+    return templates.TemplateResponse(request, "map.html", {"personas": access.PERSONAS,
+                                                            "bands": {k: v[0] for k, v in exposure.BANDS.items()}, "days": exposure.DAYS})
+
+
+@app.get("/api/routes_near")
+def routes_near(alat: float, alon: float, blat: float, blon: float, radius: float = 800):
+    """Routes with a stop within `radius` of A and a later stop within `radius` of B. Listed by route number, not ranked."""
+    out = []
+    for short, e in tripmod.load_routes().items():
+        for vi, v in enumerate(e["variants"]):
+            st = v["stops"]
+            da = [access.haversine_m(alat, alon, s["lat"], s["lon"]) for s in st]
+            db = [access.haversine_m(blat, blon, s["lat"], s["lon"]) for s in st]
+            ok = any(da[i] <= radius and any(db[j] <= radius for j in range(i + 1, len(st))) for i in range(len(st)))
+            if ok:
+                out.append({"route": short, "name": e["long"], "variant": vi, "headsign": v["headsign"], "type": e["type"]})
+    out.sort(key=lambda r: (len(r["route"]), r["route"], r["variant"]))
+    return out
+
+
+@app.get("/api/route_stops")
+def route_stops_api(route: str, variant: int):
+    e = tripmod.load_routes().get(route)
+    if not e or not (0 <= variant < len(e["variants"])):
+        raise HTTPException(404, "route not found")
+    v, recs, gone = e["variants"][variant], tripmod.stop_records(), _removed_stop_ids()
+    feats = []
+    for s in v["stops"]:
+        r = recs.get(s["id"], {})
+        feats.append({"type": "Feature", "geometry": {"type": "Point", "coordinates": [s["lon"], s["lat"]]},
+                      "properties": {"id": s["id"], "name": s["name"], "shelter": bool(r.get("shelter_listed")), "bench": bool(r.get("bench_listed")),
+                                     "boarding": access.WC_TEXT.get(r.get("wheelchair_boarding", "0"), "unknown"), "removed_by": gone.get(s["id"])}})
+    line = {"type": "Feature", "properties": {}, "geometry": {"type": "LineString", "coordinates": _ll(v["shape"])}}
+    return {"stops": {"type": "FeatureCollection", "features": feats}, "line": line, "route": route, "name": e["long"], "headsign": v["headsign"]}
+
+
+@app.post("/api/trip")
+async def trip_api(request: Request):
+    body = await request.json()
+    try:
+        a, b = tuple(body["a"]), tuple(body["b"])
+        rider, band, day = body.get("rider", "wheelchair"), body.get("band", "day"), body.get("day", "weekday")
+        rides = [(r["route"], int(r["variant"]), str(r["board"]), str(r["alight"])) for r in body["rides"]]
+        if rider not in access.PERSONAS or band not in exposure.BANDS or day not in exposure.DAYS or not rides:
+            raise ValueError("bad options")
+        legs = tripmod.build_trip(a, b, rides, avoid_no_sidewalk=rider in ("wheelchair", "senior_walker"))
+    except (KeyError, ValueError, TypeError) as e:
+        return JSONResponse({"error": str(e) or "Please check your points, route and stops."}, status_code=400)
+    res = exposure.analyze(legs, rider, band, day)
+    comps = []
+    for c in changes.affecting(legs):
+        cmp = changes.compare(legs, c, rider, band, day)
+        removed = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [s["lon"], s["lat"]]}, "properties": {"name": s["name"]}}
+                   for e in c["effects"] if e["type"] == "remove_stop"
+                   for v in tripmod.load_routes()[e["route"]]["variants"] for s in v["stops"] if s["id"] in e["stop_ids"]]
+        comps.append({"id": c["id"], "title": c["title"], "simulated": c["simulated"], "status": c["status"], "status_note": c["status_note"],
+                      "source_url": c["source_url"], "quotes": c["quotes"], "notes": cmp["notes"], "rows": cmp["rows"],
+                      "new_issues": cmp["new_issues"], "after": _legs_geojson(cmp["after_legs"]),
+                      "removed": {"type": "FeatureCollection", "features": removed}})
+    pts = lambda items, kind: [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [i["lon"], i["lat"]]},
+                                "properties": {"kind": kind, **{k: i.get(k) for k in ("title", "label", "upcoming", "item_id", "project", "location", "timeline", "distance_m")}}}
+                               for i in items]
+    return {"before": _legs_geojson(legs), "flags": res["flags"], "comparisons": comps, "persona": access.PERSONAS[rider].label,
+            "decisions": {"type": "FeatureCollection", "features": pts(res["decisions"], "decision")},
+            "works": {"type": "FeatureCollection", "features": pts(res["works"][:10], "works")}}

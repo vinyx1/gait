@@ -160,3 +160,18 @@ def test_simulated_shelter_removal_is_labelled_and_reported():
 def test_change_does_not_touch_other_routes():
     rep, _ = make_report("1000 Dundas St W", "201 Dundas St W", "wheelchair", "day", "weekday", ["505"], [(0, "10181", "2153")])
     assert rep["comparisons"] == []
+
+
+def test_map_api_flow():
+    c = TestClient(app)
+    assert c.get("/map").status_code == 200
+    r = c.get("/api/routes_near", params=dict(alat=43.6862, alon=-79.4046, blat=43.6878, blon=-79.3944)).json()
+    assert any(x["route"] == "512" for x in r)
+    s = c.get("/api/route_stops", params=dict(route="512", variant=0)).json()
+    assert sum(1 for f in s["stops"]["features"] if f["properties"]["removed_by"]) == 5
+    t = c.post("/api/trip", json={"a": [43.6862, -79.4046], "b": [43.6878, -79.3944], "rider": "senior_walker", "day": "weekday",
+                                  "band": "day", "rides": [{"route": "512", "variant": 0, "board": "14351", "alight": "15305"}]}).json()
+    walk = [f for f in t["before"]["features"] if f["properties"]["kind"] == "walk"]
+    assert walk and all(f["properties"]["routed"] for f in walk)      # walks follow the sidewalk network
+    assert t["comparisons"] and t["comparisons"][0]["new_issues"]
+    assert c.post("/api/trip", json={"a": [1, 2]}).status_code == 400

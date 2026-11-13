@@ -13,7 +13,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from . import access, labels
-from .trip import Leg, load_routes, stop_records
+from .trip import Leg, load_routes, stop_records, walk_estimate_m
 
 ROOT = Path(__file__).resolve().parent.parent
 ITEM_BUFFER_M = 150
@@ -154,14 +154,24 @@ def analyze(legs: list[Leg], persona_key: str, band: str, day: str, today_year: 
         flags.append({"severity": sev, "text": text, "evidence": evidence, "kind": kind})
 
     # walking legs
+    careful = persona_key in ("wheelchair", "senior_walker")
     for w in walks:
-        est = round(w.length_m * access.DETOUR)
-        ev = [f"{w.label}: {w.length_m} m straight line, times {access.DETOUR} = about {est} m of walking"]
+        est = walk_estimate_m(w)
+        how = (f"{w.label}: about {est} m along the City's sidewalk network" if w.stats
+               else f"{w.label}: {w.length_m} m straight line, times {access.DETOUR} = about {est} m of walking (no sidewalk path found)")
+        ev = [how]
         if est > p.max_walk_m:
-            flag("barrier" if persona_key in ("wheelchair", "senior_walker") else "watch",
+            flag("barrier" if careful else "watch",
                  f"{w.label}: about {est} m of walking, longer than the {p.max_walk_m} m assumed for a {p.label.lower()}.", ev)
         elif est > 0.8 * p.max_walk_m:
             flag("watch", f"{w.label}: about {est} m of walking, close to the {p.max_walk_m} m assumed for a {p.label.lower()}.", ev)
+        if w.stats and w.stats["no_sidewalk_m"] > 0:
+            flag("barrier" if careful and w.stats["no_sidewalk_m"] >= 50 else "watch",
+                 f"{w.label}: about {w.stats['no_sidewalk_m']} m of the walk is on a street or laneway with no sidewalk in the City's data.", ev)
+        if w.stats and w.stats["crossings"].get("no signal") and careful:
+            flag("watch", f"{w.label}: the path crosses at {w.stats['crossings']['no signal']} crossing(s) the City lists with no signal.", ev)
+        if not w.stats:
+            flag("info", f"{w.label}: no sidewalk path was found in the City's network, so this walk is a straight-line estimate.", ev)
 
     # stops and service
     for t in transit:
