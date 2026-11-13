@@ -100,7 +100,7 @@ components:
 
 TripLens tells City decisions the way they would be read aloud at a 1970s Toronto kitchen table. Each scene owns the whole screen in one flat colour from the kitchen (harvest gold, avocado, burnt orange, snow white, Pyrex turquoise; walnut for the footer), and the ink flips between dark coffee brown and cream so the words always sit on the field at body-text contrast. Nothing floats on a card; the page is a stack of full-width colour courses, and the background colour itself changes as the reader scrolls (0.9s cross-fade), so the scene change is the section break.
 
-The world's one picture is a small earth with the neighbourhood standing on its rim: a teal ocean with faint stitched wave rings, and land sewn as a patchwork quilt of farm-field patches (avocado, olive, gold, burnt orange, some with furrows) joined by cream dashed stitches, an avocado glaze edge, a dotted stoneware band, a turquoise dashed bus route, and Toronto building types standing on its rim (bay-and-gable houses, main-street shops with striped awnings, mid-rise apartments with regular window rows) set in a repeating rhythm, round trees, stops and a cream bus, with a soft ink skyline and the CN Tower behind at 16% opacity. In the winter scene white snow caps appear on every roof. It turns like a lazy Susan, one scene per scroll. Drawings are flat fills with rounded corners and short dark-brown strokes, never outlines with gradients, never photographs.
+The world's one picture is a small earth with the neighbourhood standing on its rim: a teal ocean with faint stitched wave rings, and land sewn as a patchwork quilt of farm-field patches (avocado, olive, gold, burnt orange, some with furrows) joined by cream dashed stitches, an avocado glaze edge, a dotted stoneware band, a turquoise dashed bus route, and Toronto building types standing on its rim (bay-and-gable houses, main-street shops with striped awnings, mid-rise apartments with regular window rows) set in a repeating rhythm, round trees, stops and a cream bus, with a soft ink skyline and the CN Tower behind at 16% opacity. In the winter scene white snow caps appear on every roof. It turns like a lazy Susan, one scene per scroll. Drawings are fabric appliqué: one SVG filter (#fabric) gives every shape a woven warp-and-weft grain and softly displaced cut-cloth edges, each building is sewn on with a dashed stitch line just inside its walls, and the page fields carry a faint linen weave (body::before, multiply, 22%). Never gradients, never photographs.
 
 Density is low and type is large: the body never drops below 20px, the display face is a warm, soft-shouldered serif, and every control is a chunky pill at 56px or taller. The register is warm and plain, never alarming.
 
@@ -178,7 +178,7 @@ The footer is a walnut course on the same 12-column grid: link list in columns 1
 Flat. There are no drop shadows, gradients or blurs on page elements. Depth comes from the fixed platter sitting behind the scrolling text layer and from the field colour changing underneath everything. The only shadow-like device is a 3px solid ink ring around the scale bar's "was" marker, which acts as an outline, not an elevation.
 
 ### Named Rules
-**The Flat Stoneware Rule.** Surfaces are flat colour. Lift is expressed by motion (a pill rises 3px on hover), never by a shadow.
+**The Sewn Cloth Rule.** Surfaces are flat colour with a woven grain, never glossy or shaded. Lift is expressed by motion (a pill rises 3px on hover), never by a shadow.
 
 ## Shapes
 

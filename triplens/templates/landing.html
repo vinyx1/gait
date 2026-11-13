@@ -32,6 +32,9 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--field);color:var(--ink);font:400 clamp(20px,1.4vw,22px)/1.6 "Atkinson Hyperlegible",system-ui,sans-serif;
   transition:background-color .9s var(--ease),color .9s var(--ease);-webkit-font-smoothing:antialiased}
 ::selection{background:var(--ink);color:var(--field)}
+body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.22;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='l'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.8 0.06' numOctaves='1' seed='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.38 0 0 0 0 0.3 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23l)'/%3E%3Cfilter id='w'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.06 0.8' numOctaves='1' seed='5'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.38 0 0 0 0 0.3 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23w)'/%3E%3C/svg%3E")}
+@media (prefers-reduced-transparency:reduce){body::before{display:none}}
 html{scrollbar-color:var(--ink) transparent;scrollbar-width:auto}
 a{color:inherit;text-underline-offset:5px;text-decoration-thickness:2px}
 :focus-visible{outline:4px solid var(--ink);outline-offset:4px;border-radius:12px}
@@ -217,13 +220,22 @@ const C = {cream: '#fbf1d8', stone: '#f3e3bf', gold: '#f0c04a', orange: '#e07a3a
 
 /* ---------- the platter, drawn at radius 400; angles are degrees clockwise from the top ---------- */
 const R = 400;
-const root = el('g', {}, svg), spin = el('g', {}, root);
+const root = el('g', {}, svg), spin = el('g', {}, root); root.setAttribute('filter', 'url(#fabric)');
 el('circle', {r: R + 3, fill: C.avocado}, spin);                                                // avocado glaze edge
 el('circle', {r: R - 4, fill: C.stone}, spin);                                                  // stoneware rim
 for (let a = 0; a < 360; a += 3) { const r = R - 9, x = r * Math.sin(a * Math.PI / 180), y = -r * Math.cos(a * Math.PI / 180);
   el('circle', {cx: x, cy: y, r: a % 6 ? 2.2 : 3.4, fill: a % 6 ? C.orange : C.walnut}, spin); }   // the dotted band
 // the earth inside the street ring: a turquoise ocean with soft land masses, clipped to the globe
 const defs = el('defs', {}, svg), clip = el('clipPath', {id: 'globe'}, defs); el('circle', {r: R - 20}, clip);
+const fab = el('filter', {id: 'fabric', x: '-5%', y: '-5%', width: '110%', height: '110%', 'color-interpolation-filters': 'sRGB'}, defs);
+el('feTurbulence', {type: 'fractalNoise', baseFrequency: '0.035', numOctaves: 2, seed: 4, result: 'wobble'}, fab);
+el('feDisplacementMap', {in: 'SourceGraphic', in2: 'wobble', scale: 3.2, xChannelSelector: 'R', yChannelSelector: 'G', result: 'cut'}, fab);
+el('feTurbulence', {type: 'turbulence', baseFrequency: '0.9 0.14', numOctaves: 1, seed: 9, result: 'warp'}, fab);   // threads running one way
+el('feTurbulence', {type: 'turbulence', baseFrequency: '0.14 0.9', numOctaves: 1, seed: 3, result: 'weft'}, fab);   // and across
+el('feBlend', {in: 'warp', in2: 'weft', mode: 'multiply', result: 'weave'}, fab);
+el('feColorMatrix', {in: 'weave', type: 'matrix', values: '0 0 0 0 0.92  0 0 0 0 0.88  0 0 0 0 0.82  0 0 0 -0.55 1', result: 'grain'}, fab);
+el('feComposite', {in: 'grain', in2: 'cut', operator: 'in', result: 'grainIn'}, fab);
+el('feBlend', {in: 'grainIn', in2: 'cut', mode: 'multiply'}, fab);
 el('circle', {r: R - 20, fill: '#2f7f79'}, spin);                                             // ocean
 const land = el('g', {'clip-path': 'url(#globe)'}, spin), landClip = el('clipPath', {id: 'land'}, defs);
 function blob(cx, cy, rad, fill, seedB){
@@ -302,6 +314,9 @@ function building(deg, w, h, wall){
   const g = at(deg); wall = wall || WALLS[bi % WALLS.length];
   const roof = [C.walnut, C.orange, C.brown][bi % 3]; bi++;
   if (h < 56) bayHouse(g, wall, roof); else if (h < 72) shop(g, wall, roof); else apartment(g, wall, roof, Math.min(h, 104));
+  const hh = h < 56 ? 46 : h < 72 ? 50 : Math.min(h, 104), ww = h < 56 ? 34 : h < 72 ? 44 : 40;
+  el('rect', {x: -ww / 2 + 3, y: -hh + 3, width: ww - 6, height: hh - 3, rx: 2, fill: 'none', stroke: wall === C.cream ? C.walnut : C.cream,
+              'stroke-width': 1.3, 'stroke-dasharray': '3.5 3', opacity: .75}, g);
   return g;
 }
 function tree(deg, s = 1){ const g = at(deg); el('rect', {x: -2.5, y: -14 * s, width: 5, height: 14 * s, rx: 2.5, fill: C.walnut}, g);
