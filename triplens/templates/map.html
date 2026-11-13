@@ -37,7 +37,11 @@
     <div class="samples"><strong>Try a sample:</strong><br>
       <button type="button" data-s="stclair">512 St Clair: stops proposed for removal (senior with a walker)</button>
       <button type="button" data-s="queen">501 Queen: simulated shelter removal (wheelchair user)</button>
-      <button type="button" data-s="bathurst">7 Bathurst: a past decision removed this stop (senior with a walker)</button></div>
+      <button type="button" data-s="bathurst">7 Bathurst: a past decision removed this stop (senior with a walker)</button>
+      <button type="button" data-s="dufferin">29 Dufferin: a past decision removed the Croatia St stop; the walk grows but stays within the limit (senior with a walker)</button>
+      <button type="button" data-s="dundas">505 Dundas: simulated stop relocation (wheelchair user)</button>
+      <button type="button" data-s="spadina">127 Davenport: simulated temporary stop closure (senior with a walker)</button>
+      <button type="button" data-s="late">7 Bathurst late at night: simulated service cut (shift worker)</button></div>
     <div class="step on" id="s1"><h2>1. Click your start on the map</h2><p id="s1t" class="meta">Not set</p></div>
     <div class="step" id="s2"><h2>2. Click your destination</h2><p id="s2t" class="meta">Not set</p></div>
     <div class="step" id="s3"><h2>3. Choose the bus or streetcar you take</h2>
@@ -198,6 +202,10 @@ function render(d){
 const SAMPLES = {
   stclair: {a: [43.68626, -79.40464], b: [43.68778, -79.39435], route: '512', match: 'St Clair Sta', board: '14351', alight: '15305', rider: 'senior_walker'},
   bathurst: {a: [43.68897, -79.42036], b: [43.66554, -79.41166], route: '7', variant: 1, board: '107', alight: '14617', rider: 'senior_walker'},
+  dufferin: {a: [43.65819, -79.43442], b: [43.64236, -79.42874], route: '29', variant: 2, board: '9341', alight: '15030', rider: 'senior_walker'},
+  dundas:   {a: [43.65052, -79.41572], b: [43.65482, -79.38731], route: '505', variant: 0, board: '10181', alight: '2153', rider: 'wheelchair'},
+  spadina:  {a: [43.67666, -79.40820], b: [43.66554, -79.41166], route: '127', variant: 0, board: '7956', alight: '14777', rider: 'senior_walker'},
+  late:     {a: [43.68897, -79.42036], b: [43.66554, -79.41166], route: '7', variant: 1, board: '107', alight: '14617', rider: 'shift_worker', band: 'late'},
   queen:   {a: [43.64083, -79.43392], b: [43.65317, -79.39409], route: '501', variant: 1, board: '6835', alight: '6829', rider: 'wheelchair'},
 };
 async function loadSample(key){
@@ -210,7 +218,7 @@ async function loadSample(key){
   const rt = r.find(x => x.route === s.route && (s.variant === undefined ? x.headsign.includes(s.match) : x.variant === s.variant));
   $('routes').innerHTML = `<button type="button" aria-pressed="true">${esc(rt.route)} ${esc(rt.name)}<br><small>${esc(rt.headsign)}</small></button>`;
   await pickRoute(rt, $('routes').querySelector('button'));
-  S.board = s.board; S.alight = s.alight; $('rider').value = s.rider; $('go').disabled = false; step(5);
+  S.board = s.board; S.alight = s.alight; $('rider').value = s.rider; $('band').value = s.band || 'day'; $('go').disabled = false; step(5);
   $('s4t').textContent = 'Stops set by the sample.';
   await $('go').onclick();
 }
