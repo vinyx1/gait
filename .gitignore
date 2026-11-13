@@ -12,3 +12,4 @@ data/geo/address.sqlite
 *.egg-info/
 data/geo/pednet.csv
 data/geo/pednet_graph.pkl
+data/reports/cache/*.pdf

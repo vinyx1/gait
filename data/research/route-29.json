@@ -1,0 +1,140 @@
+{
+  "route": "29",
+  "name": "Dufferin",
+  "model": "claude-opus-5-5",
+  "generated_at": "2026-11-13T05:56:34+00:00",
+  "kept": [
+    {
+      "item_id": "2025.EX25.4",
+      "decision_summary": "City Council adopted, with amendments, the RapidTO report on transit priority for Dufferin Street. In the City staff report, TTC recommended removing one bus stop on Dufferin Street, at Croatia Street.",
+      "change_type": "remove_stop",
+      "stops_named": [
+        "Croatia Street"
+      ],
+      "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+      "page": 13,
+      "quote": "Bus Stops TTC has recommended one stop for removal at Croatia Street."
+    },
+    {
+      "item_id": "2025.EX25.4",
+      "decision_summary": "A TTC background document linked to the item proposed removing two low-ridership 29 Dufferin bus stops, at Eversfield Road and Croatia Street. This was based on an earlier proposal for bus lanes from Eglinton Avenue West to King Street West. The City's final report names only Croatia Street for removal.",
+      "change_type": "remove_stop",
+      "stops_named": [
+        "Eversfield Road",
+        "Croatia Street"
+      ],
+      "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+      "page": 6,
+      "quote": "The following low-ridership bus stops are proposed to be removed: Eversfield Road and Croatia Street."
+    },
+    {
+      "item_id": "2025.EX25.4",
+      "decision_summary": "The report asked Council to approve priority bus lanes on Dufferin Street between Bloor Street West and King Street West, loading zones, turn restrictions, and a southbound priority streetcar lane between Thorburn Avenue and Springhurst Avenue. The changes were timed for the FIFA World Cup 2026.",
+      "change_type": "lanes_or_traffic",
+      "stops_named": [],
+      "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+      "page": 2,
+      "quote": "Dufferin Street • Install priority bus lanes between Bloor Street West and King Street West; • Install time-of-day, designated loading zones for delivery, passenger pick-up, and drop-off activities along the roadway; • Install turn restrictions at key intersections; and • Install a priority streetcar lane on the southbound lane between Thorburn Avenue and Springhurst Avenue."
+    },
+    {
+      "item_id": "2025.EX25.4",
+      "decision_summary": "Staff will report back after the FIFA World Cup 2026 with an evaluation of the Dufferin transit priority measures. That report may recommend removing the measures, and will cover next steps for Dufferin north of Bloor Street West to Eglinton Avenue West.",
+      "change_type": "lanes_or_traffic",
+      "stops_named": [],
+      "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+      "page": 3,
+      "quote": "At the appropriate time after FWC26, Transportation Services would report back to Executive Committee with an evaluation of the RapidTO Dufferin and Bathurst projects including recommendations for the future of the projects, up to and including the potential removal of implemented measures if warranted"
+    }
+  ],
+  "dropped": [],
+  "calls": [
+    {
+      "tool": "search_records",
+      "args": {
+        "query": "Dufferin Street"
+      },
+      "result": "2024.PH14.14 | 2024-07-11 | Planning and Housing Committee | Medical - Office Facilities/Affordable-Seniors Residential Project in Continuum of Care Setting - Request for Minister's Zoning Order at 4646 Dufferin Street | motions: Amend Item: Lost, 7-15; Defer Item Indefinitely: Lost, 1-3; End Debate: Carried, 16-6\n2024.EX16.1 | 2024-07-24 | City Council | Acceleration of the State of Good Repair Design-Build Contract for the F.G. Gardiner Expressway Rehabilitation Section 2 - Dufferin Street to Strachan Avenue and Enhanced Congestion Management Measures | motions: Adopt Item as Amended: Carried, 24-0; Amend Item (Additional): Carried, 19-5; Amend Item (Additional): Carried, 23-1; Amend Item (Additional): Carried, 24-0\n2024.CC24.11 | 2024-12-18 | City Council | 1245 and 1285 Dupont Street, 1260 Dufferin Street, and 213 Emerson Avenue - Ontario Land Tribunal Hearing - Request for Directions | motions: Adopt Item: Carried, 17-1\n2025.EX25.4 | 2025-07-23 | City Council | RapidTO: Transit Priority on Dufferin Street and Bathurst Street | motions: Adopt Item as Amended: Carried, 18-5; Adopt Item as Amended: Carried, 20-3; Amend Item (Additional): Carried, 21-2; Amend Item: Carried, 20-3\n2025.TE26.14 | 2025-11-12 | City Council | Response to City Council Direction on EX.25.4 RapidTO: Transit Priority on Dufferin Street and Bathurst Street | motions: Adopt Item: Carried, 19-2\n2023.NY9.36 | report request | Dufferin Street and Eglinton Avenue West - Pedestrian Safety After Fatal Accident Involving a Dump Truck | 1. Requested the General Manager, Transportation Services, in consultation with the Toronto Police Services as necessary, to report on the pedestrian fatality w\n2024.EX11.8 | report request | RapidTO: Surface Transit Network Plan | 2. City Council direct the General Manager, Transportation Services, in consultation with the Chief Planner and Executive Director, City Planning and the Chief \n2024.TE10.24 | report request | 980 Dufferin Street / 1141 Bloor Street West - "
+    },
+    {
+      "tool": "search_records",
+      "args": {
+        "query": "Dufferin transit priority"
+      },
+      "result": "2025.EX25.4 | 2025-07-23 | City Council | RapidTO: Transit Priority on Dufferin Street and Bathurst Street | motions: Adopt Item as Amended: Carried, 18-5; Adopt Item as Amended: Carried, 20-3; Amend Item (Additional): Carried, 21-2; Amend Item: Carried, 20-3\n2025.TE26.14 | 2025-11-12 | City Council | Response to City Council Direction on EX.25.4 RapidTO: Transit Priority on Dufferin Street and Bathurst Street | motions: Adopt Item: Carried, 19-2\n2024.EX11.8 | report request | RapidTO: Surface Transit Network Plan | 2. City Council direct the General Manager, Transportation Services, in consultation with the Chief Planner and Executive Director, City Planning and the Chief \n2024.TE17.39 | report request | Intersection Safety Review - Bloor Street West and Dufferin Street | 2. Requested the General Manager, Transportation Services, in consultation with the Chief Executive Officer, Toronto Transit Commission and the Executive Direct\n2025.EX25.4 | report request | EX25.4 - RapidTO: Transit Priority on Dufferin Street and Bathurst Street | 12. City Council direct the General Manager, Transportation Services, to report back to Executive Committee at the appropriate time after FIFA World Cup 2026, w\n2025.EX25.4 | report request | EX25.4 - RapidTO: Transit Priority on Dufferin Street and Bathurst Street | 17.  City Council direct the General Manager, Transportation Services to work with the Mayor’s Office, local Councillors, residents, businesses and transit ride\n2025.EX25.4 | report request | EX25.4 - RapidTO: Transit Priority on Dufferin Street and Bathurst Street | 18.  City Council direct the General Manager, Transportation Services to work with the Mayor’s Office, local Councillors, residents, businesses and transit ride\n2025.EX25.4 | report request | EX25.4 - RapidTO: Transit Priority on Dufferin Street and Bathurst Street | 21.  City Council direct the General Manager, Transportation Services, in consultation with the Executive Director, Corporate Real Estate Manage"
+    },
+    {
+      "tool": "list_documents",
+      "args": {
+        "item_id": "2025.EX25.4"
+      },
+      "result": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf | https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf\nhttps://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257070.pdf | https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257070.pdf\nhttps://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257071.pdf | https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257071.pdf\nhttps://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256131.pdf | https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256131.pdf\nhttps://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256132.pdf | https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256132.pdf\nhttps://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf | https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf"
+    },
+    {
+      "tool": "list_documents",
+      "args": {
+        "item_id": "2025.TE26.14"
+      },
+      "result": "No saved page for that item. Only items saved from the City site can be read."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256131.pdf",
+        "query": "stop"
+      },
+      "result": "No passages matched."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+        "query": "stop"
+      },
+      "result": "[page 2] Bathurst Street • Install priority streetcar lanes from Bathurst Station to Lake Shore Boulevard West, except on the segment between Nassau Street and Dundas Street West due to Toronto Western Hospital construction; • Install stopping prohibitions at all times; and • Install turn restrictions at key intersections along the 511 Bathurst streetcar route.\n[page 4] City Council amend Section 950-503D of City of Toronto Municipal Code Chapter 950, Traffic and Parking, to include a new Subsection (5) and a new Subsection (6) generally as follows: \"(5) Despite Subsection D(1) and (2), a vehicle may be stopped in the lane during the times or days set out in Schedule XXII in § 950-1321 for the purpose of and while actively engaged in the loading or unloading of passengers or merchandise in a commercial loading zone marked by an authorized sign under § 950-402 between the limits and times and/or days as set out in Schedule VI.\n[page 4] (6) Despite Subsection D(1) and (2), a vehicle may be stopped in the lane during the times or days set out in Schedule XXII in § 950-1321 for the purpose of and while actively engaged in the loading or unloading of passengers in a passenger loading zone marked by an authorized sign under § 950-402 between the limits and times and/or days as set out in Schedule VII.\n[page 8] Generally, the southbound curb lane is designated as a no-stopping zone from 7:00 am to 9:00 am, Monday to Friday, while the northbound curb lane is marked as a no-stopping zone from 4:00 pm to 6:00 pm, Monday to Friday.\n[page 12] Stopping and Loading A block-by-block design review, along with information gathered from the business loading survey and consultations, informed the recommended stopping and loading areas.\n[page 12] The review also included safety clearances consistent with Municipal Code Chapter 950, such as parking, stopping, or standing prohibitions near intersections, fire hydrants, or bus stops.\n[page 12] • Implement peak period stopping prohibitions"
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+        "query": "Dufferin Street bus lanes"
+      },
+      "result": "[page 1] ~TORONTO REPORT FOR ACTION RapidTO: Transit Priority on Dufferin Street and Bathurst Street Date: July 2, 2025 To: Executive Committee From: General Manager, Transportation Services Wards: 4, 9, 10, 11, 12 SUMMARY RapidTO is a joint initiative by the City of Toronto and the Toronto Transit Commission (TTC) that aims to improve bus and streetcar travel time reliability for surface transit priority roadways along arterial roads using reserved lanes, intersection signal improvements, and regulatory changes.\n[page 1] The report directed staff to initiate four new roadway-specific studies in the near term (2024-2025), one of which was the RapidTO: Dufferin Street project.\n[page 1] As directed by Council in July 2024, the RapidTO: Dufferin Street and RapidTO: Bathurst Street projects have been accelerated as critical routes to get people to and from the games.\n[page 1] In order to implement priority sections in time for FWC26, this report seeks Council authority to approve the following changes to Dufferin Street south Bloor Street West to Dufferin Gate Loop and Bathurst Street from Bathurst Station to Lake Shore Boulevard West to improve travel times and reliability for residents and visitors riding transit.\n[page 2] Dufferin Street • Install priority bus lanes between Bloor Street West and King Street West; • Install time-of-day, designated loading zones for delivery, passenger pick-up, and drop-off activities along the roadway; • Install turn restrictions at key intersections; and • Install a priority streetcar lane on the southbound lane between Thorburn Avenue and Springhurst Avenue.\n[page 2] Dufferin Street has been identified as a priority roadway in the RapidTO: Surface Transit Network Plan due to its high ridership and current service, which is slower and less reliable than desired.\n[page 2] The 29 Dufferin and 929 Dufferin Express buses serve over 40,000 riders daily, with only between 48% and 74% of buses arriving on time throughout the day on weekdays"
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+        "query": "shelter"
+      },
+      "result": "[page 9] Extensive communications efforts were made to inform the public about the consultation opportunities, which included: a project web page, digital, social media, multilingual and in-bus advertising, transit shelter ads at locations along Dufferin Street, multilingual notices delivered by Canada Post (75,071), email notification to local interest groups and posters and postcards distributed at a variety of community locations.\n[page 15] To raise awareness of the consultation events, extensive communications efforts were made to inform the public about the consultation opportunities, which included: a project web page, digital, social media and multilingual and in-bus advertising, transit shelter ads at locations along Bathurst Street, 72,646 multilingual notices delivered by Canada Post, email notification to local interest groups and posters and postcards distributed at a variety of community locations."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257070.pdf",
+        "query": "bus stop"
+      },
+      "result": "No passages matched."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256132.pdf",
+        "query": "bus stop"
+      },
+      "result": "[page 1] Endorsed the proposed installation of priority bus lanes in both directions on Dufferin Street between Eglinton Avenue West and King Street West.\n[page 1] Endorsed the proposed installation of priority bus lanes in both directions on Bathurst Street between Eglinton Avenue East and Bathurst Station (Barton Avenue).\n[page 1] Committed to use any reductions in bus/streetcar travel time from creation of priority lanes to improve the frequency and reliability of service for riders on the affected routes, not to create financial savings for the TTC.\n[page 2] Both roadways are part of the RapidTO: Surface Transit Network Plan (STNP) – a city-wide initiative aimed at improving the reliability of bus and streetcar routes, endorsed, in principle, by City Council in February 2024.\n[page 2] Additional details, including the decision history, proposed cross-sections, proposed stop changes, design evaluations, public consultation approach and the RapidTO monitoring program are included in Attachment 1."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+        "query": "stop"
+      },
+      "result": "[page 1] Additional details, including the decision history, proposed cross-sections, proposed stop changes, design evaluations, public consultation approach and the RapidTO monitoring program are included in Attachment 1.\n[page 5] In addition to these efforts, staff actively ride the bus to gather first-hand insights and have pop-up events near stops or in stations to speak directly with customers about their experiences.\n[page 6] The following low-ridership bus stops are proposed to be removed: Eversfield Road and Croatia Street.\n[page 6] To maximize the benefit of the priority bus lanes, existing on-street parking is being considered for removal, with \"no-stopping\" regulations implemented where the lanes are installed.\n[page 7] The following low-ridership bus stops are proposed to be removed: Dewbourne Avenue, Ardmore Road, Heathdale Road and Barton Avenue.\n[page 7] To maximize the benefit of the priority transit lanes, existing on-street parking is being considered for removal, with \"no-stopping\" regulations implemented where the lanes are installed.\n[page 14] As part of the RapidTO: STNP feasibility studies and consultation, changes to bus stops are also proposed, striving for a balance between convenient access and effective service.\n[page 14] Reasons to remove or relocate stops include safety concerns – in particular for mid-block stops without a protected pedestrian crossing – improved transit speeds and reliability and an adherence to TTC service standards as some existing stops are located closer than the standard requires.\n[page 14] The stop changes are proposed in part to improve service along the roadway, and in part to support parallel initiatives, such as the Vision Zero Road Safety Plan and Bus Stop Pad Improvements for Accessibility and Accommodation of Articulated Buses.\n[page 14] • Convert the curb lanes on Dufferin Street from Eglinton Avenue West to King Street West to priority bus lanes; • Convert the southbound centre lane on Dufferin Street f"
+    }
+  ],
+  "usage": {
+    "input": 50636,
+    "output": 2271
+  }
+}

@@ -36,7 +36,8 @@
 
     <div class="samples"><strong>Try a sample:</strong><br>
       <button type="button" data-s="stclair">512 St Clair: stops proposed for removal (senior with a walker)</button>
-      <button type="button" data-s="queen">501 Queen: simulated shelter removal (wheelchair user)</button></div>
+      <button type="button" data-s="queen">501 Queen: simulated shelter removal (wheelchair user)</button>
+      <button type="button" data-s="bathurst">7 Bathurst: a past decision removed this stop (senior with a walker)</button></div>
     <div class="step on" id="s1"><h2>1. Click your start on the map</h2><p id="s1t" class="meta">Not set</p></div>
     <div class="step" id="s2"><h2>2. Click your destination</h2><p id="s2t" class="meta">Not set</p></div>
     <div class="step" id="s3"><h2>3. Choose the bus or streetcar you take</h2>
@@ -152,6 +153,7 @@ $('go').onclick = async () => {
   S.data = d; src('before', d.before); src('decisions', d.decisions); src('works', d.works);
   const c = d.comparisons[0];
   src('after', c ? c.after : EMPTY); src('removed', c ? c.removed : EMPTY);
+  if (c) src('before', c.before);
   const ids = S.stops.features.map(f => f.properties.id), i0 = ids.indexOf(S.board), i1 = ids.indexOf(S.alight);
   src('ridestops', {type:'FeatureCollection', features: S.stops.features.slice(i0, i1 + 1).map((f, k) => ({...f, properties: {...f.properties, n: String(k + 1)}}))});
   clearRidePins();
@@ -173,8 +175,8 @@ function flagHTML(f){ const lab = {barrier:'Limit', watch:'Worth knowing', info:
 function render(d){
   let h = `<h2>Your trip (${esc(d.persona)})</h2><p class="meta">Numbered blue dots are the stops you pass on your ride.</p><ol>` + d.before.features.map(f => `<li>${esc(f.properties.label)}: about ${f.properties.length_m} m${f.properties.kind==='walk' ? (f.properties.routed ? ' on sidewalks' : ' (straight-line estimate)') : ''}</li>`).join('') + '</ol>';
   for (const c of d.comparisons) {
-    h += `<section class="compare"><h3>Before and after: ${esc(c.title)}</h3>` + (c.simulated ? `<p class="warn"><strong>Simulation.</strong> ${esc(c.status_note)}</p>` :
-      `<p class="meta">Status: ${esc(c.status)}. ${esc(c.status_note)} <a href="${esc(c.source_url)}">Source</a></p>` + c.quotes.map(q => `<blockquote class="official small">${esc(q)}</blockquote>`).join(''));
+    h += `<section class="compare"><h3>Before and after: ${esc(c.title)}</h3>` + (c.phase === 'implemented' ? '<p class="meta"><a href="/research/' + esc(S.ride.route) + '">See how the research agent found this decision</a></p><p class="meta"><strong>Past decision.</strong> Blue is the trip as it was before; orange is the trip today. Red rings mark the removed stops (locations reconstructed).</p>' : '') + (c.simulated ? `<p class="warn"><strong>Simulation.</strong> ${esc(c.status_note)}</p>` :
+      `<p class="meta">Status: ${esc(c.status)}. ${esc(c.status_note)} <a href="${esc(c.source_url)}">Source</a>${c.item_url ? ' · <a href="' + esc(c.item_url) + '">Council item</a>' : ''}</p>` + c.quotes.map(q => `<blockquote class="official small">${esc(q)}</blockquote>`).join(''));
     h += `<div class="toggle" role="group" aria-label="Show on map"><button type="button" data-v="both" aria-pressed="true">Both</button><button type="button" data-v="before" aria-pressed="false">Before</button><button type="button" data-v="after" aria-pressed="false">After</button></div>`;
     h += (c.notes.length ? '<ul>' + c.notes.map(n => `<li>${esc(n)}</li>`).join('') + '</ul>' : '<p>This change does not touch your stops.</p>');
     h += '<table><thead><tr><th>Part</th><th>Before</th><th>After</th></tr></thead><tbody>' + c.rows.map(r => `<tr${r.changed?' class="changed"':''}><th scope="row">${esc(r.what)}</th><td>${esc(r.before)}</td><td>${esc(r.after)}</td></tr>`).join('') + '</tbody></table>';
@@ -195,6 +197,7 @@ function render(d){
 
 const SAMPLES = {
   stclair: {a: [43.68626, -79.40464], b: [43.68778, -79.39435], route: '512', match: 'St Clair Sta', board: '14351', alight: '15305', rider: 'senior_walker'},
+  bathurst: {a: [43.68897, -79.42036], b: [43.66554, -79.41166], route: '7', variant: 1, board: '107', alight: '14617', rider: 'senior_walker'},
   queen:   {a: [43.64083, -79.43392], b: [43.65317, -79.39409], route: '501', variant: 1, board: '6835', alight: '6829', rider: 'wheelchair'},
 };
 async function loadSample(key){

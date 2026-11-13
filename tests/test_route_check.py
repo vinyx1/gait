@@ -175,3 +175,27 @@ def test_map_api_flow():
     assert walk and all(f["properties"]["routed"] for f in walk)      # walks follow the sidewalk network
     assert t["comparisons"] and t["comparisons"][0]["new_issues"]
     assert c.post("/api/trip", json={"a": [1, 2]}).status_code == 400
+
+
+def test_past_decision_rebuilds_before_state_and_flags_new_limit():
+    ex = EXAMPLES["bathurst-7-past"]
+    rep, errs = make_report(ex["origin"], ex["destination"], ex["rider"], ex["band"], ex["day"], ex["routes"], ex["stops"])
+    assert not errs
+    cmp = next(c for c in rep["comparisons"] if c["change"]["id"] == "rapidto-7-bathurst-stops")
+    assert any("Before this decision" in n for n in cmp["notes"])
+    walk = cmp["rows"][0]
+    assert walk["changed"] and int(walk["before"].split()[1]) < 150 < int(walk["after"].split()[1])
+    assert any(f["severity"] == "barrier" for f in cmp["new_issues"])
+    assert "unknown" in cmp["rows"][1]["before"]          # reconstructed stop: shelter not claimed
+
+
+def test_research_findings_are_verbatim_and_page_exists():
+    import json
+    from triplens import research
+    for r in ("7", "29"):
+        d = json.loads((ROOT / f"data/research/route-{r}.json").read_text())
+        assert d["kept"]
+        for f in d["kept"]:
+            pages = research.pages_for(f["document_url"])
+            assert research._norm(f["quote"]) in research._norm(pages[f["page"] - 1])
+    assert TestClient(app).get("/research/7").status_code == 200

@@ -201,6 +201,9 @@ EXAMPLES = {
     "spadina-127": {"title": "Spadina Rd to Bathurst St on the 127 bus (senior using a walker): a decided item and works nearby",
                     "origin": "250 Spadina Rd", "destination": "800 Bathurst St", "rider": "senior_walker", "band": "day", "day": "weekday",
                     "routes": ["127"], "stops": [(0, "7956", "14777")]},
+    "bathurst-7-past": {"title": "PAST DECISION: 7 Bathurst after RapidTO (July 2025) removed the Heathdale Rd stop (senior using a walker)",
+                        "origin": "1599 Bathurst St", "destination": "800 Bathurst St", "rider": "senior_walker", "band": "day", "day": "weekday",
+                        "routes": ["7"], "stops": [(1, "107", "14617")]},
     "stclair-512": {"title": "BEFORE AND AFTER: St Clair Ave W on the 512 if the TTC removes nine stops (senior using a walker)",
                     "origin": "5 Dunvegan Rd", "destination": "1 St Clair Ave W", "rider": "senior_walker", "band": "day", "day": "weekday",
                     "routes": ["512"], "stops": [(0, "14351", "15305")]},
@@ -423,7 +426,11 @@ async def trip_api(request: Request):
         removed = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [s["lon"], s["lat"]]}, "properties": {"name": s["name"]}}
                    for e in c["effects"] if e["type"] == "remove_stop"
                    for v in tripmod.load_routes()[e["route"]]["variants"] for s in v["stops"] if s["id"] in e["stop_ids"]]
+        if c.get("phase") == "implemented":
+            removed = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [r["lon"], r["lat"]]}, "properties": {"name": r["name"]}}
+                       for l in legs if l.kind == "transit" for r in changes.restored_stops(c, l.route)]
         comps.append({"id": c["id"], "title": c["title"], "simulated": c["simulated"], "status": c["status"], "status_note": c["status_note"],
+                      "phase": c.get("phase", "proposed"), "item_url": c.get("item_url"), "before": _legs_geojson(cmp["before_legs"]),
                       "source_url": c["source_url"], "quotes": c["quotes"], "notes": cmp["notes"], "rows": cmp["rows"],
                       "new_issues": cmp["new_issues"], "after": _legs_geojson(cmp["after_legs"]),
                       "removed": {"type": "FeatureCollection", "features": removed}})
@@ -433,3 +440,11 @@ async def trip_api(request: Request):
     return {"before": _legs_geojson(legs), "flags": res["flags"], "comparisons": comps, "persona": access.PERSONAS[rider].label,
             "decisions": {"type": "FeatureCollection", "features": pts(res["decisions"], "decision")},
             "works": {"type": "FeatureCollection", "features": pts(res["works"][:10], "works")}}
+
+
+@app.get("/research/{route}", response_class=HTMLResponse)
+def research_page(request: Request, route: str):
+    p = DATA / "research" / f"route-{route}.json"
+    if not p.exists():
+        raise HTTPException(404, "No research has been run for that route.")
+    return templates.TemplateResponse(request, "research.html", {"r": json.loads(p.read_text())})

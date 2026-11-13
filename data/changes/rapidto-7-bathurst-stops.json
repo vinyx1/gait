@@ -1,0 +1,40 @@
+{
+  "id": "rapidto-7-bathurst-stops",
+  "title": "RapidTO Bathurst (July 2025): three 7 Bathurst bus stops removed",
+  "body": "TTC Board report adopted with City Council item 2025.EX25.4",
+  "status": "decided and implemented",
+  "phase": "implemented",
+  "simulated": false,
+  "status_note": "City Council adopted RapidTO on Bathurst Street on July 23 and 24, 2025 (item 2025.EX25.4). The TTC report proposed removing Dewbourne Ave, Ardmore Rd, Heathdale Rd and Barton Ave. The first three no longer appear in the November 2026 TTC schedule file; a northbound Barton Ave stop still does. The 'before' stops are reconstructed where each street meets the route, because older schedule files are not available. Found by the research agent.",
+  "source_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+  "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.EX25.4",
+  "source_pages_file": "data/reports/cache/backgroundfile-256133.pages.json",
+  "source_pages": [
+    7
+  ],
+  "quotes": [
+    "The following low-ridership bus stops are proposed to be removed: Dewbourne Avenue, Ardmore Road, Heathdale Road and Barton Avenue.",
+    "Reasons for their removal are to improve safety, improve transit speeds and reliability and to adhere to TTC service standards."
+  ],
+  "effects": [
+    {
+      "type": "restore_removed_stops",
+      "route": "7",
+      "cross_streets": [
+        [
+          "Dewbourne Ave",
+          "Bathurst St at Dewbourne Ave"
+        ],
+        [
+          "Ardmore Rd",
+          "Bathurst St at Ardmore Rd"
+        ],
+        [
+          "Heathdale Rd",
+          "Bathurst St at Heathdale Rd"
+        ]
+      ],
+      "quote": null
+    }
+  ]
+}

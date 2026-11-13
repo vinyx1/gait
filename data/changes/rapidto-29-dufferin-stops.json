@@ -1,0 +1,31 @@
+{
+  "id": "rapidto-29-dufferin-stops",
+  "title": "RapidTO Dufferin (July 2025): the 29 Dufferin stop at Croatia St removed",
+  "body": "City staff report for City Council item 2025.EX25.4",
+  "status": "decided and implemented",
+  "phase": "implemented",
+  "simulated": false,
+  "status_note": "City Council adopted RapidTO on Dufferin Street on July 23 and 24, 2025 (item 2025.EX25.4). The Croatia St stop no longer appears in the November 2026 TTC schedule file; Eversfield Rd, also proposed, still does. The 'before' stop is reconstructed where Croatia St meets the route. Found by the research agent.",
+  "source_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+  "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.EX25.4",
+  "source_pages_file": "data/reports/cache/backgroundfile-257069.pages.json",
+  "source_pages": [
+    13
+  ],
+  "quotes": [
+    "TTC has recommended one stop for removal at Croatia Street."
+  ],
+  "effects": [
+    {
+      "type": "restore_removed_stops",
+      "route": "29",
+      "cross_streets": [
+        [
+          "Croatia St",
+          "Dufferin St at Croatia St"
+        ]
+      ],
+      "quote": null
+    }
+  ]
+}

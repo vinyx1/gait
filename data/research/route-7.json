@@ -1,0 +1,153 @@
+{
+  "route": "7",
+  "name": "Bathurst",
+  "model": "claude-opus-5-5",
+  "generated_at": "2026-11-13T05:56:07+00:00",
+  "kept": [
+    {
+      "item_id": "2025.EX25.4",
+      "decision_summary": "In a May 14, 2025 report to the TTC Board on transit priority on Dufferin Street and Bathurst Street, TTC staff proposed removing four low-ridership bus stops on the Bathurst bus section (north of Bathurst Station). The report says this is to improve safety, transit speed and reliability, and to meet TTC service standards. It also says the stop removals were still part of ongoing consultation and could change, so this is a proposal, not a confirmed removal.",
+      "change_type": "remove_stop",
+      "stops_named": [
+        "Dewbourne Avenue",
+        "Ardmore Road",
+        "Heathdale Road",
+        "Barton Avenue"
+      ],
+      "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+      "page": 7,
+      "quote": "The following low-ridership bus stops are proposed to be removed: Dewbourne Avenue, Ardmore Road, Heathdale Road and Barton Avenue."
+    },
+    {
+      "item_id": "2025.EX25.4",
+      "decision_summary": "On May 14, 2025, the TTC Board endorsed priority bus lanes in both directions on Bathurst Street from Eglinton Avenue to Bathurst Station (Barton Avenue), where the 7 Bathurst bus runs. The staff report also proposed removing on-street parking and adding no-stopping rules and turn restrictions. However, the City Council report for this item (July 2, 2025) asked for approval only for Bathurst Street from Bathurst Station south to Lake Shore Boulevard West (the 511 streetcar). It left the section between Bloor Street West and Eglinton Avenue West for a future report after the 2026 FIFA World Cup.",
+      "change_type": "lanes_or_traffic",
+      "stops_named": [],
+      "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256132.pdf",
+      "page": 1,
+      "quote": "Endorsed the proposed installation of priority bus lanes in both directions on Bathurst Street between Eglinton Avenue East and Bathurst Station (Barton Avenue)."
+    },
+    {
+      "item_id": "2025.EX25.4",
+      "decision_summary": "The City staff report to Executive Committee (July 2, 2025) asked for authority to build transit priority on Bathurst Street only from Bathurst Station to Lake Shore Boulevard West, to be ready for the 2026 FIFA World Cup. Staff would report back after the World Cup with an evaluation, which could include removing the measures, and with next steps for Bathurst Street between Bloor Street West and Eglinton Avenue West, the 7 Bathurst bus section.",
+      "change_type": "lanes_or_traffic",
+      "stops_named": [],
+      "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+      "page": 3,
+      "quote": "as well as recommendations for next steps for future implementation of RapidTO segments on Dufferin Street and Bathurst Street between Bloor Street West and Eglinton Avenue West."
+    }
+  ],
+  "dropped": [],
+  "calls": [
+    {
+      "tool": "search_records",
+      "args": {
+        "query": "Bathurst"
+      },
+      "result": "2025.EX25.4 | 2025-07-23 | City Council | RapidTO: Transit Priority on Dufferin Street and Bathurst Street | motions: Adopt Item as Amended: Carried, 18-5; Adopt Item as Amended: Carried, 20-3; Amend Item (Additional): Carried, 21-2; Amend Item: Carried, 20-3\n2025.TE25.41 | 2025-10-09 | City Council | Improving the Speed and Reliability of the 7 Bathurst | motions: Adopt Item: Carried, 20-3; Adopt Item: Carried, 22-1\n2025.TE26.14 | 2025-11-12 | City Council | Response to City Council Direction on EX.25.4 RapidTO: Transit Priority on Dufferin Street and Bathurst Street | motions: Adopt Item: Carried, 19-2\n2026.MM40.46 | 2026-04-23 | City Council | Opposing the Provincial Land Grab at Bathurst Quay and the Island - by Mayor Olivia Chow, seconded by Deputy Mayor Ausma Malik | motions: Adopt Item as Amended: Carried, 17-8; Adopt Item as Amended: Carried, 20-5; Adopt Item as Amended: Carried, 21-4; Adopt Item as Amended: Carried, 22-3\n2023.NY9.20 | report request | Bathurst Manor Neighbourhood Mobility Plan | North York Community Council referred the following recommendations back to the Director, Project Design and Management, Transportation Services, with a request\n2024.EX11.8 | report request | RapidTO: Surface Transit Network Plan | 2. City Council direct the General Manager, Transportation Services, in consultation with the Chief Planner and Executive Director, City Planning and the Chief \n2024.TE10.4 | report request | 914 Bathurst Street - Official Plan and Zoning By-law Amendment Application - Decision Report - Approval | 6. City Council request the General Manager, Transportation Services to review and report back on the feasibility of amending Schedule B of the City of Toronto \n2024.TE10.40 | report request | Metrolinx's Ontario Line Construction within the Toronto and East York District - First Quarter Update | 6. City Council request the General Manager, Transportation Services to review and report back on the feasibility of amending Schedule B of the City of"
+    },
+    {
+      "tool": "search_records",
+      "args": {
+        "query": "Bathurst stop"
+      },
+      "result": "2025.TE25.41 | report request | Improving the Speed and Reliability of the 7 Bathurst | 6. City Council direct the General Manager, Transportation Services, in consultation with the Chief Executive Officer, Toronto Transit Commission, to monitor th"
+    },
+    {
+      "tool": "list_documents",
+      "args": {
+        "item_id": "2025.TE25.41"
+      },
+      "result": "No saved page for that item. Only items saved from the City site can be read."
+    },
+    {
+      "tool": "list_documents",
+      "args": {
+        "item_id": "2025.EX25.4"
+      },
+      "result": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf | https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf\nhttps://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257070.pdf | https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257070.pdf\nhttps://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257071.pdf | https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257071.pdf\nhttps://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256131.pdf | https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256131.pdf\nhttps://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256132.pdf | https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256132.pdf\nhttps://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf | https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf"
+    },
+    {
+      "tool": "list_documents",
+      "args": {
+        "item_id": "2025.TE26.14"
+      },
+      "result": "No saved page for that item. Only items saved from the City site can be read."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256131.pdf",
+        "query": "Bathurst stop"
+      },
+      "result": "[page 1] Jamaal Myers, Chair Joe Mihevc, Vice-Chair Greg Percy, Chief Executive Officer Paul Ainslie, Commissioner Alejandra Bravo, Commissio ner Fenton Jagdeo , Commissioner Liane Kim, Commissioner Toronto Transit Commission 1900 Yonge Street, Toronto, ON M4S 1Z2 416-393-4000 Ausma Malik, Commissioner Josh Matlow, Commissioner Julie Osborne , Comm issioner Dianne Saxe, Commissioner (Sent by Email) June 3, 2025 John Elvidge City Clerk Toronto City Hall 100 Queen Street West Toronto, ON M5H 2N2 Dear John Elvidge: Subject: Transit Priority Measures on Dufferin Street and Bathurst Street The TTC Board on May 14, 2025, adopted Item TTC4.\n[page 1] 4 - Transit Priority Measures on Dufferin Street and Bathurst Street, as amended, and in doing so, has: 1.\n[page 1] Requested City Council to direct staff to explore opportunities to accelerate beautification of the public realm along the Bathurst and Dufferin priority transit corridors in accordance with the recently approved \"Towards a Beautiful City – A Path Forward\" Plan."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+        "query": "Bathurst stop"
+      },
+      "result": "[page 1] ~TORONTO REPORT FOR ACTION RapidTO: Transit Priority on Dufferin Street and Bathurst Street Date: July 2, 2025 To: Executive Committee From: General Manager, Transportation Services Wards: 4, 9, 10, 11, 12 SUMMARY RapidTO is a joint initiative by the City of Toronto and the Toronto Transit Commission (TTC) that aims to improve bus and streetcar travel time reliability for surface transit priority roadways along arterial roads using reserved lanes, intersection signal improvements, and regulatory changes.\n[page 1] As directed by Council in July 2024, the RapidTO: Dufferin Street and RapidTO: Bathurst Street projects have been accelerated as critical routes to get people to and from the games.\n[page 1] In order to implement priority sections in time for FWC26, this report seeks Council authority to approve the following changes to Dufferin Street south Bloor Street West to Dufferin Gate Loop and Bathurst Street from Bathurst Station to Lake Shore Boulevard West to improve travel times and reliability for residents and visitors riding transit.\n[page 2] Bathurst Street • Install priority streetcar lanes from Bathurst Station to Lake Shore Boulevard West, except on the segment between Nassau Street and Dundas Street West due to Toronto Western Hospital construction; • Install stopping prohibitions at all times; and • Install turn restrictions at key intersections along the 511 Bathurst streetcar route.\n[page 2] The 511 Bathurst streetcar serves over 15,000 riders daily, with between 72% and 83% of streetcars arriving on time throughout the day on weekdays, and between 52% and 87% arriving on time on weekends.\n[page 3] At the appropriate time after FWC26, Transportation Services would report back to Executive Committee with an evaluation of the RapidTO Dufferin and Bathurst projects including recommendations for the future of the projects, up to and including the potential removal of implemented measures if warranted, as well as recommendations for next steps for"
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-257069.pdf",
+        "query": "7 Bathurst bus"
+      },
+      "result": "[page 1] ~TORONTO REPORT FOR ACTION RapidTO: Transit Priority on Dufferin Street and Bathurst Street Date: July 2, 2025 To: Executive Committee From: General Manager, Transportation Services Wards: 4, 9, 10, 11, 12 SUMMARY RapidTO is a joint initiative by the City of Toronto and the Toronto Transit Commission (TTC) that aims to improve bus and streetcar travel time reliability for surface transit priority roadways along arterial roads using reserved lanes, intersection signal improvements, and regulatory changes.\n[page 1] As directed by Council in July 2024, the RapidTO: Dufferin Street and RapidTO: Bathurst Street projects have been accelerated as critical routes to get people to and from the games.\n[page 1] In order to implement priority sections in time for FWC26, this report seeks Council authority to approve the following changes to Dufferin Street south Bloor Street West to Dufferin Gate Loop and Bathurst Street from Bathurst Station to Lake Shore Boulevard West to improve travel times and reliability for residents and visitors riding transit.\n[page 2] Dufferin Street • Install priority bus lanes between Bloor Street West and King Street West; • Install time-of-day, designated loading zones for delivery, passenger pick-up, and drop-off activities along the roadway; • Install turn restrictions at key intersections; and • Install a priority streetcar lane on the southbound lane between Thorburn Avenue and Springhurst Avenue.\n[page 2] The 29 Dufferin and 929 Dufferin Express buses serve over 40,000 riders daily, with only between 48% and 74% of buses arriving on time throughout the day on weekdays.\n[page 2] On weekends, the percentage of buses arriving on time ranges from 36% to 63%.\n[page 2] Additionally, during the weekday AM and PM peak periods, the average bus speed is only 14 km/h, and the commute time is 65% longer than it would be by driving the same distance.\n[page 2] As the fifth busiest surface transit route in the city, Dufferin Street has been identif"
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256132.pdf",
+        "query": "Bathurst stop"
+      },
+      "result": "[page 1] 4 ACTION Amended Transit Priority Measures on Dufferin Street and Bathurst Street Confidential Attachment - This report contains information about a position, plan, procedure, criteria or instruction to be applied to any negotiations carried on or to be carried on by or on behalf of the City or local board.\n[page 1] Endorsed the proposed installation of priority bus lanes in both directions on Bathurst Street between Eglinton Avenue East and Bathurst Station (Barton Avenue).\n[page 1] Endorsed the proposed installation of centre priority transit lanes in both directions on Bathurst Street between Bathurst Station (Barton Avenue) and Lake Shore Boulevard West.\n[page 2] Requested City Council to direct staff to explore opportunities to accelerate beautification of the public realm along the Bathurst and Dufferin priority transit corridors in accordance with the recently approved \"Towards a Beautiful City – A Path Forward\" Plan.\n[page 2] Bathurst Street between Eglinton Avenue West and Lake Shore Boulevard West.\n[page 2] Additional details, including the decision history, proposed cross-sections, proposed stop changes, design evaluations, public consultation approach and the RapidTO monitoring program are included in Attachment 1.\n[page 2] Background Information (May 14, 2025) Report and Attachments 1, 3 and 4 from the Chief Strategy and Customer Experience Officer on Transit Priority Measures on Dufferin Street and Bathurst Street (https://www."
+    },
+    {
+      "tool": "search_records",
+      "args": {
+        "query": "7 Bathurst"
+      },
+      "result": "2025.EX25.4 | 2025-07-23 | City Council | RapidTO: Transit Priority on Dufferin Street and Bathurst Street | motions: Adopt Item as Amended: Carried, 18-5; Adopt Item as Amended: Carried, 20-3; Amend Item (Additional): Carried, 21-2; Amend Item: Carried, 20-3\n2025.TE25.41 | 2025-10-09 | City Council | Improving the Speed and Reliability of the 7 Bathurst | motions: Adopt Item: Carried, 20-3; Adopt Item: Carried, 22-1\n2025.TE26.14 | 2025-11-12 | City Council | Response to City Council Direction on EX.25.4 RapidTO: Transit Priority on Dufferin Street and Bathurst Street | motions: Adopt Item: Carried, 19-2\n2026.MM40.46 | 2026-04-23 | City Council | Opposing the Provincial Land Grab at Bathurst Quay and the Island - by Mayor Olivia Chow, seconded by Deputy Mayor Ausma Malik | motions: Adopt Item as Amended: Carried, 17-8; Adopt Item as Amended: Carried, 20-5; Adopt Item as Amended: Carried, 21-4; Adopt Item as Amended: Carried, 22-3\n2023.NY9.20 | report request | Bathurst Manor Neighbourhood Mobility Plan | North York Community Council referred the following recommendations back to the Director, Project Design and Management, Transportation Services, with a request\n2024.EX11.8 | report request | RapidTO: Surface Transit Network Plan | 2. City Council direct the General Manager, Transportation Services, in consultation with the Chief Planner and Executive Director, City Planning and the Chief \n2024.TE10.4 | report request | 914 Bathurst Street - Official Plan and Zoning By-law Amendment Application - Decision Report - Approval | 6. City Council request the General Manager, Transportation Services to review and report back on the feasibility of amending Schedule B of the City of Toronto \n2024.TE10.40 | report request | Metrolinx's Ontario Line Construction within the Toronto and East York District - First Quarter Update | 6. City Council request the General Manager, Transportation Services to review and report back on the feasibility of amending Schedule B of the City of"
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+        "query": "stop removal relocation Bathurst"
+      },
+      "result": "[page 6] To maximize the benefit of the priority bus lanes, existing on-street parking is being considered for removal, with \"no-stopping\" regulations implemented where the lanes are installed.\n[page 7] To maximize the benefit of the priority transit lanes, existing on-street parking is being considered for removal, with \"no-stopping\" regulations implemented where the lanes are installed.\n[page 16] To maximize the benefit of the priority bus lanes, existing on-street parking is being considered for removal, with \"no-stopping\" regulations implemented where the lanes are installed.\n[page 16] Note that the proposed priority bus lanes, parking and turning prohibitions and stop removals are part of the ongoing consultation with local Councillors and the public and are subject to change based on feedback received.\n[page 17] ton Rd Holmesdale Rd Legend Proposed Stop Removal • • • Express and Local Family of Services (FOS) Line 1 Yonge-University Line 2 - Bloor-Danforth - Line 5 Eglinton Neighbourhood Improvement Area (NIA) Lappin Ave King StW (J) Dufferin Gate Loop mJ Gibson St .\n[page 20] • Convert the curb lanes on Bathurst Street from Eglinton Avenue West to Bathurst Station (Barton Avenue) to priority bus lanes; • Convert the centre lanes on Bathurst Street from Bathurst Station (Barton Avenue) to Nassau Street to priority transit lanes; • Convert the centre lanes on Bathurst Street from Dundas Street West to Lake Shore Boulevard West to priority transit lanes; • Remove on-street parking and implement \"no-stopping\" along all proposed roadway segments; • Implement or modify turn restrictions at strategic locations; and • Implement advanced left-turn phases at strategic locations.\n[page 23] Warwick Ave Stratheran Rd Heathdale Rd Claxton Blvd Tichest er Rd St Clair Ave W Davenport Rd TTC Hillcrest Complex Legend • Proposed Stop Removal • Express and Local • Family of Services (FOS) Line 1 Yonge-University - Line 2 Bloor-Danforth - Line 5 Eglinton Ardmore Rd Lonsda le Rd •"
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256132.pdf",
+        "query": "stop changes"
+      },
+      "result": "[page 2] Additional details, including the decision history, proposed cross-sections, proposed stop changes, design evaluations, public consultation approach and the RapidTO monitoring program are included in Attachment 1."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+        "query": "7 Bathurst stops proposed for removal"
+      },
+      "result": "[page 1] For Action with Confidential Attachment Transit Priority Measures on Dufferin Street and Bathurst Street Date: May 14, 2025 To: TTC Board From: Chief Strategy and Customer Experience Officer Reason for Confidential Information This report contains information about a position, plan, procedure, criteria or instruction to be applied to any negotiations carried on or to be carried on by or on behalf of the City or local board.\n[page 1] A brief overview of the proposed design and expected impacts for each of the two roadways is provided in the Comments section.\n[page 2] Endorse the proposed installation of priority bus lanes in both directions on Bathurst Street between Eglinton Avenue East and Bathurst Station (Barton Avenue).\n[page 2] Endorse the proposed installation of centre priority transit lanes in both directions on Bathurst Street between Bathurst Station (Barton Avenue) and Lake Shore Boulevard West.\n[page 2] The accelerated timeline of RapidTO: Dufferin Street and RapidTO: Bathurst Street to be operational in time for spring 2026 will support the successful movement of people during the global event.\n[page 3] This funding allows for the completion of five corridors (Jane Street, Dufferin Street, Steeles Avenue West, Finch Avenue East and Bathurst Street), as noted above.\n[page 3] Estimated capital funding requirements for the TPM on Dufferin Street and Bathurst Street are provided in the Confidential Attachment 2.\n[page 4] The improved speed, reliability and increased capacity on Dufferin Street and Bathurst Street RapidTO routes will increase economic opportunity and access for equity- deserving communities.\n[page 5] In addition to these efforts, staff actively ride the bus to gather first-hand insights and have pop-up events near stops or in stations to speak directly with customers about their experiences.\n[page 5] By prioritizing the perspectives of those most impacted by the planning decisions, the proposed designs aim to improve the network to "
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+        "query": "low-ridership bus stops are proposed to be removed Bathurst Street"
+      },
+      "result": "[page 2] Endorse the proposed installation of priority bus lanes in both directions on Bathurst Street between Eglinton Avenue East and Bathurst Station (Barton Avenue).\n[page 4] Table 2: Estimated Annual Additional Passenger Revenue ($000's) Project Estimated Net New Annual Ridership Estimated Annual Passenger Revenue Increase ($000's) Dufferin Street (Priority Bus Lanes) 875,000 $2,126 Bathurst Street (Priority Bus Lanes) 505,000 $1,227 Bathurst Street (Priority Streetcar Lanes) 324,000 $787 Total $4,140 It is anticipated that any savings will be re-invested into Dufferin Street and Bathurst Street, to further enhance service in support of anticipated ridership increases.\n[page 6] The following low-ridership bus stops are proposed to be removed: Eversfield Road and Croatia Street.\n[page 6] Most of the on-street parking spaces proposed to be removed are unsigned free parking, with some paid Green P parking spaces.\n[page 6] The proposed design includes converting existing curb lanes into all-day priority bus lanes north of Bathurst Station (Barton Avenue) and converting existing mixed-use streetcar lanes into all-day priority transit lanes south of Bathurst Station.\n[page 7] The following low-ridership bus stops are proposed to be removed: Dewbourne Avenue, Ardmore Road, Heathdale Road and Barton Avenue.\n[page 7] The proposed Bathurst Street priority transit lanes are expected to yield immediate benefits for transit users while addressing safety and equity concerns.\n[page 7] The enhanced service efficiency along the roadway is expected to increase daily bus ridership by 23% with 4,920 new riders along the 7 Bathurst and increase daily streetcar ridership by 35% with 6,850 new riders along the 511 Bathurst.\n[page 7] Additionally, 54% of Bathurst Street transit riders are women, 11% are low-income residents and 19% are shift workers (compared with 55%, 12%, and 14% system-wide).\n[page 13] Both the Bathurst streetcar and bus experience slow speeds of 8 and 13 km/h, res"
+    }
+  ],
+  "usage": {
+    "input": 67294,
+    "output": 2669
+  }
+}

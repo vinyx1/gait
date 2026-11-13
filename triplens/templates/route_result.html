@@ -9,6 +9,7 @@
 {% for cmp in rep.comparisons %}
 <section aria-labelledby="cmp{{ loop.index }}" class="compare">
   <h2 id="cmp{{ loop.index }}">Before and after: {{ cmp.change.title }}</h2>
+  {% if cmp.change.phase == 'implemented' %}<p class="meta"><strong>Past decision.</strong> "Before" is the trip as it was; "after" is the trip today. Removed stops are placed where the cross street meets the route (reconstructed).</p>{% endif %}
   {% if cmp.change.simulated %}<p class="warn"><strong>Simulation.</strong> {{ cmp.change.status_note }}</p>
   {% else %}<p class="meta">Status: {{ cmp.change.status }} ({{ cmp.change.body }}). {{ cmp.change.status_note }} <a href="{{ cmp.change.source_url }}">Official source</a></p>
     {% for q in cmp.change.quotes %}<blockquote class="official small">{{ q }}</blockquote>{% endfor %}{% endif %}

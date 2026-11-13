@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Past decisions for route {{ r.route }} - TripLens{% endblock %}
+{% block content %}
+<p><a href="/map">&larr; Map</a></p>
+<h1>Past decisions that changed route {{ r.route }} {{ r.name }}</h1>
+<p class="aibox"><strong>Found by an AI research agent (Claude), then checked by software.</strong> The agent searched the City's Voting Record and Report Request Log, opened the linked staff reports and quoted them. A finding is kept only if its quote appears word for word on the cited page and the item exists in City records. A person reviews findings before they become a before/after change.</p>
+<h2>Findings ({{ r.kept | length }} kept, {{ r.dropped | length }} discarded)</h2>
+<ul class="findings">{% for f in r.kept %}
+  <li><span class="sev watch">{{ f.change_type | replace('_', ' ') }}</span> <strong>{{ f.decision_summary }}</strong>
+    <p class="meta">Item <a href="https://secure.toronto.ca/council/agenda-item.do?item={{ f.item_id }}">{{ f.item_id }}</a> · <a href="{{ f.document_url }}">document</a>, page {{ f.page }}{% if f.stops_named %} · stops named: {{ f.stops_named | join(', ') }}{% endif %}</p>
+    <blockquote class="official small">{{ f.quote }}</blockquote></li>{% endfor %}</ul>
+<details><summary>What the agent looked up ({{ r.calls | length }} tool calls)</summary>
+  <ol>{% for c in r.calls %}<li><code>{{ c.tool }}</code> {{ c.args }}</li>{% endfor %}</ol></details>
+<p class="meta">Model {{ r.model }}, run {{ r.generated_at[:10] }}. Not an official City or TTC record.</p>
+{% endblock %}

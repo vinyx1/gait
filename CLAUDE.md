@@ -20,6 +20,9 @@ The owner is **Vince** (University of Waterloo student). Work is for a hackathon
 5. **3D map** (`/map`): MapLibre with OpenFreeMap tiles, tilted 3D buildings. Click start and destination, choose a route from those with stops within 800 m of both (listed by number, not ranked), click your boarding and exit stops, then see walking legs on the City pedestrian network, shelters (blue boxes) and benches (brown) in 3D, removed stops (red rings), and before (blue) vs after (orange) with a toggle. Privacy note: map tiles come from OpenFreeMap, which sees the area viewed; clicked points go only to the local server. JSON endpoints: `/api/routes_near`, `/api/route_stops`, `/api/trip`.
 6. **Walking on real sidewalks:** `triplens/walk.py` routes walks on the City Pedestrian Network (data/geo/pednet.csv to pednet_graph.pkl, both gitignored); wheelchair and walker riders avoid no-sidewalk segments; flags no-sidewalk metres and unsignalled crossings. Falls back to straight line times 1.3 when no path is found.
 
+7. **Research agent for past decisions** (`triplens/research.py`, `scripts/run_research.py`, page `/research/<route>`): Claude with three tools (search the Voting Record and Report Request Log stored in `data/records/`, list documents of saved item pages, read passages from City legdocs PDFs) finds decisions that changed a route. Findings are kept only if the quote is on the cited page. A person turns findings into a change file. Found: RapidTO (item 2025.EX25.4, July 2025) removed 7 Bathurst stops at Dewbourne, Ardmore and Heathdale, and the 29 Dufferin stop at Croatia.
+8. **Past (implemented) changes:** change files with `"phase": "implemented"` and `restore_removed_stops` effects. The current schedule is "after"; "before" puts the removed stops back where the cross street meets the route line (`changes._reconstruct`, labelled "location reconstructed", shelter and bench unknown). Demo: `/route/example/bathurst-7-past` and the map sample "7 Bathurst" (senior with a walker at 1599 Bathurst St: about 62 m before, about 419 m today).
+
 ### What it does NOT do (do not add without being asked)
 - It does **not** plan trips, time trips, or suggest routes, stops or alternatives. Before/after works only for changes entered as structured effects; it does not read schedules of proposed networks (none are published). The resident supplies their route and picks their own stops. (A "shortest walk" stop suggestion was added once without being asked and had to be removed.)
 - It does **not** recommend, take sides, or say a trip is possible or safe. The brief requires neutral, non-partisan communication.
@@ -165,7 +168,7 @@ Walking distance everywhere is straight line times **1.3** (an assumption). Pers
 
 ## 9. Testing
 
-`pytest -q` must pass before reporting work done (48 tests). Coverage:
+`pytest -q` must pass before reporting work done (50 tests). Coverage:
 - `test_parse_item.py`: parsing is verbatim, stages ordered, amendments and votes, no names of letter writers.
 - `test_report_and_upcoming.py`: extracted report passages exist in the PDF text; Dundas staff recommendation differs from the decision; upcoming items have buttons and no invented deadline.
 - `test_rewrite_checks.py`, `test_plain_store.py`: the sentence checker (quotes, numbers, strengthened wording) and re-verification of every stored sentence and staleness against current text.
