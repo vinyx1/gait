@@ -53,19 +53,35 @@ def apply(legs: list[Leg], change: dict, avoid_no_sidewalk: bool = False) -> tup
         bi, ai = ids.index(l.board["stop_id"]), ids.index(l.alight["stop_id"])
         keep = [j for j, s in enumerate(var["stops"]) if s["id"] not in gone]
 
-        def nearest(j, lo, hi):
-            cand = [k for k in keep if lo <= k <= hi]
-            s0 = var["stops"][j]
-            return min(cand, key=lambda k: access.haversine_m(s0["lat"], s0["lon"], var["stops"][k]["lat"], var["stops"][k]["lon"])) if cand else None
+        walk_from = new[i - 1].points[0] if i > 0 and new[i - 1].kind == "walk" else (l.board["lat"], l.board["lon"])
+        walk_to = new[i + 1].points[-1] if i + 1 < len(new) and new[i + 1].kind == "walk" else (l.alight["lat"], l.alight["lon"])
 
-        nb = bi if var["stops"][bi]["id"] not in gone else nearest(bi, 0, ai - 1)
-        na = ai if var["stops"][ai]["id"] not in gone else nearest(ai, (nb or 0) + 1, len(ids) - 1)
+        def options(j, lo, hi):
+            """The remaining stops just before and just after stop j (within lo..hi), in route order."""
+            before = [k for k in keep if lo <= k < j]
+            after = [k for k in keep if j < k <= hi]
+            return [x for x in ((before[-1] if before else None), (after[0] if after else None)) if x is not None]
+
+        def walk_m(point, k):
+            r = walk_leg(point, (var["stops"][k]["lat"], var["stops"][k]["lon"]), "", avoid_no_sidewalk)
+            return walk_estimate_m(r)
+
+        def choose(j, lo, hi, point, role):
+            opts = options(j, lo, hi)
+            if not opts:
+                return None
+            dist = {k: walk_m(point, k) for k in opts}
+            pick = min(opts, key=lambda k: dist[k])
+            desc = " or ".join(f"{var['stops'][k]['name']} ({'the stop before' if k < j else 'the stop after'}, about {dist[k]} m walk)" for k in opts)
+            notes.append(f"Your stop to {role}, {var['stops'][j]['name']}, is removed. Remaining options: {desc}. "
+                         f"The comparison uses the shorter walk, {var['stops'][pick]['name']}.")
+            return pick
+
+        nb = bi if var["stops"][bi]["id"] not in gone else choose(bi, 0, ai - 1, walk_from, "get on")
+        na = ai if var["stops"][ai]["id"] not in gone else choose(ai, (nb or 0) + 1, len(ids) - 1, walk_to, "get off")
         if nb is None or na is None or na <= nb:
             notes.append(f"Route {l.route}: after this change no stop in your direction remains between your start and end.")
             continue
-        for old, nj, role in ((bi, nb, "get on"), (ai, na, "get off")):
-            if old != nj:
-                notes.append(f"Your stop to {role}, {var['stops'][old]['name']}, is removed. The nearest remaining stop in your direction is {var['stops'][nj]['name']}.")
         b, a = var["stops"][nb], var["stops"][na]
         l.board = copy.deepcopy(recs.get(b["id"], {"stop_id": b["id"], "name": b["name"], "lat": b["lat"], "lon": b["lon"]}))
         l.alight = copy.deepcopy(recs.get(a["id"], {"stop_id": a["id"], "name": a["name"], "lat": a["lat"], "lon": a["lon"]}))
