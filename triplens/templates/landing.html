@@ -220,8 +220,24 @@ el('circle', {r: R + 3, fill: C.avocado}, spin);                                
 el('circle', {r: R - 4, fill: C.stone}, spin);                                                  // stoneware rim
 for (let a = 0; a < 360; a += 3) { const r = R - 9, x = r * Math.sin(a * Math.PI / 180), y = -r * Math.cos(a * Math.PI / 180);
   el('circle', {cx: x, cy: y, r: a % 6 ? 2.2 : 3.4, fill: a % 6 ? C.orange : C.walnut}, spin); }   // the dotted band
-el('circle', {r: R - 20, fill: C.wood}, spin);                                                // walnut centre
-for (let r = R - 60; r > 40; r -= 38) el('circle', {r, fill: 'none', stroke: C.wood2, 'stroke-width': 10}, spin); // wood rings
+// the earth inside the street ring: a turquoise ocean with soft land masses, clipped to the globe
+const defs = el('defs', {}, svg), clip = el('clipPath', {id: 'globe'}, defs); el('circle', {r: R - 20}, clip);
+el('circle', {r: R - 20, fill: '#2f7f79'}, spin);                                             // ocean
+const land = el('g', {'clip-path': 'url(#globe)'}, spin);
+function blob(cx, cy, rad, fill, seedB){
+  let sd = seedB; const rr = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+  const n = 10, pts = [];
+  for (let k = 0; k < n; k++) { const a = k / n * Math.PI * 2, d = rad * (0.7 + rr() * 0.45); pts.push([cx + d * Math.cos(a), cy + d * Math.sin(a)]); }
+  let d = `M${(pts[0][0] + pts[n - 1][0]) / 2} ${(pts[0][1] + pts[n - 1][1]) / 2}`;      // smooth closed curve through midpoints
+  for (let k = 0; k < n; k++) { const p = pts[k], q = pts[(k + 1) % n]; d += ` Q${p[0]} ${p[1]} ${(p[0] + q[0]) / 2} ${(p[1] + q[1]) / 2}`; }
+  el('path', {d: d + 'Z', fill}, land);
+}
+[[-150, -230, 120, '#7c8d33', 5], [140, -120, 150, '#7c8d33', 9], [-60, 80, 110, '#8f9e3e', 13], [210, 190, 90, '#7c8d33', 17],
+ [-250, 120, 85, '#8f9e3e', 21], [20, 270, 120, '#7c8d33', 25], [-210, -40, 60, '#e2b14a', 29], [90, -250, 55, '#e2b14a', 33],
+ [-40, -120, 45, '#e2b14a', 37], [170, 40, 50, '#d9a640', 41]].forEach(([x, y, r, f, s]) => blob(x, y, r, f, s));
+for (let k = 0; k < 9; k++) { const a = k * 40 + 10, r = 150 + (k * 53) % 180;               // a few small islands
+  blob(r * Math.sin(a * Math.PI / 180), -r * Math.cos(a * Math.PI / 180), 14 + (k % 3) * 6, '#8f9e3e', 50 + k); }
+el('circle', {r: R - 20, fill: 'none', stroke: '#24140a', 'stroke-width': 3, opacity: .25}, spin);  // a quiet edge between globe and street
 el('circle', {r: R - 3, fill: 'none', stroke: C.turq, 'stroke-width': 3, 'stroke-dasharray': '12 9', 'stroke-linecap': 'round'}, spin); // the bus route
 const at = (deg, parent, lift = 0) => el('g', {transform: `rotate(${deg}) translate(0 ${-(R + lift)})`}, parent || spin);
 const pt = (deg, r) => [r * Math.sin(deg * Math.PI / 180), -r * Math.cos(deg * Math.PI / 180)];
