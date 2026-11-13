@@ -17,7 +17,7 @@ app = FastAPI(title="TripLens")
 app.mount("/static", StaticFiles(directory=HERE / "static"), name="static")
 templates = Jinja2Templates(directory=HERE / "templates")
 
-from . import access, changes, exposure, geocode, svgmap, trip as tripmod
+from . import access, changes, exposure, geocode, reports, svgmap, trip as tripmod
 from .agents import dedupe, flatten_kept, valid_partition, ROLES
 
 PARTICIPATE_URL = "https://www.toronto.ca/city-government/council/council-committee-meetings/participate/"
@@ -437,9 +437,33 @@ async def trip_api(request: Request):
     pts = lambda items, kind: [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [i["lon"], i["lat"]]},
                                 "properties": {"kind": kind, **{k: i.get(k) for k in ("title", "label", "upcoming", "item_id", "project", "location", "timeline", "distance_m")}}}
                                for i in items]
+    ev = reports.search(legs)
+    ev_pts = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [x["lon"], x["lat"]]},
+               "properties": {"src": "311", "label": f"311: {x['label']} ({x['count']}, latest {x['latest']})"}}
+              for g in ev["groups"] for x in g["s311"]]
+    ev_pts += [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [x["lon"], x["lat"]]},
+                "properties": {"src": "rider", "label": f"Rider report: {x['label']} ({x['day']})"}}
+               for g in ev["groups"] for x in g["riders"]]
     return {"before": _legs_geojson(legs), "flags": res["flags"], "comparisons": comps, "persona": access.PERSONAS[rider].label,
+            "evidence": ev, "evidence_pts": {"type": "FeatureCollection", "features": ev_pts},
             "decisions": {"type": "FeatureCollection", "features": pts(res["decisions"], "decision")},
             "works": {"type": "FeatureCollection", "features": pts(res["works"][:10], "works")}}
+
+
+@app.get("/api/report_categories")
+def report_categories():
+    return {k: v[0] for k, v in reports.RIDER_CATS.items()}
+
+
+@app.post("/api/report")
+async def report_api(request: Request):
+    """A rider adds one fixed-category report at a place. Stored: category, rounded point, stop id, date. Nothing else."""
+    body = await request.json()
+    try:
+        r = reports.add_report(str(body["cat"]), float(body["lat"]), float(body["lon"]), body.get("stop_id"))
+    except (KeyError, ValueError, TypeError) as e:
+        return JSONResponse({"error": str(e) or "Please check the report."}, status_code=400)
+    return r
 
 
 @app.get("/research/{route}", response_class=HTMLResponse)

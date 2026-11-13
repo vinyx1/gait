@@ -57,7 +57,7 @@
       <p><button id="go" disabled>Show my trip</button> <button id="reset" type="button" style="background:var(--card);color:var(--fg)">Start over</button></p></div>
     <div id="out"></div>
     <p class="legend meta"><span style="background:#475569"></span>walking (sidewalk network) <span style="background:#0b4f9c"></span>your route
-      <span style="background:#ea580c"></span>after a change</p>
+      <span style="background:#ea580c"></span>after a change<br><span style="background:#0d9488;height:.7rem;width:.7rem;border-radius:50%"></span>311 requests <span style="background:#db2777;height:.7rem;width:.7rem;border-radius:50%"></span>rider reports</p>
   </aside>
 </div>
 <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
@@ -97,7 +97,7 @@ map.on('load', () => {
       paint:{'fill-extrusion-color':'#d6dbe3', 'fill-extrusion-height':['coalesce',['get','render_height'],8],
              'fill-extrusion-base':['coalesce',['get','render_min_height'],0], 'fill-extrusion-opacity':0.55}});
   }
-  for (const id of ['routeline','stops','furn','before','after','removed','decisions','works','ridestops']) src(id, EMPTY);
+  for (const id of ['routeline','stops','furn','before','after','removed','decisions','works','ridestops','evidence']) src(id, EMPTY);
   map.addLayer({id:'routeline', type:'line', source:'routeline', paint:{'line-color':'#94a3b8','line-width':3,'line-opacity':0.7}});
   map.addLayer({id:'furn', type:'fill-extrusion', source:'furn', paint:{'fill-extrusion-color':['get','c'],'fill-extrusion-height':['get','h'],'fill-extrusion-opacity':0.95}});
   map.addLayer({id:'before-walk', type:'line', source:'before', filter:['==',['get','kind'],'walk'], paint:{'line-color':'#475569','line-width':4,'line-dasharray':[1.2,1.2]}});
@@ -112,11 +112,12 @@ map.on('load', () => {
   map.addLayer({id:'removed', type:'circle', source:'removed', paint:{'circle-radius':11,'circle-color':'rgba(0,0,0,0)','circle-stroke-width':3,'circle-stroke-color':'#dc2626'}});
   map.addLayer({id:'decisions', type:'circle', source:'decisions', paint:{'circle-radius':9,'circle-color':['case',['get','upcoming'],'#dc2626','#6b7280'],'circle-stroke-color':'#fff','circle-stroke-width':2}});
   map.addLayer({id:'works', type:'circle', source:'works', paint:{'circle-radius':6,'circle-color':'#f59e0b','circle-stroke-color':'#000','circle-stroke-width':1}});
+  map.addLayer({id:'evidence', type:'circle', source:'evidence', paint:{'circle-radius':7,'circle-color':['case',['==',['get','src'],'rider'],'#db2777','#0d9488'],'circle-stroke-color':'#fff','circle-stroke-width':2}});
   const pop = new maplibregl.Popup({closeButton:false, closeOnClick:false});
-  for (const id of ['stops','decisions','works']) {
+  for (const id of ['stops','decisions','works','evidence']) {
     map.on('mouseenter', id, e => { map.getCanvas().style.cursor = 'pointer'; const p = e.features[0].properties;
       const html = id==='stops' ? `<strong>${esc(p.name)}</strong><br>Boarding: ${esc(p.boarding)}<br>Shelter listed: ${p.shelter?'yes':'no'} · Bench listed: ${p.bench?'yes':'no'}${p.removed_by?'<br><strong>Would be removed:</strong> '+esc(p.removed_by):''}`
-        : id==='decisions' ? `<strong>Decision:</strong> ${esc(p.title)}<br>${esc(p.label)}` : `<strong>Works:</strong> ${esc(p.project)}, ${esc(p.location)}<br>${esc(p.timeline)}`;
+        : id==='evidence' ? esc(p.label) : id==='decisions' ? `<strong>Decision:</strong> ${esc(p.title)}<br>${esc(p.label)}` : `<strong>Works:</strong> ${esc(p.project)}, ${esc(p.location)}<br>${esc(p.timeline)}`;
       pop.setLngLat(e.lngLat).setHTML(html).addTo(map); });
     map.on('mouseleave', id, () => { map.getCanvas().style.cursor = ''; pop.remove(); });
   }
@@ -156,7 +157,7 @@ $('go').onclick = async () => {
   const res = await fetch('/api/trip', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(body)});
   const d = await res.json();
   if (!res.ok) { $('out').innerHTML = `<p class="err">${esc(d.error)}</p>`; return; }
-  S.data = d; src('before', d.before); src('decisions', d.decisions); src('works', d.works);
+  S.data = d; src('evidence', d.evidence_pts); src('before', d.before); src('decisions', d.decisions); src('works', d.works);
   const c = d.comparisons[0];
   src('after', c ? c.after : EMPTY); src('removed', c ? c.removed : EMPTY);
   if (c) src('before', c.before);
@@ -192,14 +193,50 @@ function render(d){
   const main = d.flags.filter(f => f.kind !== 'works'), works = d.flags.filter(f => f.kind === 'works');
   h += '<h3>What the data shows</h3><ul class="findings">' + main.map(flagHTML).join('') + '</ul>';
   if (works.length) h += `<details><summary>Works near your trip (${works.length})</summary><ul class="findings">${works.map(flagHTML).join('')}</ul></details>`;
+  h += evidenceHTML(d.evidence);
   h += '<p class="meta">Walks follow the City pedestrian network where possible; curbs, slopes and snow are not checked. Only fixed rules mark a limit. Not an official City or TTC assessment.</p>';
   $('out').innerHTML = h;
+  wireReport();
   $('out').querySelectorAll('.toggle button').forEach(b => b.onclick = () => {
     $('out').querySelectorAll('.toggle button').forEach(x => x.setAttribute('aria-pressed', x === b));
     const v = b.dataset.v;
     for (const id of ['before-walk','before-ride']) map.setLayoutProperty(id, 'visibility', v === 'after' ? 'none' : 'visible');
     for (const id of ['after-walk','after-ride','removed']) map.setLayoutProperty(id, 'visibility', v === 'before' ? 'none' : 'visible');
   });
+}
+
+function evidenceHTML(ev){
+  let h = '<section class="compare"><h3>On the ground: reports along your trip</h3>' +
+    '<p class="meta">Teal dots are 311 requests residents made to the City (open data, placed at the nearest intersection). Pink dots are rider reports. These show what people reported, not what is there today.</p>';
+  if (!ev.groups.length) h += '<p>No 311 requests or rider reports were found near your stops or walks.</p>';
+  for (const g of ev.groups) {
+    h += `<h4>${esc(g.place)}</h4><ul class="findings">`;
+    for (const x of g.s311) h += `<li><span class="sev ${x.careful?'watch':'info'}">311</span> ${esc(x.label)}: ${x.count} request${x.count>1?'s':''}, latest ${esc(x.latest)}${x.open?`, ${x.open} still open`:''} <span class="meta">(${esc(x.at.join('; '))})</span></li>`;
+    for (const x of g.riders) h += `<li><span class="sev watch">Rider report</span> ${esc(x.label)} <span class="meta">(${esc(x.day)})</span></li>`;
+    h += '</ul>';
+  }
+  if (ev.leads.length) {
+    h += '<details><summary>Leads from staff reports, not yet checked (' + ev.leads.length + ')</summary><p class="meta">Sentences the free search found in City staff reports about your route. A person has not reviewed them; only reviewed decisions change the before and after above.</p><ul class="findings">' +
+      ev.leads.map(f => `<li><span class="sev info">${esc(f.change_type.replace(/_/g,' '))}</span>${f.at_your_stops.length?' <strong>names your stop\'s street</strong>':''}<blockquote class="official small">${esc(f.quote)}</blockquote><span class="meta">Item ${esc(f.item_id)} · <a href="${esc(f.document_url)}#page=${f.page}">page ${f.page}</a></span></li>`).join('') + '</ul></details>';
+  }
+  h += '<details><summary>How this was searched</summary><ol class="meta">' + ev.trace.map(t => `<li>${esc(t)}</li>`).join('') + '</ol></details>';
+  h += '<div class="step"><h4 style="margin-top:0">Report a problem on this trip</h4><p class="meta">Pick a stop and a problem. Only the category, the stop location and today\'s date are saved: no text, no name, no account.</p>' +
+    '<label>Where <select id="rpPlace"></select></label><br><label>Problem <select id="rpCat"></select></label> <button type="button" id="rpGo">Add report</button><p id="rpMsg" class="meta" role="status"></p></div>';
+  return h + '</section>';
+}
+async function wireReport(){
+  if (!$('rpGo')) return;
+  const cats = await fetch('/api/report_categories').then(x => x.json());
+  $('rpCat').innerHTML = Object.entries(cats).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('');
+  const ids = S.stops.features.map(f => f.properties.id);
+  const places = [S.board, S.alight].map(id => S.stops.features[ids.indexOf(id)]);
+  $('rpPlace').innerHTML = places.map((f, i) => `<option value="${i}">${i ? 'Exit' : 'Boarding'} stop: ${esc(f.properties.name)}</option>`).join('');
+  $('rpGo').onclick = async () => {
+    const f = places[+$('rpPlace').value], [lon, lat] = f.geometry.coordinates;
+    const r = await fetch('/api/report', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({cat: $('rpCat').value, lat, lon, stop_id: f.properties.id})});
+    const d = await r.json();
+    $('rpMsg').textContent = r.ok ? `Saved: ${d.label} (${d.day}). Show the trip again to see it.` : d.error;
+  };
 }
 
 const SAMPLES = {
@@ -232,7 +269,7 @@ document.querySelectorAll('.samples button').forEach(b => b.onclick = () => load
 $('reset').onclick = () => {
   S.mA && S.mA.remove(); S.mB && S.mB.remove();
   Object.assign(S, {a:null, b:null, ride:null, stops:null, board:null, alight:null, data:null});
-  for (const id of ['routeline','stops','furn','before','after','removed','decisions','works','ridestops']) src(id, EMPTY);
+  for (const id of ['routeline','stops','furn','before','after','removed','decisions','works','ridestops','evidence']) src(id, EMPTY);
   clearRidePins();
   $('routes').innerHTML = ''; $('out').innerHTML = ''; $('s1t').textContent = 'Not set'; $('s2t').textContent = 'Not set'; $('go').disabled = true; step(1);
 };

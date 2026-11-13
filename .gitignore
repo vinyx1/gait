@@ -15,3 +15,5 @@ data/geo/pednet_graph.pkl
 data/reports/cache/*.pdf
 data/corpus/pdf/
 data/corpus/index.sqlite
+data/rider_reports.sqlite
+data/raw/311/
