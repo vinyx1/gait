@@ -5,36 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TripLens: what council did to your bus trip</title>
 <meta name="description" content="TripLens checks Toronto council decisions against your usual bus trip and shows what changes for a wheelchair user, a senior with a walker or a shift worker.">
-<link rel="preload" href="{{ url_for('static', path='fonts/archivo-800-condensed.woff2') }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ url_for('static', path='fonts/fredoka-600.woff2') }}" as="font" type="font/woff2" crossorigin>
 <style>
-@font-face{font-family:Archivo;src:url("{{ url_for('static', path='fonts/archivo-400-normal.woff2') }}") format("woff2");font-weight:400;font-stretch:100%;font-display:swap}
-@font-face{font-family:Archivo;src:url("{{ url_for('static', path='fonts/archivo-600-normal.woff2') }}") format("woff2");font-weight:600;font-stretch:100%;font-display:swap}
-@font-face{font-family:Archivo;src:url("{{ url_for('static', path='fonts/archivo-800-condensed.woff2') }}") format("woff2");font-weight:800;font-stretch:75%;font-display:swap}
+@font-face{font-family:Fredoka;src:url("{{ url_for('static', path='fonts/fredoka-600.woff2') }}") format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:Nunito;src:url("{{ url_for('static', path='fonts/nunito-400.woff2') }}") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:Nunito;src:url("{{ url_for('static', path='fonts/nunito-700.woff2') }}") format("woff2");font-weight:700;font-display:swap}
 
 /* One small planet: a city on a circle whose lower half sits below the screen. Scrolling turns it, scene by scene.
    Flat drawing language: no outlines, no gradients, no shadows; light buildings on a dark ground; blue is the bus
    route, red is what a decision took away. */
 :root{
-  --sky:#e7eaed; --sky-winter:#d9e1e8; --ground:#23272c; --ink:#15181b; --ink-2:#3d434a; --paper:#f6f7f8;
-  --b1:#f3f4f5; --b2:#d3d8dd; --b3:#b4bbc3; --b4:#959ea8; --tree:#7d9a83; --route:#1d5fbf; --gone:#b02e22;
+  --sky:#fbe9d2; --sky-winter:#dde9ef; --soil:#7a5236; --soil-2:#946545; --grass:#6fae55; --grass-2:#5a9746;
+  --ink:#3b2a1d; --ink-2:#6a5240; --paper:#fffaf2; --ground:#3b2a1d;
+  --b1:#fff4e2; --b2:#f6c96a; --b3:#ef9a73; --b4:#9cc8d6; --roof:#c8643f; --tree:#4f9a5b; --tree-2:#3f8450;
+  --route:#2f7fc0; --gone:#c8452e; --go:#2f7a43; --sun:#f6b43c;
   --m:clamp(16px,4vw,64px); --f-xl:clamp(46px,6.4vw,104px); --f-l:clamp(36px,4.4vw,68px); --f-b:clamp(17px,1.25vw,19px);
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *{box-sizing:border-box}
 html,body{overflow-x:clip}
-body{margin:0;background:var(--sky);color:var(--ink);font:400 var(--f-b)/1.55 Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .8s}
+body{margin:0;background:var(--sky);color:var(--ink);font:400 var(--f-b)/1.6 Nunito,system-ui,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .8s}
 body.winter,body.winter .nav{background:var(--sky-winter)}
 a{color:inherit}
-:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+:focus-visible{outline:3px solid var(--go);outline-offset:3px}
 .skip{position:absolute;left:-999px}.skip:focus{left:var(--m);top:8px;z-index:9;background:var(--paper);padding:8px 12px}
-h1,h2{font-weight:800;font-stretch:75%;letter-spacing:-.02em;line-height:.94;margin:0;text-wrap:balance}
+h1,h2{font-family:Fredoka,Nunito,sans-serif;font-weight:600;letter-spacing:-.01em;line-height:1.02;margin:0;text-wrap:balance}
 p{margin:0}
 
 /* the planet stays put; the story scrolls over the sky above it */
 #world{position:fixed;inset:0;width:100vw;height:100svh;display:block;z-index:0}
 .nav{position:fixed;top:0;left:0;right:0;z-index:3;background:var(--sky);transition:background-color .8s;display:flex;justify-content:space-between;align-items:center;padding:22px var(--m)}
-.word{font-weight:800;font-stretch:75%;font-size:30px;text-decoration:none}
-.nav ul{display:flex;gap:clamp(16px,2.4vw,36px);list-style:none;margin:0;padding:0;font-weight:600;font-size:16px}
+.word{font-family:Fredoka,sans-serif;font-weight:600;font-size:28px;text-decoration:none;display:inline-flex;align-items:center;gap:10px}
+.word svg{width:30px;height:30px}
+.nav ul{display:flex;gap:clamp(16px,2.4vw,36px);list-style:none;margin:0;padding:0;font-weight:700;font-size:16px}
 .nav ul a{text-decoration:underline 2px transparent;text-underline-offset:6px;transition:text-decoration-color .2s}
 .nav ul a:hover{text-decoration-color:currentColor}
 
@@ -42,45 +45,47 @@ main{position:relative;z-index:2}
 .scene{min-height:100svh;padding:clamp(96px,15svh,150px) var(--m) 0;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;align-content:start}
 .scene .t{grid-column:1 / 6}
 .scene .s{grid-column:1 / 6;margin-top:30px}
-.scene h1{font-size:var(--f-xl)}
+.scene h1{font-size:clamp(44px,5vw,84px)}
+#s0 .t{grid-column:1 / 8}
+#s0 .t p{max-width:44ch}
 .scene h2{font-size:var(--f-l)}
 .scene .t p{margin-top:22px;max-width:40ch;font-size:clamp(18px,1.4vw,21px)}
 .scene .s p{max-width:38ch}
 
-.btn{display:inline-flex;align-items:center;min-height:52px;padding:0 26px;background:var(--ink);color:var(--paper);font-weight:600;font-size:18px;text-decoration:none;border-radius:999px;transition:transform .18s var(--ease),background .18s}
-.btn:hover{transform:translateY(-2px);background:#000}.btn:active{transform:translateY(1px)}
+.btn{display:inline-flex;align-items:center;min-height:54px;padding:0 28px;background:var(--go);color:#fff;font-weight:700;font-size:18px;text-decoration:none;border-radius:999px;transition:transform .18s var(--ease),background .18s}
+.btn:hover{transform:translateY(-2px) rotate(-1deg);background:#276838}.btn:active{transform:translateY(1px)}
 .act{margin-top:30px;display:flex;gap:22px;align-items:center;flex-wrap:wrap}
-.act .text{font-weight:600}
+.act .text{font-weight:700}
 
 /* figures: the answer of each scene, large */
-.fig{font-weight:800;font-stretch:75%;font-size:clamp(52px,5.6vw,92px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.fig{font-family:Fredoka,sans-serif;font-weight:600;font-size:clamp(52px,5.6vw,88px);line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
 .fig .was{color:var(--ink-2)}
 .fig .to{font-size:.4em}
 .fig .bad{color:var(--gone)}
 .riders{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 14px}
-.riders button{font:600 16px Archivo,sans-serif;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;transition:background .15s,color .15s}
-.riders button:hover{background:rgba(21,24,27,.08)}
+.riders button{font:700 16px Nunito,sans-serif;min-height:44px;padding:0 16px;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;transition:background .15s,color .15s}
+.riders button:hover{background:rgba(59,42,29,.08)}
 .riders button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
 .verdict{min-height:3.2em}
 .verdict strong{color:var(--gone)}
 blockquote{margin:24px 0 0;font-size:clamp(20px,1.7vw,26px);line-height:1.35;max-width:34ch}
 .src{margin-top:14px;font-size:16px;color:var(--ink-2)}
 
-footer{position:relative;z-index:2;background:var(--ground);color:var(--b2);padding:56px var(--m) 40px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:24px;font-size:16px}
+footer{position:relative;z-index:2;background:var(--soil);color:#f3dcc4;padding:56px var(--m) 40px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;row-gap:24px;font-size:16px}
 footer .links{grid-column:1 / 6;display:grid;gap:6px}
-footer .links a{font-weight:800;font-stretch:75%;font-size:clamp(26px,2.4vw,36px);text-decoration:none;color:var(--paper)}
-footer .links a:hover{color:var(--b3)}
+footer .links a{font-family:Fredoka,sans-serif;font-weight:600;font-size:clamp(26px,2.4vw,36px);text-decoration:none;color:var(--paper)}
+footer .links a:hover{color:var(--b2)}
 footer .note{grid-column:7 / 13;display:grid;gap:12px;align-content:start}
 
 /* snow: only in the winter scene, only when motion is allowed */
 #snow{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .8s}
 body.winter #snow{opacity:1}
-#snow i{position:absolute;top:-10px;width:6px;height:6px;border-radius:50%;background:#fff;animation:fall linear infinite}
+#snow i{position:absolute;top:-10px;width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:none;animation:fall linear infinite}
 @keyframes fall{to{transform:translate3d(30px,105svh,0)}}
 
 /* the drawing */
 .gone-sign{transition:transform .9s var(--ease),opacity .9s}
-.fallen .gone-sign{transform:rotate(-82deg);opacity:.55}
+.fallen .gone-sign{transform:scale(0);opacity:0}
 .ring-x{opacity:0;transition:opacity .5s .5s}
 .fallen .ring-x{opacity:1}
 .walk-before,.walk-after{opacity:0;transition:opacity .6s}
@@ -102,7 +107,7 @@ body.winter #snow{opacity:1}
 <svg id="world" role="img" aria-label="A drawing of a small round city: buildings, trees, bus stops and City Hall stand around the edge of a planet that turns as you scroll."></svg>
 <div id="snow" aria-hidden="true"></div>
 <nav class="nav" aria-label="Main">
-  <a class="word" href="/">TripLens</a>
+  <a class="word" href="/"><svg viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="13" fill="#7a5236"/><path d="M2 15a13 13 0 0 1 26 0" fill="#6fae55"/><rect x="13" y="3" width="4" height="7" rx="2" fill="#2f7fc0"/></svg>TripLens</a>
   <ul><li><a href="#s1">How it works</a></li><li><a href="/decisions">Decisions</a></li><li><a href="/map">Open the map</a></li></ul>
 </nav>
 
@@ -110,15 +115,15 @@ body.winter #snow{opacity:1}
 <main>
   <section class="scene" id="s0" data-scene="0" aria-labelledby="h0">
     <div class="t">
-      <h1 id="h0">Council moved your bus stop.</h1>
-      <p>TripLens checks Toronto council decisions against the bus trip you take every day, and shows what changed for a wheelchair user, a senior with a walker or a shift worker.</p>
-      <div class="act"><a class="btn" href="/map">Map your trip</a><a class="text" href="#s1">See how it works</a></div>
+      <h1 id="h0">See how city decisions change your bus trip.</h1>
+      <p>Every trip starts with a walk to the stop. TripLens checks Toronto council decisions against the trip you take, and shows what changed for people who use a wheelchair, a walker, or ride late at night.</p>
+      <div class="act"><a class="btn" href="/map">Check my trip</a><a class="text" href="#s1">See how it works</a></div>
     </div>
   </section>
 
   <section class="scene" id="s1" data-scene="1" aria-labelledby="h1">
     <div class="t">
-      <h2 id="h1">This is her usual trip.</h2>
+      <h2 id="h1">Her walk to the bus was short.</h2>
       <p>A senior with a walker leaves 1599 Bathurst St and walks to the 7 Bathurst stop at Heathdale Rd. On the City's sidewalk network that walk is about {{ h.before_m }} m.</p>
     </div>
     <div class="s"><p class="fig">{{ h.before_m }} m</p><p>to the stop, before the decision</p></div>
@@ -126,8 +131,8 @@ body.winter #snow{opacity:1}
 
   <section class="scene" id="s2" data-scene="2" aria-labelledby="h2">
     <div class="t">
-      <h2 id="h2">Then council approved RapidTO.</h2>
-      <p>In July 2025 (item {{ h.item_id }}) bus lanes came to Bathurst and the Heathdale stop was removed. The nearest stop left is {{ h.board_after }}.</p>
+      <h2 id="h2">Then her stop was taken away.</h2>
+      <p>In July 2025, council approved bus lanes on Bathurst (item {{ h.item_id }}), and the Heathdale stop was removed. The nearest stop left is {{ h.board_after }}.</p>
     </div>
     <div class="s">
       {% set short = {"senior_walker": "Senior with a walker", "wheelchair": "Wheelchair user", "shift_worker": "Shift worker"} %}
@@ -139,7 +144,7 @@ body.winter #snow{opacity:1}
 
   <section class="scene" id="s3" data-scene="3" aria-labelledby="h3">
     <div class="t">
-      <h2 id="h3">Some changes only show in winter.</h2>
+      <h2 id="h3">Winter makes the wait harder.</h2>
       <p>A stop with no shelter means waiting outside. TripLens places this year's 311 requests (snow at bus stops, icy and broken sidewalks) along your walk and your stops.</p>
     </div>
     <div class="s"><p class="fig">{{ "{:,}".format(counts.requests311) }}</p><p>311 requests from this year about snow, ice, sidewalks and curbs, each placed at its intersection.</p></div>
@@ -147,7 +152,7 @@ body.winter #snow{opacity:1}
 
   <section class="scene" id="s4" data-scene="4" aria-labelledby="h4">
     <div class="t">
-      <h2 id="h4">Every claim has a page number.</h2>
+      <h2 id="h4">We check every fact.</h2>
       <p>TripLens searches {{ "{:,}".format(counts.reports) }} City staff reports from {{ counts.n_items }} council items. An AI agent may read them, but a finding is shown only if its quote is on the page it cites.</p>
     </div>
     <div class="s">
@@ -158,9 +163,9 @@ body.winter #snow{opacity:1}
 
   <section class="scene" id="s5" data-scene="5" aria-labelledby="h5">
     <div class="t">
-      <h2 id="h5">Now check your own trip.</h2>
-      <p>Click where you start and where you are going, choose your bus and your stops, and see what council has changed along the way. Then send a report to your councillor, 311 or the TTC.</p>
-      <div class="act"><a class="btn" href="/map">Open the map</a><a class="text" href="/decisions">Browse council decisions</a></div>
+      <h2 id="h5">Now it’s your turn.</h2>
+      <p>Tap where you start and where you are going, choose your bus and your stops, and see what has changed along the way. If something is wrong, TripLens helps you write to your councillor, 311 or the TTC.</p>
+      <div class="act"><a class="btn" href="/map">Check my trip</a><a class="text" href="/decisions">Browse council decisions</a></div>
     </div>
   </section>
 </main>
@@ -183,10 +188,19 @@ const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag)
 
 /* ---------- the planet, drawn at radius 400; angles are degrees clockwise from the top ---------- */
 const R = 400;
+const sky = el('g', {}, svg);
+const sun = el('g', {}, sky); el('circle', {r: 46, fill: 'var(--sun)'}, sun);
+for (let k = 0; k < 12; k++) el('rect', {x: -3, y: -72, width: 6, height: 16, rx: 3, fill: 'var(--sun)', transform: `rotate(${k * 30})`}, sun);
+const clouds = [0, 1, 2].map(k => { const c = el('g', {}, sky); [[0, 0, 26], [24, 6, 20], [-24, 6, 18], [8, 12, 22]].forEach(([x, y, r]) =>
+  el('circle', {cx: x, cy: y, r, fill: '#fffaf2'}, c)); return c; });
 const root = el('g', {}, svg), spin = el('g', {}, root);
-el('circle', {r: R, fill: 'var(--ground)'}, spin);
-el('circle', {r: R - 7, fill: 'none', stroke: '#3a4047', 'stroke-width': 8}, spin);            // the road
-el('circle', {r: R - 7, fill: 'none', stroke: 'var(--route)', 'stroke-width': 2.2}, spin);    // the bus route
+el('circle', {r: R, fill: 'var(--grass)'}, spin);                                             // grass
+el('circle', {r: R - 26, fill: 'var(--soil)'}, spin);                                         // soil
+for (let k = 0; k < 40; k++) { const a = k * 9 + (k % 3) * 2, rr = R - 70 - (k * 37 % 230);          // pebbles in the soil
+  const [x, y] = [rr * Math.sin(a * Math.PI / 180), -rr * Math.cos(a * Math.PI / 180)];
+  el('ellipse', {cx: x, cy: y, rx: 6 + k % 5, ry: 4 + k % 3, fill: 'var(--soil-2)'}, spin); }
+el('circle', {r: R - 9, fill: 'none', stroke: '#e9d9bf', 'stroke-width': 10}, spin);           // the road
+el('circle', {r: R - 9, fill: 'none', stroke: 'var(--route)', 'stroke-width': 2.4, 'stroke-dasharray': '10 8', 'stroke-linecap': 'round'}, spin); // the bus route
 const at = (deg, parent, lift = 0) => el('g', {transform: `rotate(${deg}) translate(0 ${-(R + lift)})`}, parent || spin);
 const pt = (deg, r) => [r * Math.sin(deg * Math.PI / 180), -r * Math.cos(deg * Math.PI / 180)];
 const arc = (a1, a2, r, attrs) => { const [x1, y1] = pt(a1, r), [x2, y2] = pt(a2, r);
@@ -195,37 +209,44 @@ const arc = (a1, a2, r, attrs) => { const [x1, y1] = pt(a1, r), [x2, y2] = pt(a2
 // a seeded random, so the city is the same on every visit
 let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
 const SHADES = ['var(--b1)', 'var(--b2)', 'var(--b3)', 'var(--b4)'];
+const ROOFS = ['var(--roof)', 'var(--grass-2)', 'var(--route)', 'var(--soil-2)'];
 
-function building(deg, w, h, shade){
-  const g = at(deg);
-  el('rect', {x: -w / 2, y: -h, width: w, height: h, fill: shade}, g);
-  for (let y = -h + 8; y < -10; y += 12) for (let x = -w / 2 + 6; x < w / 2 - 6; x += 10)
-    if (rnd() > .35) el('rect', {x, y, width: 4, height: 6, fill: 'var(--ground)', opacity: .22}, g);
+function building(deg, w, h, shade){   // rounded corners, a roof, warm lit windows
+  const g = at(deg), roof = ROOFS[Math.floor(rnd() * ROOFS.length)];
+  el('rect', {x: -w / 2, y: -h, width: w, height: h + 4, rx: 4, fill: shade}, g);
+  if (h < 70) el('path', {d: `M${-w / 2 - 3} ${-h + 2} L0 ${-h - w * .45} L${w / 2 + 3} ${-h + 2} Z`, fill: roof}, g);
+  else el('rect', {x: -w / 2 - 2, y: -h - 5, width: w + 4, height: 8, rx: 4, fill: roof}, g);
+  for (let y = -h + 12; y < -14; y += 14) for (let x = -w / 2 + 7; x < w / 2 - 6; x += 11)
+    if (rnd() > .3) el('rect', {x, y, width: 5, height: 7, rx: 2.5, fill: '#fff6dc', opacity: .95}, g);
+  el('rect', {x: -4, y: -11, width: 8, height: 11, rx: 4, fill: 'var(--ink)', opacity: .55}, g);
   return g;
 }
-function tree(deg, s = 1){ const g = at(deg); el('rect', {x: -1.5, y: -10 * s, width: 3, height: 10 * s, fill: 'var(--b4)'}, g);
-  el('circle', {cx: 0, cy: -18 * s, r: 9 * s, fill: 'var(--tree)'}, g); return g; }
+function tree(deg, s = 1){ const g = at(deg); el('rect', {x: -2, y: -12 * s, width: 4, height: 12 * s, rx: 2, fill: 'var(--soil)'}, g);
+  el('circle', {cx: 0, cy: -22 * s, r: 11 * s, fill: 'var(--tree)'}, g);
+  el('circle', {cx: -6 * s, cy: -16 * s, r: 7 * s, fill: 'var(--tree-2)'}, g); el('circle', {cx: 6 * s, cy: -18 * s, r: 7 * s, fill: 'var(--tree)'}, g); return g; }
+function flowers(deg){ const g = at(deg); ['#f6b43c', '#ef9a73', '#fff4e2'].forEach((c, k) => el('circle', {cx: -8 + k * 8, cy: -4 - (k % 2) * 3, r: 3, fill: c}, g)); return g; }
 function stop(deg, cls){ const g = at(deg); const s = el('g', {class: cls || '', style: 'transform-box:fill-box;transform-origin:50% 100%'}, g);
-  el('rect', {x: -1.6, y: -46, width: 3.2, height: 46, fill: 'var(--b2)'}, s);
-  el('rect', {x: -8, y: -58, width: 16, height: 14, rx: 2, fill: cls ? 'var(--gone)' : 'var(--route)'}, s);
-  el('rect', {x: -4, y: -54, width: 8, height: 2.4, fill: 'var(--paper)'}, s); return g; }
+  el('rect', {x: -1.8, y: -46, width: 3.6, height: 46, rx: 1.8, fill: 'var(--ink-2)'}, s);
+  el('circle', {cx: 0, cy: -54, r: 9, fill: cls ? 'var(--gone)' : 'var(--route)'}, s);
+  el('rect', {x: -4.5, y: -55.5, width: 9, height: 3, rx: 1.5, fill: 'var(--paper)'}, s); return g; }
 function shelter(deg){ const g = at(deg); el('rect', {x: -18, y: -30, width: 36, height: 3, fill: 'var(--b1)'}, g);
   el('rect', {x: -18, y: -30, width: 2.5, height: 30, fill: 'var(--b1)'}, g); el('rect', {x: 15.5, y: -30, width: 2.5, height: 30, fill: 'var(--b1)'}, g);
   el('rect', {x: -15, y: -27, width: 30, height: 20, fill: 'var(--b1)', opacity: .28}, g); el('rect', {x: -10, y: -10, width: 20, height: 3, fill: 'var(--b3)'}, g); return g; }
-function house(deg){ const g = at(deg); el('path', {d: 'M-16 0 V-24 L0 -38 L16 -24 V0 Z', fill: 'var(--b1)'}, g);
-  el('rect', {x: -4, y: -14, width: 8, height: 14, fill: 'var(--ground)', opacity: .5}, g); return g; }
+function house(deg){ const g = at(deg); el('rect', {x: -16, y: -26, width: 32, height: 30, rx: 3, fill: 'var(--b2)'}, g);
+  el('path', {d: 'M-20 -24 L0 -42 L20 -24 Z', fill: 'var(--roof)'}, g); el('rect', {x: -4, y: -13, width: 8, height: 13, rx: 4, fill: 'var(--ink)', opacity: .6}, g);
+  el('rect', {x: 6, y: -21, width: 6, height: 6, rx: 2, fill: '#fff6dc'}, g); return g; }
 function walker(deg){ const g = at(deg); // a person with a walker, facing the direction of travel
-  el('circle', {cx: 0, cy: -27, r: 4, fill: 'var(--paper)'}, g); el('path', {d: 'M0 -22 L1 -9 M1 -9 L-3 0 M1 -9 L5 0 M0 -19 L7 -14', stroke: 'var(--paper)', 'stroke-width': 3, 'stroke-linecap': 'round', fill: 'none'}, g);
-  el('path', {d: 'M7 -15 H14 M8 -15 L7 0 M14 -15 L15 0', stroke: 'var(--b3)', 'stroke-width': 2, fill: 'none', 'stroke-linecap': 'round'}, g); return g; }
-function person(deg){ const g = at(deg); el('circle', {cx: 0, cy: -27, r: 4, fill: 'var(--paper)'}, g);
-  el('path', {d: 'M0 -22 V-9 M0 -9 L-3 0 M0 -9 L3 0', stroke: 'var(--paper)', 'stroke-width': 3, 'stroke-linecap': 'round', fill: 'none'}, g); return g; }
+  el('circle', {cx: 0, cy: -27, r: 4, fill: '#e7b48f'}, g); el('path', {d: 'M0 -22 L1 -9 M1 -9 L-3 0 M1 -9 L5 0 M0 -19 L7 -14', stroke: 'var(--route)', 'stroke-width': 3.4, 'stroke-linecap': 'round', fill: 'none'}, g);
+  el('path', {d: 'M7 -15 H14 M8 -15 L7 0 M14 -15 L15 0', stroke: 'var(--ink-2)', 'stroke-width': 2, fill: 'none', 'stroke-linecap': 'round'}, g); return g; }
+function person(deg){ const g = at(deg); el('circle', {cx: 0, cy: -27, r: 4, fill: '#c98f63'}, g);
+  el('path', {d: 'M0 -22 V-9 M0 -9 L-3 0 M0 -9 L3 0', stroke: 'var(--roof)', 'stroke-width': 3, 'stroke-linecap': 'round', fill: 'none'}, g); return g; }
 function cityHall(deg){ // two curved towers around a low round council chamber
   const g = at(deg);
   el('path', {d: 'M-70 0 V-120 Q-52 -136 -30 -142 V0 Z', fill: 'var(--b2)'}, g);
   el('path', {d: 'M70 0 V-150 Q48 -166 22 -172 V0 Z', fill: 'var(--b1)'}, g);
   el('rect', {x: -60, y: -18, width: 120, height: 18, fill: 'var(--b3)'}, g);
   el('ellipse', {cx: 0, cy: -26, rx: 28, ry: 11, fill: 'var(--b1)'}, g);
-  for (let y = -132; y < -8; y += 9) { el('rect', {x: -64, y, width: 30, height: 2, fill: 'var(--ground)', opacity: .14}, g); el('rect', {x: 28, y: y - 22, width: 38, height: 2, fill: 'var(--ground)', opacity: .14}, g); }
+  for (let y = -132; y < -8; y += 9) { el('rect', {x: -64, y, width: 30, height: 2, fill: 'var(--ink)', opacity: .12}, g); el('rect', {x: 28, y: y - 22, width: 38, height: 2, fill: 'var(--ink)', opacity: .12}, g); }
   return g; }
 function pin(deg){ const g = at(deg); el('path', {d: 'M0 0 C-14 -26 -20 -34 -20 -46 A20 20 0 1 1 20 -46 C20 -34 14 -26 0 0 Z', fill: 'var(--route)'}, g);
   el('circle', {cx: 0, cy: -46, r: 7, fill: 'var(--paper)'}, g); return g; }
@@ -235,16 +256,17 @@ const SCENE = [0, 58, 64, 140, 210, 290];
 
 // filler city all the way round, kept clear of the scenes' own drawings
 const busy = [[-14, 14], [46, 82], [128, 152], [192, 228], [278, 302]];
-for (let a = 0; a < 360; a += 4 + rnd() * 5) {
+for (let a = 0; a < 360; a += 6 + rnd() * 5) {
   if (busy.some(([x, y]) => a > (x + 360) % 360 && a < y) || (a > 346)) continue;
-  rnd() > .3 ? building(a, 16 + rnd() * 26, 30 + rnd() * 90, SHADES[Math.floor(rnd() * 4)]) : tree(a, .8 + rnd() * .5);
+  rnd() > .3 ? building(a, 26 + rnd() * 22, 34 + rnd() * 62, SHADES[Math.floor(rnd() * 4)]) : tree(a, .9 + rnd() * .5);
 }
+for (let a = 3; a < 360; a += 23) flowers(a + 7);
 // scene 0: a corner of the city with a bus stop and shelter
 building(-11, 30, 110, 'var(--b2)'); building(-5, 20, 70, 'var(--b1)'); shelter(2); stop(5.5); tree(9); building(12, 26, 84, 'var(--b3)');
 // scenes 1 and 2: her home, the Heathdale stop (removed), the Claxton stop (left)
 house(51); walker(54.5); stop(59, 'gone-sign'); building(63, 22, 60, 'var(--b2)'); tree(67); building(71, 18, 46, 'var(--b1)'); stop(75.5); building(79, 24, 96, 'var(--b3)');
 const xmark = at(59, spin, 8); el('circle', {r: 9, fill: 'none', stroke: 'var(--gone)', 'stroke-width': 3, class: 'ring-x'}, xmark);
-arc(51.5, 58.6, R + 4, {stroke: 'var(--paper)', 'stroke-width': 3, 'stroke-dasharray': '2 6', 'stroke-linecap': 'round', class: 'walk-before'});
+arc(51.5, 58.6, R + 4, {stroke: 'var(--go)', 'stroke-width': 3, 'stroke-dasharray': '2 6', 'stroke-linecap': 'round', class: 'walk-before'});
 arc(51.5, 75.2, R + 4, {stroke: 'var(--gone)', 'stroke-width': 3, 'stroke-dasharray': '2 6', 'stroke-linecap': 'round', class: 'walk-after'});
 // scene 3: a stop with no shelter, someone waiting
 building(131, 24, 64, 'var(--b2)'); tree(135); stop(140); person(143); building(147, 30, 100, 'var(--b1)'); tree(151, 1.1);
@@ -255,8 +277,9 @@ building(281, 22, 80, 'var(--b2)'); tree(285); pin(290); stop(295); building(299
 
 // the bus drives round the route, always, behind the scenes' drawings
 const bus = el('g', {}), busBody = at(0, bus, -2); spin.insertBefore(bus, spin.children[3]);
-el('rect', {x: -22, y: -16, width: 44, height: 16, rx: 3, fill: 'var(--route)'}, busBody);
-for (let x = -17; x < 16; x += 9) el('rect', {x, y: -13, width: 6, height: 6, fill: 'var(--paper)', opacity: .85}, busBody);
+el('rect', {x: -24, y: -20, width: 48, height: 20, rx: 8, fill: 'var(--route)'}, busBody);
+el('circle', {cx: -13, cy: 0, r: 4.5, fill: 'var(--ink)'}, busBody); el('circle', {cx: 13, cy: 0, r: 4.5, fill: 'var(--ink)'}, busBody);
+for (let x = -19; x < 16; x += 10) el('rect', {x, y: -16, width: 7, height: 7, rx: 2.5, fill: '#fff6dc'}, busBody);
 
 /* ---------- layout: the circle's centre sits on the bottom edge, so its lower half is off screen ---------- */
 let W, H, scale, base = {}, zoom = 1;
@@ -271,6 +294,7 @@ function layout(){
   const r = phone ? Math.min(W * 0.92, H * 0.44) : Math.min(H * 0.48, W * 0.3);
   const cy = phone ? H * 0.62 + r : H + r * 0.02, cx = phone ? W / 2 : W * 0.7;
   base = {r, cx, top: cy - r}; place();
+  sun.setAttribute('transform', `translate(${phone ? W - 70 : W * 0.86} ${phone ? H * 0.5 : H * 0.2})`);
 }
 addEventListener('resize', layout); layout();
 
@@ -303,6 +327,9 @@ function frame(now){
   spin.setAttribute('transform', `rotate(${rot})`);
   if (!calm) busA = (busA + dt * 0.006) % 360;
   busBody.setAttribute('transform', `rotate(${busA}) translate(0 ${-(R - 2)})`);
+  clouds.forEach((c, k) => { const x = ((now * (calm ? 0 : .008) * (1 + k * .4) + k * W * .4) % (W + 300)) - 150;
+    c.setAttribute('transform', `translate(${x} ${H * (.12 + k * .1)}) scale(${2.2 - k * .5})`); });
+  sun.style.opacity = document.body.classList.contains('winter') ? .35 : 1;
   setScene(Math.round(p - .1));
   requestAnimationFrame(frame);
 }
