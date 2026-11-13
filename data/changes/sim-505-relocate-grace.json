@@ -1,0 +1,25 @@
+{
+  "id": "sim-505-relocate-grace",
+  "title": "SIMULATED: move the 505 stop at Grace St about 220 m east (far-side relocation)",
+  "body": "Simulation for demonstration",
+  "status": "simulated",
+  "simulated": true,
+  "status_note": "Not a real decision. Shows how a stop relocation is reported, a common change in transit-priority projects.",
+  "source_url": null,
+  "source_file": null,
+  "quotes": [],
+  "effects": [
+    {
+      "type": "relocate_stop",
+      "route": "505",
+      "stop_ids": [
+        "10181"
+      ],
+      "to": {
+        "lat": 43.65117,
+        "lon": -79.41159,
+        "name": "Dundas St West about 220 m east of Grace St (simulated new location)"
+      }
+    }
+  ]
+}

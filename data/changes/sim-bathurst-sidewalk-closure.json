@@ -1,0 +1,25 @@
+{
+  "id": "sim-bathurst-sidewalk-closure",
+  "title": "SIMULATED: close a stretch of sidewalk on Bathurst St near Claxton Blvd",
+  "body": "Simulation for demonstration",
+  "status": "simulated",
+  "simulated": true,
+  "status_note": "Not a real decision. Shows how a sidewalk closure for construction lengthens a walk.",
+  "source_url": null,
+  "source_file": null,
+  "quotes": [],
+  "effects": [
+    {
+      "type": "close_sidewalk",
+      "points": [
+        [
+          43.687293,
+          -79.419892
+        ]
+      ],
+      "radius_m": 25,
+      "from": "April 1, 2027",
+      "to": "October 31, 2027"
+    }
+  ]
+}

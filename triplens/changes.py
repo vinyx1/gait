@@ -38,7 +38,12 @@ def load_changes() -> dict[str, dict]:
 
 def affecting(legs: list[Leg]) -> list[dict]:
     routes = {l.route for l in legs if l.kind == "transit"}
-    return [c for c in load_changes().values() if any(e["route"] in routes for e in c["effects"])]
+    def touches(e):
+        if e["type"] == "close_sidewalk":
+            r = e.get("radius_m", 20) + 30
+            return any(access.haversine_m(p[0], p[1], q[0], q[1]) <= r for l in legs if l.kind == "walk" for q in l.points for p in e["points"])
+        return e.get("route") in routes
+    return [c for c in load_changes().values() if any(touches(e) for e in c["effects"])]
 
 
 def _reconstruct(route: str, street: str, label: str) -> list[dict]:
@@ -81,7 +86,13 @@ def restored_stops(change: dict, route: str) -> list[dict]:
 
 
 def _removed(change: dict, route: str) -> set[str]:
-    return {s for e in change["effects"] if e["type"] == "remove_stop" and e["route"] == route for s in e["stop_ids"]}
+    """Stops unusable after the change: removed, or closed for a period (both treated as gone for the comparison)."""
+    return {s for e in change["effects"] if e["type"] in ("remove_stop", "close_stop") and e["route"] == route for s in e["stop_ids"]}
+
+
+def _dates(change: dict) -> str:
+    e = next((e for e in change["effects"] if e.get("from") or e.get("to")), None)
+    return f" (from {e.get('from', '?')} to {e.get('to', '?')})" if e else ""
 
 
 def apply(legs: list[Leg], change: dict, avoid_no_sidewalk: bool = False) -> tuple[list[Leg], list[str]]:
@@ -118,7 +129,7 @@ def apply(legs: list[Leg], change: dict, avoid_no_sidewalk: bool = False) -> tup
             dist = {k: walk_m(point, k) for k in opts}
             pick = min(opts, key=lambda k: dist[k])
             desc = " or ".join(f"{var['stops'][k]['name']} ({'the stop before' if k < j else 'the stop after'}, about {dist[k]} m walk)" for k in opts)
-            notes.append(f"Your stop to {role}, {var['stops'][j]['name']}, is removed. Remaining options: {desc}. "
+            notes.append(f"Your stop to {role}, {var['stops'][j]['name']}, is {'closed' + _dates(change) if any(e['type'] == 'close_stop' for e in change['effects']) else 'removed'}. Remaining options: {desc}. "
                          f"The comparison uses the shorter walk, {var['stops'][pick]['name']}.")
             return pick
 
@@ -136,6 +147,44 @@ def apply(legs: list[Leg], change: dict, avoid_no_sidewalk: bool = False) -> tup
             new[i - 1] = walk_leg(new[i - 1].points[0], (l.board["lat"], l.board["lon"]), f"Walk to {l.board['name']}", avoid_no_sidewalk)
         if i + 1 < len(new) and new[i + 1].kind == "walk":
             new[i + 1] = walk_leg((l.alight["lat"], l.alight["lon"]), new[i + 1].points[-1], new[i + 1].label, avoid_no_sidewalk)
+    blocked = frozenset()
+    for e in change["effects"]:
+        if e["type"] == "close_sidewalk":
+            from . import walk as _walk
+            blocked = blocked | _walk.edges_near([tuple(p) for p in e["points"]], e.get("radius_m", 20))
+    if blocked:
+        for k, l in enumerate(new):
+            if l.kind == "walk":
+                before_m = walk_estimate_m(l)
+                new[k] = walk_leg(l.points[0], l.points[-1], l.label, avoid_no_sidewalk, blocked)
+                if walk_estimate_m(new[k]) != before_m:
+                    notes.append(f"{l.label}: the sidewalk closure{_dates(change)} changes this walk from about {before_m} m to about {walk_estimate_m(new[k])} m.")
+    for e in change["effects"]:
+        if e["type"] == "relocate_stop":
+            for l in new:
+                if l.kind == "transit" and l.route == e["route"]:
+                    for role, st in (("get on", l.board), ("get off", l.alight)):
+                        if st.get("stop_id") in e["stop_ids"]:
+                            old_name = st["name"]
+                            st.update({"lat": e["to"]["lat"], "lon": e["to"]["lon"], "name": e["to"]["name"]})
+                            notes.append(f"Your stop to {role}, {old_name}, moves to {e['to']['name']}.")
+            for k, l in enumerate(new):
+                if l.kind == "transit":
+                    if k > 0 and new[k - 1].kind == "walk":
+                        new[k - 1] = walk_leg(new[k - 1].points[0], (l.board["lat"], l.board["lon"]), f"Walk to {l.board['name']}", avoid_no_sidewalk, blocked)
+                    if k + 1 < len(new) and new[k + 1].kind == "walk":
+                        new[k + 1] = walk_leg((l.alight["lat"], l.alight["lon"]), new[k + 1].points[-1], new[k + 1].label, avoid_no_sidewalk, blocked)
+        if e["type"] == "reduce_service":
+            for l in new:
+                if l.kind == "transit" and l.route == e["route"] and l.board.get("service"):
+                    svc = copy.deepcopy(l.board["service"])
+                    for day in e.get("days", ["weekday", "saturday", "sunday"]):
+                        ph = (svc.get(day) or {}).get("per_hour", {})
+                        for h in list(ph):
+                            if int(h) in e["hours"]:
+                                ph[h] = round(ph[h] * e["factor"])
+                    l.board["service"] = svc
+                    notes.append(f"At {l.board['name']}, {e['label']}.")
     for e in change["effects"]:
         field = {"remove_shelter": "shelter_listed", "remove_bench": "bench_listed"}.get(e["type"])
         if not field:
@@ -204,6 +253,14 @@ def _compare(legs: list[Leg], after_legs: list[Leg], rider: str, band: str, day:
     key = lambda f: (f["severity"], f["text"])
     bset = {key(f) for f in before["flags"] if f["kind"] == "rule"}
     new_issues = [f for f in after["flags"] if f["kind"] == "rule" and f["severity"] in ("barrier", "watch") and key(f) not in bset]
+    # fewer departures when the rider travels
+    for lb, la in zip(legs, after_legs):
+        if lb.kind == "transit" and lb.board.get("service") and la.board.get("service"):
+            nb_, _ = exposure._band_count(lb.board, day, band)
+            na_, _ = exposure._band_count(la.board, day, band)
+            if nb_ and na_ < 0.6 * nb_:
+                new_issues.append({"severity": "barrier" if na_ == 0 else "watch", "kind": "rule", "evidence": [access.stop_line(lb.board)],
+                                   "text": f"{la.board['name']}: {exposure.DAYS[day]} departures in the {exposure.BANDS[band][0].lower()} drop from {nb_} to {na_}."})
     rows = []
     for lb, la in zip(legs, after_legs):
         if lb.kind == "walk":

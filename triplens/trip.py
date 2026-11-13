@@ -64,9 +64,9 @@ def build_transit_leg(route: str, vi: int, board_id: str, alight_id: str) -> Leg
                rec.get(alight_id) or {"stop_id": alight_id, "name": a["name"], "lat": a["lat"], "lon": a["lon"]})
 
 
-def walk_leg(a: tuple[float, float], b: tuple[float, float], label: str, avoid_no_sidewalk: bool = False) -> Leg:
+def walk_leg(a: tuple[float, float], b: tuple[float, float], label: str, avoid_no_sidewalk: bool = False, blocked: frozenset = frozenset()) -> Leg:
     """Walk on the City's pedestrian network when possible; otherwise a straight line (marked by stats=None)."""
-    r = walk.route(a, b, avoid_no_sidewalk)
+    r = walk.route(a, b, avoid_no_sidewalk, blocked=blocked)
     if r:
         return Leg("walk", label, [tuple(p) for p in r["points"]], stats={k: v for k, v in r.items() if k != "points"})
     return Leg("walk", label, [a, b])

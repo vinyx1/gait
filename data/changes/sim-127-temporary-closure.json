@@ -1,0 +1,22 @@
+{
+  "id": "sim-127-temporary-closure",
+  "title": "SIMULATED: close the 127 stop at MacPherson Ave during construction",
+  "body": "Simulation for demonstration",
+  "status": "simulated",
+  "simulated": true,
+  "status_note": "Not a real decision. The dates mirror the real Spadina Road construction staging (item 2026.MM42.46), which closes lanes, not this stop.",
+  "source_url": null,
+  "source_file": null,
+  "quotes": [],
+  "effects": [
+    {
+      "type": "close_stop",
+      "route": "127",
+      "stop_ids": [
+        "7956"
+      ],
+      "from": "March 1, 2027",
+      "to": "February 28, 2028"
+    }
+  ]
+}

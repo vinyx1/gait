@@ -168,7 +168,7 @@ Walking distance everywhere is straight line times **1.3** (an assumption). Pers
 
 ## 9. Testing
 
-`pytest -q` must pass before reporting work done (50 tests). Coverage:
+`pytest -q` must pass before reporting work done (54 tests). Coverage:
 - `test_parse_item.py`: parsing is verbatim, stages ordered, amendments and votes, no names of letter writers.
 - `test_report_and_upcoming.py`: extracted report passages exist in the PDF text; Dundas staff recommendation differs from the decision; upcoming items have buttons and no invented deadline.
 - `test_rewrite_checks.py`, `test_plain_store.py`: the sentence checker (quotes, numbers, strengthened wording) and re-verification of every stored sentence and staleness against current text.
@@ -181,7 +181,7 @@ When changing any rule, update the test that guards it. If a stored AI file is r
 
 **Built:** explain layer; staff-report extraction; AI rewrites with checks (11 items); rider access page with three personas and 15 stored audits across 5 places; route check with four examples; local address lookup; tile-free drawing; privacy test; docs (`architecture.md`, `route-check-architecture.md`, `ai-use-log.md`, readiness draft and filled Word template).
 
-**Built (Nov 13):** before/after comparison for structured changes (one real TTC proposal, one simulation).
+**Built (Nov 13):** before/after comparison for structured changes: real TTC 512 proposal; real past RapidTO removals on 7 Bathurst and 29 Dufferin; labelled simulations for shelter removal, stop relocation, temporary stop closure, late-service cut and sidewalk closure. A drop of 40% or more in departures at the rider's travel time is a new issue.
 
 **Not built:** trip timing; reroutes onto new streets (no stop data for them); automatic extraction of change effects from reports (effects are entered by hand with quotes); routing; AI-written reports for route-check examples; the return trip; transfers beyond two routes; translation; ingestion without a browser; Voting Record and Report Request Log integration; location data for most items (11 items located); user testing with accessibility groups.
 
@@ -220,4 +220,4 @@ When changing any rule, update the test that guards it. If a stored AI file is r
 - **Verifier:** the code that rejects AI text it cannot tie to the source.
 - **Barrier / limit:** wording reserved for fixed rules.
 
-**Add a change:** save the official source text into `data/raw/`; create `data/changes/<id>.json` with `title, body, status, status_note, simulated, source_url, source_file, quotes[], effects[]` (effect types: `remove_stop`, `remove_shelter`, `remove_bench`, each with `route`, `stop_ids`, `quote`); stop ids come from `data/geo/routes.json`; run the tests (quotes are verified on load).
+**Add a change:** save the official source text into `data/raw/`; create `data/changes/<id>.json` with `title, body, status, status_note, simulated, source_url, source_file, quotes[], effects[]` (effect types: `remove_stop`, `close_stop` (with `from`/`to` dates), `relocate_stop` (with `to: {lat, lon, name}`), `remove_shelter`, `remove_bench`, `reduce_service` (`hours`, `factor`, `days`, `label`), `close_sidewalk` (`points`, `radius_m`, dates; no route needed), and for past changes `restore_removed_stops` (`cross_streets: [[street, label]]`) with `"phase": "implemented"`); stop ids come from `data/geo/routes.json`; run the tests (quotes are verified on load).

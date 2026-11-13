@@ -159,7 +159,7 @@ def test_simulated_shelter_removal_is_labelled_and_reported():
 
 def test_change_does_not_touch_other_routes():
     rep, _ = make_report("1000 Dundas St W", "201 Dundas St W", "wheelchair", "day", "weekday", ["505"], [(0, "10181", "2153")])
-    assert rep["comparisons"] == []
+    assert [c["change"]["id"] for c in rep["comparisons"]] == ["sim-505-relocate-grace"]   # 512 and 7 changes do not apply
 
 
 def test_map_api_flow():
@@ -199,3 +199,29 @@ def test_research_findings_are_verbatim_and_page_exists():
             pages = research.pages_for(f["document_url"])
             assert research._norm(f["quote"]) in research._norm(pages[f["page"] - 1])
     assert TestClient(app).get("/research/7").status_code == 200
+
+
+def _cmp(origin, dest, rider, band, routes, stops, cid):
+    rep, errs = make_report(origin, dest, rider, band, "weekday", routes, stops)
+    assert not errs
+    return next(c for c in rep["comparisons"] if c["change"]["id"] == cid)
+
+
+def test_relocation_moves_stop_and_reroutes_walk():
+    c = _cmp("1000 Dundas St W", "201 Dundas St W", "wheelchair", "day", ["505"], [(0, "10181", "2153")], "sim-505-relocate-grace")
+    assert c["change"]["simulated"] and any("moves to" in n for n in c["notes"]) and c["new_issues"]
+
+
+def test_temporary_closure_names_dates():
+    c = _cmp("250 Spadina Rd", "800 Bathurst St", "senior_walker", "day", ["127"], [(0, "7956", "14777")], "sim-127-temporary-closure")
+    assert any("March 1, 2027" in n for n in c["notes"]) and any(f["severity"] == "barrier" for f in c["new_issues"])
+
+
+def test_service_cut_reported_for_late_traveller():
+    c = _cmp("1599 Bathurst St", "800 Bathurst St", "shift_worker", "late", ["7"], [(1, "107", "14617")], "sim-7-late-cut")
+    assert any("drop from" in f["text"] for f in c["new_issues"])
+
+
+def test_sidewalk_closure_lengthens_walk():
+    c = _cmp("1599 Bathurst St", "800 Bathurst St", "shift_worker", "day", ["7"], [(1, "107", "14617")], "sim-bathurst-sidewalk-closure")
+    assert any("sidewalk closure" in n for n in c["notes"]) and any(r["changed"] for r in c["rows"])

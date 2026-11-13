@@ -1,0 +1,27 @@
+{
+  "id": "sim-7-late-cut",
+  "title": "SIMULATED: cut late-night 7 Bathurst trips by half",
+  "body": "Simulation for demonstration",
+  "status": "simulated",
+  "simulated": true,
+  "status_note": "Not a real decision. Shows how a service reduction is reported for someone travelling late.",
+  "source_url": null,
+  "source_file": null,
+  "quotes": [],
+  "effects": [
+    {
+      "type": "reduce_service",
+      "route": "7",
+      "hours": [
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "factor": 0.5,
+      "label": "half of the departures after 23:00 would be cut (simulated, applied to all departures at the stop)"
+    }
+  ]
+}

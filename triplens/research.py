@@ -26,7 +26,7 @@ FINDINGS_SCHEMA = {
     "type": "object",
     "properties": {"findings": {"type": "array", "items": {"type": "object", "properties": {
         "item_id": {"type": "string"}, "decision_summary": {"type": "string"},
-        "change_type": {"type": "string", "enum": ["remove_stop", "relocate_stop", "remove_shelter", "reroute", "service_change", "lanes_or_traffic", "other"]},
+        "change_type": {"type": "string", "enum": ["remove_stop", "relocate_stop", "close_stop_temporary", "remove_shelter", "reroute", "service_change", "close_sidewalk", "curb_lane_change", "station_accessibility", "lanes_or_traffic", "other"]},
         "stops_named": {"type": "array", "items": {"type": "string"}},
         "document_url": {"type": "string"}, "page": {"type": "integer"}, "quote": {"type": "string"}},
         "required": ["item_id", "decision_summary", "change_type", "stops_named", "document_url", "page", "quote"], "additionalProperties": False}}},
@@ -116,8 +116,11 @@ SYSTEM = """You research past municipal decisions that changed a TTC route, for 
 Use the tools to find council, committee or TTC Board items about the route (search by street name, route name, "transit priority",
 "RapidTO", "stop"), list their documents, and read passages about stops, shelters, routing or service on the route.
 Report only what the documents say. For each finding, copy one exact passage (under 400 characters) from a read_document result
-as "quote", with its page number and document URL, and list any stop names it gives. Prefer findings that remove or relocate
-stops or shelters. If nothing relevant is found, return an empty list. Do not guess."""
+as "quote", with its page number and document URL, and list any stop names it gives. Look for every kind of change that can alter
+an accessible trip: stops removed, relocated or temporarily closed; shelters or benches removed; reroutes or diversions; service
+cuts (frequency, hours, weekends); sidewalks or crossings closed; curb-lane changes (bike lanes, patios, loading zones) at stops;
+station elevator or accessibility work. Search with several queries (street names, route name, "construction", "staging",
+"diversion", "service", "RapidTO", "transit priority"). If nothing relevant is found, return an empty list. Do not guess."""
 
 
 def run(client, route: str, name: str, streets: list[str], max_turns: int = 12) -> dict:

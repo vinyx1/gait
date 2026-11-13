@@ -196,7 +196,9 @@ def analyze(legs: list[Leg], persona_key: str, band: str, day: str, today_year: 
                 flag("barrier", f"Route {t.route} {rt['long']}: none of its scheduled trips are flagged wheelchair accessible in the TTC schedule file.", ev)
             elif tf["accessible"] < 1:
                 flag("watch", f"Route {t.route} {rt['long']}: {round(tf['accessible'] * 100)}% of its scheduled trips are flagged wheelchair accessible.", ev)
-        b = stop_records().get(t.board.get("stop_id"))
+        b = (stop_override or {}).get(t.board.get("stop_id")) or stop_records().get(t.board.get("stop_id"))
+        if b and "service" not in b:
+            b = None
         if b:
             n, nh = _band_count(b, day, band)
             ev = [access.stop_line(b)]

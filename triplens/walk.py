@@ -85,7 +85,7 @@ def nearest(lat, lon, max_m=150):
     return (bi, best) if bi is not None and best <= max_m else (None, None)
 
 
-def route(a: tuple[float, float], b: tuple[float, float], avoid_no_sidewalk: bool, max_m: float = 4000):
+def route(a: tuple[float, float], b: tuple[float, float], avoid_no_sidewalk: bool, max_m: float = 4000, blocked: frozenset = frozenset()):
     """Return dict(points, length_m, no_sidewalk_m, crossings{type:count}, snap_m) or None."""
     if not available():
         return None
@@ -103,6 +103,8 @@ def route(a: tuple[float, float], b: tuple[float, float], avoid_no_sidewalk: boo
             continue
         for v, ei in g["adj"][u]:
             e = g["edges"][ei]
+            if ei in blocked:
+                continue
             w = e[2] * (3 if avoid_no_sidewalk and e[3].startswith(NO_SIDEWALK) else 1)
             nd = d + w
             if nd < dist.get(v, 1e18):
@@ -130,3 +132,17 @@ def route(a: tuple[float, float], b: tuple[float, float], avoid_no_sidewalk: boo
     if length > max_m:
         return None
     return {"points": pts, "length_m": round(length), "no_sidewalk_m": round(nosw), "crossings": cross, "snap_m": round(ds + dt)}
+
+
+def edges_near(points: list[tuple[float, float]], radius_m: float = 20) -> frozenset:
+    """Edge ids with any vertex within radius of the given points (used to close a sidewalk stretch)."""
+    g = graph()
+    if not g:
+        return frozenset()
+    out = set()
+    for ei, e in enumerate(g["edges"]):
+        for (la, lo) in e[5]:
+            if any(_hav(la, lo, p[0], p[1]) <= radius_m for p in points):
+                out.add(ei)
+                break
+    return frozenset(out)
