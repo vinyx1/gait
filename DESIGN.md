@@ -178,7 +178,7 @@ The footer is a walnut course on the same 12-column grid: link list in columns 1
 Flat. There are no drop shadows, gradients or blurs on page elements. Depth comes from the fixed platter sitting behind the scrolling text layer and from the field colour changing underneath everything. The only shadow-like device is a 3px solid ink ring around the scale bar's "was" marker, which acts as an outline, not an elevation.
 
 ### Named Rules
-**The Sewn Cloth Rule.** Surfaces are flat colour with a woven grain, never glossy or shaded. Lift is expressed by motion (a pill rises 3px on hover), never by a shadow.
+**The Sewn Cloth Rule.** Surfaces are flat colour with a woven grain, never glossy. In the drawing only, every cut piece has felt depth from the #fabric filter: thread nap lit from the top left, seams pressed slightly darker than the padded centre, and a soft brown drop shadow (2px right, 3px down, 2.4 blur, 38%) onto the cloth below. Lift is expressed by motion (a pill rises 3px on hover), never by a shadow.
 
 ## Shapes
 
