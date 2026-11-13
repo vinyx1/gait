@@ -446,8 +446,25 @@ async def trip_api(request: Request):
                for g in ev["groups"] for x in g["riders"]]
     return {"before": _legs_geojson(legs), "flags": res["flags"], "comparisons": comps, "persona": access.PERSONAS[rider].label,
             "evidence": ev, "evidence_pts": {"type": "FeatureCollection", "features": ev_pts},
+            "wards": {"start": geocode.ward_near(*a), "destination": geocode.ward_near(*b)},
             "decisions": {"type": "FeatureCollection", "features": pts(res["decisions"], "decision")},
             "works": {"type": "FeatureCollection", "features": pts(res["works"][:10], "works")}}
+
+
+@app.post("/api/research_trip")
+async def research_trip_api(request: Request):
+    """Opt-in live research for this trip (retrieve, Claude, verify). Cached per trip. Addresses are not sent to the AI."""
+    from . import live_research
+    body = await request.json()
+    try:
+        rider = body.get("rider", "wheelchair")
+        rides = [(r["route"], int(r["variant"]), str(r["board"]), str(r["alight"])) for r in body["rides"]]
+        legs = tripmod.build_trip(tuple(body["a"]), tuple(body["b"]), rides)
+        return live_research.run(legs, access.PERSONAS[rider].label)
+    except (KeyError, ValueError, TypeError) as e:
+        return JSONResponse({"error": str(e) or "Please check the trip."}, status_code=400)
+    except Exception as e:  # API or network problem: say so plainly
+        return JSONResponse({"error": f"The research agent could not run: {type(e).__name__}."}, status_code=502)
 
 
 @app.get("/api/report_categories")

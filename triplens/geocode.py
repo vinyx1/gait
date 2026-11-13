@@ -62,3 +62,18 @@ def lookup(text: str) -> tuple[Place | None, list[Place]]:
         return None, sugg
     finally:
         con.close()
+
+
+def ward_near(lat: float, lon: float) -> str | None:
+    """Ward name of the closest City address point (within about 300 m), or None."""
+    if not available():
+        return None
+    con = sqlite3.connect(f"file:{DB}?mode=ro", uri=True)
+    try:
+        d = 0.003
+        rows = con.execute("SELECT ward, lat, lon FROM addr WHERE lat BETWEEN ? AND ? AND lon BETWEEN ? AND ?",
+                           (lat - d, lat + d, lon - d * 1.4, lon + d * 1.4)).fetchall()
+    finally:
+        con.close()
+    rows = [r for r in rows if r[0]]
+    return min(rows, key=lambda r: (r[1] - lat) ** 2 + ((r[2] - lon) * 0.72) ** 2)[0] if rows else None

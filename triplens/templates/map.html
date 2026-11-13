@@ -194,9 +194,14 @@ function render(d){
   h += '<h3>What the data shows</h3><ul class="findings">' + main.map(flagHTML).join('') + '</ul>';
   if (works.length) h += `<details><summary>Works near your trip (${works.length})</summary><ul class="findings">${works.map(flagHTML).join('')}</ul></details>`;
   h += evidenceHTML(d.evidence);
+  h += `<section class="compare"><h3>Take it further</h3>
+    <p><button type="button" id="askAgent">Ask the research agent about this trip</button>
+    <span class="meta">Searches the indexed City staff reports, then Claude (AI) reads them. Every finding is checked against the page it quotes. Your start and destination are not sent.</span></p><div id="agentOut"></div>
+    <p><button type="button" id="mkReport">Make a report I can send</button></p><div id="reportOut"></div></section>`;
   h += '<p class="meta">Walks follow the City pedestrian network where possible; curbs, slopes and snow are not checked. Only fixed rules mark a limit. Not an official City or TTC assessment.</p>';
   $('out').innerHTML = h;
   wireReport();
+  $('askAgent').onclick = askAgent; $('mkReport').onclick = makeReport;
   $('out').querySelectorAll('.toggle button').forEach(b => b.onclick = () => {
     $('out').querySelectorAll('.toggle button').forEach(x => x.setAttribute('aria-pressed', x === b));
     const v = b.dataset.v;
@@ -237,6 +242,70 @@ async function wireReport(){
     const d = await r.json();
     $('rpMsg').textContent = r.ok ? `Saved: ${d.label} (${d.day}). Show the trip again to see it.` : d.error;
   };
+}
+
+let AGENT = null;
+async function askAgent(){
+  $('askAgent').disabled = true; $('agentOut').innerHTML = '<p>Searching reports and asking the research agent… (about 10 seconds)</p>';
+  const body = {a: S.a, b: S.b, rider: $('rider').value, rides: [{route: S.ride.route, variant: S.ride.variant, board: S.board, alight: S.alight}]};
+  const r = await fetch('/api/research_trip', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(body)});
+  const d = await r.json(); $('askAgent').disabled = false;
+  if (!r.ok) { $('agentOut').innerHTML = `<p class="err">${esc(d.error)}</p>`; return; }
+  AGENT = d;
+  let h = '<div class="ai"><p><strong>AI-written, checked against the source.</strong> ' + (d.cached ? '(saved result)' : '') + '</p>';
+  h += d.kept.length ? '<ul class="findings">' + d.kept.map(f => `<li><strong>${esc(f.summary)}</strong><br>${esc(f.why_it_matters)}<blockquote class="official small">${esc(f.quote)}</blockquote><span class="meta">Item ${esc(f.item_id)} · <a href="${esc(f.document_url)}#page=${f.page}">page ${f.page}</a></span></li>`).join('') + '</ul>'
+    : '<p>The agent found nothing in the indexed reports that it could tie to this trip.</p>';
+  h += '<details><summary>How the agent worked</summary><ol class="meta">' + d.trace.map(t => `<li>${esc(t)}</li>`).join('') + '</ol>' +
+    (d.dropped.length ? '<p class="meta">Dropped by the checker:</p><ul class="meta">' + d.dropped.map(f => `<li>${esc(f.summary)} (${esc(f.reason)})</li>`).join('') + '</ul>' : '') + '</details></div>';
+  $('agentOut').innerHTML = h;
+}
+
+function reportText(d){
+  const L = [];
+  const ride = `${S.ride.route} ${S.ride.name} (${S.ride.headsign})`;
+  const st = S.stops.features, ids = st.map(f => f.properties.id);
+  L.push('TRIP IMPACT REPORT', `Prepared with TripLens on ${new Date().toISOString().slice(0,10)}. Facts below are copied from public records or computed by fixed rules; it is not an official City or TTC assessment.`, '');
+  L.push('MY TRIP', `Rider: ${d.persona}`, `Route: ${ride}`, `I get on at: ${st[ids.indexOf(S.board)].properties.name}`, `I get off at: ${st[ids.indexOf(S.alight)].properties.name}`);
+  if (d.wards.start) L.push(`Ward (start): ${d.wards.start}`);
+  L.push('');
+  for (const c of d.comparisons) {
+    L.push(`DECISION: ${c.title}`, c.simulated ? 'NOTE: this is a simulation for illustration, not a real decision.' : `Status: ${c.status}. ${c.status_note}`);
+    if (!c.simulated) { c.quotes.forEach(q => L.push(`Source text: "${q}"`)); L.push(`Source: ${c.source_url}`); if (c.item_url) L.push(`Council item: ${c.item_url}`); }
+    c.rows.filter(r => r.changed).forEach(r => L.push(`- ${r.what}: before ${r.before}; after ${r.after}`));
+    if (c.new_issues.length) { L.push('New accessibility issues for this rider:'); c.new_issues.forEach(f => L.push(`- ${f.text}`)); }
+    if (c.improvements && c.improvements.length) { L.push('Issues this change removes:'); c.improvements.forEach(f => L.push(`- ${f.text}`)); }
+    L.push('');
+  }
+  const g = d.evidence.groups;
+  if (g.length) {
+    L.push('REPORTED NEAR MY STOPS AND WALKS (City 311 open data and rider reports; history, not current conditions)');
+    for (const x of g) { L.push(x.place + ':'); x.s311.forEach(s => L.push(`- 311: ${s.label}, ${s.count} request(s), latest ${s.latest}`)); x.riders.forEach(r => L.push(`- Rider report: ${r.label} (${r.day})`)); }
+    L.push('');
+  }
+  if (AGENT && AGENT.kept.length) {
+    L.push('RELATED STAFF REPORT PASSAGES (found by an AI research agent; each quote checked against its page)');
+    AGENT.kept.forEach(f => L.push(`- "${f.quote}" (item ${f.item_id}, ${f.document_url} page ${f.page})`)); L.push('');
+  }
+  L.push('IN MY OWN WORDS', '[Write how this affects you and what you would like the City or TTC to consider.]');
+  return L.join('\n');
+}
+
+function makeReport(){
+  const d = S.data, txt = reportText(d), subj = `Trip impact: route ${S.ride.route}` + (d.comparisons[0] ? ` and ${d.comparisons[0].title}` : '');
+  const where = [];
+  for (const c of d.comparisons) if (c.item_url && !c.simulated)
+    where.push(`<li><strong>Council or committee:</strong> <a href="${esc(c.item_url)}">the item page</a>. If it is still upcoming, the page shows "Submit Comments" or "Request to Speak". Check the page for current options; this tool does not know deadlines.</li>`);
+  where.push(`<li><strong>Your councillor${d.wards.start ? ` (ward: ${esc(d.wards.start)})` : ''}:</strong> <a href="https://www.toronto.ca/city-government/council/members-of-council/">find your councillor</a> on the City site.</li>`);
+  if (d.evidence.groups.some(g => g.s311.length || g.riders.length))
+    where.push('<li><strong>Snow, ice, a broken sidewalk or curb:</strong> <a href="https://www.toronto.ca/home/311-toronto-at-your-service/">311 Toronto</a> (online, or call 311). Give the intersection listed above.</li>');
+  where.push('<li><strong>A stop, shelter or service problem:</strong> <a href="https://www.ttc.ca/customer-service">TTC Customer Service</a>.</li>');
+  $('reportOut').innerHTML = `<div id="report"><p class="meta">Read and edit before sending. Nothing is sent by this tool.</p>
+    <label for="repText">Your report</label><textarea id="repText" rows="18" style="width:100%;font:13px/1.4 ui-monospace,monospace">${esc(txt)}</textarea>
+    <p><button type="button" id="repCopy">Copy text</button> <button type="button" id="repMail">Open in email</button> <button type="button" id="repPrint">Print or save as PDF</button> <span id="repMsg" class="meta" role="status"></span></p>
+    <h4>Where you could send it</h4><ul>${where.join('')}</ul></div>`;
+  $('repCopy').onclick = async () => { try { await navigator.clipboard.writeText($('repText').value); $('repMsg').textContent = 'Copied.'; } catch { $('repText').select(); $('repMsg').textContent = 'Select all and copy.'; } };
+  $('repMail').onclick = () => { location.href = `mailto:?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent($('repText').value)}`; };
+  $('repPrint').onclick = () => { const w = window.open('', '_blank'); w.document.write(`<!doctype html><title>${esc(subj)}</title><pre style="white-space:pre-wrap;font:12pt/1.45 Georgia,serif;max-width:46rem;margin:2rem auto">${esc($('repText').value)}</pre>`); w.document.close(); w.print(); };
 }
 
 const SAMPLES = {
