@@ -225,20 +225,34 @@ for (let a = 0; a < 360; a += 3) { const r = R - 9, x = r * Math.sin(a * Math.PI
 // the earth inside the street ring: a turquoise ocean with soft land masses, clipped to the globe
 const defs = el('defs', {}, svg), clip = el('clipPath', {id: 'globe'}, defs); el('circle', {r: R - 20}, clip);
 el('circle', {r: R - 20, fill: '#2f7f79'}, spin);                                             // ocean
-const land = el('g', {'clip-path': 'url(#globe)'}, spin);
+const land = el('g', {'clip-path': 'url(#globe)'}, spin), landClip = el('clipPath', {id: 'land'}, defs);
 function blob(cx, cy, rad, fill, seedB){
   let sd = seedB; const rr = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
   const n = 10, pts = [];
   for (let k = 0; k < n; k++) { const a = k / n * Math.PI * 2, d = rad * (0.7 + rr() * 0.45); pts.push([cx + d * Math.cos(a), cy + d * Math.sin(a)]); }
   let d = `M${(pts[0][0] + pts[n - 1][0]) / 2} ${(pts[0][1] + pts[n - 1][1]) / 2}`;      // smooth closed curve through midpoints
   for (let k = 0; k < n; k++) { const p = pts[k], q = pts[(k + 1) % n]; d += ` Q${p[0]} ${p[1]} ${(p[0] + q[0]) / 2} ${(p[1] + q[1]) / 2}`; }
-  el('path', {d: d + 'Z', fill}, land);
+  el('path', {d: d + 'Z', fill}, land); el('path', {d: d + 'Z'}, landClip);
 }
 [[-150, -230, 120, '#7c8d33', 5], [140, -120, 150, '#7c8d33', 9], [-60, 80, 110, '#8f9e3e', 13], [210, 190, 90, '#7c8d33', 17],
  [-250, 120, 85, '#8f9e3e', 21], [20, 270, 120, '#7c8d33', 25], [-210, -40, 60, '#e2b14a', 29], [90, -250, 55, '#e2b14a', 33],
  [-40, -120, 45, '#e2b14a', 37], [170, 40, 50, '#d9a640', 41]].forEach(([x, y, r, f, s]) => blob(x, y, r, f, s));
 for (let k = 0; k < 9; k++) { const a = k * 40 + 10, r = 150 + (k * 53) % 180;               // a few small islands
   blob(r * Math.sin(a * Math.PI / 180), -r * Math.cos(a * Math.PI / 180), 14 + (k % 3) * 6, '#8f9e3e', 50 + k); }
+// patchwork: the land is a quilt of small fields, each patch its own crop colour, sewn together with cream stitches
+const quilt = el('g', {'clip-path': 'url(#land)'}, land), patches = el('g', {transform: 'rotate(17)'}, quilt);
+const CROPS = ['#7c8d33', '#8f9e3e', '#6a7a2a', '#e2b14a', '#d9a640', '#c8692f', '#9aa84a', '#7c8d33'];
+const S = 44;
+for (let gx = -460; gx < 460; gx += S) for (let gy = -460; gy < 460; gy += S) {
+  const k = Math.abs((gx * 7 + gy * 13) / S | 0), w = k % 5 === 0 ? S * 2 : S;          // some fields are double width
+  if (k % 5 === 0 && (gx / S) % 2) continue;
+  el('rect', {x: gx, y: gy, width: w, height: S, fill: CROPS[(k * 3 + (gy / S | 0)) % CROPS.length]}, patches);
+  if (k % 4 === 1) for (let r = 8; r < S; r += 9) el('rect', {x: gx + 4, y: gy + r, width: w - 8, height: 2.4, rx: 1.2, fill: '#24140a', opacity: .14}, patches); // furrows
+  el('rect', {x: gx + 2, y: gy + 2, width: w - 4, height: S - 4, rx: 3, fill: 'none', stroke: '#fbf1d8', 'stroke-width': 1.6, 'stroke-dasharray': '5 4', opacity: .85}, patches); // stitches
+}
+for (let k = 0; k < 7; k++) { const r = 120 + k * 38;                                           // gentle wave stitches on the ocean
+  el('circle', {r, fill: 'none', stroke: '#fbf1d8', 'stroke-width': 1.4, 'stroke-dasharray': '3 10', opacity: .28}, land); }
+land.appendChild(quilt);
 el('circle', {r: R - 20, fill: 'none', stroke: '#24140a', 'stroke-width': 3, opacity: .25}, spin);  // a quiet edge between globe and street
 el('circle', {r: R - 3, fill: 'none', stroke: C.turq, 'stroke-width': 3, 'stroke-dasharray': '12 9', 'stroke-linecap': 'round'}, spin); // the bus route
 const at = (deg, parent, lift = 0) => el('g', {transform: `rotate(${deg}) translate(0 ${-(R + lift)})`}, parent || spin);
