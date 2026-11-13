@@ -334,6 +334,8 @@ async function loadSample(key){
   await $('go').onclick();
 }
 document.querySelectorAll('.samples button').forEach(b => b.onclick = () => loadSample(b.dataset.s));
+const QS = new URLSearchParams(location.search).get('sample');
+if (QS && SAMPLES[QS]) { if (map.loaded()) loadSample(QS); else map.once('load', () => loadSample(QS)); }
 
 $('reset').onclick = () => {
   S.mA && S.mA.remove(); S.mB && S.mB.remove();

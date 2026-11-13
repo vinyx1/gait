@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TripLens: what council did to your bus trip</title>
+<meta name="description" content="TripLens checks Toronto council decisions against your usual bus trip and shows what changes for a wheelchair user, a senior with a walker or a shift worker.">
+<link rel="preload" href="{{ url_for('static', path='fonts/archivo-800-condensed.woff2') }}" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:Archivo;src:url("{{ url_for('static', path='fonts/archivo-400-normal.woff2') }}") format("woff2");font-weight:400;font-stretch:100%;font-display:swap}
+@font-face{font-family:Archivo;src:url("{{ url_for('static', path='fonts/archivo-600-normal.woff2') }}") format("woff2");font-weight:600;font-stretch:100%;font-display:swap}
+@font-face{font-family:Archivo;src:url("{{ url_for('static', path='fonts/archivo-800-condensed.woff2') }}") format("woff2");font-weight:800;font-stretch:75%;font-display:swap}
+
+/* Chapters: kraft folder, white report sheet, grey file paper, dark folder, ink. One face (Archivo), condensed 800 for display. */
+:root{
+  --kraft:#c9aa80; --kraft-1:#3f2f20; --kraft-2:#5e4630; --kraft-3:#8a6a47; --kraft-4:#b08d64; --kraft-5:#d9c19f;
+  --sheet:#f6f6f3; --paper:#e6e8eb; --ink:#1b1712; --ink-2:#4a4238; --issue:#9e1f17; --tape:rgba(236,226,206,.82);
+  --m:clamp(16px,4vw,64px); --gap:clamp(20px,2.2vw,32px);
+  --f-xl:clamp(52px,7.2vw,124px); --f-l:clamp(34px,4.2vw,64px); --f-m:clamp(22px,2vw,30px); --f-b:clamp(17px,1.25vw,19px); --f-s:16px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{overflow-x:clip}
+body{margin:0;background:var(--kraft);color:var(--ink);font:400 var(--f-b)/1.55 Archivo,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.skip{position:absolute;left:-999px}.skip:focus{left:var(--m);top:8px;z-index:9;background:var(--sheet);padding:8px 12px}
+h1,h2,h3{font-weight:800;font-stretch:75%;letter-spacing:-.02em;line-height:.92;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{padding-inline:var(--m);max-width:1680px;margin-inline:auto}
+.chapter{position:relative;min-height:90svh}
+.edge{position:absolute;left:0;top:-38px;height:40px;width:max(100%,1440px);display:block;pointer-events:none}
+
+/* ---------- buttons: a dry-brush stroke ---------- */
+.brush{position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:60px;padding:0 38px;font-weight:800;font-stretch:75%;
+  font-size:24px;letter-spacing:.005em;text-decoration:none;color:var(--sheet);isolation:isolate;transition:transform .18s var(--ease)}
+.brush svg{position:absolute;inset:0;width:100%;height:100%;z-index:-1;fill:var(--ink);transition:fill .18s}
+.brush:hover{transform:translateY(-2px) rotate(-.6deg)}.brush:active{transform:translateY(1px) scale(.98)}
+.brush.light{color:var(--ink)}.brush.light svg{fill:var(--kraft)}
+.brush.light:hover svg{fill:var(--kraft-5)}
+
+/* ---------- nav ---------- */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:24px;position:relative;z-index:3}
+.word{font-weight:800;font-stretch:75%;font-size:32px;letter-spacing:-.01em;text-decoration:none}
+.nav ul{display:flex;gap:clamp(14px,2.4vw,36px);list-style:none;margin:0;padding:0;font-size:var(--f-s);font-weight:600}
+.nav ul a{text-decoration:underline 2px transparent;text-underline-offset:6px;transition:text-decoration-color .2s,text-underline-offset .2s}
+.nav ul a:hover{text-decoration-color:currentColor;text-underline-offset:4px}
+
+/* ---------- hero ---------- */
+.hero{min-height:100svh;overflow:hidden;display:grid}
+.hero .copy{position:relative;z-index:2;align-self:center;max-width:min(46vw,720px);padding-block:48px 96px}
+.hero h1{font-size:var(--f-xl)}
+.hero .lede{margin-top:32px;max-width:34ch;font-size:clamp(18px,1.4vw,21px)}
+.hero .act{margin-top:36px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.hero .act a.text{font-weight:600;font-size:var(--f-s)}
+.sheet{position:absolute;top:0;bottom:0;right:0;width:52vw;background:var(--sheet);clip-path:{{ sheet_clip }};z-index:1}
+.board{position:absolute;z-index:2;right:var(--m);top:clamp(96px,13vh,140px);width:min(42vw,640px);display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+.print{position:relative;grid-column:1 / -1;width:78%;justify-self:end;transform:rotate(1.4deg)}
+.print img{width:100%;aspect-ratio:16/10;object-fit:cover;filter:grayscale(1) contrast(1.05)}
+.print.in .shutter img{animation:drift 30s 1.4s ease-in-out infinite alternate}
+.print figcaption{font-size:var(--f-s);margin-top:8px;color:var(--ink-2)}
+.tape{position:absolute;width:96px;height:28px;background:var(--tape);top:-12px;left:42%;transform:rotate(-4deg);z-index:2}
+.evidence{grid-column:1 / -1;position:relative;background:var(--paper);padding:26px 28px 24px;transform:rotate(-.8deg)}
+.evidence .tape{left:auto;right:30px;transform:rotate(5deg)}
+.evidence h2{font-size:var(--f-m);line-height:1.05}
+.riders{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 18px}
+.riders button{font:600 var(--f-s) Archivo,sans-serif;padding:10px 14px;min-height:44px;border:0;background:var(--sheet);color:var(--ink);cursor:pointer;transition:background .15s,transform .15s}
+.riders button:hover{background:#fff;transform:translateY(-1px)}
+.riders button[aria-pressed=true]{background:var(--ink);color:var(--sheet)}
+.walk{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;font-variant-numeric:tabular-nums}
+.walk b{font-weight:800;font-stretch:75%;font-size:clamp(44px,4.6vw,72px);line-height:1;letter-spacing:-.02em}
+.walk .was{color:var(--ink-2)}
+.walk .arrow{font-size:28px}
+.bar{position:relative;height:14px;background:var(--sheet);margin:16px 0 8px}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--ink);transition:width .5s var(--ease)}
+.bar i.over{background:var(--issue)}
+.bar u{position:absolute;top:-6px;bottom:-6px;width:3px;background:var(--issue);text-decoration:none;transition:left .5s var(--ease)}
+.verdict{font-size:var(--f-s);min-height:3em}
+.verdict strong{color:var(--issue)}
+.cite{margin-top:14px;font-size:var(--f-s);color:var(--ink-2)}
+
+/* ---------- how a case is built: accordion ---------- */
+.how{background:var(--paper);padding-block:clamp(96px,12vw,180px) clamp(96px,10vw,160px)}
+.intro{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:end}
+.intro h2{grid-column:1 / 6;font-size:var(--f-l)}
+.intro p{grid-column:7 / 12;max-width:60ch}
+.acc{display:flex;margin-top:64px;height:540px}
+.stage{position:relative;flex:1 1 0;min-width:0;overflow:hidden;transition:flex-grow .45s var(--ease);cursor:pointer;color:var(--sheet)}
+.stage:nth-child(1){background:var(--kraft-1)}.stage:nth-child(2){background:var(--kraft-2)}
+.stage:nth-child(3){background:var(--kraft-3);color:var(--ink)}.stage:nth-child(4){background:var(--kraft-4);color:var(--ink)}
+.stage:nth-child(5){background:var(--kraft-5);color:var(--ink)}
+.stage[aria-expanded=true]{flex-grow:6;cursor:default}
+.stage button.sliver{all:unset;position:absolute;inset:0;cursor:pointer}
+.stage button.sliver:focus-visible{outline:3px solid currentColor;outline-offset:-6px}
+.stage .name{position:absolute;left:22px;bottom:22px;transform-origin:left bottom;transform:rotate(-90deg) translateY(100%);white-space:nowrap;font-weight:800;font-stretch:75%;font-size:24px;transition:opacity .2s}
+.stage[aria-expanded=true] .name{opacity:0}
+.stage .open{position:absolute;inset:0;padding:34px;display:grid;grid-template-columns:1fr 1fr;gap:var(--gap);opacity:0;visibility:hidden;transition:opacity .3s .15s}
+.stage[aria-expanded=true] .open{opacity:1;visibility:visible}
+.open h3{font-size:clamp(34px,3vw,46px);grid-column:1}
+.open p{grid-column:1;align-self:end;max-width:36ch}
+.open .fig{grid-column:2;grid-row:1 / 3;align-self:stretch;overflow:hidden}
+.open .fig img{width:100%;height:100%;object-fit:cover;filter:grayscale(.35)}
+.open .num{font-weight:800;font-stretch:75%;font-size:clamp(64px,7vw,120px);line-height:.9;grid-column:2;grid-row:1 / 3;align-self:center}
+
+/* ---------- cases: cards crossing a held photograph ---------- */
+.cases{position:relative;height:240svh;background:var(--ink)}
+.stagewrap{position:sticky;top:0;height:100svh;overflow:hidden}
+.held{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.42) grayscale(.5);animation:drift 24s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1.04) translateX(-1%)}to{transform:scale(1.1) translateX(1%)}}
+.cases h2{position:absolute;left:var(--m);top:clamp(48px,9vh,96px);color:var(--sheet);font-size:var(--f-l);z-index:2;max-width:12ch;transition:transform .2s linear,opacity .2s linear}
+.track{position:absolute;top:50%;left:0;display:flex;gap:40px;padding-left:46vw;transform:translateY(-50%);will-change:transform}
+.case{flex:none;width:min(680px,72vw);height:min(560px,64svh);display:grid;grid-template-rows:64% 36%;background:var(--sheet);text-decoration:none;color:var(--ink);transition:transform .25s var(--ease)}
+.case:hover{transform:translateY(-6px) rotate(-.4deg)}
+.case img{width:100%;height:100%;object-fit:cover;filter:grayscale(.2)}
+.case .lab{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:end;padding:22px 26px}
+.case:nth-child(1) .lab{background:var(--kraft)}.case:nth-child(2) .lab{background:var(--kraft-5)}
+.case:nth-child(3) .lab{background:var(--paper)}.case:nth-child(4) .lab{background:var(--kraft-4)}
+.case h3{font-size:clamp(30px,2.8vw,46px)}
+.case p{font-size:var(--f-s);text-align:right;line-height:1.4}
+.case p b{font-variant-numeric:tabular-nums}
+.case .tag{display:inline-block;font-weight:600}
+
+/* ---------- evidence sources: tiles ---------- */
+.proof{background:var(--sheet);padding-block:clamp(110px,12vw,180px)}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.tile{aspect-ratio:3/2;background:var(--paper);padding:24px;display:flex;flex-direction:column;justify-content:flex-start;gap:12px}
+.tile.head{grid-column:span 2;aspect-ratio:auto;background:var(--kraft);}
+.tile.head h2{font-size:var(--f-l);max-width:11ch}
+.tile.head p{max-width:42ch}
+.tile h3{font-size:clamp(26px,2.2vw,34px);line-height:.98}
+.tile p{font-size:var(--f-s);color:var(--ink)}
+.tile.head{justify-content:space-between}
+.tile .n{font-weight:800;font-stretch:75%;font-size:clamp(40px,3.6vw,60px);line-height:1;font-variant-numeric:tabular-nums}
+
+/* ---------- close ---------- */
+.close{background:var(--ink);color:var(--sheet);min-height:92svh;display:grid;grid-template-rows:1fr auto;padding-block:clamp(110px,12vw,180px) 64px}
+.close h2{font-size:clamp(64px,10vw,180px);line-height:.88;max-width:9ch}
+.close .row{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap);align-items:end;margin-top:64px}
+.close .row p{grid-column:1 / 6;font-size:clamp(18px,1.5vw,22px)}
+.close .row .brush{grid-column:9 / 13;justify-self:end}
+
+/* ---------- footer ---------- */
+footer{background:var(--kraft-1);color:var(--sheet);padding-top:72px;overflow:hidden}
+.places{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gap)}
+.places ul{list-style:none;margin:0;padding:0}
+.places .big{grid-column:1 / 6}.places .big a{display:block;font-weight:800;font-stretch:75%;font-size:clamp(28px,2.6vw,38px);line-height:1.2;text-decoration:none;color:var(--kraft-5)}
+.places .big a:hover{color:var(--sheet)}
+.places .small{grid-column:7 / 13;font-size:var(--f-s);display:grid;gap:10px}
+.places .small a{color:var(--kraft-5)}
+.legal{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-top:72px;font-size:var(--f-s);color:var(--kraft-5)}
+.giant{font-weight:800;font-stretch:75%;font-size:25.5vw;line-height:.74;letter-spacing:-.03em;margin:48px 0 -6.2vw;color:var(--kraft);white-space:nowrap}
+
+/* ---------- motion: entrances only when JS runs; reduced motion keeps everything still ---------- */
+.js [data-rise]{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i,0) * 80ms)}
+.js [data-rise].in{opacity:1;transform:none}
+.js .print .shutter{clip-path:inset(0 0 100% 0);transition:clip-path 1.1s var(--ease)}
+.js .print .shutter img{transform:scale(1.12);transition:transform 1.4s var(--ease)}
+.js .print.in .shutter{clip-path:inset(0)}.js .print.in .shutter img{transform:none}
+.print .shutter{overflow:hidden}
+@media (prefers-reduced-motion:reduce){
+  .js [data-rise]{opacity:1;transform:none;transition:none}
+  .js .print .shutter{clip-path:none}.js .print .shutter img{transform:none}
+  .stage,.bar i,.bar u,.case,.brush{transition:none}
+  .held,.print.in .shutter img{animation:none}
+}
+
+/* ---------- phone and tablet ---------- */
+@media (max-width:900px){
+  .hero .copy{max-width:none;padding-block:28px 24px}
+  .sheet{display:none}
+  .board{position:static;width:auto;grid-template-columns:1fr;background:var(--sheet);padding:56px var(--m) 72px}
+  .nav ul li:not(:last-child){display:none}
+  .hero{display:block}
+  .intro h2,.intro p{grid-column:1 / -1}
+  .acc{flex-direction:column;height:auto}
+  .stage{flex:none;min-height:64px}
+  .stage .name{transform:none;bottom:auto;top:18px;left:var(--m);font-size:20px}
+  .stage .open{position:relative;display:block;padding:24px var(--m);opacity:1;visibility:visible;display:none}
+  .stage[aria-expanded=true] .open{display:block}
+  .stage[aria-expanded=true] .name{opacity:0;position:absolute}
+  .open .fig,.open .num{margin-top:20px}
+  .open .fig img{height:auto;aspect-ratio:4/3}
+  .open p{margin-top:12px}
+  .cases{height:auto;padding-block:96px}
+  .stagewrap{position:relative;height:auto;overflow:visible}
+  .held{position:relative;height:auto;aspect-ratio:4/5;filter:brightness(.6) grayscale(.5)}
+  .cases h2{position:relative;left:auto;top:auto;padding:0 var(--m) 24px}
+  .track{position:relative;transform:none!important;flex-direction:column;padding:24px var(--m) 0;top:auto;gap:24px}
+  .case{width:100%;height:auto;grid-template-rows:auto auto}
+  .case img{aspect-ratio:4/3}
+  .case .lab{grid-template-columns:1fr}.case p{text-align:left}
+  .tiles{grid-template-columns:1fr 1fr;gap:6px}
+  .tile.head{grid-column:1 / -1}
+  .tile{aspect-ratio:auto;min-height:150px;padding:18px}
+  .close .row p,.close .row .brush{grid-column:1 / -1;justify-self:stretch}
+  .places .big,.places .small{grid-column:1 / -1}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- Chapter 1: the kraft case folder, with the report sheet torn open on the right -->
+<header class="chapter hero" id="main">
+  <div class="sheet" aria-hidden="true"></div>
+  <div class="wrap" style="position:relative;z-index:3;width:100%">
+    <nav class="nav" aria-label="Main">
+      <a class="word" href="/">TripLens</a>
+      <ul><li><a href="#how">How it works</a></li><li><a href="#cases">Cases</a></li><li><a href="/decisions">Decisions</a></li><li><a href="/map">Map</a></li></ul>
+    </nav>
+    <div class="copy">
+      <h1 data-rise>Council moved your bus stop.</h1>
+      <p class="lede" data-rise style="--i:1">TripLens checks Toronto council decisions against the bus trip you take every day, and shows what changed for a wheelchair user, a senior with a walker or a shift worker.</p>
+      <div class="act" data-rise style="--i:2">
+        <a class="brush" href="/map"><svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="{{ brush }}"/></svg>Open your case file</a>
+        <a class="text" href="#cases">See four real cases</a>
+      </div>
+    </div>
+  </div>
+
+  {% set h = hero['senior_walker'] %}
+  <div class="board">
+    <figure class="print" data-rise>
+      <span class="tape" aria-hidden="true"></span>
+      <div class="shutter"><img src="{{ url_for('static', path='img/' ~ h.photo) }}" width="1280" height="1045" alt="{{ h.photo_alt }}" fetchpriority="high"></div>
+      <figcaption>Bathurst Street. In July 2025 council approved RapidTO bus lanes here, and the Heathdale Rd stop was removed.</figcaption>
+    </figure>
+    <section class="evidence" aria-labelledby="ev-h" data-rise style="--i:1">
+      <span class="tape" aria-hidden="true"></span>
+      <h2 id="ev-h">7 Bathurst, item {{ h.item_id }}: the walk to your stop</h2>
+      <div class="riders" role="group" aria-label="Who is travelling">
+        {% set short = {"senior_walker": "Senior with a walker", "wheelchair": "Wheelchair user", "shift_worker": "Shift worker"} %}{% for k, c in hero.items() %}<button type="button" data-r="{{ k }}" aria-pressed="{{ 'true' if loop.first else 'false' }}">{{ short[k] }}</button>{% endfor %}
+      </div>
+      <div class="walk" aria-live="polite"><b class="was" id="ev-b">{{ h.before_m }} m</b><span class="arrow" aria-hidden="true">→</span><b id="ev-a">{{ h.after_m }} m</b></div>
+      <div class="bar" aria-hidden="true"><i id="ev-bar"></i><u id="ev-lim"></u></div>
+      <p class="verdict" id="ev-v"></p>
+      <p class="cite">Before: {{ h.board_before | replace(' (removed stop; location reconstructed)', '') }} (reconstructed). Today: {{ h.board_after }}. From 1599 Bathurst St, on the City sidewalk network.</p>
+    </section>
+  </div>
+</header>
+
+<!-- Chapter 2: how a case is built -->
+<section class="chapter how" id="how" aria-labelledby="how-h">
+  <svg class="edge" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path fill="#e6e8eb" d="{{ torn(11) }}"/></svg>
+  <div class="wrap">
+    <div class="intro">
+      <h2 id="how-h" data-rise>How a case is built</h2>
+      <p data-rise style="--i:1">A council decision is a staff report with page numbers. Your trip is a walk, a wait and a ride. TripLens puts the two side by side, and every claim it shows can be traced to the page it came from.</p>
+    </div>
+    <div class="acc" data-rise style="--i:2">
+      {% set stages = [
+        ("Search the records", "TripLens searches " ~ "{:,}".format(counts.reports) ~ " City staff reports from " ~ counts.n_items ~ " council and committee items for the streets your route runs on.", "num", "{:,}".format(counts.reports)),
+        ("Check every quote", "An AI research agent may read the reports, but software keeps a finding only if its quote is on the page it cites, with no new numbers and no stronger words.", "img", "toronto-city-hall-council-chamber.jpg"),
+        ("Replay your trip", "Your walk follows the City pedestrian network, before and after the change, against the walking limit for your rider.", "img", "bay-ttc-renewed-bus-shelter.jpg"),
+        ("Ask the street", "Located 311 requests near your stops and walks (snow, ice, broken sidewalks), and reports from riders.", "num", "{:,}".format(counts.requests311)),
+        ("Send it on", "A plain report with the decision, the quotes and your own words, for your councillor, 311 or the TTC. Nothing is sent for you.", "img", "sidewalk-snow-plow-31975535047.jpg"),
+      ] %}
+      {% for name, text, kind, val in stages %}
+      <div class="stage" aria-expanded="{{ 'true' if loop.first else 'false' }}">
+        <button type="button" class="sliver" aria-label="{{ name }}" aria-expanded="{{ 'true' if loop.first else 'false' }}"></button>
+        <span class="name" aria-hidden="true">{{ name }}</span>
+        <div class="open">
+          <h3>{{ name }}</h3>
+          <p>{{ text }}</p>
+          {% if kind == 'num' %}<span class="num">{{ val }}</span>
+          {% else %}<div class="fig"><img src="{{ url_for('static', path='img/' ~ val) }}" width="1600" height="1100" alt="" loading="lazy"></div>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Chapter 3: cases on file, crossing the council chamber -->
+<section class="cases" id="cases" aria-labelledby="cases-h">
+  <svg class="edge" style="z-index:3" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path fill="#1b1712" d="{{ torn(17) }}"/></svg>
+  <div class="stagewrap">
+    <img class="held" src="{{ url_for('static', path='img/toronto-city-hall-council-chamber.jpg') }}" width="1600" height="1200" alt="Toronto City Council chamber at City Hall" loading="lazy">
+    <h2 id="cases-h">Four cases on file</h2>
+    <div class="track" id="track">
+      {% for c in cases %}
+      <a class="case" href="/map?sample={{ c.key }}">
+        <img src="{{ url_for('static', path='img/' ~ c.photo) }}" width="1600" height="1000" alt="{{ c.photo_alt }}" loading="lazy">
+        <div class="lab">
+          <h3>{{ c.title }}</h3>
+          <p>{% if c.before_m != c.after_m %}Walk to the stop <b>{{ c.before_m }} m → {{ c.after_m }} m</b> for a {{ c.rider_label | lower }}.{% else %}Same walk, <b>{{ c.after_m }} m</b>, for a {{ c.rider_label | lower }}.{% endif %}
+            {% if c.improvements %}{{ c.improvements | length }} issue{{ 's' if c.improvements | length > 1 }} removed.{% elif c.new_issues %}{{ c.new_issues | length }} new issue{{ 's' if c.new_issues | length > 1 }}.{% endif %}
+            <br><span class="tag">{% if c.phase == 'implemented' %}Decided and built{% else %}{{ c.status | capitalize }}{% endif %}</span></p>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Chapter 4: where the evidence comes from -->
+<section class="chapter proof" aria-labelledby="proof-h">
+  <svg class="edge" viewBox="0 0 1440 40" preserveAspectRatio="none" aria-hidden="true"><path fill="#fbfaf6" d="{{ torn(23) }}"/></svg>
+  <div class="wrap tiles">
+    <div class="tile head" data-rise>
+      <h2 id="proof-h">The evidence</h2>
+      <p>Every fact comes from public records. Each source is used for one job, and the page that shows a fact links back to it.</p>
+    </div>
+    <div class="tile" data-rise style="--i:1"><h3 class="n">{{ "{:,}".format(counts.reports) }}</h3><p>City staff reports, searched page by page</p></div>
+    <div class="tile" data-rise style="--i:2"><h3 class="n">{{ "{:,}".format(counts.requests311) }}</h3><p>311 requests about snow, ice, sidewalks and curbs, placed at their intersection</p></div>
+    <div class="tile" data-rise><h3>TTC schedule</h3><p>Routes, stops, departures and wheelchair boarding, from the open GTFS feed</p></div>
+    <div class="tile" data-rise style="--i:1"><h3>Pedestrian Network</h3><p>The City's sidewalks and crossings, for every walk</p></div>
+    <div class="tile" data-rise style="--i:2"><h3>Shelters and benches</h3><p>City street furniture, for the wait at each stop</p></div>
+    <div class="tile" data-rise style="--i:3"><h3>Council records</h3><p>Items, decisions and how to comment or speak, from the City's own pages</p></div>
+  </div>
+</section>
+
+<!-- Chapter 5: the close, inverted -->
+<section class="chapter close" aria-labelledby="close-h">
+  <div class="wrap"><h2 id="close-h" data-rise>Open your own case.</h2></div>
+  <div class="wrap row">
+    <p data-rise>Click where you start and where you are going, pick your bus and your stops, and see what council has changed along the way.</p>
+    <a class="brush light" href="/map" data-rise style="--i:1"><svg viewBox="0 0 300 64" preserveAspectRatio="none" aria-hidden="true"><path d="{{ brush }}"/></svg>Open the map</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap places">
+    <ul class="big">
+      <li><a href="/map">Map your trip</a></li>
+      <li><a href="/decisions">Council decisions</a></li>
+      <li><a href="/route">Text-only trip check</a></li>
+    </ul>
+    <div class="small">
+      <p>A working prototype for CIVIC Hack 2026. Not an official City of Toronto or TTC service. Walking limits are illustrative, not medical or legal definitions.</p>
+      <p>Photographs: {% for c in credits %}<a href="{{ c.page }}">{{ c.title | truncate(48) }}</a> by {{ c.creator or 'unknown' }}, {{ c.license }}{{ '; ' if not loop.last else '.' }}{% endfor %}</p>
+      <p>Data: City of Toronto Open Data (Open Government Licence – Toronto); TTC GTFS.</p>
+    </div>
+  </div>
+  <div class="wrap legal"><span>TripLens</span><a href="#main">Back to top</a></div>
+  <div class="wrap" aria-hidden="true"><div class="giant">TripLens</div></div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const HERO = {{ hero | tojson }};
+const $ = id => document.getElementById(id);
+
+/* the live element: switch rider, see the same decision against that rider's walking limit */
+function showRider(k){
+  const c = HERO[k], max = Math.max(c.after_m, c.before_m, c.limit_m) * 1.12;
+  $('ev-b').textContent = c.before_m + ' m'; $('ev-a').textContent = c.after_m + ' m';
+  const bar = $('ev-bar'); bar.style.width = (100 * c.after_m / max) + '%'; bar.classList.toggle('over', c.after_m > c.limit_m);
+  $('ev-lim').style.left = (100 * c.limit_m / max) + '%';
+  $('ev-v').innerHTML = c.after_m > c.limit_m
+    ? `<strong>Over the ${c.limit_m} m limit</strong> assumed for a ${c.rider_label.toLowerCase()}. Before the decision the walk was ${c.before_m} m.`
+    : `Within the ${c.limit_m} m limit assumed for a ${c.rider_label.toLowerCase()}, though ${c.after_m - c.before_m} m longer than before.`;
+  document.querySelectorAll('.riders button').forEach(b => b.setAttribute('aria-pressed', b.dataset.r === k));
+}
+document.querySelectorAll('.riders button').forEach(b => b.onclick = () => showRider(b.dataset.r));
+showRider('senior_walker');
+
+/* accordion */
+const stages = [...document.querySelectorAll('.stage')];
+stages.forEach(s => s.querySelector('.sliver').onclick = () => stages.forEach(t => {
+  const on = t === s; t.setAttribute('aria-expanded', on); t.querySelector('.sliver').setAttribute('aria-expanded', on);
+  t.querySelector('.sliver').hidden = on;
+}));
+stages.forEach(t => t.querySelector('.sliver').hidden = t.getAttribute('aria-expanded') === 'true');
+
+/* entrances */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold: .15});
+document.querySelectorAll('[data-rise]').forEach(el => io.observe(el));
+
+/* cases: cards cross the held photograph as the section scrolls */
+const sec = document.querySelector('.cases'), track = $('track'), head = $('cases-h');
+const wide = matchMedia('(min-width: 901px)'), calm = matchMedia('(prefers-reduced-motion: reduce)');
+function scrub(){
+  if (!wide.matches) return;
+  const r = sec.getBoundingClientRect(), span = sec.offsetHeight - innerHeight;
+  const p = Math.min(1, Math.max(0, -r.top / span));
+  const dist = track.scrollWidth - innerWidth * 0.18;
+  track.style.transform = `translate(${-p * dist}px, -50%)`;
+  head.style.opacity = String(Math.max(0, 1 - p * 3.2)); head.style.transform = `translateX(${-p * 240}px)`;
+}
+if (!calm.matches) { addEventListener('scroll', () => requestAnimationFrame(scrub), {passive: true}); scrub(); }
+else { track.style.cssText += ';position:relative;transform:none;flex-wrap:wrap;padding:200px var(--m) 48px'; sec.style.height = 'auto'; document.querySelector('.stagewrap').style.cssText = 'position:relative;height:auto'; }
+</script>
+</body>
+</html>

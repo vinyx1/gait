@@ -54,3 +54,14 @@ def test_report_api_stores_only_category_place_and_date(tmpdb):
 def test_staff_report_leads_are_labelled_unchecked_and_quoted():
     r = reports.search(legs())
     assert r["leads"] and all(l["quote"] and l["document_url"].startswith("https://www.toronto.ca/legdocs/") for l in r["leads"])
+
+
+def test_landing_page_numbers_come_from_the_engine():
+    from fastapi.testclient import TestClient
+    from triplens.app import app
+    from triplens import landing
+    html = TestClient(app).get("/").text
+    c = landing.case("bathurst", "senior_walker")
+    assert f"{c['before_m']} m" in html and f"{c['after_m']} m" in html
+    assert "built-in method" not in html                  # the Jinja dict.items trap
+    assert TestClient(app).get("/decisions").status_code == 200

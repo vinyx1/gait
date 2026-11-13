@@ -17,3 +17,4 @@ data/corpus/pdf/
 data/corpus/index.sqlite
 data/rider_reports.sqlite
 data/raw/311/
+.taste-skill/

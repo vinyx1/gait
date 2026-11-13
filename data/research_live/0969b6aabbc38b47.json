@@ -1,0 +1,56 @@
+{
+ "trip": {
+  "rider": "Wheelchair user",
+  "rides": [
+   {
+    "route": "505",
+    "board": "Dundas St West at Grace St",
+    "alight": "Dundas St West at Chestnut St"
+   }
+  ]
+ },
+ "kept": [
+  {
+   "passage": 11,
+   "quote": "Additionally, the concrete barriers to facilitate CaféTO installations in the curbside lane were installed along Dundas Street West starting on April 25, 2026, impacting data collected after this date.",
+   "summary": "The report says concrete barriers for CaféTO installations were placed in the curbside lane along Dundas Street West starting April 25, 2026.",
+   "why_it_matters": "Barriers in the curbside lane on Dundas Street West may change the space around stops on this rider's 505 trip, which could affect boarding or alighting with a wheelchair.",
+   "kind": "construction",
+   "item_id": "2026.TE34.104",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf",
+   "page": 2
+  },
+  {
+   "passage": 11,
+   "quote": "After March 30, when the TPM installations were complete, the 505 Dundas had periods where it was diverting off-route; and, there were also periods where other routes were diverting onto Dundas Street East/West thereby impacting travel times of the route.",
+   "summary": "The report notes the 505 Dundas had periods of diverting off-route after March 30, and other routes sometimes diverted onto Dundas Street.",
+   "why_it_matters": "Periods of 505 diversions could mean the streetcar may not serve the Grace St or Chestnut St stops at times during this rider's trip.",
+   "kind": "service",
+   "item_id": "2026.TE34.104",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf",
+   "page": 2
+  },
+  {
+   "passage": 11,
+   "quote": "For these time periods, the 75th percentile travel times has improved.",
+   "summary": "The report says 75th percentile travel times improved on changed segments of the 505 for the periods measured.",
+   "why_it_matters": "Changes on the 505 Dundas route may affect how long this rider's trip takes.",
+   "kind": "service",
+   "item_id": "2026.TE34.104",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf",
+   "page": 2
+  }
+ ],
+ "dropped": [],
+ "trace": [
+  "Retrieved 14 passages from the indexed staff reports for route 505 (0 name a street at your stops).",
+  "Claude (claude-opus-5-5) read them and proposed 3 finding(s).",
+  "The checker kept 3 and dropped 0 (quote must be on the cited page; no new numbers; no stronger wording)."
+ ],
+ "model": "claude-opus-5-5",
+ "generated_at": "2026-11-13T16:42:28+00:00",
+ "usage": {
+  "input": 7488,
+  "output": 524
+ }
+}

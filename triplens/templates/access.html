@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Transit access near {{ loc.label }} - TripLens{% endblock %}
 {% block content %}
-<p><a href="/">&larr; All items</a>{% for i in loc.item_ids %} · <a href="/item/{{ i }}">Item {{ i }}</a>{% endfor %}</p>
+<p><a href="/decisions">&larr; All items</a>{% for i in loc.item_ids %} · <a href="/item/{{ i }}">Item {{ i }}</a>{% endfor %}</p>
 <h1>Who can reach transit near {{ loc.label }}?</h1>
 <p class="lede">The same place can be easy for one rider and out of reach for another. This page compares three riders using open data. It is not a trip planner and it does not say a trip is possible or safe.</p>
 

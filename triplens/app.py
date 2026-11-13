@@ -117,6 +117,15 @@ def caveats(item: dict, reports: list[dict]) -> list[str]:
 
 
 @app.get("/", response_class=HTMLResponse)
+def landing_page(request: Request):
+    from . import landing
+    cases = [landing.case(k) for k in ("bathurst", "stclair", "harbord", "frontst")]
+    return templates.TemplateResponse(request, "landing.html", {"hero": landing.hero(), "cases": cases, "counts": landing.counts(),
+                                                                "credits": landing.credits(), "torn": landing.torn,
+                                                                "sheet_clip": landing.sheet_clip(), "brush": landing.brush()})
+
+
+@app.get("/decisions", response_class=HTMLResponse)
 def index(request: Request):
     items = load_items()
     upcoming, decided = [], []
