@@ -1,0 +1,191 @@
+{
+  "route": "505",
+  "name": "Dundas",
+  "model": "claude-opus-5-5",
+  "generated_at": "2026-11-13T06:21:31+00:00",
+  "kept": [
+    {
+      "item_id": "2025.TE27.51",
+      "decision_summary": "Council approved transit priority measures for the 505 Dundas 6-Minute Network. Weekday 'No Stopping' rules on Dundas Street West were extended so that both sides of the street are covered in both the morning and afternoon peaks. Before this, some sections had the rule in only one peak. The documents name no specific transit stops.",
+      "change_type": "curb_lane_change",
+      "stops_named": [],
+      "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-260036.pdf",
+      "page": 1,
+      "quote": "The change to curbside regulations proposed in this report is to have ‘No Stopping' coverage in both the AM and PM peak periods on both sides of the street, where it is currently only AM or PM."
+    },
+    {
+      "item_id": "2025.TE27.51",
+      "decision_summary": "Under the same item, left-turn restrictions were added or extended at intersections on Dundas Street West, including Bloor Street West, Clarens Avenue and Sheridan Avenue. The goal is to cut delays caused by vehicles turning left from the lane shared with the streetcar.",
+      "change_type": "lanes_or_traffic",
+      "stops_named": [],
+      "document_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-260036.pdf",
+      "page": 9,
+      "quote": "Vehicles turning left from the shared streetcar lane can result in significant delays to streetcar operations."
+    },
+    {
+      "item_id": "2025.TE27.51",
+      "decision_summary": "A second document for this item, at City Council, adds more 'No Stopping' changes on Dundas Street West sections, including Dovercourt Avenue to Ossington Avenue and Ossington Avenue to Augusta. It also extends turn restrictions, for example the westbound left turn at University Avenue.",
+      "change_type": "curb_lane_change",
+      "stops_named": [],
+      "document_url": "https://www.toronto.ca/legdocs/mmis/2025/cc/bgrd/backgroundfile-261109.pdf",
+      "page": 3,
+      "quote": "In these sections, the curbside regulations will be updated so each side of the street has ‘No Stopping' in both peak periods, from Monday to Friday."
+    },
+    {
+      "item_id": "2026.TE34.104",
+      "decision_summary": "This is the initial findings report on the 505 Dundas transit priority measures, adopted by Council on 2026-07-30. It confirms the measures supported 6-minute service on the 505 Dundas streetcar, which the earlier report says Council authorized in December 2025. It reports a 20% increase in ridership. The start time is cut off in the passage, but the trips are 6 minutes apart from 7:00 a.m.",
+      "change_type": "service_change",
+      "stops_named": [],
+      "document_url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf",
+      "page": 2,
+      "quote": "DECISION HISTORY On December 16 and 17, 2025, City Council authorized transit priority measures (TPMs) to support 6-minute headways on the 505 Dundas streetcar route Agenda Item History - 2025."
+    }
+  ],
+  "dropped": [],
+  "calls": [
+    {
+      "tool": "search_records",
+      "args": {
+        "query": "Dundas Street West"
+      },
+      "result": "2023.CC3.6 | 2023-02-07 | City Council | 5238 Dundas Street West and 28 Jopling Avenue South - Official Plan and Zoning By-law Amendment Application - Request for Direction | motions: Adopt Item: Carried, 25-1\n2023.PH3.13 | 2023-04-27 | Planning and Housing Committee | 4888 Dundas Street West - Notice of Intention to Designate a Property under Part IV, Section 29 of the Ontario Heritage Act | motions: Adopt Item: Carried, 22-0; Adopt Item: Carried, 5-0\n2023.CC13.23 | 2023-12-15 | City Council | 4174 Dundas Street West - Request for Directions | motions: Adopt Item as Amended: Carried, 20-1; Amend Item: Carried, 20-0\n2024.EY10.5 | 2024-02-06 | City Council | 4884-4896 Dundas Street West - Official Plan Amendment and Zoning By-law Amendment Application - Appeal Report | motions: Adopt Item: Carried, 24-0\n2024.PB16.8 | 2024-03-28 | Toronto Preservation Board | 4888 Dundas Street West - Alteration of a Property Designated under Part IV of the Ontario Heritage Act and Authority to Enter into a Heritage Easement Agreement - Request for Directions | motions: Adopt Item: Carried, 9-1\n2024.CC17.6 | 2024-04-17 | City Council | 4888 Dundas Street West - Alteration of a Property Designated under Part IV of the Ontario Heritage Act and Authority to Enter into a Heritage Easement Agreement - Request for Directions | motions: Adopt Item: Carried, 24-1\n2024.CC17.7 | 2024-04-17 | City Council | 4884-4896 Dundas Street West - Ontario Land Tribunal Hearing - Request for Directions | motions: Adopt Item: Carried, 23-1\n2024.CC21.4 | 2024-09-05 | City Council | 4195 Dundas Street West and 556, 558, 560, 562 and 564 Prince Edward Drive North - Official Plan Amendment and Zoning By-law Amendment Applications - Ontario Land Tribunal Hearing - Request for Directions | motions: Adopt Item as Amended: Carried, 22-1\n2024.EY18.6 | 2024-12-02 | Etobicoke York Community Council | 4875 Dundas Street West - Official Plan Amendment and Zoning By-law Amendment Application - Decision Report - Refusal |"
+    },
+    {
+      "tool": "search_records",
+      "args": {
+        "query": "505 Dundas"
+      },
+      "result": "2026.TE34.104 | 2026-07-30 | City Council | Initial Findings Report: Transit Priority Measures to Support the 505 Dundas 6-Minute Network | motions: Adopt Item as Amended: Carried, 20-2\n2025.TE27.51 | report request | Transit Priority Measures to Support the 505 Dundas 6-Minute Network | 2. City Council direct the General Manager, Transportation Services, in consultation with the Chief Executive Officer, Toronto Transit Commission, to collect tr\n2025.TE27.51 | report request | Transit Priority Measures to Support the 505 Dundas 6-Minute Network | 3. City Council request the General Manager, Transportation Services, in consultation with the Chief Executive Officer, Toronto Transit Commission, to engage wi\n2026.TE34.104 | report request | Initial Findings Report: Transit Priority Measures to Support the 505 Dundas 6-Minute Network | 2. City Council request the General Manager, Transportation Services, in collaboration with the Chief Executive Officer, Toronto Transit Commission, to report t"
+    },
+    {
+      "tool": "search_records",
+      "args": {
+        "query": "Dundas transit priority"
+      },
+      "result": "2026.TE34.104 | 2026-07-30 | City Council | Initial Findings Report: Transit Priority Measures to Support the 505 Dundas 6-Minute Network | motions: Adopt Item as Amended: Carried, 20-2\n2025.TE20.40 | report request | Transit Priority Measures to Support Streetcar Service Diversions during King Street East and Church Street Intersection Closures | 7. City Council direct the General Manager, Transportation Services, in consultation with the Chief Executive Officer, Toronto Transit Commission, to report to \n2025.TE25.50 | report request | Temporary Amendments to Traffic and Parking Regulations and Transit Priority Measures to Support Transit Diversions during the Queen Street East Closures | 16. City Council direct the General Manager, Transportation Services, in consultation with the Chief Executive Officer, Toronto Transit Commission, to report ba\n2025.TE25.50 | report request | Temporary Amendments to Traffic and Parking Regulations and Transit Priority Measures to Support Transit Diversions during the Queen Street East Closures | 17. City Council direct the General Manager, Transportation Services to monitor traffic congestion and Toronto Transit Commission vehicle movement on Dundas Str\n2025.TE27.51 | report request | Transit Priority Measures to Support the 505 Dundas 6-Minute Network | 2. City Council direct the General Manager, Transportation Services, in consultation with the Chief Executive Officer, Toronto Transit Commission, to collect tr\n2025.TE27.51 | report request | Transit Priority Measures to Support the 505 Dundas 6-Minute Network | 3. City Council request the General Manager, Transportation Services, in consultation with the Chief Executive Officer, Toronto Transit Commission, to engage wi\n2026.TE34.104 | report request | Initial Findings Report: Transit Priority Measures to Support the 505 Dundas 6-Minute Network | 2. City Council request the General Manager, Transportation Services, in collaboration with the Chief Executive Officer, Toronto Trans"
+    },
+    {
+      "tool": "list_documents",
+      "args": {
+        "item_id": "2026.TE34.104"
+      },
+      "result": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf | https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf"
+    },
+    {
+      "tool": "list_documents",
+      "args": {
+        "item_id": "2024.TE13.42"
+      },
+      "result": "No saved page for that item. Only items saved from the City site can be read."
+    },
+    {
+      "tool": "list_documents",
+      "args": {
+        "item_id": "2025.TE25.50"
+      },
+      "result": "No saved page for that item. Only items saved from the City site can be read."
+    },
+    {
+      "tool": "list_documents",
+      "args": {
+        "item_id": "2025.TE27.51"
+      },
+      "result": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-260036.pdf | https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-260036.pdf\nhttps://www.toronto.ca/legdocs/mmis/2025/cc/bgrd/backgroundfile-261109.pdf | https://www.toronto.ca/legdocs/mmis/2025/cc/bgrd/backgroundfile-261109.pdf"
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf",
+        "query": "stop"
+      },
+      "result": "[page 1] The transit priority measures (TPMs) implemented included expanding ‘No Stopping' coverage of the AM and PM peak periods on weekdays, as well as new and expanded left-turn restrictions."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-260036.pdf",
+        "query": "stop"
+      },
+      "result": "[page 1] The changes include expanding ‘No Stopping' coverage of the AM and PM peak periods on weekdays, as well as new and expanded left-turn restrictions on Dundas Street and Wellesley Street.\n[page 1] The change to curbside regulations proposed in this report is to have ‘No Stopping' coverage in both the AM and PM peak periods on both sides of the street, where it is currently only AM or PM.\n[page 1] The hours for the new ‘No Stopping' period reflect the hours used on the opposite side of the street.\n[page 1] This would make the ‘No Stopping' match for both sides of the road for both the AM and PM peak periods, improving consistency for the restrictions along the corridor while improving traffic flow for the added periods.\n[page 1] For example, if the north side of Dundas Street West has ‘No Stopping' from 7 a.\n[page 1] , and the south side has ‘No Stopping' from 4 p.\n[page 2] , both sides of Dundas Street West are proposed to have ‘No Stopping' from 7 a.\n[page 2] The changes proposed in this report impact the AM and PM peak periods for ‘No Stopping' restrictions on weekdays while the left-turn restrictions impact different periods depending on the location.\n[page 4] The TPMs proposed in this report are smaller-scale, impacting the AM and PM peak periods for ‘No Stopping' restrictions on weekdays while the left-turn restrictions impact different periods depending on the location.\n[page 5] \"No Stopping\" restrictions cover the north side of the roadway during PM peak (4 p.\n[page 5] \"No Stopping\" restrictions cover the north side of the roadway during PM peak (3:30 p.\n[page 5] \"No Stopping\" restrictions cover the north side of the roadway during AM and PM peaks (7:30 a."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/cc/bgrd/backgroundfile-261109.pdf",
+        "query": "stop"
+      },
+      "result": "[page 3] \"No Stopping\" restrictions cover the north side of the roadway during PM peak (3:30 p.\n[page 3] \"No Stopping\" restrictions cover the north side of the roadway during PM peak (3:30 p.\n[page 3] \"No Stopping\" restrictions cover the north side of the roadway during PM peak (3:30 p.\n[page 3] Stopping Restrictions As noted in the November 10, 2025 report for TE25.\n[page 3] 71, the changes to curbside regulations target sections of Dundas Street West where there are ‘No Stopping' restrictions in only one peak period from Monday to Friday, on each side of the street.\n[page 3] In these sections, the curbside regulations will be updated so each side of the street has ‘No Stopping' in both peak periods, from Monday to Friday.\n[page 3] The existing and proposed ‘No Stopping' and ‘No Parking' restrictions have been provided for the newly proposed TPMs in Table 2.\n[page 3] Detailed changes to ‘No Stopping' and ‘No Parking' restrictions can be found in Attachment 1.\n[page 4] Segment of Dundas Street West Dovercourt Avenue to Ossington Avenue Ossington Avenue to Augusta Side of Street North South North Existing ‘No Stopping' Restriction 3:30 p.\n[page 4] Existing ‘No Parking' Restriction None outside of ‘No Stopping' hours.\n[page 4] None outside of ‘No Stopping' hours.\n[page 4] None outside of ‘No Stopping' hours."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-260036.pdf",
+        "query": "left-turn"
+      },
+      "result": "[page 1] The changes include expanding ‘No Stopping' coverage of the AM and PM peak periods on weekdays, as well as new and expanded left-turn restrictions on Dundas Street and Wellesley Street.\n[page 2] The changes proposed in this report impact the AM and PM peak periods for ‘No Stopping' restrictions on weekdays while the left-turn restrictions impact different periods depending on the location.\n[page 3] The estimated cost to implement the curbside and turning regulations is $130,000 (pre-HST), which will be funded from the TTC's 2025-2034 Capital Budget and Plan.\n[page 4] The TPMs proposed in this report are smaller-scale, impacting the AM and PM peak periods for ‘No Stopping' restrictions on weekdays while the left-turn restrictions impact different periods depending on the location.\n[page 9] Turning Restrictions Vehicles turning left from the shared streetcar lane can result in significant delays to streetcar operations.\n[page 9] To increase the capacity along the streetcar route, existing turn restrictions are proposed to be extended or new restrictions added.\n[page 9] The affected intersections and turns are listed in Table 5 alongside their existing and proposed restrictions.\n[page 9] Table 5: Existing and Proposed Hours for Turn Restrictions Intersection Dundas Street West & Bloor Street West Direction & Turn Northbound left-turn Existing Turn Restriction 7:00 a.\n[page 9] Proposed Turn Restriction 7:00 a.\n[page 9] , daily Southbound left-turn 7:00 a.\n[page 9] Clarens Avenue Eastbound left- turn 7:00 a.\n[page 9] Westbound left-turn 3:30 p."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf",
+        "query": "streetcar"
+      },
+      "result": "[page 1] These changes were in support of 6-minute headways on the 505 Dundas streetcar route from 7:00 a.\n[page 2] DECISION HISTORY On December 16 and 17, 2025, City Council authorized transit priority measures (TPMs) to support 6-minute headways on the 505 Dundas streetcar route Agenda Item History - 2025.\n[page 2] 51 COMMENTS Travel Time Impacts While streetcar travel time results were provided by TTC, a few caveats to the data should be noted.\n[page 2] Ridership Impacts The TTC has reviewed the ridership numbers on the 505 Dundas streetcar before and after the implementation of 6-minute headways from 7:00 a.\n[page 3] This represents a 20% increase in ridership on the 505 Dundas streetcar route."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2025/cc/bgrd/backgroundfile-261109.pdf",
+        "query": "left-turn"
+      },
+      "result": "[page 2] The estimated cost to implement the curbside and turning regulations is $156,000 (pre-HST), which will be funded from the TTC's 2025-2034 Capital Budget and Plan.\n[page 4] Turning Restrictions The newly proposed turning restrictions are listed in Table 3 alongside their existing restrictions.\n[page 4] Table 3: Existing and Proposed Hours for Newly Proposed Turn Restrictions Intersection Direction & Turn Eastbound Left-turn Existing Turn Restriction 7:30 a.\n[page 4] Proposed Turn Restriction 7:00 a.\n[page 4] Dundas Street West & University Avenue Westbound Left-Turn 7:30 a.\n[page 5] The existing turning volumes were reviewed, and the proposed restrictions are anticipated to have minimal impact on personal vehicle trips and the surrounding road network due to the short additional duration added.\n[page 13] , except public holidays Chapter 950-1322 – Schedule XXIII – Prohibited Turns Intersection or Portion of Highway Direction Turns Prohibited Times and/or Days Dundas Street West and Bloor Street West Northbound Left 7:00 a.\n[page 13] Dundas Street West and Bloor Street West Southbound Left 7:00 a.\n[page 13] Clarens Avenue Eastbound Left 7:00 a.\n[page 13] Clarens Avenue Westbound Left 3:30 p.\n[page 14] Intersection or Portion of Highway Direction Turns Prohibited Times and/or Days Dundas Street West and Sheridan Avenue Eastbound Left 7:00 a.\n[page 14] , except public holidays (bicycles excepted) Dundas Street West and Sheridan Avenue Westbound Left 3:30 p."
+    },
+    {
+      "tool": "search_records",
+      "args": {
+        "query": "Dundas streetcar diversion"
+      },
+      "result": "2025.TE20.40 | report request | Transit Priority Measures to Support Streetcar Service Diversions during King Street East and Church Street Intersection Closures | 7. City Council direct the General Manager, Transportation Services, in consultation with the Chief Executive Officer, Toronto Transit Commission, to report to \n2025.TE25.50 | report request | Temporary Amendments to Traffic and Parking Regulations and Transit Priority Measures to Support Transit Diversions during the Queen Street East Closures | 16. City Council direct the General Manager, Transportation Services, in consultation with the Chief Executive Officer, Toronto Transit Commission, to report ba"
+    },
+    {
+      "tool": "search_records",
+      "args": {
+        "query": "Dundas construction"
+      },
+      "result": "No matching records."
+    },
+    {
+      "tool": "search_records",
+      "args": {
+        "query": "Chinatown Dundas parking"
+      },
+      "result": "2024.TE13.42 | report request | Keeping Dundas Street Streetcar Moving Through Chinatown: Temporary Adjustments to Parking Regulations on Dundas Street West | 3. City Council request the General Manager, Transportation Services, in consultation with the Toronto Transit Commission, the Chinatown Business Improvement Ar\n2024.MM23.35 | report request | Re-Opening and Amending Item 2024.TE13.42 - Keeping Dundas Street Streetcar Moving Through Chinatown: Temporary Adjustments to Parking Regulations on Dundas Street West - by Councillor Dianne Saxe, seconded by Deputy Mayor Ausma Malik | 3. City Council request the General Manager, Transportation Services, in consultation with the Toronto Transit Commission, the Chinatown Business Improvement Ar"
+    },
+    {
+      "tool": "list_documents",
+      "args": {
+        "item_id": "2024.MM23.35"
+      },
+      "result": "No saved page for that item. Only items saved from the City site can be read."
+    },
+    {
+      "tool": "list_documents",
+      "args": {
+        "item_id": "2025.TE20.40"
+      },
+      "result": "No saved page for that item. Only items saved from the City site can be read."
+    },
+    {
+      "tool": "read_document",
+      "args": {
+        "url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf",
+        "query": "headways"
+      },
+      "result": "[page 1] These changes were in support of 6-minute headways on the 505 Dundas streetcar route from 7:00 a.\n[page 2] DECISION HISTORY On December 16 and 17, 2025, City Council authorized transit priority measures (TPMs) to support 6-minute headways on the 505 Dundas streetcar route Agenda Item History - 2025.\n[page 2] Ridership Impacts The TTC has reviewed the ridership numbers on the 505 Dundas streetcar before and after the implementation of 6-minute headways from 7:00 a."
+    }
+  ],
+  "usage": {
+    "input": 49748,
+    "output": 2616
+  }
+}
