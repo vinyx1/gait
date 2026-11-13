@@ -6,6 +6,7 @@ colors:
   avocado: "#5f6d22"
   burnt-orange: "#d0662a"
   walnut: "#4e3220"
+  snow: "#f1f3f2"
   pyrex-turquoise: "#3c9c95"
   coffee-ink: "#24140a"
   teal-ink: "#0c2220"
@@ -97,9 +98,9 @@ components:
 
 **Creative North Star: "The Harvest Kitchen"**
 
-TripLens tells City decisions the way they would be read aloud at a 1970s Toronto kitchen table. Each scene owns the whole screen in one flat colour from the kitchen (harvest gold, avocado, burnt orange, walnut, Pyrex turquoise), and the ink flips between dark coffee brown and cream so the words always sit on the field at body-text contrast. Nothing floats on a card; the page is a stack of full-width colour courses, and the background colour itself changes as the reader scrolls (0.9s cross-fade), so the scene change is the section break.
+TripLens tells City decisions the way they would be read aloud at a 1970s Toronto kitchen table. Each scene owns the whole screen in one flat colour from the kitchen (harvest gold, avocado, burnt orange, snow white, Pyrex turquoise; walnut for the footer), and the ink flips between dark coffee brown and cream so the words always sit on the field at body-text contrast. Nothing floats on a card; the page is a stack of full-width colour courses, and the background colour itself changes as the reader scrolls (0.9s cross-fade), so the scene change is the section break.
 
-The world's one picture is a round stoneware platter of the neighbourhood: a walnut centre with wood rings, an avocado glaze edge, a dotted stoneware band, a turquoise dashed bus route, and flat, rounded houses, trees, stops and a cream bus standing on its rim. It turns like a lazy Susan, one scene per scroll. Drawings are flat fills with rounded corners and short dark-brown strokes, never outlines with gradients, never photographs.
+The world's one picture is a small earth with the neighbourhood standing on its rim: a teal ocean with soft avocado and gold land masses, an avocado glaze edge, a dotted stoneware band, a turquoise dashed bus route, and Toronto building types standing on its rim (bay-and-gable houses, main-street shops with striped awnings, mid-rise apartments with regular window rows) set in a repeating rhythm, round trees, stops and a cream bus, with a soft ink skyline and the CN Tower behind at 16% opacity. In the winter scene white snow caps appear on every roof. It turns like a lazy Susan, one scene per scroll. Drawings are flat fills with rounded corners and short dark-brown strokes, never outlines with gradients, never photographs.
 
 Density is low and type is large: the body never drops below 20px, the display face is a warm, soft-shouldered serif, and every control is a chunky pill at 56px or taller. The register is warm and plain, never alarming.
 
@@ -123,7 +124,8 @@ A 1970s kitchen palette of five saturated, slightly earthy fields and two inks, 
 - **Burnt Orange** (`burnt-orange`): the "change" scene field (the stop removed, the scale bar); also roofs, the bus stripe and the removed stop's sign in the drawing.
 
 ### Tertiary
-- **Walnut** (`walnut`): the winter scene field and the footer ground; also the platter centre (drawn slightly lighter).
+- **Walnut** (`walnut`): the footer ground.
+- **Snow** (`snow`): the winter scene field, with coffee ink; snowflakes are #9fb3bd so they read on white.
 - **Pyrex Turquoise** (`pyrex-turquoise`): the sources scene field; in the drawing, the bus route, bus windows, active stop signs and the walker's frame.
 
 ### Neutral
@@ -132,7 +134,7 @@ A 1970s kitchen palette of five saturated, slightly earthy fields and two inks, 
 - **Cream** (`cream`): text on avocado and walnut fields and the footer; snow, windows, the bus body and the stoneware band in the drawing.
 - **Stoneware** (`stoneware`): the platter rim and the second City Hall tower in the drawing. Not used for page text or fields.
 
-Field and ink pairs as shipped: gold with coffee ink (9.1:1), avocado with cream (5.1:1), burnt orange with coffee ink (4.8:1), walnut with cream (10.4:1), turquoise with teal ink (5.0:1).
+Field and ink pairs as shipped: gold with coffee ink (9.1:1), avocado with cream (5.1:1), burnt orange with coffee ink (4.8:1), snow with coffee ink (about 16:1), turquoise with teal ink (5.0:1).
 
 ### Named Rules
 **The One Field Rule.** A scene owns the whole screen in one field colour. Never place two fields side by side on one screen, and never set a field colour as a small accent on another field.

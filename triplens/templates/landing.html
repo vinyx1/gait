@@ -24,7 +24,7 @@
 body.sc0,body.sc5{--field:var(--gold);--ink:var(--brown);--soft:rgba(36,20,10,.78)}
 body.sc1{--field:var(--avocado);--ink:var(--cream);--soft:rgba(251,241,216,.86)}
 body.sc2{--field:var(--orange);--ink:var(--brown);--soft:rgba(36,20,10,.8)}
-body.sc3{--field:var(--walnut);--ink:var(--cream);--soft:rgba(251,241,216,.84)}
+body.sc3{--field:#f1f3f2;--ink:var(--brown);--soft:var(--brown)}
 body.sc4{--field:var(--turq);--ink:#0c2220;--soft:rgba(12,34,32,.82)}
 *{box-sizing:border-box}
 html,body{overflow-x:clip}
@@ -99,7 +99,9 @@ footer .about{grid-column:7 / 13;display:grid;gap:14px;align-content:start;color
 
 #snow{position:fixed;inset:0 0 0 46vw;z-index:1;pointer-events:none;opacity:0;transition:opacity .9s}
 body.sc3 #snow{opacity:1}
-#snow i{position:absolute;top:-12px;width:9px;height:9px;border-radius:50%;background:var(--cream);animation:fall linear infinite}
+.snowcap{opacity:0;transition:opacity 1s var(--ease)}
+body.sc3 .snowcap{opacity:1}
+#snow i{position:absolute;top:-12px;width:9px;height:9px;border-radius:50%;background:#9fb3bd;animation:fall linear infinite}
 @keyframes fall{to{transform:translate3d(28px,106svh,0)}}
 
 .gone-sign{transition:transform .8s var(--ease),opacity .8s}
@@ -246,21 +248,51 @@ const arc = (a1, a2, r, attrs) => { const [x1, y1] = pt(a1, r), [x2, y2] = pt(a2
 
 let seed = 11; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
 const WALLS = [C.cream, C.gold, C.orange, C.avocado, C.turq];
-const ROOFS = [C.walnut, C.orange, C.avocado, C.brown];
-
+let bi = 0;                                  // building counter: types and colours follow a rhythm, not a dice roll
+// Snow caps sit on every roof and only show in the winter scene.
+const cap = (g, d) => el('path', {d, fill: '#ffffff', class: 'snowcap'}, g);
+// Toronto bay-and-gable house: steep gable, a bay window, a porch door.
+function bayHouse(g, wall, roof){
+  el('rect', {x: -17, y: -46, width: 34, height: 48, rx: 3, fill: wall}, g);
+  el('path', {d: 'M-21 -44 L0 -70 L21 -44 Z', fill: roof}, g);
+  cap(g, 'M-21 -44 L0 -70 L21 -44 L15 -44 L0 -62 L-15 -44 Z');
+  el('circle', {cx: 0, cy: -53, r: 4, fill: C.cream}, g);
+  el('rect', {x: -13, y: -36, width: 15, height: 16, rx: 2, fill: C.cream}, g);         // bay window
+  el('rect', {x: -11, y: -34, width: 4.5, height: 12, fill: C.turq}, g); el('rect', {x: -5, y: -34, width: 4.5, height: 12, fill: C.turq}, g);
+  el('rect', {x: 5, y: -15, width: 9, height: 15, rx: 4.5, fill: C.brown}, g);           // door
+  el('rect', {x: 4, y: -34, width: 9, height: 10, rx: 2, fill: C.cream}, g);
+}
+// Main-street shop: two storeys, an awning, a big window.
+function shop(g, wall, roof){
+  el('rect', {x: -22, y: -50, width: 44, height: 52, rx: 3, fill: wall}, g);
+  el('rect', {x: -24, y: -54, width: 48, height: 7, rx: 3, fill: roof}, g);
+  cap(g, 'M-24 -54 H24 V-51 H-24 Z');
+  for (const x of [-15, -3, 9]) el('rect', {x, y: -43, width: 7, height: 10, rx: 2, fill: C.cream}, g);
+  for (let k = 0; k < 6; k++) el('rect', {x: -22 + k * 7.4, y: -27, width: 7.4, height: 8, fill: k % 2 ? C.cream : roof}, g); // striped awning
+  el('rect', {x: -18, y: -19, width: 24, height: 19, fill: C.turq, opacity: .85}, g);
+  el('rect', {x: 9, y: -17, width: 9, height: 17, rx: 2, fill: C.brown}, g);
+}
+// Mid-rise apartment: balcony bands in neat rows.
+function apartment(g, wall, roof, h){
+  el('rect', {x: -20, y: -h, width: 40, height: h + 2, rx: 3, fill: wall}, g);
+  el('rect', {x: -22, y: -h - 5, width: 44, height: 7, rx: 3, fill: roof}, g);
+  cap(g, `M-22 ${-h - 5} H22 V${-h - 2} H-22 Z`);
+  for (let y = -h + 10; y < -18; y += 13) {
+    for (const x of [-14, -2, 10]) el('rect', {x, y, width: 6, height: 8, rx: 1.5, fill: wall === C.cream ? C.turq : C.cream}, g);
+    el('rect', {x: -20, y: y + 9, width: 40, height: 2, fill: C.brown, opacity: .22}, g);
+  }
+  el('rect', {x: -5, y: -14, width: 10, height: 14, rx: 2, fill: C.brown}, g);
+}
+// building(deg, w, h, wall): w is kept for the scene calls; the type comes from the height
 function building(deg, w, h, wall){
-  const g = at(deg), roof = ROOFS[Math.floor(rnd() * ROOFS.length)];
-  wall = wall || WALLS[Math.floor(rnd() * WALLS.length)];
-  el('rect', {x: -w / 2, y: -h, width: w, height: h + 4, rx: 7, fill: wall}, g);
-  if (h < 66) el('path', {d: `M${-w / 2 - 4} ${-h + 4} Q0 ${-h - w * .55} ${w / 2 + 4} ${-h + 4} Z`, fill: roof}, g);
-  else el('rect', {x: -w / 2 - 3, y: -h - 6, width: w + 6, height: 10, rx: 5, fill: roof}, g);
-  for (let y = -h + 13; y < -16; y += 15) for (let x = -w / 2 + 8; x < w / 2 - 7; x += 12)
-    if (rnd() > .28) el('rect', {x, y, width: 6, height: 8, rx: 3, fill: wall === C.cream ? C.walnut : C.cream, opacity: wall === C.cream ? .5 : .95}, g);
-  el('rect', {x: -5, y: -13, width: 10, height: 13, rx: 5, fill: C.brown, opacity: .75}, g);
+  const g = at(deg); wall = wall || WALLS[bi % WALLS.length];
+  const roof = [C.walnut, C.orange, C.brown][bi % 3]; bi++;
+  if (h < 56) bayHouse(g, wall, roof); else if (h < 72) shop(g, wall, roof); else apartment(g, wall, roof, Math.min(h, 104));
   return g;
 }
-function tree(deg, s = 1){ const g = at(deg); el('rect', {x: -2.5, y: -13 * s, width: 5, height: 13 * s, rx: 2.5, fill: C.walnut}, g);
-  el('circle', {cx: 0, cy: -25 * s, r: 13 * s, fill: C.avocado}, g); el('circle', {cx: -7 * s, cy: -19 * s, r: 8 * s, fill: '#6f7f2c'}, g); return g; }
+function tree(deg, s = 1){ const g = at(deg); el('rect', {x: -2.5, y: -14 * s, width: 5, height: 14 * s, rx: 2.5, fill: C.walnut}, g);
+  el('circle', {cx: 0, cy: -27 * s, r: 13 * s, fill: '#6f7f2c'}, g); el('circle', {cx: -5 * s, cy: -31 * s, r: 9 * s, fill: C.avocado}, g);
+  cap(g, `M${-12 * s} ${-33 * s} Q0 ${-46 * s} ${12 * s} ${-33 * s} Q0 ${-38 * s} ${-12 * s} ${-33 * s} Z`); return g; }
 function stop(deg, cls){ const g = at(deg); const s = el('g', {class: cls || '', style: 'transform-box:fill-box;transform-origin:50% 100%'}, g);
   el('rect', {x: -2, y: -50, width: 4, height: 50, rx: 2, fill: C.brown}, s);
   el('circle', {cx: 0, cy: -58, r: 11, fill: cls ? C.orange : C.turq, stroke: C.brown, 'stroke-width': 2.5}, s);
@@ -291,9 +323,11 @@ function pin(deg){ const g = at(deg); el('path', {d: 'M0 0 C-15 -27 -22 -36 -22 
 const SCENE = [0, 58, 64, 140, 210, 290];
 let ZOOM = [1, 1.7, 1.7, 1.45, 1.2, 1];
 const busy = [[-15, 15], [46, 82], [128, 152], [192, 228], [278, 302]];
-for (let a = 0; a < 360; a += 7 + rnd() * 5) {
-  if (busy.some(([x, y]) => a > (x + 360) % 360 && a < y) || a > 345) continue;
-  rnd() > .32 ? building(a, 28 + rnd() * 20, 36 + rnd() * 58) : tree(a, .9 + rnd() * .45);
+const RHYTHM = [['h', 50], ['h', 50], ['t'], ['s', 64], ['a', 92], ['t'], ['h', 50], ['s', 64], ['a', 80], ['t']];
+for (let a = 0, k = 0; a < 345; a += 8, k++) {
+  if (busy.some(([x, y]) => a > (x + 360) % 360 - 3 && a < y + 3)) continue;
+  const [type, h] = RHYTHM[k % RHYTHM.length];
+  type === 't' ? tree(a, 1) : building(a, 30, h);
 }
 building(-11, 34, 104, C.cream); building(-5, 26, 62, C.orange); shelter(2); stop(6); tree(10); building(13, 30, 80, C.avocado);
 house(51); walker(54.5); stop(59, 'gone-sign'); building(63.5, 26, 58, C.turq); tree(67.5); building(71.5, 24, 48, C.cream); stop(75.5); building(79.5, 28, 92, C.gold);
@@ -305,6 +339,12 @@ building(131, 28, 60, C.gold); tree(135); stop(140); person(143.5); building(147
 tree(198); cityHall(210); tree(222, 1.2); building(226.5, 22, 50, C.orange);
 building(281, 26, 78, C.avocado); tree(285); pin(290); stop(295); building(299, 30, 64, C.cream);
 
+const sky = el('g', {opacity: .16}); spin.insertBefore(sky, spin.children[0]);
+for (let a = 0; a < 360; a += 4) { if (Math.abs(((a - 205 + 540) % 360) - 180) < 3) continue;
+  const h = 70 + ((a * 37) % 60), w = 22 + ((a * 13) % 12);
+  el('rect', {x: -w / 2, y: -h, width: w, height: h + 30, rx: 2, fill: C.brown, transform: `rotate(${a}) translate(0 ${-(R - 10)})`}, sky); }
+const cn = el('g', {transform: `rotate(184) translate(0 ${-(R - 10)})`}, sky);                // the CN Tower, far behind
+el('path', {d: 'M-6 0 L-3 -190 L3 -190 L6 0 Z M-12 -120 h24 a6 6 0 0 1 0 12 h-24 a6 6 0 0 1 0-12 Z M-1.5 -190 V-250 h3 V-190 Z', fill: C.brown}, cn);
 const bus = el('g', {}), busBody = at(0, bus, -3); spin.insertBefore(bus, spin.children[spin.children.length - 1]);
 el('rect', {x: -28, y: -24, width: 56, height: 24, rx: 9, fill: C.cream, stroke: C.brown, 'stroke-width': 2.5}, busBody);
 el('rect', {x: -28, y: -9, width: 56, height: 5, fill: C.orange}, busBody);
