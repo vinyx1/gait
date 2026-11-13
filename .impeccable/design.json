@@ -1,0 +1,335 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-13T19:18:02+00:00",
+  "title": "Design System: TripLens",
+  "extensions": {
+    "colorMeta": {
+      "harvest-gold": {
+        "role": "primary",
+        "displayName": "Harvest Gold",
+        "canonical": "oklch(78.9% 0.144 82)",
+        "tonalRamp": [
+          "#191001",
+          "#3c2300",
+          "#623800",
+          "#8b5700",
+          "#b17b00",
+          "#cfa34d",
+          "#e4ca9c",
+          "#f6edde"
+        ]
+      },
+      "avocado": {
+        "role": "secondary",
+        "displayName": "Avocado",
+        "canonical": "oklch(50.7% 0.100 119)",
+        "tonalRamp": [
+          "#101307",
+          "#262d08",
+          "#3d4803",
+          "#5d6b20",
+          "#7f8f45",
+          "#a5b378",
+          "#cad3b1",
+          "#edf0e5"
+        ]
+      },
+      "burnt-orange": {
+        "role": "secondary",
+        "displayName": "Burnt Orange",
+        "canonical": "oklch(62.8% 0.152 47)",
+        "tonalRamp": [
+          "#1f0c04",
+          "#491700",
+          "#772100",
+          "#a53e00",
+          "#cd6427",
+          "#ea9165",
+          "#f6c0a7",
+          "#fdeae1"
+        ]
+      },
+      "walnut": {
+        "role": "tertiary",
+        "displayName": "Walnut",
+        "canonical": "oklch(34.6% 0.050 53)",
+        "tonalRamp": [
+          "#16100c",
+          "#34251c",
+          "#553c2c",
+          "#7a5c48",
+          "#9f7e6a",
+          "#c0a494",
+          "#dbcac0",
+          "#f3edea"
+        ]
+      },
+      "pyrex-turquoise": {
+        "role": "tertiary",
+        "displayName": "Pyrex Turquoise",
+        "canonical": "oklch(63.5% 0.090 188)",
+        "tonalRamp": [
+          "#051513",
+          "#00312e",
+          "#004f4a",
+          "#00736d",
+          "#379791",
+          "#73bab4",
+          "#b0d7d3",
+          "#e5f2f0"
+        ]
+      },
+      "coffee-ink": {
+        "role": "neutral",
+        "displayName": "Coffee Ink",
+        "canonical": "oklch(21.0% 0.032 52)",
+        "tonalRamp": [
+          "#15110e",
+          "#302721",
+          "#4f3e35",
+          "#735e53",
+          "#978175",
+          "#b9a79c",
+          "#d6cbc5",
+          "#f1eeeb"
+        ]
+      },
+      "teal-ink": {
+        "role": "neutral",
+        "displayName": "Teal Ink",
+        "canonical": "oklch(23.3% 0.028 188)",
+        "tonalRamp": [
+          "#0e1312",
+          "#202c2a",
+          "#334745",
+          "#516966",
+          "#738c89",
+          "#9bb0ad",
+          "#c5d1cf",
+          "#ebefef"
+        ]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Cream",
+        "canonical": "oklch(95.9% 0.035 89)",
+        "tonalRamp": [
+          "#13110d",
+          "#2d281e",
+          "#494230",
+          "#6b634d",
+          "#8f856f",
+          "#b2aa97",
+          "#d2cdc2",
+          "#f0eeea"
+        ]
+      },
+      "stoneware": {
+        "role": "neutral",
+        "displayName": "Stoneware",
+        "canonical": "oklch(92.0% 0.050 87)",
+        "tonalRamp": [
+          "#14110b",
+          "#2f2819",
+          "#4c4126",
+          "#706242",
+          "#938563",
+          "#b6aa8e",
+          "#d4cdbd",
+          "#f1eee9"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "The single page headline."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Scene titles written as plain sentences."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "The one big number in a scene; unit set in Atkinson 700."
+      },
+      "quote": {
+        "displayName": "Quote",
+        "purpose": "Verbatim source quotations, max 28ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All running text, 20px floor, max 34ch in scenes."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Pill and button labels, inline emphasis, text actions."
+      }
+    },
+    "shadows": [
+      {
+        "name": "marker-ring",
+        "value": "0 0 0 3px var(--ink)",
+        "purpose": "Outline ring on the scale bar's 'was' marker only; not elevation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-house",
+        "value": "cubic-bezier(.22,.8,.24,1)",
+        "purpose": "Every transition: field cross-fades, pill lift, scale bar moves."
+      },
+      {
+        "name": "field-crossfade",
+        "value": "background-color .9s, color .9s",
+        "purpose": "Scene field and ink change as the reader scrolls (body, nav, pills)."
+      },
+      {
+        "name": "lift",
+        "value": "transform .2s",
+        "purpose": "Pill rises 3px on hover (chips 2px), presses 1px on active."
+      },
+      {
+        "name": "scale-move",
+        "value": "width/left .6s",
+        "purpose": "Scale bar fill, marker and limit when the rider changes."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "none",
+        "purpose": "Under prefers-reduced-motion all transitions are removed, snow hidden, platter snaps."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "phone",
+        "value": "860px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one action per screen: a 64px ink pill whose label takes the field colour, so it inverts every scene.",
+      "html": "<div class=\"ds-field\"><a class=\"ds-btn\" href=\"#\">Check my bus trip <svg viewBox=\"0 0 24 24\" width=\"26\" height=\"26\" aria-hidden=\"true\"><path d=\"M4 12h14M13 6l6 6-6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a></div>",
+      "css": ".ds-field{background:#e8b03a;padding:32px} .ds-btn{display:inline-flex;align-items:center;gap:14px;min-height:64px;padding:0 32px;border-radius:999px;background:#24140a;color:#e8b03a;font-family:'Atkinson Hyperlegible',Atkinson,system-ui,sans-serif;font-weight:700;font-size:21px;text-decoration:none;transition:transform .2s cubic-bezier(.22,.8,.24,1)} .ds-btn svg{transition:transform .25s cubic-bezier(.22,.8,.24,1)} .ds-btn:hover{transform:translateY(-3px)} .ds-btn:hover svg{transform:translateX(4px)} .ds-btn:active{transform:translateY(1px)} .ds-btn:focus-visible{outline:4px solid #24140a;outline-offset:4px}"
+    },
+    {
+      "name": "Primary Button on Avocado",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The same pill on a cream-ink field: cream pill, avocado label.",
+      "html": "<div class=\"ds-field-av\"><a class=\"ds-btn-av\" href=\"#\">Check my bus trip <svg viewBox=\"0 0 24 24\" width=\"26\" height=\"26\" aria-hidden=\"true\"><path d=\"M4 12h14M13 6l6 6-6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a></div>",
+      "css": ".ds-field-av{background:#5f6d22;padding:32px} .ds-btn-av{display:inline-flex;align-items:center;gap:14px;min-height:64px;padding:0 32px;border-radius:999px;background:#fbf1d8;color:#5f6d22;font-family:'Atkinson Hyperlegible',Atkinson,system-ui,sans-serif;font-weight:700;font-size:21px;text-decoration:none;transition:transform .2s cubic-bezier(.22,.8,.24,1)} .ds-btn-av:hover{transform:translateY(-3px)} .ds-btn-av:focus-visible{outline:4px solid #fbf1d8;outline-offset:4px}"
+    },
+    {
+      "name": "Text Action",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The quieter second action beside the pill: a bold underlined link, never a second pill.",
+      "html": "<div class=\"ds-field-t\"><a class=\"ds-text\" href=\"#\">Show me an example first</a></div>",
+      "css": ".ds-field-t{background:#e8b03a;padding:32px;color:#24140a} .ds-text{color:inherit;font-family:'Atkinson Hyperlegible',Atkinson,system-ui,sans-serif;font-weight:700;font-size:20px;text-decoration-thickness:2px;text-underline-offset:5px} .ds-text:hover{text-decoration-thickness:3px} .ds-text:focus-visible{outline:4px solid #24140a;outline-offset:4px;border-radius:12px}"
+    },
+    {
+      "name": "Rider Chips",
+      "kind": "chip",
+      "refersTo": "chip-rider",
+      "description": "Chunky 56px pills with a 3px ink border; pressed fills with ink so state never relies on colour alone.",
+      "html": "<div class=\"ds-field-o\" role=\"group\" aria-label=\"Show this change for someone who\"><button class=\"ds-chip\" aria-pressed=\"true\">Uses a walker</button><button class=\"ds-chip\" aria-pressed=\"false\">Uses a wheelchair</button><button class=\"ds-chip\" aria-pressed=\"false\">Works late shifts</button></div>",
+      "css": ".ds-field-o{background:#d0662a;padding:32px;display:flex;flex-wrap:wrap;gap:10px} .ds-chip{font-family:'Atkinson Hyperlegible',Atkinson,system-ui,sans-serif;font-weight:700;font-size:19px;min-height:56px;padding:0 22px;border-radius:999px;border:3px solid #24140a;background:transparent;color:#24140a;cursor:pointer;transition:background-color .2s,color .2s,transform .2s cubic-bezier(.22,.8,.24,1)} .ds-chip:hover{transform:translateY(-2px)} .ds-chip[aria-pressed=true]{background:#24140a;color:#d0662a} .ds-chip:focus-visible{outline:4px solid #24140a;outline-offset:4px}"
+    },
+    {
+      "name": "Scale Bar",
+      "kind": "custom",
+      "refersTo": "scale-track",
+      "description": "Every distance read on one measured bar against the rider's limit: fill is now, ringed marker is before, dashed line is the limit.",
+      "html": "<div class=\"ds-field-s\"><div class=\"ds-scale\"><div class=\"ds-track\"><div class=\"ds-fill\" style=\"width:70%\"></div><div class=\"ds-was\" style=\"left:calc(10% - 3px)\"></div><div class=\"ds-lim\" style=\"left:41.7%\"><span>limit 250 m</span></div></div><div class=\"ds-ticks\"><span>0 m</span><span>200</span><span>400</span><span>600 m</span></div></div><p class=\"ds-verdict\">Her walk grew from about <b>62 m</b> to about <b>419 m</b>.</p></div>",
+      "css": ".ds-field-s{background:#d0662a;color:#24140a;padding:64px 32px 32px;font-family:'Atkinson Hyperlegible',Atkinson,system-ui,sans-serif;} .ds-scale{position:relative;max-width:560px;padding-bottom:34px} .ds-track{position:relative;height:22px;border-radius:999px;background:color-mix(in srgb,#24140a 18%,transparent)} .ds-fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:#24140a;transition:width .6s cubic-bezier(.22,.8,.24,1)} .ds-was{position:absolute;top:-6px;width:6px;height:34px;border-radius:3px;background:#d0662a;box-shadow:0 0 0 3px #24140a} .ds-lim{position:absolute;top:-14px;bottom:-8px;width:0;border-left:4px dashed #24140a} .ds-lim span{position:absolute;top:-34px;left:-2px;transform:translateX(-50%);white-space:nowrap;font-weight:700;font-size:20px} .ds-ticks{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;font-size:16px;font-variant-numeric:tabular-nums} .ds-verdict{margin:12px 0 0;font-size:21px;max-width:32ch}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "button-primary-nav",
+      "description": "Fixed bar in the current field colour: Young Serif wordmark with the platter mark left, a 52px pill right.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-word\" href=\"#\"><svg viewBox=\"0 0 34 34\" width=\"34\" height=\"34\" aria-hidden=\"true\"><circle cx=\"17\" cy=\"17\" r=\"15\" fill=\"#4e3220\"/><circle cx=\"17\" cy=\"17\" r=\"15\" fill=\"none\" stroke=\"#fbf1d8\" stroke-width=\"3\" stroke-dasharray=\"2 4\"/><rect x=\"14\" y=\"5\" width=\"6\" height=\"9\" rx=\"3\" fill=\"#3c9c95\"/></svg>TripLens</a><a class=\"ds-navbtn\" href=\"#\">Check my bus trip <svg viewBox=\"0 0 24 24\" width=\"26\" height=\"26\" aria-hidden=\"true\"><path d=\"M4 12h14M13 6l6 6-6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a></nav>",
+      "css": ".ds-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 32px;background:#e8b03a;color:#24140a} .ds-word{font-family:'Young Serif',Georgia,serif;font-size:30px;color:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:12px} .ds-navbtn{display:inline-flex;align-items:center;gap:14px;min-height:52px;padding:0 24px;border-radius:999px;background:#24140a;color:#e8b03a;font-family:'Atkinson Hyperlegible',Atkinson,system-ui,sans-serif;font-weight:700;font-size:18px;text-decoration:none;transition:transform .2s cubic-bezier(.22,.8,.24,1)} .ds-navbtn:hover{transform:translateY(-3px)} .ds-navbtn:focus-visible{outline:4px solid #24140a;outline-offset:4px}"
+    },
+    {
+      "name": "Scene Text Block",
+      "kind": "card",
+      "refersTo": "button-primary",
+      "description": "A scene as shipped: sentence headline, body at 34ch, the big figure with its unit. No card; the field is the container.",
+      "html": "<section class=\"ds-scene\"><h2>Her walk to the bus was short.</h2><p>Take an example rider who uses a walker, starting at 1599 Bathurst Street.</p><p class=\"ds-big\">62<small>metres</small></p></section>",
+      "css": ".ds-scene{background:#5f6d22;color:#fbf1d8;padding:48px 32px} .ds-scene h2{font-family:'Young Serif',Georgia,serif;font-weight:400;font-size:52px;line-height:1.04;letter-spacing:-.015em;margin:0;text-wrap:balance} .ds-scene p{font-family:'Atkinson Hyperlegible',Atkinson,system-ui,sans-serif;font-size:21px;line-height:1.6;margin:26px 0 0;max-width:34ch} .ds-big{font-family:'Young Serif',Georgia,serif!important;font-size:80px!important;line-height:1!important;font-variant-numeric:lining-nums tabular-nums;margin-top:30px!important} .ds-big small{font-family:'Atkinson Hyperlegible',Atkinson,system-ui,sans-serif;font-weight:700;font-size:26px;margin-left:6px}"
+    },
+    {
+      "name": "Footer",
+      "kind": "custom",
+      "refersTo": "footer",
+      "description": "Walnut course, cream ink; Young Serif links and honest small print.",
+      "html": "<footer class=\"ds-foot\"><div class=\"ds-links\"><a href=\"#\">Check my bus trip</a><a href=\"#\">Simple form</a><a href=\"#\">City decisions</a></div><p>TripLens is a working prototype. It is not an official City of Toronto or TTC service.</p></footer>",
+      "css": ".ds-foot{background:#4e3220;color:#fbf1d8;padding:48px 32px;display:grid;gap:28px;font-family:'Atkinson Hyperlegible',Atkinson,system-ui,sans-serif;font-size:20px} .ds-links{display:grid;gap:8px} .ds-links a{font-family:'Young Serif',Georgia,serif;font-size:34px;color:inherit;text-decoration:none} .ds-links a:hover{text-decoration:underline} .ds-links a:focus-visible{outline:4px solid #fbf1d8;outline-offset:4px;border-radius:12px} .ds-foot p{margin:0;max-width:52ch}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Harvest Kitchen",
+    "overview": "TripLens tells City decisions the way they would be read aloud at a 1970s Toronto kitchen table. Each scene owns the whole screen in one flat colour from the kitchen (harvest gold, avocado, burnt orange, walnut, Pyrex turquoise), and the ink flips between dark coffee brown and cream so the words always sit on the field at body-text contrast. Nothing floats on a card; the page is a stack of full-width colour courses, and the background colour itself changes as the reader scrolls (0.9s cross-fade), so the scene change is the section break.\n\nThe world's one picture is a round stoneware platter of the neighbourhood: a walnut centre with wood rings, an avocado glaze edge, a dotted stoneware band, a turquoise dashed bus route, and flat, rounded houses, trees, stops and a cream bus standing on its rim. It turns like a lazy Susan, one scene per scroll. Drawings are flat fills with rounded corners and short dark-brown strokes, never outlines with gradients, never photographs.\n\nDensity is low and type is large: the body never drops below 20px, the display face is a warm, soft-shouldered serif, and every control is a chunky pill at 56px or taller. The register is warm and plain, never alarming.",
+    "keyCharacteristics": [
+      "One colour field per scene; the field is the background of the whole viewport, nav included.",
+      "Ink is either coffee brown or cream (teal ink on turquoise), chosen per field for contrast.",
+      "Pills that invert: the primary action is always ink-on-field reversed (field-coloured text on an ink pill).",
+      "Flat stoneware drawing language; the platter is the only illustration.",
+      "Large, legible type: Young Serif display, Atkinson Hyperlegible body at 20px and up.",
+      "Figures are read on one measured scale against the rider's limit."
+    ],
+    "rules": [
+      {
+        "name": "The One Field Rule",
+        "body": "A scene owns the whole screen in one field colour. Never place two fields side by side on one screen, and never set a field colour as a small accent on another field.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink Flip Rule",
+        "body": "Every field has exactly one ink, and everything on it (text, rules, pills, scale bar, focus ring, selection) uses that ink or that field. Ink is chosen for at least 4.5:1 at body size; secondary text uses full ink, not a faded one, on avocado, orange and turquoise.",
+        "section": "colors"
+      },
+      {
+        "name": "The Drawing Palette Rule",
+        "body": "The platter drawing uses the same hues, lifted slightly brighter so it reads against its own field (gold #f0c04a, orange #e07a3a, avocado #8a9b3a, turquoise #4fb0a8, walnut #5a3a22, wood #6b4428 / #7a5032, leaf shade #6f7f2c). These are drawing-only; never use them for text or page fields.",
+        "section": "colors"
+      },
+      {
+        "name": "The Twenty Pixel Floor Rule",
+        "body": "Running text, notes, sources and labels are 20px or larger. Smaller sizes appear only on aria-hidden decoration (scale tick numbers, 16px).",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Headline Rule",
+        "body": "Headlines are full plain sentences with a full stop, in sentence case. No small labels or eyebrows above them.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Stoneware Rule",
+        "body": "Surfaces are flat colour. Lift is expressed by motion (a pill rises 3px on hover), never by a shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** give each scene one full-screen field from the palette and flip the ink to the shipped pair for that field.",
+      "**Do** make the primary action a 64px ink pill with field-coloured text and an arrow, one per screen.",
+      "**Do** keep running text at 20px or larger in Atkinson Hyperlegible, and headlines as plain sentences in Young Serif.",
+      "**Do** show any distance against the rider's limit on the scale bar, with a plain-sentence verdict beside it.",
+      "**Do** draw in flat, rounded stoneware shapes using the drawing palette, with a text description.",
+      "**Do** honour reduced motion: colour changes and the platter snap rather than ease."
+    ],
+    "donts": [
+      "**Don't** use white, grey, or a white civic page with a headline, button and three feature cards.",
+      "**Don't** add drop shadows, gradients, glass or blur to page elements.",
+      "**Don't** put small labels or eyebrows above headlines.",
+      "**Don't** use faded or translucent ink for text on avocado, orange or turquoise fields.",
+      "**Don't** bring outline-style icon sets or glyph icons into this world; the platter drawing and the inline SVG arrow are the vocabulary."
+    ]
+  }
+}
