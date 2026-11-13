@@ -18,7 +18,7 @@
   --sky:#fbe9d2; --sky-winter:#dde9ef; --soil:#7a5236; --soil-2:#946545; --grass:#6fae55; --grass-2:#5a9746;
   --ink:#3b2a1d; --ink-2:#6a5240; --paper:#fffaf2; --ground:#3b2a1d;
   --b1:#fff4e2; --b2:#f6c96a; --b3:#ef9a73; --b4:#9cc8d6; --roof:#c8643f; --tree:#4f9a5b; --tree-2:#3f8450;
-  --route:#2f7fc0; --gone:#c8452e; --go:#2f7a43; --sun:#f6b43c;
+  --route:#2f7fc0; --gone:#a33520; --go:#2f7a43; --sun:#f6b43c;
   --m:clamp(16px,4vw,64px); --f-xl:clamp(46px,6.4vw,104px); --f-l:clamp(36px,4.4vw,68px); --f-b:clamp(17px,1.25vw,19px);
   --ease:cubic-bezier(.2,.7,.2,1);
 }
@@ -294,7 +294,7 @@ function layout(){
   const r = phone ? Math.min(W * 0.92, H * 0.44) : Math.min(H * 0.48, W * 0.3);
   const cy = phone ? H * 0.62 + r : H + r * 0.02, cx = phone ? W / 2 : W * 0.7;
   base = {r, cx, top: cy - r}; place();
-  sun.setAttribute('transform', `translate(${phone ? W - 70 : W * 0.86} ${phone ? H * 0.5 : H * 0.2})`);
+  sun.setAttribute('transform', phone ? `translate(${W - 40} ${H * 0.6 - 30}) scale(.5)` : `translate(${W * 0.86} ${H * 0.2})`);
 }
 addEventListener('resize', layout); layout();
 
