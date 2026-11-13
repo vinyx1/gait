@@ -20,6 +20,7 @@
   <h3>New accessibility issues after the change for {{ personas[persona].label | lower }}</h3>
   {% if cmp.new_issues %}<ul class="findings">{% for f in cmp.new_issues %}<li><span class="sev {{ f.severity }}">{{ {'barrier': 'Limit', 'watch': 'Worth knowing', 'info': 'Info'}[f.severity] }}</span> {{ f.text }}</li>{% endfor %}</ul>
   {% else %}<p>No new issues found by the fixed rules.</p>{% endif %}
+  {% if cmp.improvements %}<h3>Issues this change removes</h3><ul class="findings">{% for f in cmp.improvements %}<li><span class="sev info">Improves</span> {{ f.text }}</li>{% endfor %}</ul>{% endif %}
 </section>
 {% endfor %}
 

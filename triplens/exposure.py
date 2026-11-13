@@ -150,8 +150,8 @@ def analyze(legs: list[Leg], persona_key: str, band: str, day: str, today_year: 
     mentions = route_mentions([l.route for l in transit])
     flags: list[dict] = []
 
-    def flag(sev, text, evidence, kind="rule"):
-        flags.append({"severity": sev, "text": text, "evidence": evidence, "kind": kind})
+    def flag(sev, text, evidence, kind="rule", code=None, leg=None):
+        flags.append({"severity": sev, "text": text, "evidence": evidence, "kind": kind, "code": code, "leg": leg})
 
     # walking legs
     careful = persona_key in ("wheelchair", "senior_walker")
@@ -161,17 +161,17 @@ def analyze(legs: list[Leg], persona_key: str, band: str, day: str, today_year: 
                else f"{w.label}: {w.length_m} m straight line, times {access.DETOUR} = about {est} m of walking (no sidewalk path found)")
         ev = [how]
         if est > p.max_walk_m:
-            flag("barrier" if careful else "watch",
-                 f"{w.label}: about {est} m of walking, longer than the {p.max_walk_m} m assumed for a {p.label.lower()}.", ev)
+            flag("barrier" if careful else "watch", code="walk_over_limit", leg=walks.index(w), text=
+                 f"{w.label}: about {est} m of walking, longer than the {p.max_walk_m} m assumed for a {p.label.lower()}.", evidence=ev)
         elif est > 0.8 * p.max_walk_m:
-            flag("watch", f"{w.label}: about {est} m of walking, close to the {p.max_walk_m} m assumed for a {p.label.lower()}.", ev)
+            flag("watch", code="walk_near_limit", leg=walks.index(w), text=f"{w.label}: about {est} m of walking, close to the {p.max_walk_m} m assumed for a {p.label.lower()}.", evidence=ev)
         if w.stats and w.stats["no_sidewalk_m"] > 0:
-            flag("barrier" if careful and w.stats["no_sidewalk_m"] >= 50 else "watch",
-                 f"{w.label}: about {w.stats['no_sidewalk_m']} m of the walk is on a street or laneway with no sidewalk in the City's data.", ev)
+            flag("barrier" if careful and w.stats["no_sidewalk_m"] >= 50 else "watch", code="no_sidewalk", leg=walks.index(w), text=
+                 f"{w.label}: about {w.stats['no_sidewalk_m']} m of the walk is on a street or laneway with no sidewalk in the City's data.", evidence=ev)
         if w.stats and w.stats["crossings"].get("no signal") and careful:
-            flag("watch", f"{w.label}: the path crosses at {w.stats['crossings']['no signal']} crossing(s) the City lists with no signal.", ev)
+            flag("watch", code="unsignalled", leg=walks.index(w), text=f"{w.label}: the path crosses at {w.stats['crossings']['no signal']} crossing(s) the City lists with no signal.", evidence=ev)
         if not w.stats:
-            flag("info", f"{w.label}: no sidewalk path was found in the City's network, so this walk is a straight-line estimate.", ev)
+            flag("info", code="straight", leg=walks.index(w), text=f"{w.label}: no sidewalk path was found in the City's network, so this walk is a straight-line estimate.", evidence=ev)
 
     # stops and service
     for t in transit:
@@ -182,20 +182,28 @@ def analyze(legs: list[Leg], persona_key: str, band: str, day: str, today_year: 
             if persona_key == "wheelchair" and "wheelchair_boarding" in rec:
                 wb = rec["wheelchair_boarding"]
                 if wb == "2":
-                    flag("barrier", f"{role} {rec['name']}: boarding is listed as not possible.", [line])
+                    flag("barrier", f"{role} {rec['name']}: boarding is listed as not possible.", [line], code="boarding_no:" + role)
                 elif wb == "0":
-                    flag("watch", f"{role} {rec['name']}: the TTC file has no wheelchair boarding information for this stop.", [line])
-            if persona_key == "senior_walker" and role == "Boarding" and "shelter_listed" in rec \
+                    flag("watch", f"{role} {rec['name']}: the TTC file has no wheelchair boarding information for this stop.", [line], code="boarding_unknown:" + role)
+            if careful and rec.get("platform"):
+                flag("watch", f"{role} {rec['name']}: you board from a {rec['platform']}, crossing the cycle track to reach it. Raised platforms can make boarding more level; check how the crossing is marked.", [line], code="platform:" + role)
+            if careful and role == "Boarding" and "shelter_listed" in rec and not rec["shelter_listed"] and not rec.get("reconstructed") and rec.get("service"):
+                n_w, nh_w = _band_count(rec, day, band)
+                if n_w:
+                    wait = round(60 * nh_w / n_w / 2)
+                    if wait >= 4:
+                        flag("watch", f"{role} {rec['name']}: no shelter is listed, and the average wait at your travel time is about {wait} minutes, outdoors in winter weather.", [line], code="shelter_wait")
+            if persona_key == "senior_walker" and role == "Boarding" and "shelter_listed" in rec and not rec.get("reconstructed") \
                     and not rec["shelter_listed"] and not rec["bench_listed"]:
-                flag("watch", f"{role} {rec['name']}: no shelter or bench is listed in City data (the data may be incomplete).", [line])
+                flag("watch", f"{role} {rec['name']}: no shelter or bench is listed in City data (the data may be incomplete).", [line], code="no_seat")
         tf = rt["trip_flags"]
         if persona_key == "wheelchair":
             ev = [f"route {t.route} {rt['long']}: trips flagged accessible {round(tf['accessible'] * 100)}%, "
                   f"not accessible {round(tf['not_accessible'] * 100)}%, no information {round(tf['no_information'] * 100)}%"]
             if tf["accessible"] == 0:
-                flag("barrier", f"Route {t.route} {rt['long']}: none of its scheduled trips are flagged wheelchair accessible in the TTC schedule file.", ev)
+                flag("barrier", code="route_wc:" + t.route, evidence=ev, text=f"Route {t.route} {rt['long']}: none of its scheduled trips are flagged wheelchair accessible in the TTC schedule file.")
             elif tf["accessible"] < 1:
-                flag("watch", f"Route {t.route} {rt['long']}: {round(tf['accessible'] * 100)}% of its scheduled trips are flagged wheelchair accessible.", ev)
+                flag("watch", code="route_wc:" + t.route, evidence=ev, text=f"Route {t.route} {rt['long']}: {round(tf['accessible'] * 100)}% of its scheduled trips are flagged wheelchair accessible.")
         b = (stop_override or {}).get(t.board.get("stop_id")) or stop_records().get(t.board.get("stop_id"))
         if b and "service" not in b:
             b = None
@@ -203,7 +211,7 @@ def analyze(legs: list[Leg], persona_key: str, band: str, day: str, today_year: 
             n, nh = _band_count(b, day, band)
             ev = [access.stop_line(b)]
             if n == 0:
-                flag("barrier", f"{b['name']}: no {DAYS[day]} departures in the {BANDS[band][0].lower()} in the base schedule.", ev)
+                flag("barrier", code="no_service", evidence=ev, text=f"{b['name']}: no {DAYS[day]} departures in the {BANDS[band][0].lower()} in the base schedule.")
             else:
                 gap = round(60 * nh / n)
                 flag("info", f"{b['name']}: {n} {DAYS[day]} departures in the {BANDS[band][0].lower()}, about one every {gap} minutes on average (all routes at the stop).", ev)

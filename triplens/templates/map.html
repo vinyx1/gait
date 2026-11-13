@@ -39,6 +39,8 @@
       <button type="button" data-s="queen">501 Queen: simulated shelter removal (wheelchair user)</button>
       <button type="button" data-s="bathurst">7 Bathurst: a past decision removed this stop (senior with a walker)</button>
       <button type="button" data-s="dufferin">29 Dufferin: a past decision removed the Croatia St stop; the walk grows but stays within the limit (senior with a walker)</button>
+      <button type="button" data-s="harbord">94 Wellesley on Harbord: a 2024 bikeway decision moved stops and added bus/bike platforms (wheelchair user)</button>
+      <button type="button" data-s="frontst">114 at Union Station late at night: a 2025 decision adds a shelter (senior with a walker)</button>
       <button type="button" data-s="dundas">505 Dundas: simulated stop relocation (wheelchair user)</button>
       <button type="button" data-s="spadina">127 Davenport: simulated temporary stop closure (senior with a walker)</button>
       <button type="button" data-s="late">7 Bathurst late at night: simulated service cut (shift worker)</button></div>
@@ -184,7 +186,8 @@ function render(d){
     h += `<div class="toggle" role="group" aria-label="Show on map"><button type="button" data-v="both" aria-pressed="true">Both</button><button type="button" data-v="before" aria-pressed="false">Before</button><button type="button" data-v="after" aria-pressed="false">After</button></div>`;
     h += (c.notes.length ? '<ul>' + c.notes.map(n => `<li>${esc(n)}</li>`).join('') + '</ul>' : '<p>This change does not touch your stops.</p>');
     h += '<table><thead><tr><th>Part</th><th>Before</th><th>After</th></tr></thead><tbody>' + c.rows.map(r => `<tr${r.changed?' class="changed"':''}><th scope="row">${esc(r.what)}</th><td>${esc(r.before)}</td><td>${esc(r.after)}</td></tr>`).join('') + '</tbody></table>';
-    h += '<h4>New accessibility issues</h4>' + (c.new_issues.length ? '<ul class="findings">' + c.new_issues.map(flagHTML).join('') + '</ul>' : '<p>None found by the fixed rules.</p>') + '</section>';
+    h += '<h4>New accessibility issues</h4>' + (c.new_issues.length ? '<ul class="findings">' + c.new_issues.map(flagHTML).join('') + '</ul>' : '<p>None found by the fixed rules.</p>');
+    h += (c.improvements && c.improvements.length ? '<h4>Issues this change removes</h4><ul class="findings">' + c.improvements.map(flagHTML).join('') + '</ul>' : '') + '</section>';
   }
   const main = d.flags.filter(f => f.kind !== 'works'), works = d.flags.filter(f => f.kind === 'works');
   h += '<h3>What the data shows</h3><ul class="findings">' + main.map(flagHTML).join('') + '</ul>';
@@ -203,6 +206,8 @@ const SAMPLES = {
   stclair: {a: [43.68626, -79.40464], b: [43.68778, -79.39435], route: '512', match: 'St Clair Sta', board: '14351', alight: '15305', rider: 'senior_walker'},
   bathurst: {a: [43.68897, -79.42036], b: [43.66554, -79.41166], route: '7', variant: 1, board: '107', alight: '14617', rider: 'senior_walker'},
   dufferin: {a: [43.65819, -79.43442], b: [43.64236, -79.42874], route: '29', variant: 2, board: '9341', alight: '15030', rider: 'senior_walker'},
+  harbord:  {a: [43.66012, -79.41720], b: [43.66497, -79.38606], route: '94', variant: 1, board: '16790', alight: '8625', rider: 'wheelchair'},
+  frontst:  {a: [43.64661, -79.37812], b: [43.64429, -79.36849], route: '114', variant: 0, board: '16754', alight: '15320', rider: 'senior_walker', band: 'late'},
   dundas:   {a: [43.65052, -79.41572], b: [43.65482, -79.38731], route: '505', variant: 0, board: '10181', alight: '2153', rider: 'wheelchair'},
   spadina:  {a: [43.67666, -79.40820], b: [43.66554, -79.41166], route: '127', variant: 0, board: '7956', alight: '14777', rider: 'senior_walker'},
   late:     {a: [43.68897, -79.42036], b: [43.66554, -79.41166], route: '7', variant: 1, board: '107', alight: '14617', rider: 'shift_worker', band: 'late'},

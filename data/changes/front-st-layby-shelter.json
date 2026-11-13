@@ -1,0 +1,36 @@
+{
+  "id": "front-st-layby-shelter",
+  "title": "Front St West bus lay-by (2025): new shelter and relocated accessible loading zone for the 114 and 121",
+  "body": "City Council item 2025.EX21.4 (Transit Priority on Queens Quay East)",
+  "status": "approved; shelter not yet listed in City data",
+  "simulated": false,
+  "status_note": "The report proposes a new bus stop marker and shelter at the east end of the Front St West lay-by, and moves the Wheel-Trans accessible loading zone 50 m east with a dropped curb and curb ramp. The new stop appears in the TTC schedule, but the City's shelter list does not show a shelter there yet.",
+  "source_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-253638.pdf",
+  "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.EX21.4",
+  "source_pages_file": "data/reports/cache/backgroundfile-253638.pages.json",
+  "source_pages": [
+    24
+  ],
+  "quotes": [
+    "A new bus stop marker and bus shelter would be introduced at the east end of the lay-by area to indicate customer pick-up, for the TTC's 114 Queens Quay East and 121 Esplanade-River routes.",
+    "Following consultation with Wheel-Trans, the existing accessible loading zone is proposed to be relocated 50 metres east from its current location, to in front of the marked bus layover area."
+  ],
+  "effects": [
+    {
+      "type": "add_shelter",
+      "route": "114",
+      "stop_ids": [
+        "16754"
+      ],
+      "quote": null
+    },
+    {
+      "type": "add_shelter",
+      "route": "121",
+      "stop_ids": [
+        "16754"
+      ],
+      "quote": null
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "past-94-harbord-bikeway-stops",
+  "title": "Harbord-Hoskin bikeway (2024): 94 Wellesley stops shifted and bus/bike platforms added",
+  "body": "City Council item 2024.IE10.2 (Cycling Network Plan, 2024)",
+  "status": "decided and implemented",
+  "phase": "implemented",
+  "simulated": false,
+  "status_note": "The report says TTC stops shift from Crawford St to Montrose Ave, Grace St to Clinton St and Manning Ave to Palmerston Blvd, and raised bus/bike platforms are proposed. Today's TTC schedule has stops at Montrose, Clinton and Palmerston and none at Crawford, Grace or Manning, so the shifts happened. Whether each platform was built is not in the data. Old stops are reconstructed where each street meets Harbord St. Found by the free search.",
+  "source_url": "https://www.toronto.ca/legdocs/mmis/2024/ie/bgrd/backgroundfile-241748.pdf",
+  "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.IE10.2",
+  "source_pages_file": "data/reports/cache/backgroundfile-241748.pages.json",
+  "source_pages": [
+    11
+  ],
+  "quotes": [
+    "TTC staff have proposed that several TTC bus stops be shifted including: Crawford Street to Montrose Avenue, Grace Street to Clinton Street and Manning Avenue to Palmerston Boulevard.",
+    "Raised bus/bike platforms at TTC bus stops are proposed for installation."
+  ],
+  "effects": [
+    {
+      "type": "restore_removed_stops",
+      "route": "94",
+      "cross_streets": [
+        [
+          "Crawford St",
+          "Harbord St at Crawford St"
+        ],
+        [
+          "Grace St",
+          "Harbord St at Grace St"
+        ],
+        [
+          "Manning Ave",
+          "Harbord St at Manning Ave"
+        ]
+      ],
+      "quote": null
+    },
+    {
+      "type": "bus_bike_platform",
+      "route": "94",
+      "stop_ids": [
+        "16829",
+        "16790",
+        "16791",
+        "16792",
+        "16793",
+        "16828"
+      ],
+      "label": "raised bus/bike platform beside the Harbord St cycle track (as proposed in the report)",
+      "quote": null
+    }
+  ]
+}

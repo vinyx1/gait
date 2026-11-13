@@ -432,7 +432,7 @@ async def trip_api(request: Request):
         comps.append({"id": c["id"], "title": c["title"], "simulated": c["simulated"], "status": c["status"], "status_note": c["status_note"],
                       "phase": c.get("phase", "proposed"), "item_url": c.get("item_url"), "before": _legs_geojson(cmp["before_legs"]),
                       "source_url": c["source_url"], "quotes": c["quotes"], "notes": cmp["notes"], "rows": cmp["rows"],
-                      "new_issues": cmp["new_issues"], "after": _legs_geojson(cmp["after_legs"]),
+                      "new_issues": cmp["new_issues"], "improvements": cmp["improvements"], "after": _legs_geojson(cmp["after_legs"]),
                       "removed": {"type": "FeatureCollection", "features": removed}})
     pts = lambda items, kind: [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [i["lon"], i["lat"]]},
                                 "properties": {"kind": kind, **{k: i.get(k) for k in ("title", "label", "upcoming", "item_id", "project", "location", "timeline", "distance_m")}}}

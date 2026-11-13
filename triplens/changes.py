@@ -85,6 +85,25 @@ def restored_stops(change: dict, route: str) -> list[dict]:
     return out
 
 
+def apply_stop_attrs(legs: list[Leg], change: dict) -> tuple[list[Leg], list[str]]:
+    """Effects that change a stop's features rather than its position."""
+    new, notes = [copy.deepcopy(l) for l in legs], []
+    for e in change["effects"]:
+        if e["type"] not in ("add_shelter", "bus_bike_platform"):
+            continue
+        for l in new:
+            if l.kind == "transit" and l.route == e["route"]:
+                for st in (l.board, l.alight):
+                    if st.get("stop_id") in e["stop_ids"]:
+                        if e["type"] == "add_shelter" and not st.get("shelter_listed"):
+                            st["shelter_listed"] = True
+                            notes.append(f"{st['name']}: a new bus shelter would be provided.")
+                        if e["type"] == "bus_bike_platform":
+                            st["platform"] = e.get("label", "raised bus/bike platform beside a cycle track")
+                            notes.append(f"{st['name']}: you board from a {st['platform']}, crossing the cycle track to reach it.")
+    return new, notes
+
+
 def _removed(change: dict, route: str) -> set[str]:
     """Stops unusable after the change: removed, or closed for a period (both treated as gone for the comparison)."""
     return {s for e in change["effects"] if e["type"] in ("remove_stop", "close_stop") and e["route"] == route for s in e["stop_ids"]}
@@ -241,18 +260,23 @@ def compare(legs: list[Leg], change: dict, rider: str, band: str, day: str) -> d
     careful = rider in ("wheelchair", "senior_walker")
     if change.get("phase") == "implemented":
         before_legs, notes = restore(legs, change, careful)
-        cmp = _compare(before_legs, legs, rider, band, day)
+        now_legs, n2 = apply_stop_attrs(legs, change)
+        notes = notes + n2
+        cmp = _compare(before_legs, now_legs, rider, band, day)
         return {"change": change, "notes": notes or ["The removed stops were not nearer for this trip, so the decision did not change it."], **cmp}
     after_legs, notes = apply(legs, change, careful)
-    return {"change": change, "notes": notes, **_compare(legs, after_legs, rider, band, day)}
+    after_legs, n2 = apply_stop_attrs(after_legs, change)
+    return {"change": change, "notes": notes + n2, **_compare(legs, after_legs, rider, band, day)}
 
 
 def _compare(legs: list[Leg], after_legs: list[Leg], rider: str, band: str, day: str) -> dict:
     before = exposure.analyze(legs, rider, band, day, stop_override=_overrides(legs))
     after = exposure.analyze(after_legs, rider, band, day, stop_override=_overrides(after_legs))
-    key = lambda f: (f["severity"], f["text"])
-    bset = {key(f) for f in before["flags"] if f["kind"] == "rule"}
-    new_issues = [f for f in after["flags"] if f["kind"] == "rule" and f["severity"] in ("barrier", "watch") and key(f) not in bset]
+    key = lambda f: (f.get("code") or f["text"], f.get("leg"))
+    rank = {"info": 0, "watch": 1, "barrier": 2}
+    bmap = {key(f): f for f in before["flags"] if f["kind"] == "rule"}
+    new_issues = [f for f in after["flags"] if f["kind"] == "rule" and f["severity"] in ("barrier", "watch")
+                  and (key(f) not in bmap or rank[f["severity"]] > rank[bmap[key(f)]["severity"]])]
     # fewer departures when the rider travels
     for lb, la in zip(legs, after_legs):
         if lb.kind == "transit" and lb.board.get("service") and la.board.get("service"):
@@ -269,9 +293,22 @@ def _compare(legs: list[Leg], after_legs: list[Leg], rider: str, band: str, day:
         else:
             for role, sb, sa in (("Get on at", lb.board, la.board), ("Get off at", lb.alight, la.alight)):
                 fb = lambda s: (f"{s['name']} (shelter and bench unknown)" if s.get("reconstructed") else
-                                f"{s['name']} (shelter {'listed' if s.get('shelter_listed') else 'not listed'}, bench {'listed' if s.get('bench_listed') else 'not listed'})")
+                                f"{s['name']} (shelter {'listed' if s.get('shelter_listed') else 'not listed'}, bench {'listed' if s.get('bench_listed') else 'not listed'}"
+                                + (f", {s['platform']}" if s.get('platform') else "") + ")")
                 rows.append({"what": role, "before": fb(sb), "after": fb(sa), "changed": fb(sb) != fb(sa)})
-    return {"rows": rows, "new_issues": new_issues, "after_legs": after_legs, "before_legs": legs}
+    # a rebuilt stop's shelter, bench and boarding flags are unknown: do not compare them
+    unknown = set()
+    for lb in legs:
+        if lb.kind == "transit":
+            if lb.board.get("reconstructed"):
+                unknown |= {"shelter_wait", "no_seat", "boarding_unknown:Boarding", "boarding_no:Boarding"}
+            if lb.alight.get("reconstructed"):
+                unknown |= {"boarding_unknown:Getting off at", "boarding_no:Getting off at"}
+    new_issues = [f for f in new_issues if f.get("code") not in unknown]
+    aset = {key(f) for f in after["flags"] if f["kind"] == "rule"}
+    improvements = [f for f in before["flags"] if f["kind"] == "rule" and f["severity"] in ("barrier", "watch") and key(f) not in aset
+                    and f.get("code") not in unknown]
+    return {"rows": rows, "new_issues": new_issues, "improvements": improvements, "after_legs": after_legs, "before_legs": legs}
 
 
 def _overrides(legs: list[Leg]) -> dict:

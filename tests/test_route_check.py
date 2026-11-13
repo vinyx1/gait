@@ -214,7 +214,9 @@ def test_relocation_moves_stop_and_reroutes_walk():
 
 def test_temporary_closure_names_dates():
     c = _cmp("250 Spadina Rd", "800 Bathurst St", "senior_walker", "day", ["127"], [(0, "7956", "14777")], "sim-127-temporary-closure")
-    assert any("March 1, 2027" in n for n in c["notes"]) and any(f["severity"] == "barrier" for f in c["new_issues"])
+    assert any("March 1, 2027" in n for n in c["notes"]) and any(r["changed"] for r in c["rows"])
+    # the walk was already over the senior's limit before the closure, so it is not reported as a new issue
+    assert not any(f.get("code") == "walk_over_limit" for f in c["new_issues"])
 
 
 def test_service_cut_reported_for_late_traveller():
@@ -241,3 +243,22 @@ def test_free_finder_finds_real_removals_without_ai():
     for f in r7["findings"][:5]:                     # every quote is real page text
         txt = con.execute("SELECT text FROM pages WHERE url = ? AND page = ?", (f["document_url"], f["page"])).fetchone()[0]
         assert f["quote"][:200] in txt
+
+
+def _api(body):
+    return TestClient(app).post("/api/trip", json=body).json()
+
+
+def test_bikeway_decision_flags_platform_crossing_not_unknown_shelter():
+    d = _api({"a": [43.66012, -79.4172], "b": [43.66497, -79.38606], "rider": "wheelchair", "day": "weekday", "band": "day",
+              "rides": [{"route": "94", "variant": 1, "board": "16790", "alight": "8625"}]})
+    c = next(x for x in d["comparisons"] if x["id"] == "past-94-harbord-bikeway-stops")
+    codes = {f.get("code") for f in c["new_issues"]}
+    assert "platform:Boarding" in codes and "shelter_wait" not in codes
+
+
+def test_new_shelter_shows_as_improvement():
+    d = _api({"a": [43.64661, -79.37812], "b": [43.64429, -79.36849], "rider": "senior_walker", "day": "weekday", "band": "late",
+              "rides": [{"route": "114", "variant": 0, "board": "16754", "alight": "15320"}]})
+    c = next(x for x in d["comparisons"] if x["id"] == "front-st-layby-shelter")
+    assert any(f.get("code") == "shelter_wait" for f in c["improvements"]) and not c["new_issues"]
