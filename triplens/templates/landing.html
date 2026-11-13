@@ -235,22 +235,7 @@ el('feTurbulence', {type: 'turbulence', baseFrequency: '0.14 0.9', numOctaves: 1
 el('feBlend', {in: 'warp', in2: 'weft', mode: 'multiply', result: 'weave'}, fab);
 el('feColorMatrix', {in: 'weave', type: 'matrix', values: '0 0 0 0 0.92  0 0 0 0 0.88  0 0 0 0 0.82  0 0 0 -0.55 1', result: 'grain'}, fab);
 el('feComposite', {in: 'grain', in2: 'cut', operator: 'in', result: 'grainIn'}, fab);
-el('feBlend', {in: 'grainIn', in2: 'cut', mode: 'multiply', result: 'cloth'}, fab);
-// thread relief: light grazing across the weave, so the cloth has a little nap
-el('feTurbulence', {type: 'fractalNoise', baseFrequency: '0.75', numOctaves: 2, seed: 7, result: 'nap'}, fab);
-const lit = el('feDiffuseLighting', {in: 'nap', surfaceScale: 1.1, diffuseConstant: 1.32, 'lighting-color': '#ffffff', result: 'relief'}, fab);
-el('feDistantLight', {azimuth: 225, elevation: 58}, lit);
-el('feComposite', {in: 'relief', in2: 'cloth', operator: 'in', result: 'reliefIn'}, fab);
-el('feBlend', {in: 'reliefIn', in2: 'cloth', mode: 'multiply', result: 'napped'}, fab);
-// padding: each piece is a little puffed at its centre and pressed at its seams
-el('feGaussianBlur', {in: 'cut', stdDeviation: 4, result: 'soft'}, fab);
-el('feComposite', {in: 'cut', in2: 'soft', operator: 'arithmetic', k1: 0, k2: 1, k3: -0.62, k4: 0, result: 'seam'}, fab);
-el('feColorMatrix', {in: 'seam', type: 'matrix', values: '0 0 0 0 0.14  0 0 0 0 0.08  0 0 0 0 0.04  0 0 0 0.5 0', result: 'seamShade'}, fab);
-el('feComposite', {in: 'seamShade', in2: 'cut', operator: 'in', result: 'seamIn'}, fab);
-el('feMerge', {result: 'padded'}, fab).append(Object.assign(document.createElementNS(NS, 'feMergeNode'), {}), document.createElementNS(NS, 'feMergeNode'));
-fab.lastChild.children[0].setAttribute('in', 'napped'); fab.lastChild.children[1].setAttribute('in', 'seamIn');
-// the cut piece sits on the cloth below it and casts a soft shadow
-el('feDropShadow', {in: 'padded', dx: 2.2, dy: 3.2, stdDeviation: 2.4, 'flood-color': '#24140a', 'flood-opacity': .38}, fab);
+el('feBlend', {in: 'grainIn', in2: 'cut', mode: 'multiply'}, fab);
 el('circle', {r: R - 20, fill: '#2f7f79'}, spin);                                             // ocean
 const land = el('g', {'clip-path': 'url(#globe)'}, spin), landClip = el('clipPath', {id: 'land'}, defs);
 function blob(cx, cy, rad, fill, seedB){
@@ -383,7 +368,7 @@ building(131, 28, 60, C.gold); tree(135); stop(140); person(143.5); building(147
 tree(198); cityHall(210); tree(222, 1.2); building(226.5, 22, 50, C.orange);
 building(281, 26, 78, C.avocado); tree(285); pin(290); stop(295); building(299, 30, 64, C.cream);
 
-const sky = el('g', {opacity: .1}); spin.insertBefore(sky, spin.children[0]);
+const sky = el('g', {opacity: .16}); spin.insertBefore(sky, spin.children[0]);
 for (let a = 0; a < 360; a += 4) { if (Math.abs(((a - 205 + 540) % 360) - 180) < 3) continue;
   const h = 70 + ((a * 37) % 60), w = 22 + ((a * 13) % 12);
   el('rect', {x: -w / 2, y: -h, width: w, height: h + 30, rx: 2, fill: C.brown, transform: `rotate(${a}) translate(0 ${-(R - 10)})`}, sky); }
