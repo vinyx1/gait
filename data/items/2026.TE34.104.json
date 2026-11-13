@@ -1,0 +1,116 @@
+{
+  "item_id": "2026.TE34.104",
+  "url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.TE34.104",
+  "title": "Initial Findings Report: Transit Priority Measures to Support the 505 Dundas 6-Minute Network",
+  "tracking_status": [
+    "City Council adopted this item on July 29 and 30, 2026 with amendments.",
+    "This item was considered by Toronto and East York Community Council on July 8 and 9, 2026 and was adopted with amendments. It will be considered by City Council on July 29 and 30, 2026."
+  ],
+  "stages": [
+    {
+      "body": "Toronto and East York Community Council",
+      "dates_text": "July 8 and 9, 2026",
+      "first_date": "2026-07-08",
+      "last_date": "2026-07-09",
+      "item_line": "TE34.104 - Initial Findings Report: Transit Priority Measures to Support the 505 Dundas 6-Minute Network",
+      "decision_type": "ACTION",
+      "status": "Amended",
+      "wards": "4 - Parkdale - High Park, 9 - Davenport, 10 - Spadina - Fort York, 13 - Toronto Centre",
+      "decision_heading": "Community Council Recommendations",
+      "decision_text": "The Toronto and East York Community Council recommends that:\n1. City Council request the General Manager, Transportation Services, in collaboration with the Chief Executive Officer, Toronto Transit Commission, to investigate the feasibility and options for expanding Transit Priority Measures for the 505 Dundas streetcar outside of the currently implemented Transit Priority Measures, to further reduce travel times and improve reliability of the Dundas streetcar for transit riders; such investigation to include further analysis of the 505 Dundas streetcar performance and development of an engagement plan to support future Transit Priority Measures.\n2. City Council request the General Manager, Transportation Services, in collaboration with the Chief Executive Officer, Toronto Transit Commission, to report back with recommendations on Part 1 above in the first quarter of 2027.",
+      "origin": "(June 19, 2026) Report from the Director, Congestion and Network Management, Transportation Services",
+      "summary": "In December 2025, Transportation Services recommended permanent parking and traffic amendments to Dundas Street East and West to enhance transit service as part of 2025.TE27.51 Transit Priority Measures to Support the 505 Dundas 6-Minute Network. The transit priority measures (TPMs) implemented included expanding ‘No Stopping’ coverage of the AM and PM peak periods on weekdays, as well as new and expanded left-turn restrictions.\nThese changes were in support of 6-minute headways on the 505 Dundas streetcar route from 7:00 a.m. to 7:00 p.m. daily, which began on November 15, 2026. The goal of the TPMs is to help improve the speed and reliability of the 505 Dundas route and minimize the risk of increased bunching and gapping associated with moving to a more frequent headway.",
+      "background": [
+        {
+          "date": "(June 19, 2026)",
+          "label": "Report from the Director, Congestion and Network Management, Transportation Services on Initial Findings Report: Transit Priority Measures to Support the 505 Dundas 6-Minute Network",
+          "url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf"
+        }
+      ],
+      "communications_count": 3,
+      "communication_dates": [
+        "July 7, 2026",
+        "July 7, 2026",
+        "July 8, 2026"
+      ],
+      "motions": [
+        {
+          "motion_type": "Amend Item",
+          "moved_by": "Deputy Mayor Ausma Malik",
+          "result": "Carried",
+          "text": "That:\n1. City Council request the General Manager, Transportation Services, in collaboration with the Chief Executive Officer, Toronto Transit Commission, to investigate the feasibility and options for expanding Transit Priority Measures for the 505 Dundas streetcar outside of the currently implemented Transit Priority Measures, to further reduce travel times and improve reliability of the Dundas streetcar for transit riders; such investigation to include further analysis of the 505 Dundas streetcar performance and development of an engagement plan to support future Transit Priority Measures.\n2. City Council request the General Manager, Transportation Services, in collaboration with the Chief Executive Officer, Toronto Transit Commission, to report back with recommendations on Part 1 above in the first quarter of 2027."
+        }
+      ],
+      "votes": []
+    },
+    {
+      "body": "City Council",
+      "dates_text": "July 29 and 30, 2026",
+      "first_date": "2026-07-29",
+      "last_date": "2026-07-30",
+      "item_line": "TE34.104 - Initial Findings Report: Transit Priority Measures to Support the 505 Dundas 6-Minute Network",
+      "decision_type": "ACTION",
+      "status": "Amended",
+      "wards": "4 - Parkdale - High Park, 9 - Davenport, 10 - Spadina - Fort York, 13 - Toronto Centre",
+      "decision_heading": "City Council Decision",
+      "decision_text": "City Council on July 29 and 30, 2026, adopted the following:\n1. City Council request the General Manager, Transportation Services, in collaboration with the Chief Executive Officer, Toronto Transit Commission, to investigate the feasibility and options for expanding Transit Priority Measures for the 505 Dundas streetcar outside of the currently implemented Transit Priority Measures, to further reduce travel times and improve reliability of the Dundas streetcar for transit riders; such investigation to include further analysis of the 505 Dundas streetcar performance and development of an engagement plan to support future Transit Priority Measures.\n2. City Council request the General Manager, Transportation Services, in collaboration with the Chief Executive Officer, Toronto Transit Commission, to report to the Infrastructure and Environment Committee with recommendations on Part 1 above in the first quarter of 2027.",
+      "origin": null,
+      "summary": null,
+      "background": [
+        {
+          "date": "(June 19, 2026)",
+          "label": "Report from the Director, Congestion and Network Management, Transportation Services on Initial Findings Report: Transit Priority Measures to Support the 505 Dundas 6-Minute Network",
+          "url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf"
+        }
+      ],
+      "communications_count": 2,
+      "communication_dates": [
+        "July 29, 2026",
+        "July 29, 2026"
+      ],
+      "motions": [
+        {
+          "motion_type": "Amend Item",
+          "moved_by": "Councillor Shelley Carroll",
+          "result": "Carried",
+          "text": "That City Council amend recommendation 2 so that it reads as follows:\n2 .City Council request the General Manager, Transportation Services, in collaboration with the Chief Executive Officer, Toronto Transit Commission, to report to the Infrastructure and Environment Committee and with recommendations on Part 1 above in the first quarter of 2027"
+        },
+        {
+          "motion_type": "Adopt Item as Amended",
+          "moved_by": null,
+          "result": "Carried",
+          "text": ""
+        }
+      ],
+      "votes": [
+        {
+          "motion": "Adopt Item as Amended",
+          "when": "Jul-30-2026 6:01 PM",
+          "result": "Carried",
+          "required": "Majority Required - TE34.104 - Adopt the Item as Amended",
+          "yes": 20,
+          "no": 2,
+          "absent": 4
+        }
+      ]
+    }
+  ],
+  "documents": [
+    {
+      "label": null,
+      "url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-288607.pdf"
+    },
+    {
+      "label": null,
+      "url": "https://www.toronto.ca/legdocs/mmis/2026/te/comm/communicationfile-217118.pdf"
+    },
+    {
+      "label": null,
+      "url": "https://www.toronto.ca/legdocs/mmis/2026/cc/comm/communicationfile-218421.pdf"
+    }
+  ],
+  "bylaws": [],
+  "fetched_at": "2026-11-13T01:56:14.846Z",
+  "actions": [],
+  "upcoming": false
+}

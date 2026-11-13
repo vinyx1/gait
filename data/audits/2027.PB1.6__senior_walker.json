@@ -1,0 +1,370 @@
+{
+  "location": "2027.PB1.6",
+  "label": "1337 Queen St W, Toronto",
+  "persona": "senior_walker",
+  "persona_label": "Senior using a cane or walker",
+  "model": "claude-opus-5-5",
+  "generated_at": "2026-11-13T03:12:54+00:00",
+  "feed": {
+    "feed_version": "S1000544",
+    "feed_start": "20261101",
+    "feed_end": "20261219",
+    "service_patterns": "weekday(1), saturday(2), sunday(3) only",
+    "source": "TTC GTFS via City of Toronto Open Data; Street Furniture - Transit Shelter and Bench datasets"
+  },
+  "roles": [
+    {
+      "role": "stops_boarding",
+      "kept": [
+        {
+          "title": "The nearest stop lists boarding as possible, plus a shelter and a bench",
+          "detail": "The closest stop is Queen St West at O'Hara Ave, about 52 m away on foot. The data lists boarding there as possible, and the City data lists both a shelter and a bench. This means the nearest stop is also the nearest one that matches this rider's needs. Walking distances are estimates (straight-line distance times 1.3), and the actual sidewalk route was not checked.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 6845 | Queen St West at O'Hara Ave | 40 m straight-line (about 52 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes"
+            }
+          ]
+        },
+        {
+          "title": "Every streetcar trip at the Queen St stops is flagged not accessible",
+          "detail": "Every Queen St West stop on this list lists boarding as possible. However, every trip serving those stops is flagged not accessible. This includes the nearest stop, served by routes 301, 304, 501 and 504. The data does not show what this means in practice for a rider using a walker.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "routes: 301, 304, 501, 504 | weekday first departure 04:42, last departure 30:46, 297 departures, 82 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%"
+            }
+          ]
+        },
+        {
+          "title": "Bus stop with trips flagged accessible is farther away",
+          "detail": "The nearest stop where trips are flagged accessible is Lansdowne Ave at Queen St West, served by route 47. It is about 307 m away on foot. The data lists a shelter and a bench there, and 100% of its trips are flagged wheelchair accessible. The rider's walking limit is an assumption, so the data does not show whether this distance is within it.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 5218 | Lansdowne Ave at Queen St West | 236 m straight-line (about 307 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 47"
+            },
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 100%, flagged not accessible: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Second-closest stop has no bench listed",
+          "detail": "Queen St West at Dunn Ave is about 79 m away on foot. The City data lists a shelter there but no bench. Not being listed may mean the dataset is incomplete, not that there is no bench.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 6835 | Queen St West at Dunn Ave | 61 m straight-line (about 79 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no"
+            }
+          ]
+        },
+        {
+          "title": "Nearby West Lodge stop lists boarding as not possible and has no service",
+          "detail": "The stop at West Lodge Ave at May Robinson Apartments, about 266 m away, lists boarding as not possible. It also shows no routes and no weekday or weekend service in the base schedule.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 11723 | West Lodge Ave at May Robinson Apartments | 205 m straight-line (about 266 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            },
+            {
+              "call": "C1",
+              "quote": "routes: none | no weekday service in the base schedule | saturday departures 0, sunday departures 0"
+            }
+          ]
+        }
+      ],
+      "dropped": [],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 8
+          },
+          "text": "[C1] stop 6845 | Queen St West at O'Hara Ave | 40 m straight-line (about 52 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 301, 304, 501, 504 | weekday first departure 04:42, last departure 30:46, 297 departures, 82 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 6835 | Queen St West at Dunn Ave | 61 m straight-line (about 79 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 301, 304, 501, 504 | weekday first departure 03:47, last departure 29:50, 297 departures, 71 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 6836 | Queen St West at Brock Ave | 136 m straight-line (about 177 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 301, 304, 501, 504 | weekday first departure 03:48, last departure 29:51, 297 departures, 71 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 6839 | Queen St West at Brock Ave | 157 m straight-line (about 204 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 301, 304, 501, 504 | weekday first departure 04:41, last departure 30:45, 297 departures, 82 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 6842 | Queen St West at Lansdowne Ave | 205 m straight-line (about 266 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 301, 304, 501, 504 | weekday first departure 04:44, last departure 30:46, 297 departures, 82 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 11723 | West Lodge Ave at May Robinson Apartments | 205 m straight-line (about 266 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: none | no weekday service in the base schedule | saturday departures 0, sunday departures 0\nstop 5218 | Lansdowne Ave at Queen St West | 236 m straight-line (about 307 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 47 | weekday first departure 05:06, last departure 26:32, 362 departures, 36 departures at or after 23:00 | saturday departures 324, sunday departures 263 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 6840 | Queen St West at Jameson Ave | 294 m straight-line (about 382 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 301, 304, 501, 504 | weekday first departure 03:46, last departure 29:49, 297 departures, 71 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 5050,
+        "output": 1648
+      }
+    },
+    {
+      "role": "walking_winter",
+      "kept": [
+        {
+          "title": "Closest stop is about 52 m away and lists a shelter and bench",
+          "detail": "The closest stop, Queen St West at O'Hara Ave, is 40 m away in a straight line, or about 52 m on foot. This walking figure is an estimate; the actual sidewalk route was not checked. City data lists both a shelter and a bench at this stop. The next stop, at Dunn Ave, lists a shelter but no bench, and \"not listed\" may only mean the data is incomplete.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "Queen St West at O'Hara Ave | 40 m straight-line (about 52 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes"
+            },
+            {
+              "call": "C1",
+              "quote": "Queen St West at Dunn Ave | 61 m straight-line (about 79 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no"
+            }
+          ]
+        },
+        {
+          "title": "Stops list boarding as possible, but every trip is flagged not accessible",
+          "detail": "All five nearby stops list wheelchair boarding as possible. However, at each of these stops, 100% of the trips that serve it are flagged not accessible. The data does not show what this means for someone using a cane or walker.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Road resurfacing planned on nearby side streets",
+          "detail": "Two nearby resurfacing projects include repairs to damaged sidewalks and curbs. One is on Close Ave, 162 m away, planned for Q2 2027 to Q4 2027. The other is on Maple Grove Ave between Brock Ave and O'Hara Ave, 190 m away, with a carry-over timeline of Q2 2024 to Q3 2025. The data does not show whether any of this work affects the sidewalk on Queen St W itself.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "CLOSE AVE; From: KING ST W; To: QUEEN ST W | status: Active | timeline: Q2 2027 - Q4 2027 | 162 m from the point"
+            },
+            {
+              "call": "C2",
+              "quote": "MAPLE GROVE AVE; From: BROCK AVE; To: O'HARA AVE | status: Active | timeline: Q2 2024 - Q3 2025 (Carry-Over) | 190 m from the point"
+            },
+            {
+              "call": "C2",
+              "quote": "including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road."
+            }
+          ]
+        },
+        {
+          "title": "Sidewalk clearing starts at 2 cm of snow and takes about 12 hours",
+          "detail": "The City's winter report says crews begin clearing sidewalks once snow reaches 2 cm. A full clearing cycle takes about 12 hours, so sidewalks may still have snow on them for some time after a snowfall.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "Under current service levels, the City begins sidewalk clearing once snow accumulation reaches 2 cm."
+            },
+            {
+              "call": "C3",
+              "quote": "City crews typically complete a full sidewalk clearing cycle within approximately 12 hours once accumulation reaches 2 cm."
+            }
+          ]
+        },
+        {
+          "title": "Laneways are salted but not plowed",
+          "detail": "In public laneways, the City only salts, within 24 hours after snowfall ends; it does not plow them. A laneway resurfacing project is also listed 205 m away, on Milky Way, for 2026.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "The Council-approved winter maintenance service level for public laneways is salting only, within 24 hours after the end of snowfall, to manage icy conditions; snow plowing is not provided."
+            },
+            {
+              "call": "C2",
+              "quote": "Laneway Resurfacing | MILKY WAY; From: GWYNNE AVE; To: ELM GROVE AVE | status: Active | timeline: 2026 | 205 m from the point"
+            }
+          ]
+        },
+        {
+          "title": "Snow clearing at transit stops focuses on priority stops",
+          "detail": "The report says snow clearing at transit stops focused on a priority list provided by the TTC. The data does not show whether any of the stops near this address are on that list.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "the TTC provided a list of priority stops and routes, which helped focus clearing efforts on high- traffic and higher-risk locations."
+            }
+          ]
+        }
+      ],
+      "dropped": [],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 5
+          },
+          "text": "[C1] stop 6845 | Queen St West at O'Hara Ave | 40 m straight-line (about 52 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 301, 304, 501, 504 | weekday first departure 04:42, last departure 30:46, 297 departures, 82 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 6835 | Queen St West at Dunn Ave | 61 m straight-line (about 79 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 301, 304, 501, 504 | weekday first departure 03:47, last departure 29:50, 297 departures, 71 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 6836 | Queen St West at Brock Ave | 136 m straight-line (about 177 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 301, 304, 501, 504 | weekday first departure 03:48, last departure 29:51, 297 departures, 71 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 6839 | Queen St West at Brock Ave | 157 m straight-line (about 204 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 301, 304, 501, 504 | weekday first departure 04:41, last departure 30:45, 297 departures, 82 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 6842 | Queen St West at Lansdowne Ave | 205 m straight-line (about 266 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 301, 304, 501, 504 | weekday first departure 04:44, last departure 30:46, 297 departures, 82 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+        },
+        "C2": {
+          "tool": "planned_works",
+          "args": {
+            "radius_m": 400
+          },
+          "text": "[C2] Road resurfacing program | Local Road Resurfacing | CLOSE AVE; From: KING ST W; To: QUEEN ST W | status: Active | timeline: Q2 2027 - Q4 2027 | 162 m from the point | last updated 2023-12-17 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nRoad resurfacing program | Local Road Resurfacing | MAPLE GROVE AVE; From: BROCK AVE; To: O'HARA AVE | status: Active | timeline: Q2 2024 - Q3 2025 (Carry-Over) | 190 m from the point | last updated 2023-03-03 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nRoad resurfacing program | Laneway Resurfacing | MILKY WAY; From: GWYNNE AVE; To: ELM GROVE AVE | status: Active | timeline: 2026 | 205 m from the point | last updated 2021-06-29 | details: Replacement of old asphalt surface with new asphalt surface or overlay of concrete laneway surface with asphalt, including repairs of any damaged curbs and associated areas. Work may include the closure of individual lanes or the entire laneway.\nRoad resurfacing program | Local Road Resurfacing | LAXTON AVE; From: JAMESON AVE; To: DOWLING AVE | status: Active | timeline: Q2 2027 - Q4 2027 | 278 m from the point | last updated 2023-02-13 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nRoad resurfacing program | Local Road Resurfacing | WEST LODGE AVE; From: SEAFORTH AVE; To: [180 m N] SEAFORTH AVE | status: Active | timeline: Q2 2026 - Q4 2026 | 303 m from the point | last updated 2026-10-02 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road."
+        },
+        "C3": {
+          "tool": "winter_rules",
+          "args": {},
+          "text": "[C3] W1 | Under current service levels, the City begins sidewalk clearing once snow accumulation reaches 2 cm. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 25\nW2 | Differences in timing between City operations and private compliance requirements may also create uncertainty following snowfall events, as City crews typically complete a full sidewalk clearing cycle within approximately 12 hours once accumulation reaches 2 cm. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 25\nW3 | The Council-approved winter maintenance service level for public laneways is salting only, within 24 hours after the end of snowfall, to manage icy conditions; snow plowing is not provided. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 23\nW4 | Transit stop accessibility was also enhanced through a combination of mechanical clearing and manual hand crews. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 12\nW5 | In advance of the 2025-2026 winter season, the TTC provided a list of priority stops and routes, which helped focus clearing efforts on high- traffic and higher-risk locations. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 12\nW6 | Public laneways are often too narrow and typically lack sufficient on-site snow storage capacity, creating the potential for snow to be pushed against garages and fences, resulting in damage or obstructed access. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 23"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 6434,
+        "output": 2104
+      }
+    },
+    {
+      "role": "service_hours",
+      "kept": [
+        {
+          "title": "About 11 to 15 departures per hour through the day at the nearest stop",
+          "detail": "From 06:00 to 23:00, the O'Hara Ave stop has 11 to 15 departures each weekday hour. There are fewer in the earliest hour (04:00 has 2) and the latest hour (30:00, which is 6 a.m. the next day, has 3).",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "06:00 has 11, 07:00 has 12"
+            },
+            {
+              "call": "C2",
+              "quote": "21:00 has 15"
+            },
+            {
+              "call": "C2",
+              "quote": "04:00 has 2"
+            },
+            {
+              "call": "C2",
+              "quote": "30:00 has 3"
+            }
+          ]
+        },
+        {
+          "title": "Weekend service listed at nearby stops",
+          "detail": "The O'Hara Ave stop lists 302 departures on Saturday and 289 on Sunday. The data does not show the first and last times for weekend service.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "saturday departures 302, sunday departures 289"
+            }
+          ]
+        },
+        {
+          "title": "Shelter and bench listed at the nearest stop only",
+          "detail": "City data lists both a shelter and a bench at the O'Hara Ave stop. The next-nearest stop, Queen St West at Dunn Ave (about 79 m), lists a shelter but no bench. A bench that is not listed may still exist, because the dataset may be incomplete.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "shelter listed in City data: yes | bench listed in City data: yes"
+            },
+            {
+              "call": "C3",
+              "quote": "shelter listed in City data: yes | bench listed in City data: no"
+            }
+          ]
+        },
+        {
+          "title": "Every trip is flagged not accessible, although the stops list boarding as possible",
+          "detail": "Each nearby stop lists wheelchair boarding as possible (GTFS 1). However, 100% of the trips serving these stops are flagged not accessible.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+            }
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "title": "Nearest stop has frequent weekday service from early morning to after midnight",
+          "detail": "The nearest stop, Queen St West at O'Hara Ave, is about 52 m away (an estimate based on straight-line distance). Its first weekday departure is at 04:42 and its last is at 30:46, which means 6:46 a.m. the next day. It has 297 departures on a weekday, and 82 of them leave at or after 23:00.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "40 m straight-line (about 52 m walking)"
+            },
+            {
+              "call": "C1",
+              "quote": "weekday first departure 04:42, last departure 30:46, 297 departures, 82 departures at or after 23:00"
+            }
+          ],
+          "reason": "number not in cited results: 6"
+        }
+      ],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 5
+          },
+          "text": "[C1] stop 6845 | Queen St West at O'Hara Ave | 40 m straight-line (about 52 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 301, 304, 501, 504 | weekday first departure 04:42, last departure 30:46, 297 departures, 82 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 6835 | Queen St West at Dunn Ave | 61 m straight-line (about 79 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 301, 304, 501, 504 | weekday first departure 03:47, last departure 29:50, 297 departures, 71 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 6836 | Queen St West at Brock Ave | 136 m straight-line (about 177 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 301, 304, 501, 504 | weekday first departure 03:48, last departure 29:51, 297 departures, 71 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 6839 | Queen St West at Brock Ave | 157 m straight-line (about 204 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 301, 304, 501, 504 | weekday first departure 04:41, last departure 30:45, 297 departures, 82 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 6842 | Queen St West at Lansdowne Ave | 205 m straight-line (about 266 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 301, 304, 501, 504 | weekday first departure 04:44, last departure 30:46, 297 departures, 82 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+        },
+        "C2": {
+          "tool": "stop_detail",
+          "args": {
+            "stop_id": "6845"
+          },
+          "text": "[C2] stop 6845 | Queen St West at O'Hara Ave | 40 m straight-line (about 52 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 301, 304, 501, 504 | weekday first departure 04:42, last departure 30:46, 297 departures, 82 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nWeekday departures per hour (hours 24 and above mean after midnight): 04:00 has 2, 05:00 has 7, 06:00 has 11, 07:00 has 12, 08:00 has 11, 09:00 has 11, 10:00 has 12, 11:00 has 12, 12:00 has 12, 13:00 has 12, 14:00 has 12, 15:00 has 12, 16:00 has 12, 17:00 has 12, 18:00 has 12, 19:00 has 13, 20:00 has 13, 21:00 has 15, 22:00 has 12, 23:00 has 13, 24:00 has 13, 25:00 has 14, 26:00 has 11, 27:00 has 12, 28:00 has 10, 29:00 has 6, 30:00 has 3"
+        },
+        "C3": {
+          "tool": "stop_detail",
+          "args": {
+            "stop_id": "6835"
+          },
+          "text": "[C3] stop 6835 | Queen St West at Dunn Ave | 61 m straight-line (about 79 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 301, 304, 501, 504 | weekday first departure 03:47, last departure 29:50, 297 departures, 71 departures at or after 23:00 | saturday departures 302, sunday departures 289 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nWeekday departures per hour (hours 24 and above mean after midnight): 03:00 has 2, 04:00 has 6, 05:00 has 12, 06:00 has 12, 07:00 has 12, 08:00 has 12, 09:00 has 12, 10:00 has 12, 11:00 has 12, 12:00 has 12, 13:00 has 12, 14:00 has 12, 15:00 has 12, 16:00 has 12, 17:00 has 12, 18:00 has 13, 19:00 has 13, 20:00 has 13, 21:00 has 12, 22:00 has 11, 23:00 has 13, 24:00 has 12, 25:00 has 12, 26:00 has 10, 27:00 has 10, 28:00 has 8, 29:00 has 6"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 8367,
+        "output": 1098
+      }
+    }
+  ],
+  "groups": [
+    [
+      0
+    ],
+    [
+      5
+    ],
+    [
+      13,
+      3
+    ],
+    [
+      1,
+      6,
+      14
+    ],
+    [
+      2
+    ],
+    [
+      4
+    ],
+    [
+      7
+    ],
+    [
+      8
+    ],
+    [
+      9
+    ],
+    [
+      10
+    ],
+    [
+      11
+    ],
+    [
+      12
+    ]
+  ]
+}

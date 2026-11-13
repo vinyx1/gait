@@ -1,0 +1,387 @@
+{
+  "location": "2027.PB1.3",
+  "label": "66 Gerrard St E, Toronto",
+  "persona": "wheelchair",
+  "persona_label": "Wheelchair user",
+  "model": "claude-opus-5-5",
+  "generated_at": "2026-11-13T03:12:35+00:00",
+  "feed": {
+    "feed_version": "S1000544",
+    "feed_start": "20261101",
+    "feed_end": "20261219",
+    "service_patterns": "weekday(1), saturday(2), sunday(3) only",
+    "source": "TTC GTFS via City of Toronto Open Data; Street Furniture - Transit Shelter and Bench datasets"
+  },
+  "roles": [
+    {
+      "role": "stops_boarding",
+      "kept": [
+        {
+          "title": "Nearest stop lists boarding possible, but all its trips are flagged not accessible",
+          "detail": "The nearest stop, Carlton St at Church St (stop 751), is about 268 m walking and lists wheelchair boarding as possible. Every trip serving it (routes 306 and 506) is flagged not accessible. Both flags matter for a wheelchair user.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 751 | Carlton St at Church St | 206 m straight-line (about 268 m walking) | wheelchair boarding: possible (GTFS 1)"
+            },
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Nearest stop where both the stop and its trips are flagged accessible",
+          "detail": "Yonge St at Gerrard St East (stop 3226) is about 360 m walking. It lists boarding as possible, and 100% of its trips (routes 97, 320) are flagged accessible. Walking distances are straight-line estimates times 1.3. The real sidewalk route was not checked.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 3226 | Yonge St at Gerrard St East | 277 m straight-line (about 360 m walking) | wheelchair boarding: possible (GTFS 1)"
+            },
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Several nearby stops list boarding as not possible",
+          "detail": "The data lists wheelchair boarding as not possible at Carlton St at Church St (stop 752), at both Carlton St at Jarvis St stops (753 and 754), and at the College Station southbound platform (13807).",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 752 | Carlton St at Church St | 226 m straight-line (about 294 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            },
+            {
+              "call": "C1",
+              "quote": "stop 13807 | College Station - Southbound Platform | 309 m straight-line (about 402 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            }
+          ]
+        },
+        {
+          "title": "No shelter or bench listed at the Yonge St stops that list boarding as possible",
+          "detail": "Stops 3226, 16833 and 3228 have no shelter or bench listed in the City's data. That data may be incomplete. Stop 751 lists a shelter but no bench.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "Yonge St at Gerrard St East | 277 m straight-line (about 360 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no"
+            },
+            {
+              "call": "C1",
+              "quote": "shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506"
+            }
+          ]
+        },
+        {
+          "title": "Other Yonge St stops that list boarding as possible",
+          "detail": "Yonge St at Gerrard St West South Side (stop 16833, about 377 m walking) and Yonge St at Elm St (stop 3228, about 407 m walking) also list boarding as possible. Every trip at both stops is flagged accessible.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 16833 | Yonge St at Gerrard St West South Side | 290 m straight-line (about 377 m walking) | wheelchair boarding: possible (GTFS 1)"
+            },
+            {
+              "call": "C1",
+              "quote": "stop 3228 | Yonge St at Elm St | 313 m straight-line (about 407 m walking) | wheelchair boarding: possible (GTFS 1)"
+            }
+          ]
+        }
+      ],
+      "dropped": [],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 8
+          },
+          "text": "[C1] stop 751 | Carlton St at Church St | 206 m straight-line (about 268 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:01, last departure 28:30, 139 departures, 23 departures at or after 23:00 | saturday departures 144, sunday departures 131 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 752 | Carlton St at Church St | 226 m straight-line (about 294 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:31, last departure 28:50, 139 departures, 24 departures at or after 23:00 | saturday departures 144, sunday departures 131 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 3226 | Yonge St at Gerrard St East | 277 m straight-line (about 360 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 97, 320 | weekday first departure 04:54, last departure 28:39, 76 departures, 31 departures at or after 23:00 | saturday departures 80, sunday departures 120 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 16833 | Yonge St at Gerrard St West South Side | 290 m straight-line (about 377 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 97, 320 | weekday first departure 04:19, last departure 28:04, 80 departures, 33 departures at or after 23:00 | saturday departures 84, sunday departures 124 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 753 | Carlton St at Jarvis St | 308 m straight-line (about 400 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:03, last departure 28:31, 139 departures, 23 departures at or after 23:00 | saturday departures 144, sunday departures 131 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 13807 | College Station - Southbound Platform | 309 m straight-line (about 402 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 1 | weekday first departure 05:56, last departure 25:45, 346 departures, 33 departures at or after 23:00 | saturday departures 272, sunday departures 224 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 3228 | Yonge St at Elm St | 313 m straight-line (about 407 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 97, 320 | weekday first departure 04:54, last departure 28:39, 76 departures, 31 departures at or after 23:00 | saturday departures 80, sunday departures 120 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 754 | Carlton St at Jarvis St | 339 m straight-line (about 441 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:30, last departure 28:49, 139 departures, 24 departures at or after 23:00 | saturday departures 144, sunday departures 131 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 5060,
+        "output": 1332
+      }
+    },
+    {
+      "role": "walking_winter",
+      "kept": [
+        {
+          "title": "Nearest stop lists boarding as possible, but every trip there is flagged not accessible",
+          "detail": "Stop 751 (Carlton St at Church St, routes 306 and 506) is about 268 m away by an estimated walk. It lists wheelchair boarding as possible. However, the feed flags 100% of the trips serving this stop as not accessible.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 751 | Carlton St at Church St | 206 m straight-line (about 268 m walking) | wheelchair boarding: possible (GTFS 1)"
+            },
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Several nearby stops list wheelchair boarding as not possible",
+          "detail": "The data lists wheelchair boarding as not possible at Carlton St stops 752, 753 and 754. It also lists boarding as not possible at College Station's southbound platform (stop 13807), which is about 402 m away by an estimated walk.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 752 | Carlton St at Church St | 226 m straight-line (about 294 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            },
+            {
+              "call": "C1",
+              "quote": "stop 13807 | College Station - Southbound Platform | 309 m straight-line (about 402 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            }
+          ]
+        },
+        {
+          "title": "Yonge St bus stops list boarding as possible, with all trips flagged accessible",
+          "detail": "Stop 3226 (Yonge St at Gerrard St East, routes 97 and 320) is about 360 m away by an estimated walk. It lists boarding as possible, and 100% of its trips are flagged wheelchair accessible. City data does not list a shelter or a bench at this stop, but that data may be incomplete.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 3226 | Yonge St at Gerrard St East | 277 m straight-line (about 360 m walking) | wheelchair boarding: possible (GTFS 1)"
+            },
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Active road resurfacing on Mutual St nearby",
+          "detail": "Resurfacing is listed as active on Mutual St, about 147 m from the location, with a timeline of Q2 2025 - Q2 2026. The work includes repairs of damaged sidewalks and curbs and may close lanes or the entire road. The data does not show whether these works affect any of the walking routes to the stops listed here.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "MUTUAL ST; From: GERRARD ST E; To: MC GILL ST | status: Active | timeline: Q2 2025 - Q2 2026 | 147 m from the point"
+            },
+            {
+              "call": "C2",
+              "quote": "including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road."
+            }
+          ]
+        },
+        {
+          "title": "Sidewalk clearing starts at 2 cm of snow and can take about 12 hours",
+          "detail": "According to the City's report, sidewalk clearing begins once 2 cm of snow has built up. A full clearing cycle typically takes approximately 12 hours, so sidewalks may not be cleared yet shortly after a snowfall.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "the City begins sidewalk clearing once snow accumulation reaches 2 cm."
+            },
+            {
+              "call": "C3",
+              "quote": "City crews typically complete a full sidewalk clearing cycle within approximately 12 hours once accumulation reaches 2 cm."
+            }
+          ]
+        },
+        {
+          "title": "Public laneways are salted but not plowed",
+          "detail": "The City's service level for public laneways is salting only, within 24 hours after snowfall ends; snow plowing is not provided. The report also says priority transit stops chosen by the TTC got focused clearing, but the data does not show whether the stops near this location are on that list.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "public laneways is salting only, within 24 hours after the end of snowfall, to manage icy conditions; snow plowing is not provided."
+            },
+            {
+              "call": "C3",
+              "quote": "the TTC provided a list of priority stops and routes, which helped focus clearing efforts on high- traffic and higher-risk locations."
+            }
+          ]
+        }
+      ],
+      "dropped": [],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 8
+          },
+          "text": "[C1] stop 751 | Carlton St at Church St | 206 m straight-line (about 268 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:01, last departure 28:30, 139 departures, 23 departures at or after 23:00 | saturday departures 144, sunday departures 131 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 752 | Carlton St at Church St | 226 m straight-line (about 294 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:31, last departure 28:50, 139 departures, 24 departures at or after 23:00 | saturday departures 144, sunday departures 131 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 3226 | Yonge St at Gerrard St East | 277 m straight-line (about 360 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 97, 320 | weekday first departure 04:54, last departure 28:39, 76 departures, 31 departures at or after 23:00 | saturday departures 80, sunday departures 120 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 16833 | Yonge St at Gerrard St West South Side | 290 m straight-line (about 377 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 97, 320 | weekday first departure 04:19, last departure 28:04, 80 departures, 33 departures at or after 23:00 | saturday departures 84, sunday departures 124 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 753 | Carlton St at Jarvis St | 308 m straight-line (about 400 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:03, last departure 28:31, 139 departures, 23 departures at or after 23:00 | saturday departures 144, sunday departures 131 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 13807 | College Station - Southbound Platform | 309 m straight-line (about 402 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 1 | weekday first departure 05:56, last departure 25:45, 346 departures, 33 departures at or after 23:00 | saturday departures 272, sunday departures 224 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 3228 | Yonge St at Elm St | 313 m straight-line (about 407 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 97, 320 | weekday first departure 04:54, last departure 28:39, 76 departures, 31 departures at or after 23:00 | saturday departures 80, sunday departures 120 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 754 | Carlton St at Jarvis St | 339 m straight-line (about 441 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:30, last departure 28:49, 139 departures, 24 departures at or after 23:00 | saturday departures 144, sunday departures 131 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+        },
+        "C2": {
+          "tool": "planned_works",
+          "args": {
+            "radius_m": 400
+          },
+          "text": "[C2] Road resurfacing program | Local Road Resurfacing | MUTUAL ST; From: GERRARD ST E; To: MC GILL ST | status: Active | timeline: Q2 2025 - Q2 2026 | 147 m from the point | last updated 2024-06-26 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nRoad resurfacing program | Local Road Resurfacing | MUTUAL ST; From: GOULD ST; To: GERRARD ST E | status: Active | timeline: Q2 2025 - Q2 2026 | 149 m from the point | last updated 2024-06-26 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nRoad resurfacing program | Local Road Resurfacing | MUTUAL ST; From: MC GILL ST; To: GRANBY ST | status: Active | timeline: Q2 2025 - Q2 2026 | 166 m from the point | last updated 2024-06-26 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road."
+        },
+        "C3": {
+          "tool": "winter_rules",
+          "args": {},
+          "text": "[C3] W1 | Under current service levels, the City begins sidewalk clearing once snow accumulation reaches 2 cm. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 25\nW2 | Differences in timing between City operations and private compliance requirements may also create uncertainty following snowfall events, as City crews typically complete a full sidewalk clearing cycle within approximately 12 hours once accumulation reaches 2 cm. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 25\nW3 | The Council-approved winter maintenance service level for public laneways is salting only, within 24 hours after the end of snowfall, to manage icy conditions; snow plowing is not provided. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 23\nW4 | Transit stop accessibility was also enhanced through a combination of mechanical clearing and manual hand crews. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 12\nW5 | In advance of the 2025-2026 winter season, the TTC provided a list of priority stops and routes, which helped focus clearing efforts on high- traffic and higher-risk locations. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 12\nW6 | Public laneways are often too narrow and typically lack sufficient on-site snow storage capacity, creating the potential for snow to be pushed against garages and fences, resulting in damage or obstructed access. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 23"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 6586,
+        "output": 1856
+      }
+    },
+    {
+      "role": "service_hours",
+      "kept": [
+        {
+          "title": "Nearest stop lists boarding possible, but all its streetcar trips are flagged not accessible",
+          "detail": "The closest stop, Carlton St at Church St (stop 751, about 268 m walking), lists wheelchair boarding as possible. However, every trip on routes 306 and 506 serving it is flagged not accessible in the feed.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 751 | Carlton St at Church St | 206 m straight-line (about 268 m walking) | wheelchair boarding: possible (GTFS 1)"
+            },
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Nearest stop with both boarding and trips flagged accessible is on Yonge St",
+          "detail": "Yonge St at Gerrard St East (stop 3226) is about 360 m walking, an estimate based on straight-line distance. It lists boarding as possible, and 100% of its trips on routes 97 and 320 are flagged accessible. It has 76 weekday departures, with the first at 04:54 and the last at 28:39 (after midnight).",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "stop 3226 | Yonge St at Gerrard St East | 277 m straight-line (about 360 m walking) | wheelchair boarding: possible (GTFS 1)"
+            },
+            {
+              "call": "C2",
+              "quote": "weekday first departure 04:54, last departure 28:39, 76 departures, 31 departures at or after 23:00"
+            }
+          ]
+        },
+        {
+          "title": "Daytime frequency at the accessible Yonge stop is low",
+          "detail": "At stop 3226, most daytime hours from 07:00 to 22:00 have only 2 departures each on weekdays. The busiest hour is 26:00 (after midnight), with 13 departures.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "07:00 has 2, 08:00 has 3, 09:00 has 2, 10:00 has 2"
+            },
+            {
+              "call": "C2",
+              "quote": "26:00 has 13, 27:00 has 7, 28:00 has 3"
+            }
+          ]
+        },
+        {
+          "title": "Weekend and late-night service is listed at the accessible Yonge stops",
+          "detail": "Stop 3226 lists 80 Saturday and 120 Sunday departures, with 31 weekday departures at or after 23:00. Stop 16833 (about 377 m walking) lists 80 weekday, 84 Saturday and 124 Sunday departures.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "saturday departures 80, sunday departures 120"
+            },
+            {
+              "call": "C1",
+              "quote": "weekday first departure 04:19, last departure 28:04, 80 departures, 33 departures at or after 23:00 | saturday departures 84, sunday departures 124"
+            }
+          ]
+        },
+        {
+          "title": "Several nearby stops list boarding as not possible",
+          "detail": "The data lists wheelchair boarding as not possible at stop 752 (Carlton at Church), at both Carlton at Jarvis stops, and at the College Station southbound platform. The station platform has 346 weekday departures, but boarding there is listed as not possible.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 13807 | College Station - Southbound Platform | 309 m straight-line (about 402 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            },
+            {
+              "call": "C1",
+              "quote": "stop 752 | Carlton St at Church St | 226 m straight-line (about 294 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            }
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "title": "No shelter or bench listed at the accessible Yonge stops",
+          "detail": "The City's data does not list a shelter or bench at stops 3226, 16833 or 3228. This could mean the dataset is incomplete, not that none exists.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "shelter listed in City data: no | bench listed in City data: no"
+            }
+          ],
+          "reason": "number not in cited results: 16833, 3228"
+        }
+      ],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 8
+          },
+          "text": "[C1] stop 751 | Carlton St at Church St | 206 m straight-line (about 268 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:01, last departure 28:30, 139 departures, 23 departures at or after 23:00 | saturday departures 144, sunday departures 131 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 752 | Carlton St at Church St | 226 m straight-line (about 294 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:31, last departure 28:50, 139 departures, 24 departures at or after 23:00 | saturday departures 144, sunday departures 131 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 3226 | Yonge St at Gerrard St East | 277 m straight-line (about 360 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 97, 320 | weekday first departure 04:54, last departure 28:39, 76 departures, 31 departures at or after 23:00 | saturday departures 80, sunday departures 120 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 16833 | Yonge St at Gerrard St West South Side | 290 m straight-line (about 377 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 97, 320 | weekday first departure 04:19, last departure 28:04, 80 departures, 33 departures at or after 23:00 | saturday departures 84, sunday departures 124 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 753 | Carlton St at Jarvis St | 308 m straight-line (about 400 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:03, last departure 28:31, 139 departures, 23 departures at or after 23:00 | saturday departures 144, sunday departures 131 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 13807 | College Station - Southbound Platform | 309 m straight-line (about 402 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 1 | weekday first departure 05:56, last departure 25:45, 346 departures, 33 departures at or after 23:00 | saturday departures 272, sunday departures 224 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 3228 | Yonge St at Elm St | 313 m straight-line (about 407 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 97, 320 | weekday first departure 04:54, last departure 28:39, 76 departures, 31 departures at or after 23:00 | saturday departures 80, sunday departures 120 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 754 | Carlton St at Jarvis St | 339 m straight-line (about 441 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:30, last departure 28:49, 139 departures, 24 departures at or after 23:00 | saturday departures 144, sunday departures 131 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+        },
+        "C2": {
+          "tool": "stop_detail",
+          "args": {
+            "stop_id": "3226"
+          },
+          "text": "[C2] stop 3226 | Yonge St at Gerrard St East | 277 m straight-line (about 360 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 97, 320 | weekday first departure 04:54, last departure 28:39, 76 departures, 31 departures at or after 23:00 | saturday departures 80, sunday departures 120 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nWeekday departures per hour (hours 24 and above mean after midnight): 04:00 has 1, 05:00 has 8, 06:00 has 3, 07:00 has 2, 08:00 has 3, 09:00 has 2, 10:00 has 2, 11:00 has 2, 12:00 has 2, 13:00 has 2, 14:00 has 2, 15:00 has 2, 16:00 has 2, 17:00 has 2, 18:00 has 2, 19:00 has 2, 20:00 has 2, 21:00 has 2, 22:00 has 2, 23:00 has 3, 24:00 has 2, 25:00 has 3, 26:00 has 13, 27:00 has 7, 28:00 has 3"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 8812,
+        "output": 1498
+      }
+    }
+  ],
+  "groups": [
+    [
+      0,
+      5,
+      11
+    ],
+    [
+      1,
+      7,
+      12
+    ],
+    [
+      2,
+      6,
+      15
+    ],
+    [
+      3
+    ],
+    [
+      4
+    ],
+    [
+      8
+    ],
+    [
+      9
+    ],
+    [
+      10
+    ],
+    [
+      13
+    ],
+    [
+      14
+    ]
+  ]
+}

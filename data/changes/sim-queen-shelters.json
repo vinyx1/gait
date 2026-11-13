@@ -1,0 +1,31 @@
+{
+  "id": "sim-queen-shelters",
+  "title": "SIMULATED: remove the shelters at two Queen St West stops",
+  "body": "Simulation for demonstration",
+  "status": "simulated",
+  "simulated": true,
+  "status_note": "This is not a real decision. It shows how the tool would report a shelter removal.",
+  "source_url": null,
+  "source_file": null,
+  "quotes": [],
+  "effects": [
+    {
+      "type": "remove_shelter",
+      "route": "501",
+      "stop_ids": [
+        "6835",
+        "6845"
+      ],
+      "quote": null
+    },
+    {
+      "type": "remove_bench",
+      "route": "501",
+      "stop_ids": [
+        "6835",
+        "6845"
+      ],
+      "quote": null
+    }
+  ]
+}

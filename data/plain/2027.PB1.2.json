@@ -1,0 +1,64 @@
+[
+  {
+    "label": "What the report says (summary)",
+    "page": 1,
+    "source": "This report recommends that City Council state its intention to designate the property at 106 Beverley Street under Part IV, Section 29 of the Ontario Heritage Act for its cultural heritage value according to the Statement of Significance which includes a description of heritage attributes found in Attachment 1. The subject property at 106 Beverley Street, known originally as Esten House (1855), and later as Georgina House (1909), is located on the west side of Beverley Street, south of Dundas Street West, within the Grange neighbourhood of downtown Toronto. A location map and current photograph of the heritage property are included in Attachment 2. Constructed in 1855 for Toronto lawyer James Esten, the property contains a three- storey detached house-form building in the Italianate architectural style, which was designed by architect James Grand. Following its sale to philanthropist Georgina Broughall, who converted the property into an interdenominational women’s residence, the renamed Georgina House underwent extensive interior and exterior alterations and additions. These modifications were overseen by architect Eden Smith, including unspecified interior alterations, the front verandah (1909), a four-storey rear addition (1912), and the Osler Wing (1914), which was officially opened via public ceremony by His Royal Highness the Duke of Connaught. The property forms part of the historic residential context of the Grange neighbourhood, comprising Victorian- and Edwardian- era houses interspersed with places of worship and institutional buildings. Georgina House fits within this context of mid- to late-Victorian era houses and reflects this important period of development in Toronto. The subject property at 106 Beverley Street was listed on the City of Toronto's Heritage Register on November 21, 1977. 106 Beverley Street - Notice of Intention to Designate Page 1 of 28 This property is one of eighteen pre-1870 listed properties citywide which have been identified as candidates for designation through the City's implementation of Bill 23 amendments to the Ontario Heritage Act and its ongoing prioritization strategy for listed properties that must be designated or removed from the Heritage Register by January 1, 2027. Part of the strategy for the review of listed properties on the Heritage Register includes the procurement of qualified heritage consultants to research, evaluate, and prepare heritage evaluation reports for a subset of listed properties prioritized for designation. City Planning retained the services of Alex Corey Heritage Consulting (\"the Consultant\") to research and evaluate a citywide group of eighteen pre-1870 listed properties which includes the subject property at 106 Beverley Street. The Consultant evaluated the subject property and determined that it meets the provincial criteria. The Consultant's research on the subject property is included in Attachment 3 of this report. The research, analysis, and evaluation contained within Attachment 3 reflect the Consultant's professional expertise and opinion. Staff have independently reviewed the Consultant's research and heritage evaluation and concur with the determination that the property at 106 Beverley Street has cultural heritage value and meets five of the Ontario Regulation 9/06 criteria prescribed for municipal designation under Part IV, Section 29 of the Ontario Heritage Act. A property may be designated under Part IV, Section 29 of the Ontario Heritage Act, if it meets two or more of the nine criteria. Designation enables City Council to review proposed alterations or demolitions to the property and enforce heritage property standards and maintenance.",
+    "sentences": [
+      {
+        "plain": "This report recommends that City Council say it intends to designate 106 Beverley Street as a heritage property under Part IV, Section 29 of the Ontario Heritage Act.",
+        "quote": "This report recommends that City Council state its intention to designate the property at 106 Beverley Street under Part IV, Section 29 of the Ontario Heritage Act"
+      },
+      {
+        "plain": "The house was built in 1855 and was first called Esten House, then later Georgina House (1909), and it is on the west side of Beverley Street, south of Dundas Street West, in the Grange neighbourhood.",
+        "quote": "known originally as Esten House (1855), and later as Georgina House (1909), is located on the west side of Beverley Street, south of Dundas Street West, within the Grange neighbourhood of downtown Toronto"
+      },
+      {
+        "plain": "The property has been on the City's Heritage Register (a list of heritage properties) since November 21, 1977.",
+        "quote": "The subject property at 106 Beverley Street was listed on the City of Toronto's Heritage Register on November 21, 1977."
+      },
+      {
+        "plain": "Under changes to provincial law, listed properties like this one must be designated or removed from the Heritage Register by January 1, 2027.",
+        "quote": "listed properties that must be designated or removed from the Heritage Register by January 1, 2027"
+      },
+      {
+        "plain": "A consultant and City staff both found that the property meets five of the provincial criteria, and a property may be designated if it meets two or more of the nine criteria.",
+        "quote": "concur with the determination that the property at 106 Beverley Street has cultural heritage value and meets five of the Ontario Regulation 9/06 criteria"
+      },
+      {
+        "plain": "Designation lets City Council review proposed changes or demolitions and enforce heritage property standards and upkeep.",
+        "quote": "Designation enables City Council to review proposed alterations or demolitions to the property and enforce heritage property standards and maintenance."
+      }
+    ],
+    "dropped": [],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:36:51+00:00",
+    "note": null
+  },
+  {
+    "label": "What the report recommends",
+    "page": 2,
+    "source": "The Senior Manager, Heritage Planning, Urban Design, City Planning recommends that: 1. City Council state its intention to designate the property at 106 Beverley Street under Part IV, Section 29 of the Ontario Heritage Act in accordance with the Statement of Significance for 106 Beverley Street (Reasons for Designation) attached as Attachment 1, to the report, October 28, 2026, from the Senior Manager, Heritage Planning, Urban Design, City Planning. 2. If there are no objections to the designation, City Council authorize the City Solicitor to introduce the Bill in Council designating the property under Part IV, Section 29 of the Ontario Heritage Act.",
+    "sentences": [
+      {
+        "plain": "The Senior Manager of Heritage Planning, Urban Design, City Planning makes two recommendations.",
+        "quote": "The Senior Manager, Heritage Planning, Urban Design, City Planning recommends that:"
+      },
+      {
+        "plain": "First, City Council would say it intends to designate the property at 106 Beverley Street as a heritage property under Part IV, Section 29 of the Ontario Heritage Act.",
+        "quote": "City Council state its intention to designate the property at 106 Beverley Street under Part IV, Section 29 of the Ontario Heritage Act"
+      },
+      {
+        "plain": "The reasons for the designation are in a Statement of Significance, attached as Attachment 1 to the report dated October 28, 2026.",
+        "quote": "in accordance with the Statement of Significance for 106 Beverley Street (Reasons for Designation) attached as Attachment 1, to the report, October 28, 2026"
+      },
+      {
+        "plain": "Second, if there are no objections, City Council would allow the City Solicitor to bring a Bill to Council to designate the property.",
+        "quote": "If there are no objections to the designation, City Council authorize the City Solicitor to introduce the Bill in Council designating the property under Part IV, Section 29 of the Ontario Heritage Act."
+      }
+    ],
+    "dropped": [],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:36:54+00:00",
+    "note": null
+  }
+]

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}TripLens{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+  <header class="site">
+    <a class="brand" href="/">TripLens</a>
+    <nav aria-label="Main" class="mainnav"><a href="/">Decisions</a> <a href="/route">Check my route</a></nav>
+    <span class="tag">Working prototype. Not an official City of Toronto service.</span>
+  </header>
+  <main id="main">{% block content %}{% endblock %}</main>
+  <footer class="site">
+    <p>Content is copied from the official City of Toronto pages linked on each item. Check the official page before you act.</p>
+  </footer>
+</body>
+</html>

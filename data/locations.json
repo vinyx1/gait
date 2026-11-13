@@ -1,0 +1,91 @@
+[
+  {
+    "id": "2027.PB1.1",
+    "label": "8 Arnold Ave, Toronto",
+    "lat": 43.6825561738188,
+    "lon": -79.4884244283848,
+    "ward": "York South-Weston",
+    "method": "City Address Points dataset (exact address match)",
+    "item_ids": [
+      "2027.PB1.1"
+    ]
+  },
+  {
+    "id": "2027.PB1.2",
+    "label": "106 Beverley St, Toronto",
+    "lat": 43.6531720147423,
+    "lon": -79.3940853696802,
+    "ward": "Spadina-Fort York",
+    "method": "City Address Points dataset (exact address match)",
+    "item_ids": [
+      "2027.PB1.2"
+    ]
+  },
+  {
+    "id": "2027.PB1.3",
+    "label": "66 Gerrard St E, Toronto",
+    "lat": 43.6599549521572,
+    "lon": -79.3788636882422,
+    "ward": "Toronto Centre",
+    "method": "City Address Points dataset (exact address match)",
+    "item_ids": [
+      "2027.PB1.3"
+    ]
+  },
+  {
+    "id": "2027.PB1.4",
+    "label": "70 Gerrard St E, Toronto",
+    "lat": 43.6601366788837,
+    "lon": -79.3784045143208,
+    "ward": "Toronto Centre",
+    "method": "City Address Points dataset (exact address match)",
+    "item_ids": [
+      "2027.PB1.4"
+    ]
+  },
+  {
+    "id": "2027.PB1.6",
+    "label": "1337 Queen St W, Toronto",
+    "lat": 43.6408329800092,
+    "lon": -79.4339214087117,
+    "ward": "Parkdale-High Park",
+    "method": "City Address Points dataset (exact address match)",
+    "item_ids": [
+      "2027.PB1.6"
+    ]
+  },
+  {
+    "id": "spadina_work_area",
+    "label": "Spadina Road near Lowther Ave and Kendal Ave (work area)",
+    "lat": 43.669669999999996,
+    "lon": -79.4050335,
+    "ward": "University-Rosedale",
+    "method": "Mean position of 4 TTC stops named for Spadina Rd at Lowther or Kendal. Approximate.",
+    "item_ids": [
+      "2026.TE32.25",
+      "2026.MM42.46"
+    ]
+  },
+  {
+    "id": "croft_st",
+    "label": "Croft Street, Ward 11 (laneway homes)",
+    "lat": 43.65848967689228,
+    "lon": -79.40655020488254,
+    "ward": "University-Rosedale",
+    "method": "Mean position of 23 Croft St address points. Approximate; Shaftesbury Court not separately located.",
+    "item_ids": [
+      "2026.IE31.8"
+    ]
+  },
+  {
+    "id": "dundas_spadina",
+    "label": "Dundas St West at Spadina Ave (a point on the 505 Dundas corridor)",
+    "lat": 43.65292675,
+    "lon": -79.39803625,
+    "ward": "Spadina-Fort York",
+    "method": "Mean position of 4 TTC stops named Dundas St West at Spadina. The decision covers the whole route; this is one representative point.",
+    "item_ids": [
+      "2026.TE34.104"
+    ]
+  }
+]

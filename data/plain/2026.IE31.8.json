@@ -1,0 +1,95 @@
+[
+  {
+    "label": "What the report says (summary)",
+    "page": 1,
+    "source": "A number of families have accepted the city’s encouragement to build laneway homes in Ward 11, whose only road access is via a public lane. However, the city does not provide snow clearing services to such lanes, creating serious access issues for their residents during severe winter weather. In 2026.IE29.1, City staff declined to recommend snow removal for the 2,744 public laneways in the City of Toronto, but did not provide any alternative solution for even pedestrian access to the comparatively small number of laneway houses. This motion is focussed on a small number of laneway houses whose residents had serious access issues during winter weather in 2025 and 2026.",
+    "sentences": [
+      {
+        "plain": "Some families in Ward 11 have built laneway homes, which the City encouraged.",
+        "quote": "A number of families have accepted the city’s encouragement to build laneway homes in Ward 11"
+      },
+      {
+        "plain": "The only road to these homes is a public lane.",
+        "quote": "whose only road access is via a public lane"
+      },
+      {
+        "plain": "The City does not clear snow from these lanes, so people living there have had serious trouble getting in and out in bad winter weather.",
+        "quote": "the city does not provide snow clearing services to such lanes, creating serious access issues for their residents during severe winter weather"
+      },
+      {
+        "plain": "In report 2026.IE29.1, City staff did not recommend clearing snow from the 2,744 public lanes in Toronto.",
+        "quote": "In 2026.IE29.1, City staff declined to recommend snow removal for the 2,744 public laneways in the City of Toronto"
+      },
+      {
+        "plain": "Staff also did not offer another way for people to reach the fairly small number of laneway homes, even on foot.",
+        "quote": "but did not provide any alternative solution for even pedestrian access to the comparatively small number of laneway houses"
+      },
+      {
+        "plain": "This motion is about a small number of laneway homes whose residents had serious trouble getting access during winter weather in 2025 and 2026.",
+        "quote": "This motion is focussed on a small number of laneway houses whose residents had serious access issues during winter weather in 2025 and 2026."
+      }
+    ],
+    "dropped": [],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:36:07+00:00",
+    "note": null
+  },
+  {
+    "label": "What the report recommends",
+    "page": 1,
+    "source": "It is recommended that: 1. Infrastructure and Environment Committee request the General Manager, Transportation, Services to report back to Infrastructure and Environment Committee at its first 2027 meeting with recommendations on snow clearing sufficient to permit pedestrian access to lawfully constructed laneway homes in Ward 11, starting with: a. Shaftesbury Court, and b. Croft Street. Councillor Dianne Saxe Ward 11, University–Rosedale",
+    "sentences": [
+      {
+        "plain": "This report recommends that the Infrastructure and Environment Committee ask the General Manager of Transportation Services to report back to it.",
+        "quote": "Infrastructure and Environment Committee request the General Manager, Transportation, Services to report back to Infrastructure and Environment Committee"
+      },
+      {
+        "plain": "The report back would come at the committee's first meeting in 2027.",
+        "quote": "at its first 2027 meeting"
+      },
+      {
+        "plain": "It would give recommendations on clearing enough snow so people on foot can reach laneway homes in Ward 11 that were built legally.",
+        "quote": "with recommendations on snow clearing sufficient to permit pedestrian access to lawfully constructed laneway homes in Ward 11"
+      },
+      {
+        "plain": "It would start with Shaftesbury Court and Croft Street.",
+        "quote": "starting with: a. Shaftesbury Court, and b. Croft Street."
+      },
+      {
+        "plain": "The recommendation comes from Councillor Dianne Saxe of Ward 11, University–Rosedale.",
+        "quote": "Councillor Dianne Saxe Ward 11, University–Rosedale"
+      }
+    ],
+    "dropped": [],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:36:12+00:00",
+    "note": null
+  },
+  {
+    "label": "What was decided",
+    "page": null,
+    "source": "The Infrastructure and Environment Committee:\n1. Referred the item to the Deputy City Manager, Infrastructure Services and requested that they undertake a broader review of snow clearing options, specific to laneways with laneway housing, with financial implications and include as part of the report back as directed by City Council's decision on item IE29.1.",
+    "sentences": [
+      {
+        "plain": "The Infrastructure and Environment Committee sent this item to the Deputy City Manager, Infrastructure Services.",
+        "quote": "Referred the item to the Deputy City Manager, Infrastructure Services"
+      },
+      {
+        "plain": "The Committee asked the Deputy City Manager to do a wider review of snow clearing options for laneways that have laneway housing.",
+        "quote": "requested that they undertake a broader review of snow clearing options, specific to laneways with laneway housing"
+      },
+      {
+        "plain": "The review is to include the costs and other money impacts.",
+        "quote": "with financial implications"
+      },
+      {
+        "plain": "The Committee asked that this review be part of the report back that City Council asked for in its decision on item IE29.1.",
+        "quote": "include as part of the report back as directed by City Council's decision on item IE29.1."
+      }
+    ],
+    "dropped": [],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:36:15+00:00",
+    "note": null
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "label": "What the report says (summary)",
+    "page": 1,
+    "source": "This report recommends that City Council approve the demolition of an existing building on a non-contributing property located at 1337 Queen Street West within the Parkdale Main Street Heritage Conservation District (PHCD) and approve the erection of a replacement building in accordance with Section 42 of the Ontario Heritage Act in connection with the City-led Parkdale Hub project. The proposed development is for the West Block of the Parkdale Hub project to erect a new 16-storey mixed-use tower with a 4-storey podium building that will include purpose-built affordable housing; and which will remain under ownership of the City. A heritage permit for the project was previously approved on June 24 and 25, 2026, by City Council. The current proposal is largely the same as the previous approval, but a change has been made to the height of the podium of the new building. The street wall height of the new podium building has been increased by 1.2m which means that it no longer matches the height of the adjacent contributing building at 1347 Queen Street West. It also does not include the 5.0m step back required by the PHCD Plan for any parts of the new building that are taller than the adjacent contributing property. Consequently, a new Section 42 approval under the Ontario Heritage Act is required. One of the objectives of the PHCD Plan is to conserve the consistent and continuous streetwall that characterises most of the PHCD but this section of south side of Queen Street West has neither a consistent nor a continuous street wall. Therefore, the proposed modest height increase for the podium of the new Parkdale Hub West Block development would not harm the character or appearance of the District or be contrary to the objectives of the PHCD Plan. As such staff have no concern with the lack of a step back of the top of the new podium building in this location. Demolition and Construction - 1337 Queen St W Page 1 of 17",
+    "sentences": [
+      {
+        "plain": "This report recommends that City Council approve tearing down an existing building at 1337 Queen Street West and approve putting up a new building in its place.",
+        "quote": "This report recommends that City Council approve the demolition of an existing building on a non-contributing property located at 1337 Queen Street West"
+      },
+      {
+        "plain": "The site is in the Parkdale Main Street Heritage Conservation District, and the work is part of the City-led Parkdale Hub project.",
+        "quote": "within the Parkdale Main Street Heritage Conservation District (PHCD) and approve the erection of a replacement building in accordance with Section 42 of the Ontario Heritage Act in connection with the City-led Parkdale Hub project"
+      },
+      {
+        "plain": "The plan is a new 16-storey tower with a 4-storey base that will include affordable housing and stay owned by the City.",
+        "quote": "erect a new 16-storey mixed-use tower with a 4-storey podium building that will include purpose-built affordable housing; and which will remain under ownership of the City"
+      },
+      {
+        "plain": "City Council approved a heritage permit for the project on June 24 and 25, 2026, but the front wall of the base is now 1.2m taller and no longer matches the heritage building next door at 1347 Queen Street West.",
+        "quote": "The street wall height of the new podium building has been increased by 1.2m which means that it no longer matches the height of the adjacent contributing building at 1347 Queen Street West."
+      },
+      {
+        "plain": "The new design also does not include the 5.0m step back required by the district plan, so a new approval under the Ontario Heritage Act is required.",
+        "quote": "It also does not include the 5.0m step back required by the PHCD Plan for any parts of the new building that are taller than the adjacent contributing property. Consequently, a new Section 42 approval under the Ontario Heritage Act is required."
+      },
+      {
+        "plain": "Staff say this part of Queen Street West does not have a consistent or continuous street wall, so they have no concern with the missing step back here.",
+        "quote": "As such staff have no concern with the lack of a step back of the top of the new podium building in this location."
+      }
+    ],
+    "dropped": [],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:37:01+00:00",
+    "note": null
+  },
+  {
+    "label": "What the report recommends",
+    "page": 2,
+    "source": "The Senior Manager, Heritage Planning, Urban Design, City Planning recommends that: 1. City Council approve the demolition of the non-contributing building and the erection of a new 16-storey mixed-use building at 1337 Queen Street West, in the Parkdale Main Street Heritage Conservation District in accordance with subsections 42(1) 4 and 42(1) 2 of the Ontario Heritage Act, and subject to the following conditions: a. That the replacement building for 1337 Queen Street West is constructed substantially in accordance with the plans and elevations prepared by LGA Architectural Partners dated September 25, 2026, on file with the Senior Manager, Heritage Planning.",
+    "sentences": [
+      {
+        "plain": "The Senior Manager of Heritage Planning, Urban Design, City Planning makes a recommendation to City Council.",
+        "quote": "The Senior Manager, Heritage Planning, Urban Design, City Planning recommends that:"
+      },
+      {
+        "plain": "The recommendation is that City Council approve tearing down a building at 1337 Queen Street West that does not add to the area's heritage character, and building a new 16-storey mixed-use building there.",
+        "quote": "City Council approve the demolition of the non-contributing building and the erection of a new 16-storey mixed-use building at 1337 Queen Street West"
+      },
+      {
+        "plain": "The site is in the Parkdale Main Street Heritage Conservation District, and the approval would be under subsections 42(1) 4 and 42(1) 2 of the Ontario Heritage Act.",
+        "quote": "in the Parkdale Main Street Heritage Conservation District in accordance with subsections 42(1) 4 and 42(1) 2 of the Ontario Heritage Act"
+      },
+      {
+        "plain": "The approval would be subject to conditions.",
+        "quote": "and subject to the following conditions:"
+      },
+      {
+        "plain": "One condition is that the new building be built mostly following the plans and drawings by LGA Architectural Partners dated September 25, 2026.",
+        "quote": "That the replacement building for 1337 Queen Street West is constructed substantially in accordance with the plans and elevations prepared by LGA Architectural Partners dated September 25, 2026"
+      },
+      {
+        "plain": "These plans are on file with the Senior Manager, Heritage Planning.",
+        "quote": "on file with the Senior Manager, Heritage Planning."
+      }
+    ],
+    "dropped": [],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:37:03+00:00",
+    "note": null
+  }
+]

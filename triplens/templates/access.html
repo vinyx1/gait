@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Transit access near {{ loc.label }} - TripLens{% endblock %}
+{% block content %}
+<p><a href="/">&larr; All items</a>{% for i in loc.item_ids %} · <a href="/item/{{ i }}">Item {{ i }}</a>{% endfor %}</p>
+<h1>Who can reach transit near {{ loc.label }}?</h1>
+<p class="lede">The same place can be easy for one rider and out of reach for another. This page compares three riders using open data. It is not a trip planner and it does not say a trip is possible or safe.</p>
+
+<nav aria-label="Choose a rider" class="tabs">
+  {% for k, p in personas.items() %}
+    <a href="/access/{{ loc.id }}?persona={{ k }}" {% if k == persona %}aria-current="page" class="on"{% endif %}>{{ p.label }}</a>
+  {% endfor %}
+</nav>
+
+<section aria-labelledby="glance">
+  <h2 id="glance">At a glance</h2>
+  <div class="three">
+  {% for k, s in snaps.items() %}
+    <div class="card {% if k == persona %}sel{% endif %}">
+      <h3>{{ s.label }}</h3>
+      <p class="meta">Walking limit assumed: {{ s.max_walk_m }} m. {{ s.stop_count }} stop{{ '' if s.stop_count == 1 else 's' }} in range.</p>
+      {% if s.flags %}<ul>{% for f in s.flags %}<li><span class="sev {{ f.severity }}">{{ {'barrier': 'Barrier', 'watch': 'Worth knowing', 'info': 'Info'}[f.severity] }}</span> {{ f.text }}</li>{% endfor %}</ul>
+      {% else %}<p>No problems found by the rules below.</p>{% endif %}
+    </div>
+  {% endfor %}
+  </div>
+  <p class="meta">Rules are simple and fixed (distance, boarding flags, service hours). Walking limits are illustrative assumptions, because people vary a lot.</p>
+</section>
+
+<section aria-labelledby="stops">
+  <h2 id="stops">Nearest stops for {{ snap.label }}</h2>
+  {% if snap.stops %}
+  <table>
+    <caption class="meta">Walking distance is straight-line distance times {{ snap.detour_factor }}. The real sidewalk network was not checked. Feed {{ meta.feed_version }} ({{ meta.feed_start }} to {{ meta.feed_end }}).</caption>
+    <thead><tr><th scope="col">Stop</th><th scope="col">Walk (est.)</th><th scope="col">Boarding</th><th scope="col">Trips flagged accessible</th><th scope="col">Shelter / bench listed</th><th scope="col">Routes</th><th scope="col">Weekday first to last</th></tr></thead>
+    <tbody>
+    {% for s in snap.stops %}
+      <tr><th scope="row">{{ s.name }} <span class="meta">#{{ s.stop_id }}</span></th>
+        <td>{{ (s.distance_m * snap.detour_factor) | round | int }} m</td>
+        <td>{{ wc[s.wheelchair_boarding] }}</td>
+        <td>{% if s.trip_flags %}{{ (s.trip_flags.accessible * 100) | round | int }}% yes, {{ (s.trip_flags.not_accessible * 100) | round | int }}% no, {{ (s.trip_flags.no_information * 100) | round | int }}% no info{% else %}no trips{% endif %}</td>
+        <td>{{ 'shelter' if s.shelter_listed else 'no shelter listed' }}, {{ 'bench' if s.bench_listed else 'no bench listed' }}</td>
+        <td>{{ s.routes | join(', ') }}</td>
+        <td>{% if s.service.weekday %}{{ s.service.weekday.first }} to {{ s.service.weekday.last }}{% else %}none{% endif %}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<p>No stops within this rider's assumed walking range.</p>{% endif %}
+</section>
+
+<section aria-labelledby="agents">
+  <h2 id="agents">What the audit agents found for {{ snap.label }}</h2>
+  {% if audit %}
+    <p class="aibox"><strong>Written by AI agents (Claude), then checked by software.</strong> Three agents (stops and boarding, walking and winter, service and schedule) looked things up with tools on open data. A finding is shown only if it cites exact text from a tool result and its numbers match. {{ audit.tool_calls }} tool lookups were made; {{ audit.dropped_count }} finding{{ '' if audit.dropped_count == 1 else 's' }} failed the checks and {{ 'was' if audit.dropped_count == 1 else 'were' }} discarded. Overlapping findings are merged. Only the fixed rules above can mark a barrier.</p>
+    <ul class="findings">
+    {% macro finding(f) %}
+      <li>
+        <span class="sev {{ f.severity }}">{{ {'watch': 'Worth knowing', 'info': 'Info'}.get(f.severity, 'Worth knowing') }}</span>
+        <strong>{{ f.title }}</strong>
+        <p>{{ f.detail }}</p>
+        <details><summary>Evidence from the data ({{ f.role }})</summary>
+          {% for c in f.cites %}<blockquote class="official pre small">{{ c.quote }}</blockquote>{% endfor %}
+        </details>
+      </li>
+    {% endmacro %}
+    {% for f in audit.shown %}{{ finding(f) }}{% endfor %}
+    </ul>
+    {% if audit.more %}<details><summary>Show {{ audit.more | length }} more findings</summary><ul class="findings">{% for f in audit.more %}{{ finding(f) }}{% endfor %}</ul></details>{% endif %}
+    <p class="meta">Model {{ audit.model }}, run {{ audit.generated_at[:10] }}. Not an official City or TTC assessment.</p>
+  {% else %}
+    <p>The audit agents have not been run for this rider and place.</p>
+  {% endif %}
+</section>
+
+<section aria-labelledby="limits">
+  <h2 id="limits">Limits you should know about</h2>
+  <ul>
+    <li>Data: TTC schedule file and City of Toronto open data (street furniture, road and sidewalk programs). Boarding flags come from the schedule file as published.</li>
+    <li>In this feed, every streetcar trip is flagged "not accessible" while buses and subway trips are mostly flagged accessible. The file does not explain this, and the TTC may describe accessibility differently. Check the TTC before relying on it.</li>
+    <li>"No shelter or bench listed" means the City dataset does not list one. It may be incomplete.</li>
+    <li>Walking uses straight-line distance times {{ snap.detour_factor }}. Curbs, slopes, snow, crossings and sidewalk condition were not checked.</li>
+    <li>Only the base weekday, Saturday and Sunday schedules are counted.</li>
+    <li>How the location was chosen: {{ loc.method }}</li>
+    <li>This shows access to stops. It does not plan or time a trip.</li>
+  </ul>
+</section>
+{% endblock %}

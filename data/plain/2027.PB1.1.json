@@ -1,0 +1,66 @@
+[
+  {
+    "label": "What the report says (summary)",
+    "page": 1,
+    "source": "This report recommends that City Council state its intention to designate the property at 8 Arnold Avenue under Part IV, Section 29 of the Ontario Heritage Act for its cultural heritage value according to the Statement of Significance and description of heritage attributes found in Attachment 1. The subject property at 8 Arnold Avenue is located just within the northern boundary of the Rockcliffe-Smythe neighbourhood, south of Lambton Avenue. The residence is notable as a red-brick, one-and-a-half-storey, Ontario Farmhouse-style property, dating from c.1870s – 1880s, and historically known as the George Marshall Residence. The property, which is the earliest known house in the Mount Dennis community, serves to recall the community’s former farming and settlement past. A location map and current photograph of the property are found in Attachment 2. In 2021 the Mount Dennis Cultural Heritage Resource Assessment (CHRA) was completed by the heritage consulting firm, Common Bond Collective, as part of the Picture Mount Dennis Planning Framework Study. The CHRA identified the property at 8 Arnold Avenue as having potential heritage value for its design/physical, and historical/associative value. The Mount Dennis Secondary Plan and the associated Official Plan Amendment (OPA 571) was approved by the Ontario Land Tribunal on October 11, 2024. City Council listed the property at 8 Arnold Avenue on the City of Toronto's Heritage Register on May 20, 2026. On August 19, 2026, Toronto Building received an application to demolish the dwelling at 8 Arnold Avenue. On October 14, 2026, Toronto Building issued an Applicable Law Notice to the applicant identifying outstanding requirements relating to demolition control under S.33 of the Planning Act and notice under the Ontario Heritage Act. 8 Arnold Avenue - Notice of Intention to Designate Page 1 of 19 The owner must submit to Heritage Planning a Notice of Intention to Demolish, as required under S.27(9) of the Ontario Heritage Act, to give a municipal council at least 60 days’ notice in writing of their intention to demolish or remove a structure on a “listed” property. This allows Council time to decide whether to move forward with a notice of intention to designate the property under Part IV of the Ontario Heritage Act. At the time of this report, the owner had not yet submitted the notice to Heritage Planning. Staff have determined that the property at 8 Arnold Avenue has cultural heritage value and meets three of the Ontario Regulation 9/06 criteria prescribed for municipal designation under Part IV, Section 29 of the Ontario Heritage Act. A property may be designated under Part IV, Section 29 of the Ontario Heritage Act, if it meets two or more of the nine criteria. Designation enables City Council to review proposed alterations or demolitions to the property and enforce heritage property standards and maintenance.",
+    "sentences": [
+      {
+        "plain": "This report recommends that City Council say it intends to designate 8 Arnold Avenue as a heritage property under Part IV, Section 29 of the Ontario Heritage Act.",
+        "quote": "This report recommends that City Council state its intention to designate the property at 8 Arnold Avenue under Part IV, Section 29 of the Ontario Heritage Act"
+      },
+      {
+        "plain": "The house is a red-brick, one-and-a-half-storey Ontario Farmhouse-style home from about the 1870s to 1880s, known as the George Marshall Residence.",
+        "quote": "The residence is notable as a red-brick, one-and-a-half-storey, Ontario Farmhouse-style property, dating from c.1870s – 1880s, and historically known as the George Marshall Residence."
+      },
+      {
+        "plain": "It is the earliest known house in Mount Dennis and recalls the area's past as a farming and settlement community.",
+        "quote": "The property, which is the earliest known house in the Mount Dennis community, serves to recall the community’s former farming and settlement past."
+      },
+      {
+        "plain": "On August 19, 2026, Toronto Building received an application to demolish the house.",
+        "quote": "On August 19, 2026, Toronto Building received an application to demolish the dwelling at 8 Arnold Avenue."
+      },
+      {
+        "plain": "Staff found the property meets three of the nine provincial criteria, and a property may be designated if it meets two or more.",
+        "quote": "A property may be designated under Part IV, Section 29 of the Ontario Heritage Act, if it meets two or more of the nine criteria."
+      }
+    ],
+    "dropped": [
+      {
+        "plain": "The owner must give Heritage Planning a written notice at least 60 days before demolishing, but had not done so when this report was written.",
+        "quote": "At the time of this report, the owner had not yet submitted the notice to Heritage Planning.",
+        "reason": "stronger wording than source: 'must'"
+      }
+    ],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:36:49+00:00",
+    "note": null
+  },
+  {
+    "label": "What the report recommends",
+    "page": 2,
+    "source": "The Senior Manager, Heritage Planning, Urban Design, City Planning recommends that: 1. City Council state its intention to designate the property at 8 Arnold Avenue under Part IV, Section 29 of the Ontario Heritage Act in accordance with the Statement of Significance for 8 Arnold Avenue (Reasons for Designation) attached as Attachment 1, to the report, October 28, 2026, from the Senior Manager, Heritage Planning, Urban Design, City Planning. 2. If there are no objections to the designation, City Council authorize the City Solicitor to introduce the Bill in Council designating the property under Part IV, Section 29 of the Ontario Heritage Act.",
+    "sentences": [
+      {
+        "plain": "The Senior Manager, Heritage Planning, Urban Design, City Planning makes two recommendations to City Council.",
+        "quote": "The Senior Manager, Heritage Planning, Urban Design, City Planning recommends that:"
+      },
+      {
+        "plain": "First, the report recommends that City Council say it intends to designate the property at 8 Arnold Avenue under Part IV, Section 29 of the Ontario Heritage Act.",
+        "quote": "City Council state its intention to designate the property at 8 Arnold Avenue under Part IV, Section 29 of the Ontario Heritage Act"
+      },
+      {
+        "plain": "This would be based on the Statement of Significance (Reasons for Designation) attached as Attachment 1 to the report dated October 28, 2026.",
+        "quote": "in accordance with the Statement of Significance for 8 Arnold Avenue (Reasons for Designation) attached as Attachment 1, to the report, October 28, 2026"
+      },
+      {
+        "plain": "Second, if there are no objections to the designation, the report recommends that City Council allow the City Solicitor to bring a Bill to Council to designate the property.",
+        "quote": "If there are no objections to the designation, City Council authorize the City Solicitor to introduce the Bill in Council designating the property under Part IV, Section 29 of the Ontario Heritage Act."
+      }
+    ],
+    "dropped": [],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:36:50+00:00",
+    "note": null
+  }
+]

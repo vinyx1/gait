@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.transitland_key
+data/gtfs/
+.pytest_cache/
+data/reports/*.pdf
+docs/_template.docx
+data/geo/address_points.csv
+data/geo/address.sqlite
+*.egg-info/

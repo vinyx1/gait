@@ -1,0 +1,162 @@
+import os
+from pathlib import Path
+
+import pytest
+from fastapi.testclient import TestClient
+
+from triplens import geocode, trip, exposure
+from triplens.app import app, EXAMPLES, make_report
+
+ROOT = Path(__file__).resolve().parent.parent
+pytestmark = pytest.mark.skipif(not geocode.available(), reason="run scripts/build_address_index.py first")
+
+
+def pt(addr):
+    p, _ = geocode.lookup(addr)
+    assert p, addr
+    return (p.lat, p.lon)
+
+
+def legs_for(o, d, routes, stops):
+    return trip.build_trip(pt(o), pt(d), [(r, v, b, a) for r, (v, b, a) in zip(routes, stops)])
+
+
+def test_geocode_normalizes_and_suggests():
+    for q in ("1337 Queen St W", "1337 queen street west, Toronto", "Unit 5, 1337 Queen Street West"):
+        m, _ = geocode.lookup(q)
+        assert m and m.label == "1337 Queen St W" and m.ward == "Parkdale-High Park"
+    m, s = geocode.lookup("300 Dundas St W")
+    assert m is None and s and all("Dundas St W" in p.label for p in s)
+    assert geocode.lookup("99999 Nowhere Rd") == (None, [])
+
+
+def test_transit_leg_follows_route_and_stop_order_is_checked():
+    legs = legs_for("1337 Queen St W", "106 Beverley St", ["501"], [(1, "6835", "6829")])
+    assert [l.kind for l in legs] == ["walk", "transit", "walk"]
+    t = legs[1]
+    assert t.length_m > 2000 and len(t.points) > 10 and t.route == "501"
+    with pytest.raises(ValueError):
+        trip.build_transit_leg("501", 1, t.alight["stop_id"], t.board["stop_id"])
+
+
+def test_queen_trip_finds_both_open_decisions_and_marks_streetcar_for_wheelchair():
+    legs = legs_for("1337 Queen St W", "106 Beverley St", ["501"], [(1, "6835", "6829")])
+    r = exposure.analyze(legs, "wheelchair", "day", "weekday")
+    ids = {d["item_id"] for d in r["decisions"]}
+    assert {"2027.PB1.6", "2027.PB1.2"} <= ids
+    assert all(d["actions"] for d in r["decisions"] if d["upcoming"])
+    assert any(f["severity"] == "barrier" and "501" in f["text"] for f in r["flags"])
+
+
+def test_decision_that_names_the_route_is_flagged():
+    legs = legs_for("1000 Dundas St W", "201 Dundas St W", ["505"], [(0, "10181", "2153")])
+    r = exposure.analyze(legs, "wheelchair", "day", "weekday")
+    assert any(m["route"] == "505" and m["item_id"] == "2026.TE34.104" for m in r["mentions"])
+    m = r["mentions"][0]
+    item = exposure._items()[m["item_id"]]
+    blob = " ".join([item["title"]] + [x for st in item["stages"] for x in (st.get("decision_text"), st.get("summary")) if x])
+    assert m["snippet"] in blob            # the quoted snippet is real text from the source
+
+
+def test_far_away_trip_has_no_decisions():
+    p = trip.Leg("walk", "w", [pt("32 Nineteenth St"), pt("5 Nineteenth St")])
+    assert exposure.items_near([p]) == []
+
+
+def test_ended_works_are_reported_as_possibly_out_of_date():
+    legs = legs_for("1337 Queen St W", "106 Beverley St", ["501"], [(1, "6835", "6829")])
+    r = exposure.analyze(legs, "senior_walker", "day", "weekday", today_year=2026)
+    ended = [f for f in r["flags"] if f["kind"] == "works" and "has ended" in f["text"]]
+    live = [f for f in r["flags"] if f["kind"] == "works" and "has ended" not in f["text"]]
+    assert ended and all(f["severity"] == "info" for f in ended)
+    assert all(f["severity"] == "watch" for f in live)
+    r2 = exposure.analyze(legs, "senior_walker", "day", "weekday", today_year=2020)
+    assert not [f for f in r2["flags"] if "has ended" in f["text"]]
+
+
+def test_every_flag_has_evidence_and_only_rules_say_barrier():
+    for ex in EXAMPLES.values():
+        rep, errs = make_report(ex["origin"], ex["destination"], ex["rider"], ex["band"], ex["day"], ex["routes"], ex["stops"])
+        assert not errs and rep["flags"]
+        for f in rep["flags"]:
+            assert f["evidence"] and all(e.strip() for e in f["evidence"])
+            assert f["severity"] in ("barrier", "watch", "info")
+        assert any(f["kind"] == "act" for f in rep["flags"]) or rep["comparisons"] or ex["routes"] == ["127"]
+
+
+def test_decided_items_never_shown_as_open_for_comment():
+    rep, _ = make_report("250 Spadina Rd", "800 Bathurst St", "senior_walker", "day", "weekday", ["127"], [(0, "7956", "14777")])
+    for f in rep["flags"]:
+        if f["kind"] == "item":
+            assert "already been made" in f["text"]
+    assert not any(f["kind"] == "act" for f in rep["flags"])
+
+
+def snapshot_files():
+    return sorted((str(p), p.stat().st_mtime_ns) for p in ROOT.rglob("*")
+                  if p.is_file() and ".venv" not in p.parts and ".git" not in p.parts and "__pycache__" not in p.parts and ".pytest_cache" not in p.parts)
+
+
+def test_route_check_stores_nothing_and_sets_no_cookies():
+    c = TestClient(app)
+    before = snapshot_files()
+    r1 = c.get("/route/example/queen-beverley")
+    r2 = c.post("/route/stops", data={"origin": "1337 Queen St W", "destination": "106 Beverley St", "rider": "wheelchair",
+                                      "band": "day", "day": "weekday", "route1": "501", "route2": ""})
+    r3 = c.post("/route/result", data={"origin": "1337 Queen St W", "destination": "106 Beverley St", "rider": "wheelchair",
+                                       "band": "day", "day": "weekday", "route0": "501", "board0": "1:6835", "alight0": "1:6829"})
+    assert r1.status_code == r2.status_code == r3.status_code == 200
+    assert all("set-cookie" not in r.headers for r in (r1, r2, r3))
+    assert "1337 Queen" not in str(r3.url)           # addresses are not in the URL
+    assert snapshot_files() == before
+
+
+def test_bad_input_gives_clear_errors():
+    c = TestClient(app)
+    r = c.post("/route/stops", data={"origin": "nowhere rd", "destination": "106 Beverley St", "rider": "wheelchair",
+                                     "band": "day", "day": "weekday", "route1": "501", "route2": ""})
+    assert "could not find" in r.text
+    r = c.post("/route/stops", data={"origin": "1337 Queen St W", "destination": "106 Beverley St", "rider": "wheelchair",
+                                     "band": "day", "day": "weekday", "route1": "9999", "route2": ""})
+    assert "do not recognise" in r.text
+    r = c.post("/route/result", data={"origin": "1337 Queen St W", "destination": "106 Beverley St", "rider": "wheelchair", "band": "day",
+                                      "day": "weekday", "route0": "501", "board0": "1:6829", "alight0": "1:6835"})
+    assert "must come after" in r.text
+
+
+def test_tool_never_picks_stops_for_the_resident():
+    c = TestClient(app)
+    r = c.post("/route/stops", data={"origin": "1337 Queen St W", "destination": "106 Beverley St", "rider": "wheelchair",
+                                     "band": "day", "day": "weekday", "route1": "501", "route2": ""})
+    assert r.status_code == 200 and "selected" not in r.text and "shortest" not in r.text.lower()
+    assert not hasattr(trip, "suggest") and not hasattr(trip, "suggest_chain")
+
+
+def test_real_stop_removal_shows_before_and_after_and_new_issue():
+    from triplens.app import EXAMPLES
+    ex = EXAMPLES["stclair-512"]
+    rep, errs = make_report(ex["origin"], ex["destination"], ex["rider"], ex["band"], ex["day"], ex["routes"], ex["stops"])
+    assert not errs
+    cmp = next(c for c in rep["comparisons"] if c["change"]["id"] == "ttc-512-stop-removals")
+    assert any("is removed" in n for n in cmp["notes"])
+    assert any(r["changed"] for r in cmp["rows"])
+    assert any(f["severity"] == "barrier" and "walking" in f["text"] for f in cmp["new_issues"])
+
+
+def test_change_quotes_are_verbatim_from_saved_source():
+    from triplens import changes
+    changes.load_changes.cache_clear()
+    cs = changes.load_changes()          # raises if any quote is not in the saved source text
+    assert not cs["ttc-512-stop-removals"]["simulated"] and cs["sim-queen-shelters"]["simulated"]
+
+
+def test_simulated_shelter_removal_is_labelled_and_reported():
+    rep, _ = make_report("1337 Queen St W", "106 Beverley St", "senior_walker", "day", "weekday", ["501"], [(1, "6835", "6829")])
+    cmp = next(c for c in rep["comparisons"] if c["change"]["id"] == "sim-queen-shelters")
+    assert cmp["change"]["simulated"] and any("shelter would be removed" in n for n in cmp["notes"])
+    assert any("shelter or bench" in f["text"] for f in cmp["new_issues"])
+
+
+def test_change_does_not_touch_other_routes():
+    rep, _ = make_report("1000 Dundas St W", "201 Dundas St W", "wheelchair", "day", "weekday", ["505"], [(0, "10181", "2153")])
+    assert rep["comparisons"] == []

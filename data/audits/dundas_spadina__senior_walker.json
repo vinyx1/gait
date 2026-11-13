@@ -1,0 +1,374 @@
+{
+  "location": "dundas_spadina",
+  "label": "Dundas St West at Spadina Ave (a point on the 505 Dundas corridor)",
+  "persona": "senior_walker",
+  "persona_label": "Senior using a cane or walker",
+  "model": "claude-opus-5-5",
+  "generated_at": "2026-11-13T03:13:41+00:00",
+  "feed": {
+    "feed_version": "S1000544",
+    "feed_start": "20261101",
+    "feed_end": "20261219",
+    "service_patterns": "weekday(1), saturday(2), sunday(3) only",
+    "source": "TTC GTFS via City of Toronto Open Data; Street Furniture - Transit Shelter and Bench datasets"
+  },
+  "roles": [
+    {
+      "role": "stops_boarding",
+      "kept": [
+        {
+          "title": "Nearest 505 Dundas stops list boarding as not possible",
+          "detail": "The two nearest stops are Dundas St West at Spadina Ave. Both are about 39 m away by estimated walk, and both list wheelchair boarding as not possible (GTFS 2). This is a \"not possible\" flag, not a lack of information. Both stops have a shelter listed in City data.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 2189 | Dundas St West at Spadina Ave | 30 m straight-line (about 39 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes"
+            },
+            {
+              "call": "C1",
+              "quote": "stop 2190 | Dundas St West at Spadina Ave | 30 m straight-line (about 39 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            }
+          ]
+        },
+        {
+          "title": "Nearest stop that lists boarding as possible is on Spadina",
+          "detail": "The nearest stop that lists boarding as possible is Spadina Ave at Dundas St West North Side, about 68 m away by estimated walk. It serves routes 310 and 510, not the 505. Its shelter is listed and its bench is not.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 7349 | Spadina Ave at Dundas St West North Side | 52 m straight-line (about 68 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 310, 510"
+            }
+          ]
+        },
+        {
+          "title": "Every trip at these stops is flagged not accessible",
+          "detail": "At every stop listed, 100% of trips are flagged not accessible. That includes the stops where boarding is listed as possible.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Nearest bench listed is about 248 m away",
+          "detail": "None of the four stops within about 68 m has a bench listed in City data. The first stop with a bench listed is Spadina Ave at Sullivan St North Side, about 248 m away by estimated walk. \"Not listed\" may mean the City's data is incomplete. This rider's walking limit is an assumption, and these distances are straight-line estimates, not measured along sidewalks.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 7356 | Spadina Ave at Sullivan St North Side | 191 m straight-line (about 248 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes"
+            }
+          ]
+        },
+        {
+          "title": "Frequent service including late nights",
+          "detail": "The nearest Dundas stop lists 236 weekday departures. The first is at 05:39 and the last is at 29:26, with 45 departures at or after 23:00.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "weekday first departure 05:39, last departure 29:26, 236 departures, 45 departures at or after 23:00"
+            }
+          ]
+        }
+      ],
+      "dropped": [],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 8
+          },
+          "text": "[C1] stop 2189 | Dundas St West at Spadina Ave | 30 m straight-line (about 39 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 305, 505 | weekday first departure 05:39, last departure 29:26, 236 departures, 45 departures at or after 23:00 | saturday departures 236, sunday departures 209 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 2190 | Dundas St West at Spadina Ave | 30 m straight-line (about 39 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 305, 505 | weekday first departure 04:52, last departure 28:42, 236 departures, 36 departures at or after 23:00 | saturday departures 236, sunday departures 209 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 8121 | Spadina Ave at Dundas St West South Side | 51 m straight-line (about 66 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 310, 510 | weekday first departure 05:36, last departure 29:45, 232 departures, 33 departures at or after 23:00 | saturday departures 256, sunday departures 221 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 7349 | Spadina Ave at Dundas St West North Side | 52 m straight-line (about 68 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 310, 510 | weekday first departure 05:15, last departure 29:30, 232 departures, 30 departures at or after 23:00 | saturday departures 256, sunday departures 221 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 7356 | Spadina Ave at Sullivan St North Side | 191 m straight-line (about 248 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 310, 510 | weekday first departure 05:13, last departure 29:28, 232 departures, 30 departures at or after 23:00 | saturday departures 256, sunday departures 221 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 8131 | Spadina Ave at Sullivan St | 219 m straight-line (about 285 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 310, 510 | weekday first departure 05:37, last departure 29:46, 232 departures, 33 departures at or after 23:00 | saturday departures 256, sunday departures 221 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 8128 | Spadina Ave at Nassau St South Side | 287 m straight-line (about 373 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 310, 510 | weekday first departure 05:34, last departure 29:44, 232 departures, 33 departures at or after 23:00 | saturday departures 256, sunday departures 221 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 4946,
+        "output": 1241
+      }
+    },
+    {
+      "role": "walking_winter",
+      "kept": [
+        {
+          "title": "Wheelchair boarding listed as not possible at the closest Dundas stops",
+          "detail": "Stops 2189 and 2190, about 39 m walking from the point (an estimate), list wheelchair boarding as not possible. Every trip serving them is flagged not accessible. Stop 7349 on Spadina lists boarding as possible, but all of its trips are also flagged not accessible.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 2189 | Dundas St West at Spadina Ave | 30 m straight-line (about 39 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            },
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+            },
+            {
+              "call": "C1",
+              "quote": "stop 7349 | Spadina Ave at Dundas St West North Side | 52 m straight-line (about 68 m walking) | wheelchair boarding: possible (GTFS 1)"
+            }
+          ]
+        },
+        {
+          "title": "Shelters listed, but benches not listed at the four closest stops",
+          "detail": "City data lists a shelter but no bench at the four stops within about 68 m walking. The closest stop with a listed bench is stop 7356, about 248 m walking. Benches that are not listed may still exist, because the dataset may be incomplete.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "shelter listed in City data: yes | bench listed in City data: no | routes: 305, 505"
+            },
+            {
+              "call": "C1",
+              "quote": "stop 7356 | Spadina Ave at Sullivan St North Side | 191 m straight-line (about 248 m walking)"
+            },
+            {
+              "call": "C1",
+              "quote": "bench listed in City data: yes"
+            }
+          ]
+        },
+        {
+          "title": "Planned road and sidewalk work nearby in 2027-2028",
+          "detail": "Road resurfacing on Kensington Ave, 230 m from the point, is planned for Q2 2027 - Q4 2028. It includes sidewalk and curb repairs and may close lanes or the whole road. New sidewalk is also planned on Wales Ave, 336 m away. The data does not show work on Dundas St West or Spadina Ave at the stops.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "KENSINGTON AVE (TO); From: ST ANDREW ST; To: BALDWIN ST | status: Active | timeline: Q2 2027 - Q4 2028 | 230 m from the point"
+            },
+            {
+              "call": "C2",
+              "quote": "including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road."
+            }
+          ]
+        },
+        {
+          "title": "Sidewalk clearing starts at 2 cm of snow and can take about 12 hours",
+          "detail": "City crews start clearing sidewalks once snow reaches 2 cm. A full clearing cycle takes about 12 hours. Snow under 2 cm, or snow during that window, may still be on the walk to the stops.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "the City begins sidewalk clearing once snow accumulation reaches 2 cm."
+            },
+            {
+              "call": "C3",
+              "quote": "City crews typically complete a full sidewalk clearing cycle within approximately 12 hours once accumulation reaches 2 cm."
+            }
+          ]
+        },
+        {
+          "title": "Public laneways are salted, not plowed",
+          "detail": "The City's level of service for public laneways is salting within 24 hours after snowfall ends, with no plowing. Any walking route that uses a laneway may still have snow on it.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "The Council-approved winter maintenance service level for public laneways is salting only, within 24 hours after the end of snowfall"
+            },
+            {
+              "call": "C3",
+              "quote": "snow plowing is not provided."
+            }
+          ]
+        },
+        {
+          "title": "Unclear whether these stops get priority winter clearing",
+          "detail": "The report says the TTC gave a list of priority stops and routes to focus clearing efforts. The data does not show whether the stops at Dundas and Spadina are on that list.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "the TTC provided a list of priority stops and routes, which helped focus clearing efforts on high- traffic and higher-risk locations."
+            }
+          ]
+        }
+      ],
+      "dropped": [],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 5
+          },
+          "text": "[C1] stop 2189 | Dundas St West at Spadina Ave | 30 m straight-line (about 39 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 305, 505 | weekday first departure 05:39, last departure 29:26, 236 departures, 45 departures at or after 23:00 | saturday departures 236, sunday departures 209 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 2190 | Dundas St West at Spadina Ave | 30 m straight-line (about 39 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 305, 505 | weekday first departure 04:52, last departure 28:42, 236 departures, 36 departures at or after 23:00 | saturday departures 236, sunday departures 209 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 8121 | Spadina Ave at Dundas St West South Side | 51 m straight-line (about 66 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 310, 510 | weekday first departure 05:36, last departure 29:45, 232 departures, 33 departures at or after 23:00 | saturday departures 256, sunday departures 221 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 7349 | Spadina Ave at Dundas St West North Side | 52 m straight-line (about 68 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 310, 510 | weekday first departure 05:15, last departure 29:30, 232 departures, 30 departures at or after 23:00 | saturday departures 256, sunday departures 221 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 7356 | Spadina Ave at Sullivan St North Side | 191 m straight-line (about 248 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 310, 510 | weekday first departure 05:13, last departure 29:28, 232 departures, 30 departures at or after 23:00 | saturday departures 256, sunday departures 221 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+        },
+        "C2": {
+          "tool": "planned_works",
+          "args": {
+            "radius_m": 400
+          },
+          "text": "[C2] Road resurfacing program | Local Road Resurfacing | KENSINGTON AVE (TO); From: ST ANDREW ST; To: BALDWIN ST | status: Active | timeline: Q2 2027 - Q4 2028 | 230 m from the point | last updated 2026-10-01 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nSidewalk construction program | Sidewalk Construction | WALES AVE; From: [50M W] AUGUSTA AVE; To: DENISON AVE | status: Active | timeline: Q2 2027 - Q4 2028 | 336 m from the point | last updated 2024-01-23 | details: Installation of new sidewalks where none existed before."
+        },
+        "C3": {
+          "tool": "winter_rules",
+          "args": {},
+          "text": "[C3] W1 | Under current service levels, the City begins sidewalk clearing once snow accumulation reaches 2 cm. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 25\nW2 | Differences in timing between City operations and private compliance requirements may also create uncertainty following snowfall events, as City crews typically complete a full sidewalk clearing cycle within approximately 12 hours once accumulation reaches 2 cm. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 25\nW3 | The Council-approved winter maintenance service level for public laneways is salting only, within 24 hours after the end of snowfall, to manage icy conditions; snow plowing is not provided. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 23\nW4 | Transit stop accessibility was also enhanced through a combination of mechanical clearing and manual hand crews. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 12\nW5 | In advance of the 2025-2026 winter season, the TTC provided a list of priority stops and routes, which helped focus clearing efforts on high- traffic and higher-risk locations. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 12\nW6 | Public laneways are often too narrow and typically lack sufficient on-site snow storage capacity, creating the potential for snow to be pushed against garages and fences, resulting in damage or obstructed access. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 23"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 5912,
+        "output": 1880
+      }
+    },
+    {
+      "role": "service_hours",
+      "kept": [
+        {
+          "title": "Frequent daytime service, thinner in the early morning and late night",
+          "detail": "At stop 2189 most hours from 08:00 to 20:00 have 12 or 13 departures. Early morning and late night have fewer, for example 2 at 05:00, then 3 at 28:00 and 1 at 29:00 (after midnight).",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "05:00 has 2, 06:00 has 6, 07:00 has 7, 08:00 has 12"
+            },
+            {
+              "call": "C2",
+              "quote": "27:00 has 5, 28:00 has 3, 29:00 has 1"
+            }
+          ]
+        },
+        {
+          "title": "Weekend service is listed, with fewer departures on Sunday",
+          "detail": "The Dundas stops list 236 Saturday departures, the same as a weekday, and 209 on Sunday. The Spadina stops (routes 310 and 510) list 256 on Saturday and 221 on Sunday.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "saturday departures 236, sunday departures 209"
+            },
+            {
+              "call": "C1",
+              "quote": "saturday departures 256, sunday departures 221"
+            }
+          ]
+        },
+        {
+          "title": "Nearest stops list boarding as not possible, and all trips are flagged not accessible",
+          "detail": "Both Dundas stops (2189 and 2190) list wheelchair boarding as not possible (GTFS 2). Every trip at each nearby stop is flagged not accessible, including stop 7349 on Spadina (about 68 m walking, an estimate), which lists boarding as possible.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes"
+            },
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Shelters listed, but a bench is listed at only one nearby stop",
+          "detail": "All six nearby stops have a shelter in the City data. A bench is listed only at stop 7356 on Spadina at Sullivan, about 248 m walking (an estimate). \"Not listed\" can mean the dataset is incomplete.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 7356 | Spadina Ave at Sullivan St North Side | 191 m straight-line (about 248 m walking)"
+            },
+            {
+              "call": "C1",
+              "quote": "shelter listed in City data: yes | bench listed in City data: yes"
+            }
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "title": "Service runs early morning to after midnight on weekdays at the Dundas stops",
+          "detail": "The two closest stops (about 39 m walking, an estimate) are served by routes 305 and 505. On weekdays, stop 2190 runs from 04:52 to 28:42, which is 4:42 the next morning. Stop 2189 runs from 05:39 to 29:26, which is 5:26 the next morning.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "weekday first departure 04:52, last departure 28:42, 236 departures, 36 departures at or after 23:00"
+            },
+            {
+              "call": "C2",
+              "quote": "weekday first departure 05:39, last departure 29:26, 236 departures, 45 departures at or after 23:00"
+            }
+          ],
+          "reason": "number not in cited results: 4"
+        }
+      ],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 6
+          },
+          "text": "[C1] stop 2189 | Dundas St West at Spadina Ave | 30 m straight-line (about 39 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 305, 505 | weekday first departure 05:39, last departure 29:26, 236 departures, 45 departures at or after 23:00 | saturday departures 236, sunday departures 209 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 2190 | Dundas St West at Spadina Ave | 30 m straight-line (about 39 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 305, 505 | weekday first departure 04:52, last departure 28:42, 236 departures, 36 departures at or after 23:00 | saturday departures 236, sunday departures 209 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 8121 | Spadina Ave at Dundas St West South Side | 51 m straight-line (about 66 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 310, 510 | weekday first departure 05:36, last departure 29:45, 232 departures, 33 departures at or after 23:00 | saturday departures 256, sunday departures 221 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 7349 | Spadina Ave at Dundas St West North Side | 52 m straight-line (about 68 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 310, 510 | weekday first departure 05:15, last departure 29:30, 232 departures, 30 departures at or after 23:00 | saturday departures 256, sunday departures 221 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 7356 | Spadina Ave at Sullivan St North Side | 191 m straight-line (about 248 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 310, 510 | weekday first departure 05:13, last departure 29:28, 232 departures, 30 departures at or after 23:00 | saturday departures 256, sunday departures 221 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 8131 | Spadina Ave at Sullivan St | 219 m straight-line (about 285 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 310, 510 | weekday first departure 05:37, last departure 29:46, 232 departures, 33 departures at or after 23:00 | saturday departures 256, sunday departures 221 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+        },
+        "C2": {
+          "tool": "stop_detail",
+          "args": {
+            "stop_id": "2189"
+          },
+          "text": "[C2] stop 2189 | Dundas St West at Spadina Ave | 30 m straight-line (about 39 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 305, 505 | weekday first departure 05:39, last departure 29:26, 236 departures, 45 departures at or after 23:00 | saturday departures 236, sunday departures 209 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nWeekday departures per hour (hours 24 and above mean after midnight): 05:00 has 2, 06:00 has 6, 07:00 has 7, 08:00 has 12, 09:00 has 12, 10:00 has 11, 11:00 has 12, 12:00 has 12, 13:00 has 12, 14:00 has 12, 15:00 has 12, 16:00 has 12, 17:00 has 12, 18:00 has 12, 19:00 has 13, 20:00 has 12, 21:00 has 10, 22:00 has 10, 23:00 has 11, 24:00 has 8, 25:00 has 9, 26:00 has 8, 27:00 has 5, 28:00 has 3, 29:00 has 1"
+        },
+        "C3": {
+          "tool": "stop_detail",
+          "args": {
+            "stop_id": "2190"
+          },
+          "text": "[C3] stop 2190 | Dundas St West at Spadina Ave | 30 m straight-line (about 39 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 305, 505 | weekday first departure 04:52, last departure 28:42, 236 departures, 36 departures at or after 23:00 | saturday departures 236, sunday departures 209 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nWeekday departures per hour (hours 24 and above mean after midnight): 04:00 has 2, 05:00 has 6, 06:00 has 6, 07:00 has 12, 08:00 has 12, 09:00 has 12, 10:00 has 13, 11:00 has 12, 12:00 has 12, 13:00 has 12, 14:00 has 11, 15:00 has 13, 16:00 has 12, 17:00 has 12, 18:00 has 12, 19:00 has 10, 20:00 has 11, 21:00 has 10, 22:00 has 10, 23:00 has 9, 24:00 has 8, 25:00 has 9, 26:00 has 5, 27:00 has 3, 28:00 has 2"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 8797,
+        "output": 1350
+      }
+    }
+  ],
+  "groups": [
+    [
+      0
+    ],
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      5,
+      13
+    ],
+    [
+      3,
+      6,
+      14
+    ],
+    [
+      4
+    ],
+    [
+      11
+    ],
+    [
+      12
+    ],
+    [
+      7
+    ],
+    [
+      8
+    ],
+    [
+      9
+    ],
+    [
+      10
+    ]
+  ]
+}

@@ -1,0 +1,83 @@
+[
+  {
+    "label": "What the report says (summary)",
+    "page": 1,
+    "source": "In December 2025, Transportation Services recommended permanent parking and traffic amendments to Dundas Street East and West to enhance transit service as part of 2025.TE27.51 Transit Priority Measures to Support the 505 Dundas 6-Minute Network. The transit priority measures (TPMs) implemented included expanding ‘No Stopping’ coverage of the AM and PM peak periods on weekdays, as well as new and expanded left-turn restrictions. These changes were in support of 6-minute headways on the 505 Dundas streetcar route from 7:00 a.m. to 7:00 p.m. daily, which began on November 15, 2026. The goal of the TPMs is to help improve the speed and reliability of the 505 Dundas route and minimize the risk of increased bunching and gapping associated with moving to a more frequent headway.",
+    "sentences": [
+      {
+        "plain": "In December 2025, Transportation Services recommended permanent parking and traffic changes on Dundas Street East and West to improve transit service.",
+        "quote": "In December 2025, Transportation Services recommended permanent parking and traffic amendments to Dundas Street East and West to enhance transit service"
+      },
+      {
+        "plain": "These changes were called transit priority measures (TPMs), and they included more 'No Stopping' rules during the morning and evening busy periods on weekdays.",
+        "quote": "The transit priority measures (TPMs) implemented included expanding ‘No Stopping’ coverage of the AM and PM peak periods on weekdays"
+      },
+      {
+        "plain": "The measures also included new and expanded limits on left turns.",
+        "quote": "as well as new and expanded left-turn restrictions"
+      },
+      {
+        "plain": "The changes support streetcars coming every 6 minutes on the 505 Dundas route from 7:00 a.m. to 7:00 p.m. daily, which began on November 15, 2026.",
+        "quote": "These changes were in support of 6-minute headways on the 505 Dundas streetcar route from 7:00 a.m. to 7:00 p.m. daily, which began on November 15, 2026."
+      },
+      {
+        "plain": "The goal is to help make the 505 Dundas route faster and more reliable, and to lower the risk of more bunching and gaps between streetcars as service becomes more frequent.",
+        "quote": "The goal of the TPMs is to help improve the speed and reliability of the 505 Dundas route and minimize the risk of increased bunching and gapping associated with moving to a more frequent headway."
+      }
+    ],
+    "dropped": [],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:36:39+00:00",
+    "note": null
+  },
+  {
+    "label": "What the report recommends",
+    "page": 1,
+    "source": "The Director, Congestion and Network Management, Transportation Services, recommends that: 1. Toronto and East York Community Council receive this report for information.",
+    "sentences": [
+      {
+        "plain": "This recommendation comes from the Director of Congestion and Network Management in Transportation Services.",
+        "quote": "The Director, Congestion and Network Management, Transportation Services, recommends that:"
+      },
+      {
+        "plain": "The Director recommends that Toronto and East York Community Council receive this report for information, which means the council would note it without being asked to make a decision.",
+        "quote": "Toronto and East York Community Council receive this report for information."
+      }
+    ],
+    "dropped": [],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:36:44+00:00",
+    "note": null
+  },
+  {
+    "label": "What was decided",
+    "page": null,
+    "source": "City Council on July 29 and 30, 2026, adopted the following:\n1. City Council request the General Manager, Transportation Services, in collaboration with the Chief Executive Officer, Toronto Transit Commission, to investigate the feasibility and options for expanding Transit Priority Measures for the 505 Dundas streetcar outside of the currently implemented Transit Priority Measures, to further reduce travel times and improve reliability of the Dundas streetcar for transit riders; such investigation to include further analysis of the 505 Dundas streetcar performance and development of an engagement plan to support future Transit Priority Measures.\n2. City Council request the General Manager, Transportation Services, in collaboration with the Chief Executive Officer, Toronto Transit Commission, to report to the Infrastructure and Environment Committee with recommendations on Part 1 above in the first quarter of 2027.",
+    "sentences": [
+      {
+        "plain": "City Council made this decision on July 29 and 30, 2026.",
+        "quote": "City Council on July 29 and 30, 2026, adopted the following:"
+      },
+      {
+        "plain": "Council asked the General Manager of Transportation Services, working with the head (Chief Executive Officer) of the Toronto Transit Commission, to study whether more Transit Priority Measures could be added for the 505 Dundas streetcar, beyond the ones already in place.",
+        "quote": "City Council request the General Manager, Transportation Services, in collaboration with the Chief Executive Officer, Toronto Transit Commission, to investigate the feasibility and options for expanding Transit Priority Measures for the 505 Dundas streetcar"
+      },
+      {
+        "plain": "The goal is to make trips shorter and make the Dundas streetcar more reliable for riders.",
+        "quote": "to further reduce travel times and improve reliability of the Dundas streetcar for transit riders"
+      },
+      {
+        "plain": "The study is to include a closer look at how the 505 Dundas streetcar is performing, and a plan for engaging people to support future Transit Priority Measures.",
+        "quote": "such investigation to include further analysis of the 505 Dundas streetcar performance and development of an engagement plan to support future Transit Priority Measures."
+      },
+      {
+        "plain": "Council also asked them to report back to the Infrastructure and Environment Committee with recommendations in the first quarter of 2027.",
+        "quote": "to report to the Infrastructure and Environment Committee with recommendations on Part 1 above in the first quarter of 2027."
+      }
+    ],
+    "dropped": [],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:36:46+00:00",
+    "note": null
+  }
+]

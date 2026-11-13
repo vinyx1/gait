@@ -1,0 +1,64 @@
+[
+  {
+    "label": "What the report says (summary)",
+    "page": 1,
+    "source": "This report recommends that City Council state its intention to designate the property at 70 Gerrard Street East under Part IV, Section 29 of the Ontario Heritage Act for its cultural heritage value according to the Statement of Significance which includes a description of heritage attributes found in Attachment 1. The subject property at 70 Gerrard Street East is located on the north side of Gerrard Street East, at the northeast corner of Church Street, within the Downtown Yonge East neighbourhood of downtown Toronto. A location map and current photograph of the heritage property are included in Attachment 2. Constructed c. 1845 and substantially altered in 1886 according to plans by Langley & Burke, the property historically known as the Dr. James Elliot Graham House contains a remodelled Queen Anne Revival style, two-and-a-half-storey detached house-form building, which was originally designed in the Georgian style. Following its long tenure as a private residence, the subject property has since the 1970s been home to a series of commercial and institutional establishments and organizations, including Egerton's Restaurant, The Edge music venue, and Under 21/Covenant House. The property forms part of a group of surviving mid- to late-19-century house-form buildings around the intersection of Church Street and Gerrard Street East, in the east section of downtown Toronto. The subject property at 70 Gerrard Street East was listed on the City of Toronto's Heritage Register on March 15, 1974. This property is one of eighteen pre-1870 listed properties citywide which have been identified as candidates for designation through the City's implementation of Bill 23 amendments to the Ontario Heritage Act and its ongoing prioritization strategy for listed 70 Gerrard Street East - Notice of Intention to Designate Page 1 of 29 properties that must be designated or removed from the Heritage Register by January 1, 2027. Part of the strategy for the review of listed properties on the Heritage Register includes the procurement of qualified heritage consultants to research, evaluate, and prepare heritage evaluation reports for a subset of listed properties prioritized for designation. City Planning retained the services of Alex Corey Heritage Consulting (\"the Consultant\") to research and evaluate a citywide group of eighteen pre-1870 listed properties which includes the subject property at 70 Gerrard Street East. The Consultant evaluated the subject property and determined that it meets the provincial criteria. The Consultant's research on the subject property is included in Attachment 3 of this report. The research, analysis, and evaluation contained within Attachment 3 reflect the Consultant's professional expertise and opinion. Staff have independently reviewed the Consultant's research and heritage evaluation and concur with the determination that the property at 70 Gerrard Street East has cultural heritage value and meets six of the Ontario Regulation 9/06 criteria prescribed for municipal designation under Part IV, Section 29 of the Ontario Heritage Act. A property may be designated under Part IV, Section 29 of the Ontario Heritage Act, if it meets two or more of the nine criteria. Designation enables City Council to review proposed alterations or demolitions to the property and enforce heritage property standards and maintenance.",
+    "sentences": [
+      {
+        "plain": "This report recommends that City Council say it intends to designate 70 Gerrard Street East as a heritage property under Part IV, Section 29 of the Ontario Heritage Act.",
+        "quote": "This report recommends that City Council state its intention to designate the property at 70 Gerrard Street East under Part IV, Section 29 of the Ontario Heritage Act"
+      },
+      {
+        "plain": "The house is on the north side of Gerrard Street East, at the northeast corner of Church Street, in the Downtown Yonge East neighbourhood.",
+        "quote": "located on the north side of Gerrard Street East, at the northeast corner of Church Street, within the Downtown Yonge East neighbourhood of downtown Toronto"
+      },
+      {
+        "plain": "It was built around 1845 and greatly changed in 1886, and since the 1970s it has held businesses and organizations such as Egerton's Restaurant, The Edge music venue and Under 21/Covenant House.",
+        "quote": "Constructed c. 1845 and substantially altered in 1886"
+      },
+      {
+        "plain": "The property has been on the City's Heritage Register since March 15, 1974, and listed properties like it must be designated or removed from the Register by January 1, 2027.",
+        "quote": "properties that must be designated or removed from the Heritage Register by January 1, 2027"
+      },
+      {
+        "plain": "A consultant hired by City Planning, and then City staff, found that the property meets six of the provincial criteria, and a property may be designated if it meets two or more of the nine criteria.",
+        "quote": "meets six of the Ontario Regulation 9/06 criteria prescribed for municipal designation under Part IV, Section 29 of the Ontario Heritage Act. A property may be designated under Part IV, Section 29 of the Ontario Heritage Act, if it meets two or more of the nine criteria."
+      },
+      {
+        "plain": "Designation lets City Council review plans to change or demolish the property and enforce heritage property standards and upkeep.",
+        "quote": "Designation enables City Council to review proposed alterations or demolitions to the property and enforce heritage property standards and maintenance."
+      }
+    ],
+    "dropped": [],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:36:57+00:00",
+    "note": null
+  },
+  {
+    "label": "What the report recommends",
+    "page": 2,
+    "source": "The Senior Manager, Heritage Planning, Urban Design, City Planning recommends that: 1. City Council state its intention to designate the property at 70 Gerrard Street East under Part IV, Section 29 of the Ontario Heritage Act in accordance with the Statement of Significance for 70 Gerrard Street East (Reasons for Designation) attached as Attachment 1, to the report, October 28, 2026, from the Senior Manager, Heritage Planning, Urban Design, City Planning. 2. If there are no objections to the designation, City Council authorize the City Solicitor to introduce the Bill in Council designating the property under Part IV, Section 29 of the Ontario Heritage Act.",
+    "sentences": [
+      {
+        "plain": "A senior City heritage planner recommends that City Council say it plans to protect the property at 70 Gerrard Street East as a heritage property.",
+        "quote": "The Senior Manager, Heritage Planning, Urban Design, City Planning recommends that: 1. City Council state its intention to designate the property at 70 Gerrard Street East"
+      },
+      {
+        "plain": "This protection, called designation, would be under Part IV, Section 29 of the Ontario Heritage Act.",
+        "quote": "under Part IV, Section 29 of the Ontario Heritage Act"
+      },
+      {
+        "plain": "The reasons for protecting the property are listed in Attachment 1 of the report dated October 28, 2026.",
+        "quote": "in accordance with the Statement of Significance for 70 Gerrard Street East (Reasons for Designation) attached as Attachment 1, to the report, October 28, 2026"
+      },
+      {
+        "plain": "If no one objects, the report recommends that City Council allow the City Solicitor to bring a Bill to Council to designate the property.",
+        "quote": "If there are no objections to the designation, City Council authorize the City Solicitor to introduce the Bill in Council designating the property"
+      }
+    ],
+    "dropped": [],
+    "model": "claude-opus-5-5",
+    "generated_at": "2026-11-13T02:36:57+00:00",
+    "note": null
+  }
+]

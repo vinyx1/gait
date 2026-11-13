@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Decisions - TripLens{% endblock %}
+{% block content %}
+<h1>Council and committee decisions</h1>
+<p class="privacy"><strong>New:</strong> <a href="/route">Check my route</a>. Enter the trip you make and see which decisions, works and stop conditions lie along it.</p>
+<p class="lede">Pick an item to see where it stands, what was recommended, what was decided, and how to take part.</p>
+{% macro cards(rows) %}
+<ul class="cards">
+  {% for r in rows %}
+  <li>
+    <a href="/item/{{ r.id }}"><strong>{{ r.title }}</strong></a>
+    <div class="meta">{{ r.id }} · {{ r.body }} · {{ r.date }}</div>
+    <div><span class="badge">{{ r.label }}</span></div>
+  </li>
+  {% endfor %}
+</ul>
+{% endmacro %}
+{% if upcoming %}<h2>Coming up</h2>{{ cards(upcoming) }}{% endif %}
+<h2>Already decided or referred</h2>
+{{ cards(decided) }}
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}{{ item.title }} - TripLens{% endblock %}
+{% block content %}
+<p><a href="/">&larr; All items</a></p>
+<h1>{{ item.title }}</h1>
+<p class="meta">Item {{ item.item_id }} · <a href="{{ item.url }}">Official item page</a></p>
+
+<section aria-labelledby="where">
+  <h2 id="where">Where it stands</h2>
+  <p class="status"><span class="badge big">{{ label }}</span> {{ explain }}</p>
+  <p class="meta">{% if item.upcoming %}Scheduled: {{ latest.body }}, {{ latest.dates_text }}.{% else %}Last recorded step: {{ latest.body }}, {{ latest.dates_text }}.{% endif %}</p>
+  {% for t in item.tracking_status %}<blockquote class="official">{{ t }}</blockquote>{% endfor %}
+  <p class="meta">Source: official item page, "Tracking Status" (saved {{ item.fetched_at[:10] if item.fetched_at else "date unknown" }}).</p>
+</section>
+
+{% if rewrites %}
+<section aria-labelledby="plain">
+  <h2 id="plain">In plain language</h2>
+  <p class="aibox"><strong>Written by AI (Claude), then checked by software.</strong> Each sentence is kept only if the exact words it is based on are found in the official text and its numbers match. It can still miss context. The official wording is below.</p>
+  {% for rw in rewrites %}
+    <h3>{{ rw.label }}{% if rw.page %} <span class="meta">(report page {{ rw.page }})</span>{% endif %}</h3>
+    {% if rw.long %}<p class="warn">This is a long text{% if rw.parts > 8 %} with {{ rw.parts }} numbered parts{% endif %}. The sentences below cover the main points only. Read the full official wording before relying on them.</p>{% endif %}
+    <ul class="plainlist">{% for s in rw.sentences %}<li>{{ s.plain }}</li>{% endfor %}</ul>
+    <details><summary>Show the exact words each sentence is based on</summary>
+      <ol>{% for s in rw.sentences %}<li><blockquote class="official pre small">{{ s.quote }}</blockquote></li>{% endfor %}</ol>
+    </details>
+  {% endfor %}
+  <p class="meta">Model: {{ rewrites[0].model }}, generated {{ rewrites[0].generated_at[:10] }}. Not an official City summary.</p>
+</section>
+{% endif %}
+
+<section aria-labelledby="where-affected">
+  <h2 id="where-affected">Who and where it affects</h2>
+  {% if latest.wards %}<p>Wards listed on the official page: <strong>{{ latest.wards }}</strong></p>{% else %}<p>No ward is listed on the official page.</p>{% endif %}
+  {% for l in access_locs %}<p><a href="/access/{{ l.id }}">See how transit access differs for a wheelchair user, a senior with a walker and a shift worker near {{ l.label }}</a>. <span class="meta">Open data and AI checks, not a trip planner.</span></p>{% endfor %}
+  {% if not access_locs %}<p class="meta">A rider-by-rider access view is not available for this item.</p>{% endif %}
+</section>
+
+<section aria-labelledby="say">
+  <h2 id="say">Can you still have a say?</h2>
+  {% if window.kind == "upcoming" %}
+    <p class="callout"><strong>Yes, possibly.</strong> Scheduled: {{ window.meeting }}.</p>
+    {% if window.actions %}<ul>{% for a in window.actions %}<li>{{ a }} (button on the official item page)</li>{% endfor %}</ul>{% endif %}
+  {% endif %}
+  <p>{{ window.text }}</p>
+  <p><a href="{{ item.url }}">Open the live item page</a> · <a href="{{ participate_url }}">How to speak or send comments (City of Toronto)</a></p>
+  <p class="meta">Deadlines are never worked out from meeting dates here. Your name and comments become part of the public record.</p>
+</section>
+
+{% if primary %}
+<section aria-labelledby="compare">
+  <h2 id="compare">{% if item.upcoming %}What is recommended{% else %}Recommended and decided{% endif %}</h2>
+  <div class="two">
+    <div>
+      <h3>{{ "Recommendation in the linked report" }}</h3>
+      <p class="meta">{{ primary.header.get('from') or 'Author not stated' }}{% if primary.header.get('date') %}, {{ primary.header.date }}{% endif %}. Copied from the report, page {{ (primary.facts | selectattr('label','equalto','Recommendations') | list)[0].page }}.</p>
+      <blockquote class="official pre small">{% for r in primary.recommendations %}{{ r }}
+{% endfor %}</blockquote>
+    </div>
+    <div>
+      <h3>{% if item.upcoming %}Decision{% else %}What was decided{% endif %}</h3>
+      {% if item.upcoming %}<p>Not decided yet.</p>
+      {% else %}<p class="meta">{{ latest.body }}, {{ latest.dates_text }} ({{ plain(latest.status)[0] }}).</p>
+      <blockquote class="official pre small">{{ latest.decision_text }}</blockquote>{% endif %}
+    </div>
+  </div>
+  <p class="meta">Shown side by side so you can compare them. They can differ because members change recommendations at meetings.</p>
+</section>
+{% endif %}
+
+{% if reports %}
+<section aria-labelledby="reports">
+  <h2 id="reports">What the linked reports say (copied from the PDFs)</h2>
+  {% for r in reports %}
+  <details {% if loop.first %}open{% endif %}>
+    <summary><strong>{{ r.title or 'Linked document' }}</strong> <span class="meta">({{ r.stage }}{% if r.header.get('date') %}, {{ r.header.date }}{% endif %})</span></summary>
+    <p class="meta"><a href="{{ r.url }}">Open the PDF</a>{% if r.header.get('from') %} · From: {{ r.header['from'] }}{% endif %}{% if r.header.get('to') %} · To: {{ r.header['to'] }}{% endif %}</p>
+    {% for f in r.facts %}{% if f.label != 'Recommendations' %}
+      <h4>{{ f.label }} <span class="meta">(page {{ f.page }})</span></h4>
+      <blockquote class="official pre small">{{ f.quote }}</blockquote>
+    {% endif %}{% endfor %}
+  </details>
+  {% endfor %}
+</section>
+{% endif %}
+
+<section aria-labelledby="path">
+  <h2 id="path">How it moved through the process</h2>
+  <ol class="timeline">
+  {% for s in item.stages %}
+    <li>
+      <h3>{{ s.body }} · {{ s.dates_text }}</h3>
+      {% if item.upcoming %}<p><span class="badge">Scheduled, not decided</span></p>
+      {% else %}<p><span class="badge">{{ plain(s.status)[0] }}</span> <span class="meta">Official status: {{ s.status }}</span></p>{% endif %}
+      {% if s.decision_text %}
+        <h4>{{ s.decision_heading }} (official wording)</h4>
+        <blockquote class="official pre">{{ s.decision_text }}</blockquote>
+      {% endif %}
+      {% if s.motions %}
+        <h4>Motions</h4>
+        <ul>{% for m in s.motions %}
+          <li>{{ m.motion_type }}{% if m.moved_by %}, moved by {{ m.moved_by }}{% endif %}{% if m.result %} ({{ m.result }}){% endif %}
+            {% if m.text %}<blockquote class="official pre small">{{ m.text }}</blockquote>{% endif %}</li>
+        {% endfor %}</ul>
+      {% endif %}
+      {% if s.votes %}
+        <h4>Recorded votes</h4>
+        <ul>{% for v in s.votes %}
+          <li>{{ v.motion }}: {{ v.result }}{% if v.yes is not none %} — {{ v.yes }} yes, {{ v.no }} no, {{ v.absent }} absent{% endif %}{% if v.required %} ({{ v.required }}){% endif %}</li>
+        {% endfor %}</ul>
+      {% endif %}
+      {% if s.communications_count %}<p class="meta">{{ s.communications_count }} public communication(s) filed with this step. Names and contents are not shown here.</p>{% endif %}
+      {% if s.summary %}<h4>Summary shown on the official item page (official wording, author not stated here)</h4><blockquote class="official pre small">{{ s.summary }}</blockquote>{% endif %}
+    </li>
+  {% endfor %}
+  </ol>
+</section>
+
+<section aria-labelledby="unsure">
+  <h2 id="unsure">What this page can't tell you</h2>
+  <ul>{% for c in caveats %}<li>{{ c }}</li>{% endfor %}
+  {% for n in notes %}<li><strong>Known problem in the source:</strong> {{ n.text }} <span class="meta">({{ n.source }})</span></li>{% endfor %}</ul>
+</section>
+
+<section aria-labelledby="sources">
+  <h2 id="sources">Sources</h2>
+  <ul>
+    <li><a href="{{ item.url }}">Official item page</a></li>
+    {% for st in item.stages %}{% for b in st.background %}
+      <li><a href="{{ b.url }}">{{ b.label or b.url }}</a>{% if b.date %} {{ b.date }}{% endif %} ({{ st.body }})</li>
+    {% endfor %}{% endfor %}
+    {% for d in item.documents %}{% if not item.stages|selectattr('background')|list %}<li><a href="{{ d.url }}">{{ d.label or d.url }}</a></li>{% endif %}{% endfor %}
+    {% for b in item.bylaws %}<li>By-law: <a href="{{ b.url }}">{{ b.label }}</a></li>{% endfor %}
+  </ul>
+</section>
+{% endblock %}

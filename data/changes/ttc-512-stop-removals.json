@@ -1,0 +1,33 @@
+{
+  "id": "ttc-512-stop-removals",
+  "title": "TTC proposal: remove nine stops on the 512 St Clair streetcar",
+  "body": "Toronto Transit Commission",
+  "status": "proposed",
+  "simulated": false,
+  "status_note": "The TTC page calls this a proposal starting as early as March 15, 2026, with a survey that closed January 30, 2026. The stops are still in the November 2026 schedule file, so it may not have happened yet. Check with the TTC.",
+  "source_url": "https://www.ttc.ca/riding-the-ttc/Updates/Improving-transit-reliability-on-St-Clair",
+  "source_file": "data/raw/ttc_512_stclair.txt",
+  "quotes": [
+    "Starting as early as March 15, 2026, the TTC is proposing a plan to remove nine stops along the 512 St Clair route.",
+    "Each stop adds up to thirty seconds to journey times. Removing closely spaced stops will improve travel times and increase service reliability.",
+    "available until January 30, 2026."
+  ],
+  "effects": [
+    {
+      "type": "remove_stop",
+      "route": "512",
+      "stop_ids": [
+        "15050",
+        "14935",
+        "14883",
+        "14343",
+        "14351",
+        "8163",
+        "4632",
+        "14884",
+        "14936"
+      ],
+      "quote": "Old Stock Yard\nSilverthorn / Hounslow Heath\nNorthcliffe (both directions)\nTweedsmuir (both directions)\nDunvegan (both directions)"
+    }
+  ]
+}

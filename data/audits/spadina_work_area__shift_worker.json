@@ -1,0 +1,438 @@
+{
+  "location": "spadina_work_area",
+  "label": "Spadina Road near Lowther Ave and Kendal Ave (work area)",
+  "persona": "shift_worker",
+  "persona_label": "Shift worker (late nights and early mornings)",
+  "model": "claude-opus-5-5",
+  "generated_at": "2026-11-13T03:13:11+00:00",
+  "feed": {
+    "feed_version": "S1000544",
+    "feed_start": "20261101",
+    "feed_end": "20261219",
+    "service_patterns": "weekday(1), saturday(2), sunday(3) only",
+    "source": "TTC GTFS via City of Toronto Open Data; Street Furniture - Transit Shelter and Bench datasets"
+  },
+  "roles": [
+    {
+      "role": "stops_boarding",
+      "kept": [
+        {
+          "title": "Nearest stop has late-night service but nothing before 05:30",
+          "detail": "The closest stop, the Spadina Station northbound platform, is about 86 m away by estimated walking distance and has 36 weekday departures at or after 23:00. Its first weekday departure is at 06:12, so it does not cover the early-morning window before 05:30.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 13853 | Spadina Station - Northbound Platform | 66 m straight-line (about 86 m walking)"
+            },
+            {
+              "call": "C3",
+              "quote": "weekday first departure 06:12, last departure 26:01, 346 departures, 36 departures at or after 23:00"
+            }
+          ]
+        },
+        {
+          "title": "Nearest stop with service both after 23:00 and before 05:30 is farther away",
+          "detail": "Spadina Station at Bus Bay 2, served by routes 306 and 506, is about 355 m away by estimated walking distance. It has 2 departures in the 04:00 hour and 7 in the 05:00 hour, plus 33 weekday departures at or after 23:00. This is the only listed stop with a first departure before 05:30. Walking distances are straight-line times 1.3, and the rider's walk limit is an assumption.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "273 m straight-line (about 355 m walking)"
+            },
+            {
+              "call": "C2",
+              "quote": "04:00 has 2, 05:00 has 7"
+            },
+            {
+              "call": "C2",
+              "quote": "weekday first departure 04:40, last departure 25:58, 264 departures, 33 departures at or after 23:00"
+            }
+          ]
+        },
+        {
+          "title": "Bus Bay 2 lists boarding as possible, but every trip is flagged not accessible",
+          "detail": "The stop itself lists wheelchair boarding as possible (GTFS 1). However, 100% of the trips serving it are flagged not accessible. For a rider using a wheelchair, the early-morning option in this data is flagged not accessible at the trip level.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Spadina Road bus stops start between 05:45 and 06:31",
+          "detail": "The route 127 stops on Spadina Road at Lowther Ave and Kendal Ave are about 91 m to 122 m away by estimated walking distance. They have 6 or 7 departures at or after 23:00, but their earliest weekday departure is 05:45, which is after 05:30. The location is described as a work area, and the data does not show whether any works affect these stops.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 7354 | Spadina Rd at Lowther Ave | 94 m straight-line (about 122 m walking)"
+            },
+            {
+              "call": "C1",
+              "quote": "weekday first departure 05:45, last departure 25:10, 50 departures, 6 departures at or after 23:00"
+            }
+          ]
+        },
+        {
+          "title": "Shelter and bench listings",
+          "detail": "Neither the nearest stop nor Bus Bay 2 has a shelter or bench listed in City data. Both Spadina Rd at Kendal Ave stops list a shelter but no bench. \"Not listed\" may mean the dataset is incomplete, not that no shelter or bench exists.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "shelter listed in City data: no | bench listed in City data: no | routes: 306, 506"
+            },
+            {
+              "call": "C1",
+              "quote": "stop 7352 | Spadina Rd at Kendal Ave | 77 m straight-line (about 100 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no"
+            }
+          ]
+        },
+        {
+          "title": "Bus Bay 1 has no scheduled service",
+          "detail": "Spadina Station at Bus Bay 1, about 356 m away, lists no routes and no weekday service in the base schedule.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 15079 | Spadina Station at Bus Bay 1 | 274 m straight-line (about 356 m walking)"
+            },
+            {
+              "call": "C1",
+              "quote": "routes: none | no weekday service in the base schedule | saturday departures 0, sunday departures 0"
+            }
+          ]
+        }
+      ],
+      "dropped": [],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 10
+          },
+          "text": "[C1] stop 13853 | Spadina Station - Northbound Platform | 66 m straight-line (about 86 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 1 | weekday first departure 06:12, last departure 26:01, 346 departures, 36 departures at or after 23:00 | saturday departures 272, sunday departures 224 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 8127 | Spadina Rd at Lowther Ave | 70 m straight-line (about 91 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 127 | weekday first departure 06:31, last departure 25:28, 48 departures, 7 departures at or after 23:00 | saturday departures 48, sunday departures 41 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 13854 | Spadina Station - Southbound Platform | 72 m straight-line (about 94 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 1 | weekday first departure 06:03, last departure 25:36, 340 departures, 32 departures at or after 23:00 | saturday departures 269, sunday departures 224 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 7352 | Spadina Rd at Kendal Ave | 77 m straight-line (about 100 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 127 | weekday first departure 05:46, last departure 25:11, 50 departures, 6 departures at or after 23:00 | saturday departures 50, sunday departures 40 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 8125 | Spadina Rd at Kendal Ave | 86 m straight-line (about 112 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 127 | weekday first departure 06:31, last departure 25:28, 48 departures, 7 departures at or after 23:00 | saturday departures 48, sunday departures 41 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 7354 | Spadina Rd at Lowther Ave | 94 m straight-line (about 122 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 127 | weekday first departure 05:45, last departure 25:10, 50 departures, 6 departures at or after 23:00 | saturday departures 50, sunday departures 40 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 8117 | Spadina Rd at Bernard Ave South Side | 249 m straight-line (about 324 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 127 | weekday first departure 06:30, last departure 25:27, 48 departures, 7 departures at or after 23:00 | saturday departures 48, sunday departures 41 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 14776 | Spadina Station at Bus Bay 2 | 273 m straight-line (about 355 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 306, 506 | weekday first departure 04:40, last departure 25:58, 264 departures, 33 departures at or after 23:00 | saturday departures 274, sunday departures 248 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 15079 | Spadina Station at Bus Bay 1 | 274 m straight-line (about 356 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: none | no weekday service in the base schedule | saturday departures 0, sunday departures 0\nstop 7342 | Spadina Rd at Bernard Ave | 277 m straight-line (about 360 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: yes | routes: 127 | weekday first departure 05:47, last departure 25:12, 50 departures, 6 departures at or after 23:00 | saturday departures 50, sunday departures 40 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%"
+        },
+        "C2": {
+          "tool": "stop_detail",
+          "args": {
+            "stop_id": "14776"
+          },
+          "text": "[C2] stop 14776 | Spadina Station at Bus Bay 2 | 273 m straight-line (about 355 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 306, 506 | weekday first departure 04:40, last departure 25:58, 264 departures, 33 departures at or after 23:00 | saturday departures 274, sunday departures 248 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nWeekday departures per hour (hours 24 and above mean after midnight): 04:00 has 2, 05:00 has 7, 06:00 has 13, 07:00 has 13, 08:00 has 14, 09:00 has 14, 10:00 has 12, 11:00 has 12, 12:00 has 12, 13:00 has 12, 14:00 has 14, 15:00 has 13, 16:00 has 15, 17:00 has 15, 18:00 has 13, 19:00 has 14, 20:00 has 12, 21:00 has 12, 22:00 has 12, 23:00 has 12, 24:00 has 12, 25:00 has 9"
+        },
+        "C3": {
+          "tool": "stop_detail",
+          "args": {
+            "stop_id": "13853"
+          },
+          "text": "[C3] stop 13853 | Spadina Station - Northbound Platform | 66 m straight-line (about 86 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 1 | weekday first departure 06:12, last departure 26:01, 346 departures, 36 departures at or after 23:00 | saturday departures 272, sunday departures 224 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nWeekday departures per hour (hours 24 and above mean after midnight): 06:00 has 10, 07:00 has 21, 08:00 has 24, 09:00 has 24, 10:00 has 18, 11:00 has 16, 12:00 has 15, 13:00 has 15, 14:00 has 15, 15:00 has 16, 16:00 has 15, 17:00 has 23, 18:00 has 22, 19:00 has 23, 20:00 has 20, 21:00 has 17, 22:00 has 16, 23:00 has 12, 24:00 has 12, 25:00 has 11, 26:00 has 1"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 10080,
+        "output": 1780
+      }
+    },
+    {
+      "role": "walking_winter",
+      "kept": [
+        {
+          "title": "No departures listed before 05:30",
+          "detail": "None of the six nearby stops lists a weekday departure before 05:30. The earliest is 05:45 on route 127 at Spadina Rd at Lowther Ave (stop 7354), and the subway platforms start at 06:03 and 06:12. The data does not show early-morning service in the rider's window before 05:30.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 7354 | Spadina Rd at Lowther Ave | 94 m straight-line (about 122 m walking)"
+            },
+            {
+              "call": "C1",
+              "quote": "weekday first departure 05:45, last departure 25:10"
+            },
+            {
+              "call": "C1",
+              "quote": "weekday first departure 06:03, last departure 25:36, 340 departures, 32 departures at or after 23:00"
+            }
+          ],
+          "note": "Downgraded from barrier: the cited text does not itself show a stop, service or boarding barrier."
+        },
+        {
+          "title": "Road works nearby with unclear status",
+          "detail": "Resurfacing on Walmer Rd from Kendal Ave to Bernard Ave, 125 m away, is listed as Active. Its timeline is Q2 2024 - Q3 2024, and it was last updated 2024-06-26, so the data does not show whether the work is still going on. This work may include sidewalk and curb repairs and closing lanes or the whole road.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "WALMER RD; From: KENDAL AVE; To: BERNARD AVE | status: Active | timeline: Q2 2024 - Q3 2024 | 125 m from the point | last updated 2024-06-26"
+            },
+            {
+              "call": "C2",
+              "quote": "including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road."
+            }
+          ]
+        },
+        {
+          "title": "Brunswick Ave resurfacing through Q2 2026",
+          "detail": "Several sections of Brunswick Ave, about 303 m to 320 m away, are listed as Active resurfacing with a timeline of Q3 2025 - Q2 2026. These listings were last updated 2022-02-22. The data does not show whether this work affects the walk to the stops.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "BRUNSWICK AVE; From: LOWTHER AVE; To: BARTON AVE | status: Active | timeline: Q3 2025 - Q2 2026 | 303 m from the point | last updated 2022-02-22"
+            }
+          ]
+        },
+        {
+          "title": "Timing of winter sidewalk clearing",
+          "detail": "The City starts clearing sidewalks once snow reaches 2 cm, and crews typically finish a full clearing cycle within approximately 12 hours. Sidewalks may not yet be cleared for a walk in the middle of the night or early morning soon after snowfall. The report says transit stops were cleared using machines and hand crews, focused on a TTC priority list, but the data does not show whether these stops are on that list.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "the City begins sidewalk clearing once snow accumulation reaches 2 cm."
+            },
+            {
+              "call": "C3",
+              "quote": "City crews typically complete a full sidewalk clearing cycle within approximately 12 hours once accumulation reaches 2 cm."
+            },
+            {
+              "call": "C3",
+              "quote": "the TTC provided a list of priority stops and routes, which helped focus clearing efforts on high- traffic and higher-risk locations."
+            }
+          ]
+        },
+        {
+          "title": "Laneways are salted, not plowed",
+          "detail": "Under the Council-approved service level, public laneways are only salted, within 24 hours after snowfall ends, and are not plowed. Any walking route that uses a laneway could have snow left on it.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "The Council-approved winter maintenance service level for public laneways is salting only, within 24 hours after the end of snowfall, to manage icy conditions; snow plowing is not provided."
+            }
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "title": "Late-night service after 23:00 is listed",
+          "detail": "The Spadina Station northbound platform lists 36 weekday departures at or after 23:00, with the last at 26:01 (2:01 a.m. on the 24-hour transit clock). The bus stops on route 127 list 6 to 7 departures at or after 23:00. These stops are about 86 m to 122 m away by an estimated walk (straight-line distance times 1.3).",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "weekday first departure 06:12, last departure 26:01, 346 departures, 36 departures at or after 23:00"
+            },
+            {
+              "call": "C1",
+              "quote": "weekday first departure 06:31, last departure 25:28, 48 departures, 7 departures at or after 23:00"
+            }
+          ],
+          "reason": "number not in cited results: 2, 24"
+        }
+      ],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 6
+          },
+          "text": "[C1] stop 13853 | Spadina Station - Northbound Platform | 66 m straight-line (about 86 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 1 | weekday first departure 06:12, last departure 26:01, 346 departures, 36 departures at or after 23:00 | saturday departures 272, sunday departures 224 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 8127 | Spadina Rd at Lowther Ave | 70 m straight-line (about 91 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 127 | weekday first departure 06:31, last departure 25:28, 48 departures, 7 departures at or after 23:00 | saturday departures 48, sunday departures 41 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 13854 | Spadina Station - Southbound Platform | 72 m straight-line (about 94 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 1 | weekday first departure 06:03, last departure 25:36, 340 departures, 32 departures at or after 23:00 | saturday departures 269, sunday departures 224 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 7352 | Spadina Rd at Kendal Ave | 77 m straight-line (about 100 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 127 | weekday first departure 05:46, last departure 25:11, 50 departures, 6 departures at or after 23:00 | saturday departures 50, sunday departures 40 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 8125 | Spadina Rd at Kendal Ave | 86 m straight-line (about 112 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 127 | weekday first departure 06:31, last departure 25:28, 48 departures, 7 departures at or after 23:00 | saturday departures 48, sunday departures 41 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 7354 | Spadina Rd at Lowther Ave | 94 m straight-line (about 122 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 127 | weekday first departure 05:45, last departure 25:10, 50 departures, 6 departures at or after 23:00 | saturday departures 50, sunday departures 40 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%"
+        },
+        "C2": {
+          "tool": "planned_works",
+          "args": {
+            "radius_m": 400
+          },
+          "text": "[C2] Road resurfacing program | Local Road Resurfacing | WALMER RD; From: KENDAL AVE; To: BERNARD AVE | status: Active | timeline: Q2 2024 - Q3 2024 | 125 m from the point | last updated 2024-06-26 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nRoad resurfacing program | Local Road Resurfacing | BRUNSWICK AVE; From: BARTON AVE; To: WELLS ST | status: Active | timeline: Q3 2025 - Q2 2026 | 303 m from the point | last updated 2022-02-22 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nRoad resurfacing program | Local Road Resurfacing | BRUNSWICK AVE; From: LOWTHER AVE; To: BARTON AVE | status: Active | timeline: Q3 2025 - Q2 2026 | 303 m from the point | last updated 2022-02-22 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nRoad resurfacing program | Local Road Resurfacing | BRUNSWICK AVE; From: BLOOR ST W; To: LOWTHER AVE | status: Active | timeline: Q3 2025 - Q2 2026 | 320 m from the point | last updated 2022-02-22 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nRoad resurfacing program | Local Road Resurfacing | WELLS ST; From: [N] BRUNSWICK AVE [BRANCH]; To: [S] BRUNSWICK AVE [BRANCH] | status: Active | timeline: Q2 2024 - Q3 2024 | 369 m from the point | last updated 2024-06-26 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nRoad resurfacing program | Local Road Resurfacing | WELLS ST; From: [S] BRUNSWICK AVE [BRANCH]; To: HOWLAND AVE (TO) | status: Active | timeline: Q2 2024 - Q3 2024 | 379 m from the point | last updated 2024-06-26 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road."
+        },
+        "C3": {
+          "tool": "winter_rules",
+          "args": {},
+          "text": "[C3] W1 | Under current service levels, the City begins sidewalk clearing once snow accumulation reaches 2 cm. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 25\nW2 | Differences in timing between City operations and private compliance requirements may also create uncertainty following snowfall events, as City crews typically complete a full sidewalk clearing cycle within approximately 12 hours once accumulation reaches 2 cm. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 25\nW3 | The Council-approved winter maintenance service level for public laneways is salting only, within 24 hours after the end of snowfall, to manage icy conditions; snow plowing is not provided. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 23\nW4 | Transit stop accessibility was also enhanced through a combination of mechanical clearing and manual hand crews. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 12\nW5 | In advance of the 2025-2026 winter season, the TTC provided a list of priority stops and routes, which helped focus clearing efforts on high- traffic and higher-risk locations. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 12\nW6 | Public laneways are often too narrow and typically lack sufficient on-site snow storage capacity, creating the potential for snow to be pushed against garages and fences, resulting in damage or obstructed access. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 23"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 6770,
+        "output": 1909
+      }
+    },
+    {
+      "role": "service_hours",
+      "kept": [
+        {
+          "title": "No weekday departures listed before 05:30",
+          "detail": "None of the six nearby stops lists a weekday departure before 05:30. The earliest is 05:45 on route 127 at Spadina Rd at Lowther Ave. The earliest subway departure from Spadina Station is 06:03 southbound and 06:12 northbound.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "weekday first departure 05:45, last departure 25:10"
+            },
+            {
+              "call": "C1",
+              "quote": "weekday first departure 06:03, last departure 25:36, 340 departures"
+            }
+          ],
+          "note": "Downgraded from barrier: the cited text does not itself show a stop, service or boarding barrier."
+        },
+        {
+          "title": "Weekday gap after the last early-morning departure",
+          "detail": "The last weekday departure listed at Spadina Station northbound is 26:01 (after midnight), and only 1 departure runs in the 26:00 hour. The data does not show any departures between then and the first morning trips.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "25:00 has 11, 26:00 has 1"
+            }
+          ]
+        },
+        {
+          "title": "Subway runs often after 23:00 on weekdays",
+          "detail": "Spadina Station northbound platform lists 36 weekday departures at or after 23:00, and southbound lists 32. The northbound hourly counts are 12 in the 23:00 hour, 12 in the 24:00 hour and 11 in the 25:00 hour.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "346 departures, 36 departures at or after 23:00"
+            },
+            {
+              "call": "C2",
+              "quote": "23:00 has 12, 24:00 has 12, 25:00 has 11"
+            }
+          ]
+        },
+        {
+          "title": "Few late-night trips on route 127",
+          "detail": "Route 127 stops on Spadina Rd list only 6 or 7 weekday departures at or after 23:00, and 48 to 50 departures over the whole weekday. At Lowther Ave (stop 7354) the hourly counts are 3 in the 23:00 hour, 2 in the 24:00 hour and 1 in the 25:00 hour.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "23:00 has 3, 24:00 has 2, 25:00 has 1"
+            },
+            {
+              "call": "C1",
+              "quote": "weekday first departure 06:31, last departure 25:28, 48 departures, 7 departures at or after 23:00"
+            }
+          ]
+        },
+        {
+          "title": "Weekend service has fewer departures",
+          "detail": "Spadina Station northbound lists 272 Saturday and 224 Sunday departures, compared with 346 on weekdays. Route 127 at Kendal Ave (stop 7352) lists 50 on Saturday and 40 on Sunday. The data does not show weekend first or last departure times.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "saturday departures 272, sunday departures 224"
+            },
+            {
+              "call": "C1",
+              "quote": "saturday departures 50, sunday departures 40"
+            }
+          ]
+        },
+        {
+          "title": "Stops are close, but the walking times are estimates",
+          "detail": "All six stops are listed within about 122 m walking, based on straight-line distance times 1.3. The real sidewalk network was not checked. Only the Kendal Ave stops list a shelter in City data, and none list a bench, though the City data may be incomplete.",
+          "severity": "info",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "66 m straight-line (about 86 m walking)"
+            },
+            {
+              "call": "C1",
+              "quote": "stop 7352 | Spadina Rd at Kendal Ave | 77 m straight-line (about 100 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes"
+            }
+          ]
+        }
+      ],
+      "dropped": [],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 6
+          },
+          "text": "[C1] stop 13853 | Spadina Station - Northbound Platform | 66 m straight-line (about 86 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 1 | weekday first departure 06:12, last departure 26:01, 346 departures, 36 departures at or after 23:00 | saturday departures 272, sunday departures 224 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 8127 | Spadina Rd at Lowther Ave | 70 m straight-line (about 91 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 127 | weekday first departure 06:31, last departure 25:28, 48 departures, 7 departures at or after 23:00 | saturday departures 48, sunday departures 41 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 13854 | Spadina Station - Southbound Platform | 72 m straight-line (about 94 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 1 | weekday first departure 06:03, last departure 25:36, 340 departures, 32 departures at or after 23:00 | saturday departures 269, sunday departures 224 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 7352 | Spadina Rd at Kendal Ave | 77 m straight-line (about 100 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 127 | weekday first departure 05:46, last departure 25:11, 50 departures, 6 departures at or after 23:00 | saturday departures 50, sunday departures 40 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 8125 | Spadina Rd at Kendal Ave | 86 m straight-line (about 112 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 127 | weekday first departure 06:31, last departure 25:28, 48 departures, 7 departures at or after 23:00 | saturday departures 48, sunday departures 41 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 7354 | Spadina Rd at Lowther Ave | 94 m straight-line (about 122 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 127 | weekday first departure 05:45, last departure 25:10, 50 departures, 6 departures at or after 23:00 | saturday departures 50, sunday departures 40 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%"
+        },
+        "C2": {
+          "tool": "stop_detail",
+          "args": {
+            "stop_id": "13853"
+          },
+          "text": "[C2] stop 13853 | Spadina Station - Northbound Platform | 66 m straight-line (about 86 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 1 | weekday first departure 06:12, last departure 26:01, 346 departures, 36 departures at or after 23:00 | saturday departures 272, sunday departures 224 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nWeekday departures per hour (hours 24 and above mean after midnight): 06:00 has 10, 07:00 has 21, 08:00 has 24, 09:00 has 24, 10:00 has 18, 11:00 has 16, 12:00 has 15, 13:00 has 15, 14:00 has 15, 15:00 has 16, 16:00 has 15, 17:00 has 23, 18:00 has 22, 19:00 has 23, 20:00 has 20, 21:00 has 17, 22:00 has 16, 23:00 has 12, 24:00 has 12, 25:00 has 11, 26:00 has 1"
+        },
+        "C3": {
+          "tool": "stop_detail",
+          "args": {
+            "stop_id": "7354"
+          },
+          "text": "[C3] stop 7354 | Spadina Rd at Lowther Ave | 94 m straight-line (about 122 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 127 | weekday first departure 05:45, last departure 25:10, 50 departures, 6 departures at or after 23:00 | saturday departures 50, sunday departures 40 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nWeekday departures per hour (hours 24 and above mean after midnight): 05:00 has 1, 06:00 has 3, 07:00 has 2, 08:00 has 3, 09:00 has 3, 10:00 has 3, 11:00 has 3, 12:00 has 2, 13:00 has 3, 14:00 has 2, 15:00 has 3, 16:00 has 2, 17:00 has 2, 18:00 has 3, 19:00 has 2, 20:00 has 2, 21:00 has 2, 22:00 has 3, 23:00 has 3, 24:00 has 2, 25:00 has 1"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 8642,
+        "output": 1450
+      }
+    }
+  ],
+  "groups": [
+    [
+      0
+    ],
+    [
+      1
+    ],
+    [
+      2
+    ],
+    [
+      3
+    ],
+    [
+      4
+    ],
+    [
+      5
+    ],
+    [
+      6,
+      11
+    ],
+    [
+      7
+    ],
+    [
+      8
+    ],
+    [
+      9
+    ],
+    [
+      10
+    ],
+    [
+      12
+    ],
+    [
+      13
+    ],
+    [
+      14
+    ],
+    [
+      15
+    ],
+    [
+      16
+    ]
+  ]
+}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Check my route - TripLens{% endblock %}
+{% block content %}
+<p><a href="/">&larr; All items</a></p>
+<h1>Check my route</h1>
+<p class="lede">Tell us the trip you make and the bus, streetcar or subway you take. We show what the open data lists along it: decisions you can still act on, planned works, and how the stops work for you. We do not plan trips or say a trip is possible or safe.</p>
+<p class="privacy"><strong>Private by design.</strong> Your addresses are looked up in a file on this computer and are not sent anywhere or saved. The map is a drawing, not a map service.</p>
+{% if errors %}<div role="alert" class="warn"><ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul></div>{% endif %}
+{% if not have_geo %}<p class="warn">The local address file is missing. Run <code>scripts/build_address_index.py</code>.</p>{% endif %}
+<form method="post" action="/route/stops" class="stack">
+  <label>Where do you start? <span class="meta">Toronto street address, for example 1337 Queen St W</span>
+    <input name="origin" required autocomplete="off" value="{{ v.get('origin','') }}"></label>
+  <label>Where do you go? <span class="meta">Toronto street address</span>
+    <input name="destination" required autocomplete="off" value="{{ v.get('destination','') }}"></label>
+  <label>Which route do you take? <span class="meta">Type a number such as 501, or pick from the list</span>
+    <input name="route1" list="routes" required autocomplete="off" value="{{ v.get('route1','') }}"></label>
+  <label>A second route, if you transfer <span class="meta">Optional</span>
+    <input name="route2" list="routes" autocomplete="off" value="{{ v.get('route2','') }}"></label>
+  <datalist id="routes">{% for s, l in routes %}<option value="{{ s }} {{ l }}">{% endfor %}</datalist>
+  <fieldset><legend>Which rider are you checking for?</legend>
+    {% for k, p in personas.items() %}<label class="inline"><input type="radio" name="rider" value="{{ k }}" {% if v.get('rider', 'wheelchair') == k %}checked{% endif %}> {{ p.label }}</label>{% endfor %}
+  </fieldset>
+  <label>When do you travel?
+    <select name="day">{% for k, n in days.items() %}<option value="{{ k }}" {% if v.get('day','weekday') == k %}selected{% endif %}>{{ n | capitalize }}</option>{% endfor %}</select>
+    <select name="band" aria-label="Time of day">{% for k, n in bands.items() %}<option value="{{ k }}" {% if v.get('band','day') == k %}selected{% endif %}>{{ n }}</option>{% endfor %}</select></label>
+  <button type="submit">Next: choose your stops</button>
+</form>
+<section aria-labelledby="ex"><h2 id="ex">Or try an example</h2>
+  <ul>{% for k, e in examples.items() %}<li><a href="/route/example/{{ k }}">{{ e.title }}</a></li>{% endfor %}</ul></section>
+{% endblock %}

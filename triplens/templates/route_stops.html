@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Choose your stops - TripLens{% endblock %}
+{% block content %}
+<h1>Choose your stops</h1>
+<p class="lede">Choose the stops you use on each route. Start: <strong>{{ o.label }}</strong>. Destination: <strong>{{ d.label }}</strong>.</p>
+<form method="post" action="/route/result" class="stack">
+  <input type="hidden" name="origin" value="{{ v.origin }}"><input type="hidden" name="destination" value="{{ v.destination }}">
+  <input type="hidden" name="rider" value="{{ v.rider }}"><input type="hidden" name="band" value="{{ v.band }}"><input type="hidden" name="day" value="{{ v.day }}">
+  {% for r in rides %}
+  <input type="hidden" name="route{{ r.index }}" value="{{ r.route }}">
+  <fieldset><legend>Route {{ r.route }} {{ r.long }}</legend>
+    <label>Where do you get on?
+      <select name="board{{ r.index }}" required><option value="">Choose a stop</option>{% for g in r.groups %}<optgroup label="{{ g.label }}">{% for s in g.stops %}<option value="{{ s.value }}">{{ s.name }}{% if s.note_on %} ({{ s.note_on }}){% endif %}</option>{% endfor %}</optgroup>{% endfor %}</select></label>
+    <label>Where do you get off?
+      <select name="alight{{ r.index }}" required><option value="">Choose a stop</option>{% for g in r.groups %}<optgroup label="{{ g.label }}">{% for s in g.stops %}<option value="{{ s.value }}">{{ s.name }}{% if s.note_off %} ({{ s.note_off }}){% endif %}</option>{% endfor %}</optgroup>{% endfor %}</select></label>
+  </fieldset>
+  {% endfor %}
+  <p class="meta">Stops are grouped by direction of travel. Choose both stops from the same direction, with the stop where you get off after the stop where you get on. Distances are shown only to help you find your stops.</p>
+  <button type="submit">Show what is along my route</button>
+</form>
+{% endblock %}

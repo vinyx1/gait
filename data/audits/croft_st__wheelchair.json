@@ -1,0 +1,372 @@
+{
+  "location": "croft_st",
+  "label": "Croft Street, Ward 11 (laneway homes)",
+  "persona": "wheelchair",
+  "persona_label": "Wheelchair user",
+  "model": "claude-opus-5-5",
+  "generated_at": "2026-11-13T03:13:19+00:00",
+  "feed": {
+    "feed_version": "S1000544",
+    "feed_start": "20261101",
+    "feed_end": "20261219",
+    "service_patterns": "weekday(1), saturday(2), sunday(3) only",
+    "source": "TTC GTFS via City of Toronto Open Data; Street Furniture - Transit Shelter and Bench datasets"
+  },
+  "roles": [
+    {
+      "role": "stops_boarding",
+      "kept": [
+        {
+          "title": "Nearest stop lists boarding as not possible",
+          "detail": "The closest stop, College St at Borden St (stop 817), lists wheelchair boarding as not possible, and every trip serving it is flagged not accessible. All of the 9 closest stops list boarding as not possible.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 817 | College St at Borden St | 201 m straight-line (about 261 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            },
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Nearest stop marked boarding possible has only trips flagged not accessible",
+          "detail": "College St at Augusta Ave (stop 12338) is the nearest stop that lists boarding as possible, at about 391 m walking compared with about 261 m for the nearest stop. However, every trip on its routes (306, 506) is flagged not accessible.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 12338 | College St at Augusta Ave | 301 m straight-line (about 391 m walking) | wheelchair boarding: possible (GTFS 1)"
+            },
+            {
+              "call": "C1",
+              "quote": "routes: 306, 506 | weekday first departure 04:39, last departure 29:01, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Nearest stop with boarding possible and accessible trips is farther away",
+          "detail": "Harbord St at Brunswick Ave (stop 7804, route 94) lists boarding as possible, and 100% of its trips are flagged accessible. It is about 536 m walking, an estimate based on straight-line distance times 1.3. Whether that is within this rider's walking limit varies from person to person. The weekday schedule lists 61 departures at this stop.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "stop 7804 | Harbord St at Brunswick Ave | 412 m straight-line (about 536 m walking) | wheelchair boarding: possible (GTFS 1)"
+            },
+            {
+              "call": "C2",
+              "quote": "routes: 94 | weekday first departure 05:48, last departure 25:11, 61 departures, 7 departures at or after 23:00 | saturday departures 61, sunday departures 54 | trips flagged wheelchair accessible: 100%"
+            }
+          ]
+        },
+        {
+          "title": "Bathurst stop marked boarding possible has few trips flagged accessible",
+          "detail": "Bathurst St at Nassau St - Toronto Western Hospital (stop 16454) lists boarding as possible at about 546 m walking. Only 9% of its trips are flagged accessible, and 91% are flagged not accessible.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "stop 16454 | Bathurst St at Nassau St - Toronto Western Hospital | 420 m straight-line (about 546 m walking) | wheelchair boarding: possible (GTFS 1)"
+            },
+            {
+              "call": "C2",
+              "quote": "trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Shelter and bench listings at stops marked boarding possible",
+          "detail": "The City data lists a shelter but no bench at stops 7804, 7802 and 7803 on Harbord St. Stops 12338 and 16454 have neither a shelter nor a bench listed. \"Not listed\" may mean the dataset is incomplete, not that none exists.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "stop 7802 | Harbord St at Bathurst St | 423 m straight-line (about 550 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no"
+            },
+            {
+              "call": "C1",
+              "quote": "wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no"
+            }
+          ]
+        }
+      ],
+      "dropped": [],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 10
+          },
+          "text": "[C1] stop 817 | College St at Borden St | 201 m straight-line (about 261 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: yes | routes: 306, 506 | weekday first departure 04:39, last departure 29:02, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 816 | College St at Borden St | 209 m straight-line (about 272 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:28, last departure 29:42, 141 departures, 34 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 812 | College St at Bathurst St | 223 m straight-line (about 290 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 04:40, last departure 29:02, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 111 | Bathurst St at College St | 232 m straight-line (about 302 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:18, last departure 27:48, 181 departures, 23 departures at or after 23:00 | saturday departures 176, sunday departures 169 | trips flagged wheelchair accessible: 8%, flagged not accessible: 92%, no information: 0%\nstop 212 | Bathurst St at Ulster St | 236 m straight-line (about 307 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:58, last departure 28:30, 183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%\nstop 811 | College St at Bathurst St | 261 m straight-line (about 339 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:26, last departure 29:41, 141 departures, 34 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 110 | Bathurst St at College St | 262 m straight-line (about 341 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:56, last departure 28:28, 183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%\nstop 213 | Bathurst St at Ulster St | 262 m straight-line (about 341 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:17, last departure 27:47, 181 departures, 23 departures at or after 23:00 | saturday departures 176, sunday departures 169 | trips flagged wheelchair accessible: 8%, flagged not accessible: 92%, no information: 0%\nstop 809 | College St at Augusta Ave | 300 m straight-line (about 390 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:29, last departure 29:43, 141 departures, 34 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 12338 | College St at Augusta Ave | 301 m straight-line (about 391 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 306, 506 | weekday first departure 04:39, last departure 29:01, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+        },
+        "C2": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 15
+          },
+          "text": "[C2] stop 817 | College St at Borden St | 201 m straight-line (about 261 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: yes | routes: 306, 506 | weekday first departure 04:39, last departure 29:02, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 816 | College St at Borden St | 209 m straight-line (about 272 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:28, last departure 29:42, 141 departures, 34 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 812 | College St at Bathurst St | 223 m straight-line (about 290 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 04:40, last departure 29:02, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 111 | Bathurst St at College St | 232 m straight-line (about 302 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:18, last departure 27:48, 181 departures, 23 departures at or after 23:00 | saturday departures 176, sunday departures 169 | trips flagged wheelchair accessible: 8%, flagged not accessible: 92%, no information: 0%\nstop 212 | Bathurst St at Ulster St | 236 m straight-line (about 307 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:58, last departure 28:30, 183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%\nstop 811 | College St at Bathurst St | 261 m straight-line (about 339 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:26, last departure 29:41, 141 departures, 34 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 110 | Bathurst St at College St | 262 m straight-line (about 341 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:56, last departure 28:28, 183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%\nstop 213 | Bathurst St at Ulster St | 262 m straight-line (about 341 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:17, last departure 27:47, 181 departures, 23 departures at or after 23:00 | saturday departures 176, sunday departures 169 | trips flagged wheelchair accessible: 8%, flagged not accessible: 92%, no information: 0%\nstop 809 | College St at Augusta Ave | 300 m straight-line (about 390 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:29, last departure 29:43, 141 departures, 34 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 12338 | College St at Augusta Ave | 301 m straight-line (about 391 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 306, 506 | weekday first departure 04:39, last departure 29:01, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 148 | Bathurst St at Harbord St | 409 m straight-line (about 532 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:58, last departure 28:30, 183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%\nstop 7804 | Harbord St at Brunswick Ave | 412 m straight-line (about 536 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 94 | weekday first departure 05:48, last departure 25:11, 61 departures, 7 departures at or after 23:00 | saturday departures 61, sunday departures 54 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 16454 | Bathurst St at Nassau St - Toronto Western Hospital | 420 m straight-line (about 546 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:56, last departure 28:28, 183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%\nstop 7802 | Harbord St at Bathurst St | 423 m straight-line (about 550 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 94 | weekday first departure 06:00, last departure 25:19, 59 departures, 7 departures at or after 23:00 | saturday departures 61, sunday departures 53 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 7803 | Harbord St at Bathurst St | 423 m straight-line (about 550 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 94 | weekday first departure 05:47, last departure 25:10, 61 departures, 7 departures at or after 23:00 | saturday departures 61, sunday departures 54 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 11876,
+        "output": 1565
+      }
+    },
+    {
+      "role": "walking_winter",
+      "kept": [
+        {
+          "title": "Trip flags: College St trips all not accessible, Bathurst St mostly not accessible",
+          "detail": "At the College St stops (routes 306 and 506), 100% of trips are flagged not accessible. At the Bathurst St stops (routes 307 and 511), 8% to 9% of trips are flagged accessible. However, those stops also list boarding as not possible.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+            },
+            {
+              "call": "C1",
+              "quote": "trips flagged wheelchair accessible: 8%, flagged not accessible: 92%, no information: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Public laneways get salting only, with no snow plowing",
+          "detail": "This location is described as laneway homes. Under the City report, public laneways are salted within 24 hours after snowfall ends but are not plowed. The report also says snow can end up obstructing access in narrow laneways.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "The Council-approved winter maintenance service level for public laneways is salting only, within 24 hours after the end of snowfall, to manage icy conditions; snow plowing is not provided."
+            },
+            {
+              "call": "C3",
+              "quote": "creating the potential for snow to be pushed against garages and fences, resulting in damage or obstructed access."
+            }
+          ]
+        },
+        {
+          "title": "Sidewalk clearing begins at 2 cm of snow",
+          "detail": "The City report says sidewalk clearing begins once snow reaches 2 cm. Crews typically complete a full clearing cycle within approximately 12 hours. So sidewalks to the stops may not be cleared for some time after a snowfall.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "City crews typically complete a full sidewalk clearing cycle within approximately 12 hours once accumulation reaches 2 cm."
+            }
+          ]
+        },
+        {
+          "title": "Active resurfacing on Harbord St, including sidewalk and curb repairs",
+          "detail": "Harbord St, including the section at Croft St, is listed for active road resurfacing from Q3 2024 to Q4 2025, about 392 m away. The work includes repairs to damaged sidewalks and curbs, and the road may be partly or fully closed. The listing was last updated 2024-05-09, so the data does not show whether the work is finished.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "HARBORD ST; From: CROFT ST; To: LIPPINCOTT ST | status: Active | timeline: Q3 2024 - Q4 2025 | 392 m from the point | last updated 2024-05-09"
+            },
+            {
+              "call": "C2",
+              "quote": "including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road."
+            }
+          ]
+        }
+      ],
+      "dropped": [
+        {
+          "title": "All six nearest stops list wheelchair boarding as not possible",
+          "detail": "Each of the 6 stops returned lists wheelchair boarding as not possible (GTFS 2). The closest is College St at Borden St, about 261 m walking (an estimate based on straight-line distance times 1.3). The data does not show any nearby stop where boarding is listed as possible.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 817 | College St at Borden St | 201 m straight-line (about 261 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            },
+            {
+              "call": "C1",
+              "quote": "stop 211 | Bathurst St at Ulster St | 236 m straight-line (about 307 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            }
+          ],
+          "reason": "quote not found in the cited result"
+        }
+      ],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 6
+          },
+          "text": "[C1] stop 817 | College St at Borden St | 201 m straight-line (about 261 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: yes | routes: 306, 506 | weekday first departure 04:39, last departure 29:02, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 816 | College St at Borden St | 209 m straight-line (about 272 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:28, last departure 29:42, 141 departures, 34 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 812 | College St at Bathurst St | 223 m straight-line (about 290 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 04:40, last departure 29:02, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 111 | Bathurst St at College St | 232 m straight-line (about 302 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:18, last departure 27:48, 181 departures, 23 departures at or after 23:00 | saturday departures 176, sunday departures 169 | trips flagged wheelchair accessible: 8%, flagged not accessible: 92%, no information: 0%\nstop 212 | Bathurst St at Ulster St | 236 m straight-line (about 307 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:58, last departure 28:30, 183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%\nstop 811 | College St at Bathurst St | 261 m straight-line (about 339 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:26, last departure 29:41, 141 departures, 34 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+        },
+        "C2": {
+          "tool": "planned_works",
+          "args": {
+            "radius_m": 400
+          },
+          "text": "[C2] Road resurfacing program | Major Road Resurfacing | HARBORD ST; From: BORDEN ST; To: CROFT ST | status: Active | timeline: Q3 2024 - Q4 2025 | 392 m from the point | last updated 2024-05-09 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nRoad resurfacing program | Major Road Resurfacing | HARBORD ST; From: CROFT ST; To: LIPPINCOTT ST | status: Active | timeline: Q3 2024 - Q4 2025 | 392 m from the point | last updated 2024-05-09 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nRoad resurfacing program | Major Road Resurfacing | HARBORD ST; From: BRUNSWICK AVE; To: BORDEN ST | status: Active | timeline: Q3 2024 - Q4 2025 | 396 m from the point | last updated 2024-05-09 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road.\nRoad resurfacing program | Major Road Resurfacing | HARBORD ST; From: LIPPINCOTT ST; To: BATHURST ST | status: Active | timeline: Q3 2024 - Q4 2025 | 398 m from the point | last updated 2024-05-09 | details: Replacement of old asphalt surface with new asphalt surface, including repairs of any damaged sidewalks and curbs. Work may include the closure of individual lanes or the entire road."
+        },
+        "C3": {
+          "tool": "winter_rules",
+          "args": {},
+          "text": "[C3] W1 | Under current service levels, the City begins sidewalk clearing once snow accumulation reaches 2 cm. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 25\nW2 | Differences in timing between City operations and private compliance requirements may also create uncertainty following snowfall events, as City crews typically complete a full sidewalk clearing cycle within approximately 12 hours once accumulation reaches 2 cm. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 25\nW3 | The Council-approved winter maintenance service level for public laneways is salting only, within 24 hours after the end of snowfall, to manage icy conditions; snow plowing is not provided. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 23\nW4 | Transit stop accessibility was also enhanced through a combination of mechanical clearing and manual hand crews. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 12\nW5 | In advance of the 2025-2026 winter season, the TTC provided a list of priority stops and routes, which helped focus clearing efforts on high- traffic and higher-risk locations. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 12\nW6 | Public laneways are often too narrow and typically lack sufficient on-site snow storage capacity, creating the potential for snow to be pushed against garages and fences, resulting in damage or obstructed access. | source: 2025-2026 Annual Winter Maintenance Report and Blanket Contracts for Trucking Services (item 2026.IE29.1), PDF page 23"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 6379,
+        "output": 1350
+      }
+    },
+    {
+      "role": "service_hours",
+      "kept": [
+        {
+          "title": "The eight closest stops list boarding as not possible",
+          "detail": "The eight closest stops on College St and Bathurst St are all listed with wheelchair boarding as not possible. The closest of these is about 261 m away (an estimate). Walking distances are straight-line times 1.3, and the sidewalk route was not checked.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C1",
+              "quote": "stop 817 | College St at Borden St | 201 m straight-line (about 261 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            },
+            {
+              "call": "C2",
+              "quote": "stop 213 | Bathurst St at Ulster St | 262 m straight-line (about 341 m walking) | wheelchair boarding: not possible (GTFS 2)"
+            }
+          ]
+        },
+        {
+          "title": "Nearest stop listed as possible has only trips flagged not accessible",
+          "detail": "College St at Augusta Ave (stop 12338), about 391 m away, lists boarding as possible. However, every trip there is flagged not accessible (0% accessible). The schedule runs from 04:39 to 29:01 with 141 weekday departures, but the data does not show any trip there flagged as accessible.",
+          "severity": "barrier",
+          "cites": [
+            {
+              "call": "C4",
+              "quote": "wheelchair boarding: possible (GTFS 1)"
+            },
+            {
+              "call": "C4",
+              "quote": "trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Route 94 on Harbord St: accessible flags, fewer departures",
+          "detail": "Harbord St at Brunswick Ave (stop 7804), about 536 m away, lists boarding as possible, and 100% of its trips are flagged accessible. It has 61 weekday departures, mostly 3 per hour, from 05:48 to 25:11. Saturday has 61 departures and Sunday has 54.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "weekday first departure 05:48, last departure 25:11, 61 departures, 7 departures at or after 23:00 | saturday departures 61, sunday departures 54"
+            },
+            {
+              "call": "C3",
+              "quote": "trips flagged wheelchair accessible: 100%, flagged not accessible: 0%"
+            }
+          ]
+        },
+        {
+          "title": "Late-night service on route 94 thins after midnight",
+          "detail": "At stop 7804, there are 7 weekday departures at or after 23:00. The 25:00 hour (1 a.m.) has only 1 departure, and the data does not show any later departures from this stop.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C3",
+              "quote": "23:00 has 3, 24:00 has 3, 25:00 has 1"
+            }
+          ]
+        },
+        {
+          "title": "Bathurst stop listed as possible has few accessible trips",
+          "detail": "Bathurst St at Nassau St (stop 16454), about 546 m away, lists boarding as possible. However, only 9% of its trips are flagged accessible and 91% are flagged not accessible. It has 183 weekday departures in total.",
+          "severity": "watch",
+          "cites": [
+            {
+              "call": "C2",
+              "quote": "stop 16454 | Bathurst St at Nassau St - Toronto Western Hospital | 420 m straight-line (about 546 m walking) | wheelchair boarding: possible (GTFS 1)"
+            },
+            {
+              "call": "C2",
+              "quote": "183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%"
+            }
+          ]
+        }
+      ],
+      "dropped": [],
+      "calls": {
+        "C1": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 8
+          },
+          "text": "[C1] stop 817 | College St at Borden St | 201 m straight-line (about 261 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: yes | routes: 306, 506 | weekday first departure 04:39, last departure 29:02, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 816 | College St at Borden St | 209 m straight-line (about 272 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:28, last departure 29:42, 141 departures, 34 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 812 | College St at Bathurst St | 223 m straight-line (about 290 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 04:40, last departure 29:02, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 111 | Bathurst St at College St | 232 m straight-line (about 302 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:18, last departure 27:48, 181 departures, 23 departures at or after 23:00 | saturday departures 176, sunday departures 169 | trips flagged wheelchair accessible: 8%, flagged not accessible: 92%, no information: 0%\nstop 212 | Bathurst St at Ulster St | 236 m straight-line (about 307 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:58, last departure 28:30, 183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%\nstop 811 | College St at Bathurst St | 261 m straight-line (about 339 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:26, last departure 29:41, 141 departures, 34 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 110 | Bathurst St at College St | 262 m straight-line (about 341 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:56, last departure 28:28, 183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%\nstop 213 | Bathurst St at Ulster St | 262 m straight-line (about 341 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:17, last departure 27:47, 181 departures, 23 departures at or after 23:00 | saturday departures 176, sunday departures 169 | trips flagged wheelchair accessible: 8%, flagged not accessible: 92%, no information: 0%"
+        },
+        "C2": {
+          "tool": "nearby_stops",
+          "args": {
+            "max_results": 15
+          },
+          "text": "[C2] stop 817 | College St at Borden St | 201 m straight-line (about 261 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: yes | routes: 306, 506 | weekday first departure 04:39, last departure 29:02, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 816 | College St at Borden St | 209 m straight-line (about 272 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:28, last departure 29:42, 141 departures, 34 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 812 | College St at Bathurst St | 223 m straight-line (about 290 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 04:40, last departure 29:02, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 111 | Bathurst St at College St | 232 m straight-line (about 302 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:18, last departure 27:48, 181 departures, 23 departures at or after 23:00 | saturday departures 176, sunday departures 169 | trips flagged wheelchair accessible: 8%, flagged not accessible: 92%, no information: 0%\nstop 212 | Bathurst St at Ulster St | 236 m straight-line (about 307 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:58, last departure 28:30, 183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%\nstop 811 | College St at Bathurst St | 261 m straight-line (about 339 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:26, last departure 29:41, 141 departures, 34 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 110 | Bathurst St at College St | 262 m straight-line (about 341 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:56, last departure 28:28, 183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%\nstop 213 | Bathurst St at Ulster St | 262 m straight-line (about 341 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:17, last departure 27:47, 181 departures, 23 departures at or after 23:00 | saturday departures 176, sunday departures 169 | trips flagged wheelchair accessible: 8%, flagged not accessible: 92%, no information: 0%\nstop 809 | College St at Augusta Ave | 300 m straight-line (about 390 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: no | bench listed in City data: no | routes: 306, 506 | weekday first departure 05:29, last departure 29:43, 141 departures, 34 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 12338 | College St at Augusta Ave | 301 m straight-line (about 391 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 306, 506 | weekday first departure 04:39, last departure 29:01, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nstop 148 | Bathurst St at Harbord St | 409 m straight-line (about 532 m walking) | wheelchair boarding: not possible (GTFS 2) | shelter listed in City data: yes | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:58, last departure 28:30, 183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%\nstop 7804 | Harbord St at Brunswick Ave | 412 m straight-line (about 536 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 94 | weekday first departure 05:48, last departure 25:11, 61 departures, 7 departures at or after 23:00 | saturday departures 61, sunday departures 54 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 16454 | Bathurst St at Nassau St - Toronto Western Hospital | 420 m straight-line (about 546 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 307, 511 | weekday first departure 04:56, last departure 28:28, 183 departures, 26 departures at or after 23:00 | saturday departures 177, sunday departures 169 | trips flagged wheelchair accessible: 9%, flagged not accessible: 91%, no information: 0%\nstop 7802 | Harbord St at Bathurst St | 423 m straight-line (about 550 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 94 | weekday first departure 06:00, last departure 25:19, 59 departures, 7 departures at or after 23:00 | saturday departures 61, sunday departures 53 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nstop 7803 | Harbord St at Bathurst St | 423 m straight-line (about 550 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 94 | weekday first departure 05:47, last departure 25:10, 61 departures, 7 departures at or after 23:00 | saturday departures 61, sunday departures 54 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%"
+        },
+        "C3": {
+          "tool": "stop_detail",
+          "args": {
+            "stop_id": "7804"
+          },
+          "text": "[C3] stop 7804 | Harbord St at Brunswick Ave | 412 m straight-line (about 536 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: yes | bench listed in City data: no | routes: 94 | weekday first departure 05:48, last departure 25:11, 61 departures, 7 departures at or after 23:00 | saturday departures 61, sunday departures 54 | trips flagged wheelchair accessible: 100%, flagged not accessible: 0%, no information: 0%\nWeekday departures per hour (hours 24 and above mean after midnight): 05:00 has 1, 06:00 has 3, 07:00 has 3, 08:00 has 3, 09:00 has 3, 10:00 has 3, 11:00 has 3, 12:00 has 3, 13:00 has 3, 14:00 has 3, 15:00 has 3, 16:00 has 3, 17:00 has 3, 18:00 has 4, 19:00 has 3, 20:00 has 3, 21:00 has 3, 22:00 has 4, 23:00 has 3, 24:00 has 3, 25:00 has 1"
+        },
+        "C4": {
+          "tool": "stop_detail",
+          "args": {
+            "stop_id": "12338"
+          },
+          "text": "[C4] stop 12338 | College St at Augusta Ave | 301 m straight-line (about 391 m walking) | wheelchair boarding: possible (GTFS 1) | shelter listed in City data: no | bench listed in City data: no | routes: 306, 506 | weekday first departure 04:39, last departure 29:01, 141 departures, 29 departures at or after 23:00 | saturday departures 137, sunday departures 138 | trips flagged wheelchair accessible: 0%, flagged not accessible: 100%, no information: 0%\nWeekday departures per hour (hours 24 and above mean after midnight): 04:00 has 3, 05:00 has 6, 06:00 has 6, 07:00 has 6, 08:00 has 6, 09:00 has 6, 10:00 has 6, 11:00 has 6, 12:00 has 6, 13:00 has 6, 14:00 has 6, 15:00 has 6, 16:00 has 6, 17:00 has 6, 18:00 has 6, 19:00 has 6, 20:00 has 7, 21:00 has 6, 22:00 has 6, 23:00 has 7, 24:00 has 6, 25:00 has 6, 26:00 has 3, 27:00 has 3, 28:00 has 3, 29:00 has 1"
+        }
+      },
+      "note": null,
+      "usage": {
+        "input": 18131,
+        "output": 1419
+      }
+    }
+  ],
+  "groups": [
+    [
+      0,
+      9
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      2,
+      11
+    ],
+    [
+      3,
+      13
+    ],
+    [
+      4
+    ],
+    [
+      5
+    ],
+    [
+      6
+    ],
+    [
+      7
+    ],
+    [
+      8
+    ],
+    [
+      12
+    ]
+  ]
+}

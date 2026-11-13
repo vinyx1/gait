@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}What is along my route - TripLens{% endblock %}
+{% block content %}
+<p><a href="/route">&larr; Check another route</a>{% if example %} · <span class="meta">Example</span>{% endif %}</p>
+<h1>What is along your route</h1>
+<p class="meta">{{ rep.origin.label }} to {{ rep.dest.label }} · {{ personas[persona].label }} · {{ rep.day }}, {{ rep.band | lower }}</p>
+<p class="privacy"><strong>Nothing was saved.</strong> Your addresses stayed on this computer. Reload the form to start again.</p>
+
+{% for cmp in rep.comparisons %}
+<section aria-labelledby="cmp{{ loop.index }}" class="compare">
+  <h2 id="cmp{{ loop.index }}">Before and after: {{ cmp.change.title }}</h2>
+  {% if cmp.change.simulated %}<p class="warn"><strong>Simulation.</strong> {{ cmp.change.status_note }}</p>
+  {% else %}<p class="meta">Status: {{ cmp.change.status }} ({{ cmp.change.body }}). {{ cmp.change.status_note }} <a href="{{ cmp.change.source_url }}">Official source</a></p>
+    {% for q in cmp.change.quotes %}<blockquote class="official small">{{ q }}</blockquote>{% endfor %}{% endif %}
+  {% if cmp.notes %}<ul>{% for n in cmp.notes %}<li>{{ n }}</li>{% endfor %}</ul>{% else %}<p>This change does not touch the stops you use.</p>{% endif %}
+  <table><caption class="meta">Your trip before and after the change</caption>
+    <thead><tr><th scope="col">Part of trip</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
+    <tbody>{% for r in cmp.rows %}<tr{% if r.changed %} class="changed"{% endif %}><th scope="row">{{ r.what }}</th><td>{{ r.before }}</td><td>{{ r.after }}{% if r.changed %} <strong>(changed)</strong>{% endif %}</td></tr>{% endfor %}</tbody></table>
+  <h3>New accessibility issues after the change for {{ personas[persona].label | lower }}</h3>
+  {% if cmp.new_issues %}<ul class="findings">{% for f in cmp.new_issues %}<li><span class="sev {{ f.severity }}">{{ {'barrier': 'Limit', 'watch': 'Worth knowing', 'info': 'Info'}[f.severity] }}</span> {{ f.text }}</li>{% endfor %}</ul>
+  {% else %}<p>No new issues found by the fixed rules.</p>{% endif %}
+</section>
+{% endfor %}
+
+<section aria-labelledby="sum">
+  <h2 id="sum">Summary</h2>
+  {% set nb = rep.flags | selectattr('severity','equalto','barrier') | list | length %}
+  {% set na = rep.flags | selectattr('kind','equalto','act') | list | length %}
+  <ul>
+    <li><strong>{{ nb }}</strong> limit{{ '' if nb == 1 else 's' }} found by the fixed rules for this rider.</li>
+    <li><strong>{{ na }}</strong> decision{{ '' if na == 1 else 's' }} near your trip that you may still be able to comment on.</li>
+    <li><strong>{{ rep.decisions | length }}</strong> decision{{ '' if rep.decisions | length == 1 else 's' }} and <strong>{{ rep.works | length }}</strong> works listing{{ '' if rep.works | length == 1 else 's' }} within a short distance of your trip.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="map">
+  <h2 id="map">Your trip, as a drawing</h2>
+  {{ rep.svg | safe }}
+  <p class="meta"><strong>A</strong> start, <strong>B</strong> destination. Dashed line: walking (a straight-line estimate). Solid line: the route you take. Red square: decision still open. Grey square: decision already made. Orange diamond: planned works. Everything shown is also listed below.</p>
+  <ol class="legs">{% for kind, label, length in rep.legs %}<li>{{ label }}: about {{ length }} m {{ 'straight line' if kind == 'walk' else 'along the route' }}</li>{% endfor %}</ol>
+</section>
+
+<section aria-labelledby="flags">
+  <h2 id="flags">What the data shows for {{ personas[persona].label | lower }}</h2>
+  {% macro flag(f) %}
+    <li><span class="sev {{ f.severity }}">{{ {'barrier': 'Limit', 'watch': 'Worth knowing', 'info': 'Info'}[f.severity] }}</span> {{ f.text }}
+      <details><summary>Evidence from the data</summary>{% for e in f.evidence %}<blockquote class="official pre small">{{ e }}</blockquote>{% endfor %}</details></li>
+  {% endmacro %}
+  <ul class="findings">
+  {% for f in rep.flags if f.kind != 'works' %}{{ flag(f) }}{% endfor %}
+  </ul>
+  {% set wk = rep.flags | selectattr('kind','equalto','works') | list %}
+  {% if wk %}<details><summary>Planned or listed works near your trip ({{ wk | length }})</summary><ul class="findings">{% for f in wk %}{{ flag(f) }}{% endfor %}</ul></details>{% endif %}
+  {% if rep.decisions %}
+  <h3>Decisions near your trip</h3>
+  <ol>{% for it in rep.decisions %}<li><a href="/item/{{ it.item_id }}">{{ it.title }}</a> <span class="meta">({{ it.label }}; {{ it.distance_m }} m from your trip{% if it.actions %}; official page shows: {{ it.actions | join(', ') }}{% endif %})</span></li>{% endfor %}</ol>
+  {% endif %}
+</section>
+
+<section aria-labelledby="limits">
+  <h2 id="limits">Limits you should know about</h2>
+  <ul>
+    <li>The route part of your trip follows the line the vehicle runs in the TTC schedule file. Walking parts are straight lines multiplied by {{ 1.3 }}. Real sidewalks, curbs, slopes, crossings and snow were not checked.</li>
+    <li>This does not time or plan a trip, and it cannot compare your trip before and after a change. The return trip is not checked.</li>
+    <li>Only decisions that this tool has loaded and located can appear. A city pilot would load every agenda item.</li>
+    <li>In the TTC file every streetcar trip is flagged "not accessible" while most buses and subway trips are flagged accessible. The file does not say why, and the TTC may describe accessibility differently. Check with the TTC.</li>
+    <li>Works lists come from City open data and can be out of date. Shelter and bench listings may be incomplete. Only the base weekday, Saturday and Sunday schedules are counted.</li>
+    <li>Rider walking limits are illustrative assumptions, not medical or legal definitions.</li>
+  </ul>
+</section>
+{% endblock %}
