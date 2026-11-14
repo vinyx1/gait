@@ -1,0 +1,56 @@
+{
+ "trip": {
+  "rider": "Senior using a cane or walker",
+  "rides": [
+   {
+    "route": "7",
+    "board": "Bathurst St at Claxton Blvd South Side",
+    "alight": "Bathurst Station at Bus Bay 3"
+   }
+  ]
+ },
+ "kept": [
+  {
+   "passage": 4,
+   "quote": "The following low-ridership bus stops are proposed to be removed: Dewbourne Avenue, Ardmore Road, Heathdale Road and Barton Avenue.",
+   "summary": "The report proposes removing four low-ridership Bathurst Street bus stops, at Dewbourne Avenue, Ardmore Road, Heathdale Road and Barton Avenue.",
+   "why_it_matters": "Claxton Blvd is not on this list, but if a nearby stop like Heathdale Road is one this rider sometimes uses, removal could mean a longer walk with a cane or walker.",
+   "kind": "stop_change",
+   "item_id": "2025.EX25.4",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 7
+  },
+  {
+   "passage": 5,
+   "quote": "Note that the proposed priority transit lanes, parking and turning prohibitions and stop removals are part of the ongoing consultation with local Councillors and the public and are subject to change based on feedback received.",
+   "summary": "The proposed Bathurst Street transit lanes and stop removals, shown on a map that includes Claxton Blvd, are still under consultation and may change.",
+   "why_it_matters": "The list of stops near Claxton Blvd on route 7 may still change, which could affect where this rider boards.",
+   "kind": "stop_change",
+   "item_id": "2025.EX25.4",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 23
+  },
+  {
+   "passage": 4,
+   "quote": "The proposed Bathurst Street priority transit lanes are expected to yield immediate benefits for transit users while addressing safety and equity concerns.",
+   "summary": "Staff expect proposed priority transit lanes on Bathurst Street to benefit transit users and address safety and equity concerns.",
+   "why_it_matters": "Priority lanes on Bathurst could make route 7 trips to Bathurst Station faster or more reliable, and lane changes may alter how the curb works at stops.",
+   "kind": "service",
+   "item_id": "2025.EX25.4",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-256133.pdf",
+   "page": 7
+  }
+ ],
+ "dropped": [],
+ "trace": [
+  "Retrieved 7 passages from the indexed staff reports for route 7 (3 name a street at your stops).",
+  "Claude (claude-opus-5-5) read them and proposed 3 finding(s).",
+  "The checker kept 3 and dropped 0 (quote must be on the cited page; no new numbers; no stronger wording)."
+ ],
+ "model": "claude-opus-5-5",
+ "generated_at": "2026-11-14T03:03:03+00:00",
+ "usage": {
+  "input": 3977,
+  "output": 581
+ }
+}

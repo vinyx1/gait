@@ -30,7 +30,7 @@ class Persona:
 PERSONAS = {
     "wheelchair": Persona("wheelchair", "Wheelchair user", 400,
                           "Needs a stop where boarding is marked possible. Walk limit is an assumption and varies a lot between people."),
-    "senior_walker": Persona("senior_walker", "Senior using a cane or walker", 250,
+    "senior_walker": Persona("senior_walker", "Person using a cane or walker", 250,
                              "Shorter walks, and benefits from a shelter or bench. Walk limit is an assumption."),
     "shift_worker": Persona("shift_worker", "Shift worker (late nights and early mornings)", 600,
                             "Needs service after 23:00 and before 05:30. Walk limit is an assumption."),
@@ -204,6 +204,7 @@ def _works() -> list[dict]:
                 out.append({"program": prog, "project": _clean(r.get("PROJECT")), "location": _clean(r.get("LOCATION")),
                             "status": _clean(r.get("STATUS")), "timeline": _clean(r.get("DURATION/ Construction Timeline")),
                             "details": _clean(r.get("DETAILS"))[:300], "updated": r.get("LAST_UPDATED_DATE"),
+                            "web": (r.get("INV_WEB_SITE") or "").strip(),
                             "segments": list(_segments(geom))})
     return out
 
@@ -213,7 +214,7 @@ def works_near(lat: float, lon: float, radius_m: float) -> list[dict]:
     for w in _works():
         d = min((_dist_point_to_line_m(lat, lon, seg) for seg in w["segments"]), default=1e12)
         if d <= radius_m:
-            res.append({k: v for k, v in w.items() if k != "segments"} | {"distance_m": round(d)})
+            res.append({k: v for k, v in w.items() if k not in ("segments", "web")} | {"distance_m": round(d)})
     res.sort(key=lambda w: w["distance_m"])
     return res
 
@@ -221,3 +222,127 @@ def works_near(lat: float, lon: float, radius_m: float) -> list[dict]:
 def works_line(w: dict) -> str:
     return (f"{w['program']} | {w['project']} | {w['location']} | status: {w['status']} | timeline: {w['timeline']} | "
             f"{w['distance_m']} m from the point | last updated {w['updated']} | details: {w['details']}")
+
+
+# ---------- City works that touch the trip itself ----------
+# Only works whose own street segment meets the rider's walks or stops, or runs along their ride, are kept.
+# The City's words (what the work is, that it may close lanes or the road) are shown as written; nothing is predicted.
+
+TOUCH_WALK_M, TOUCH_STOP_M, TOUCH_RIDE_M, ALONG_RIDE_M = 20, 30, 18, 80
+
+
+def _quarter_end(timeline: str) -> tuple[int, int] | None:
+    """The last quarter a City timeline names: 'Q2 2026 - Q4 2026' -> (2026, 4); '2027' -> (2027, 4)."""
+    qs = re.findall(r"Q([1-4])\s*(\d{4})", timeline)
+    if qs:
+        return max((int(y), int(q)) for q, y in qs)
+    ys = re.findall(r"\b(20\d\d)\b", timeline)
+    return (max(int(y) for y in ys), 4) if ys else None
+
+
+def _place(t: str) -> str:
+    t = t.replace("[END]", "").strip()
+    m = re.match(r"\[(\d+)\s*M\s*([NSEW])\]\s*(.*)", t, re.I)
+    sides = {"N": "north", "S": "south", "E": "east", "W": "west"}
+    nice = lambda x: " ".join(w.capitalize() if w.isalpha() else w for w in x.split())
+    return f"{m.group(1)} m {sides[m.group(2).upper()]} of {nice(m.group(3))}" if m else nice(t)
+
+
+def _where(location: str) -> dict:
+    parts = [p.strip() for p in location.split(";") if p.strip()]
+    out = {"street": _place(parts[0]) if parts else location}
+    for p in parts[1:]:
+        k, _, v = p.partition(":")
+        if k.strip().lower() in ("from", "to"):
+            out[k.strip().lower()] = _place(v)
+    return out
+
+
+def _sample(line, step_m: float = 8):
+    """Points every few metres along a line of [lon, lat] pairs."""
+    for (x1, y1), (x2, y2) in zip(line, line[1:]):
+        n = max(1, int(haversine_m(y1, x1, y2, x2) / step_m))
+        for i in range(n):
+            yield y1 + (y2 - y1) * i / n, x1 + (x2 - x1) * i / n
+    if line:
+        yield line[-1][1], line[-1][0]
+
+
+def works_on_trip(legs, today=None) -> list[dict]:
+    """City road and sidewalk works that meet this trip, with the part of the trip each one touches."""
+    from datetime import date
+    today = today or date.today()
+    now_q = (today.year, (today.month - 1) // 3 + 1)
+    trip = [(l, [(lon, lat) for lat, lon in l.points]) for l in legs]
+    allpts = [p for _, pts in trip for p in pts]
+    if not allpts:
+        return []
+    pad = 0.0015
+    x0, x1 = min(p[0] for p in allpts) - pad, max(p[0] for p in allpts) + pad
+    y0, y1 = min(p[1] for p in allpts) - pad, max(p[1] for p in allpts) + pad
+    stops = []
+    for l in legs:
+        if l.kind == "transit":
+            stops += [("board", l, l.board), ("alight", l, l.alight)]
+    out = []
+    for w in _works():
+        if w["status"].lower() != "active":
+            continue
+        end = _quarter_end(w["timeline"])
+        if end and end < now_q:                       # the City's own timeline has already ended
+            continue
+        segs = [s for s in w["segments"] if len(s) > 1]
+        if not segs or not any(x0 <= x <= x1 and y0 <= y <= y1 for s in segs for x, y in s):
+            continue
+        touches = []
+        for li, (l, pts) in enumerate(trip):
+            if l.kind == "walk":
+                near = sum(1 for s in segs for la, lo in _sample(s) if _dist_point_to_line_m(la, lo, pts) <= TOUCH_WALK_M)
+                if near:
+                    along = near * 8
+                    touches.append({"part": "walk", "label": l.label, "along_m": round(along / 10) * 10 if along >= 40 else 0, "seq": li * 3})
+            else:
+                near = sum(1 for s in segs for la, lo in _sample(s) if _dist_point_to_line_m(la, lo, pts) <= TOUCH_RIDE_M)
+                if near * 8 >= ALONG_RIDE_M:
+                    touches.append({"part": "ride", "label": l.label, "along_m": round(near * 8 / 10) * 10, "seq": li * 3})
+        for role, l, st in stops:
+            if st and min(_dist_point_to_line_m(st["lat"], st["lon"], s) for s in segs) <= TOUCH_STOP_M:
+                touches.append({"part": "stop", "role": role, "label": st["name"], "seq": legs.index(l) * 3 + (-1 if role == "board" else 1)})
+        if touches:
+            mid = segs[0][len(segs[0]) // 2]
+            out.append({"from_start_m": min(range(len(allpts)), key=lambda i: haversine_m(allpts[i][1], allpts[i][0], mid[1], mid[0])),"program": w["program"], "project": w["project"], "where": _where(w["location"]),
+                        "details": w["details"], "timeline": w["timeline"], "updated": w["updated"], "web": w["web"],
+                        "touches": touches,
+                        "geometry": {"type": "MultiLineString", "coordinates": segs}})
+    return _group_works(out)
+
+
+def _group_works(found: list[dict]) -> list[dict]:
+    """One entry per project and street: the City lists a long job block by block."""
+    groups: dict = {}
+    for w in found:
+        g = groups.setdefault((w["project"], w["where"]["street"], w["details"]), {
+            "program": w["program"], "project": w["project"], "street": w["where"]["street"], "details": w["details"],
+            "web": w["web"], "blocks": [], "touches": [], "updated": w["updated"],
+            "geometry": {"type": "MultiLineString", "coordinates": []}})
+        g["blocks"].append({"from": w["where"].get("from", ""), "to": w["where"].get("to", ""), "timeline": w["timeline"], "_d": w["from_start_m"]})
+        g["geometry"]["coordinates"] += w["geometry"]["coordinates"]
+        g["updated"] = max(g["updated"] or "", w["updated"] or "")
+        g["touches"] += w["touches"]
+    order = {"stop": 0, "walk": 1, "ride": 2}
+    out = []
+    for g in groups.values():
+        merged, seen = [], {}
+        for t in g["touches"]:                    # the same walk or ride met by several blocks: add up the metres
+            k = (t["part"], t["label"], t.get("role"))
+            if k in seen:
+                seen[k]["along_m"] = seen[k].get("along_m", 0) + t.get("along_m", 0)
+            else:
+                seen[k] = dict(t)
+                merged.append(seen[k])
+        g["touches"] = sorted(merged, key=lambda t: t["seq"])
+        g["blocks"].sort(key=lambda b: b.pop("_d"))       # in the order the trip passes them
+        g["timelines"] = sorted({b["timeline"] for b in g["blocks"]}, key=lambda t: _quarter_end(t) or (0, 0))
+        out.append(g)
+    out.sort(key=lambda g: (min(order[t["part"]] for t in g["touches"]), -len(g["touches"])))
+    return out

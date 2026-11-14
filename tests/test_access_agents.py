@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 
-from triplens import access
-from triplens.agents import verify_findings, dedupe
+from gait import access
+from gait.agents import verify_findings, dedupe
 
 ROOT = Path(__file__).resolve().parent.parent
 P = access.PERSONAS["wheelchair"]
@@ -79,8 +79,8 @@ def test_stored_audits_pass_verification_again():
 
 
 def test_stored_groupings_are_valid_partitions_and_page_never_shows_agent_barrier():
-    from triplens.agents import flatten_kept, valid_partition
-    from triplens.app import audit_for
+    from gait.agents import flatten_kept, valid_partition
+    from gait.app import audit_for
     for fpath in (ROOT / "data/audits").glob("*.json"):
         a = json.loads(fpath.read_text())
         assert valid_partition(a["groups"], len(flatten_kept(a))), fpath.name

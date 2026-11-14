@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from triplens.parse_item import parse_item, parse_date_span
+from gait.parse_item import parse_item, parse_date_span
 
 RAW = Path(__file__).resolve().parent.parent / "data/raw/items_snapshot.json"
 

@@ -8,8 +8,8 @@ import anthropic
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from triplens import agents  # noqa: E402
-from triplens.rewrite import load_env  # noqa: E402
+from gait import agents  # noqa: E402
+from gait.rewrite import load_env  # noqa: E402
 
 
 def main() -> None:

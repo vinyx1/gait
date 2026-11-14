@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 
-from triplens.parse_report import parse_report, split_recommendations
-from triplens.verify import quote_in_source
+from gait.parse_report import parse_report, split_recommendations
+from gait.verify import quote_in_source
 
 ROOT = Path(__file__).resolve().parent.parent
 

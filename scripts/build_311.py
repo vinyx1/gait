@@ -16,8 +16,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from triplens import geocode  # noqa: E402
-from triplens.access import haversine_m, load_stops  # noqa: E402
+from gait import geocode  # noqa: E402
+from gait.access import haversine_m, load_stops  # noqa: E402
 
 # 311 type -> (our category, what it means for a rider)
 TYPES = {

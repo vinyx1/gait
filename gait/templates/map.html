@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Route map - Gait</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+  <link rel="preload" href="{{ url_for('static', path='fonts/atkinson-hyperlegible-400.woff2') }}" as="font" type="font/woff2" crossorigin>
+  <style>
+    @font-face{font-family:"Young Serif";src:url("{{ url_for('static', path='fonts/young-serif-400.woff2') }}") format("woff2");font-weight:400;font-display:swap}
+    @font-face{font-family:"Atkinson Hyperlegible";src:url("{{ url_for('static', path='fonts/atkinson-hyperlegible-400.woff2') }}") format("woff2");font-weight:400;font-display:swap}
+    @font-face{font-family:"Atkinson Hyperlegible";src:url("{{ url_for('static', path='fonts/atkinson-hyperlegible-700.woff2') }}") format("woff2");font-weight:700;font-display:swap}
+    /* the calm tool: the landing's type and inks on cream, no colour fields. Before is turquoise, after is burnt orange. */
+    :root,:root:root{--bg:#fbf1d8;--fg:#24140a;--muted:#4e3220;--line:rgba(36,20,10,.2);--accent:#1f6f69;--card:#f3e3bf;--quote:#f3e3bf;
+      --before:#1f6f69;--after:#b5501b;--ink:#24140a;--ease:cubic-bezier(.22,.8,.24,1)}
+    body{margin:0;font:400 18px/1.55 "Atkinson Hyperlegible",system-ui,sans-serif;background:var(--bg);color:var(--fg)}
+    ::selection{background:var(--ink);color:var(--bg)}
+    a{color:var(--ink);text-decoration-thickness:2px;text-underline-offset:4px}
+    :focus-visible,button:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:8px}
+    h1,h2,h3{font-family:"Young Serif",Georgia,serif;font-weight:400;letter-spacing:-.01em;line-height:1.15;text-wrap:balance}
+    /* the map fills the screen; two floating panels sit over it: setting up the trip on the left, what changes on the right */
+    #map{position:fixed;inset:0}
+    .panel{position:fixed;top:16px;bottom:16px;z-index:2;overflow:auto;overscroll-behavior:contain;background:var(--bg);border-radius:20px;
+      padding:20px 24px 32px;box-shadow:0 1px 2px rgba(36,20,10,.18),0 12px 32px rgba(36,20,10,.22)}
+    /* the scrollbar keeps out of the rounded corners and the pinned bottom bar (Show my trip, Back and Next) */
+    .panel::-webkit-scrollbar{width:12px}
+    .panel::-webkit-scrollbar-track{background:transparent;margin:22px 0 96px}
+    #panel:not(.own):not(.res)::-webkit-scrollbar-track{margin-bottom:22px}
+    .panel::-webkit-scrollbar-thumb{background:rgba(78,50,32,.5);border-radius:999px;border:3px solid var(--bg)}
+    @supports not selector(::-webkit-scrollbar){.panel{scrollbar-width:thin;scrollbar-color:var(--muted) transparent}}
+    #panel{overflow-x:hidden;left:16px;bottom:auto;max-height:calc(100vh - 32px);width:min(26rem,calc(50vw - 24px))}
+    #panel.res{width:min(31rem,calc(100vw - 32px))}
+    #panel .rhead{font-size:28px;margin:4px 0 4px}
+    .rtop{display:flex;justify-content:space-between;align-items:center;padding:10px 0 0}.rtop .back{margin:0}
+    .rreset{min-height:44px;font-size:16px}
+    #panel:not(.own) .foot{display:none}
+    @media(max-width:899px){
+      #map{position:relative;inset:auto;height:62vh}
+      .panel{position:static;width:auto;margin:12px;max-height:none;bottom:auto}
+    }
+    .panel>.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 6px}
+    .panel>.top a:first-child{font-family:"Young Serif",serif;font-size:24px;text-decoration:none}
+    .panel h1{font-size:28px;margin:6px 0 4px}
+    .meta,.tag{color:var(--muted);font-size:16px}
+    .privacy{border:0;background:none;padding:0;color:var(--muted);font-size:16px}
+    button{font:700 17px "Atkinson Hyperlegible",sans-serif;min-height:44px;padding:0 18px;border-radius:999px;border:2px solid var(--ink);background:var(--ink);color:var(--bg);cursor:pointer;transition:transform .2s var(--ease)}
+    button:hover:not(:disabled){transform:translateY(-2px)} button:active:not(:disabled){transform:translateY(1px)}
+    button:disabled{opacity:.45;cursor:not-allowed}
+    button.ghost,.routes button,.toggle button{background:transparent;color:var(--ink)}
+    .routes button[aria-pressed=true],.toggle button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+    .steps{counter-reset:st;padding-top:4px}
+    .step{counter-increment:st;position:relative;padding:10px 0 12px 42px;margin:0;border:0}
+    .step+.step{border-top:1px solid var(--line)}
+    .step::before{content:counter(st);position:absolute;left:0;top:9px;width:28px;height:28px;border-radius:50%;border:2px solid var(--line);
+      display:grid;place-items:center;font:700 15px "Atkinson Hyperlegible",sans-serif;color:var(--muted);transition:background-color .2s,border-color .2s,color .2s}
+    .step.on::before{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+    .step.done::before{content:"";border-color:var(--before);background:var(--before) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='%23fbf1d8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/18px no-repeat}
+    .step:not(.on):not(.done) h3{color:var(--muted)}
+    .step .meta{margin:2px 0 0}
+    #s1t,#s2t{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:28px}
+    .xbtn{width:36px;height:36px;min-height:36px;padding:0;display:grid;place-items:center;border-radius:50%;background:transparent;color:var(--ink);border:2px solid var(--line);flex:none}
+    .xbtn:hover:not(:disabled){border-color:var(--ink);background:var(--ink);color:var(--bg);transform:none}
+    .xbtn svg{width:18px;height:18px}
+    .step.done .meta{color:var(--ink)}
+    .routes button{margin:4px 4px 0 0;border-radius:10px;padding:3px 10px;min-height:0;text-align:left;font-size:14px;line-height:1.2;border-width:2px}
+    .routes button small{font-size:12px;font-weight:400}
+    select{font:inherit;min-height:44px;padding:0 10px;border:2px solid var(--ink);border-radius:10px;background:var(--bg);color:var(--ink);margin:4px 8px 4px 0}
+    .err{color:#9b1c1c;font-weight:700}
+    .pin[hidden]{display:none}
+    .pin{font:700 14px "Atkinson Hyperlegible",system-ui;color:#fbf1d8;padding:4px 10px;border-radius:999px;border:2px solid #fbf1d8;box-shadow:0 2px 6px rgba(36,20,10,.35);white-space:nowrap}
+    .pin.a{background:#24140a}.pin.b{background:#5f6d22}.pin.on{background:#1f6f69}.pin.off{background:#4e3220}.pin.gone{background:#b5501b}.pin.was{background:#1f6f69;border-style:dashed}
+    .layers{position:fixed;z-index:3;top:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px;padding:6px;border-radius:999px;background:var(--bg);
+      box-shadow:0 1px 2px rgba(36,20,10,.18),0 8px 24px rgba(36,20,10,.2)}
+    .layers button{background:transparent;color:var(--ink);min-height:44px;font-size:16px;padding:0 16px;border-color:transparent}
+    .layers button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+    .layers .sw{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:8px;vertical-align:-2px;border:2px dashed #b5501b;background:rgba(181,80,27,.25)}
+    .layers button[aria-pressed=true] .sw{border-color:var(--bg)}
+    @media(max-width:899px){.layers{position:absolute;top:12px}}
+    .checks{list-style:none;margin:6px 0 14px;padding:0}
+    .checks li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:7px 0;border-top:1px solid var(--line);margin:0;font-size:17px;line-height:1.4}
+    .checks li:last-child{border-bottom:1px solid var(--line)}
+    .checks .mk{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font:700 14px/1 "Atkinson Hyperlegible",sans-serif;margin-top:1px}
+    .checks .c-ok .mk{background:var(--before);color:var(--bg)}
+    .checks .c-warn .mk{border:2px solid var(--after);color:var(--after)}
+    .checks .c-bad .mk{background:var(--after);color:var(--bg)}
+    .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+    #pg0.play .checks li{animation:rise .45s var(--ease) both;animation-delay:calc(var(--i) * 90ms)}
+    .ppl{margin:0 0 6px}
+    .wnote{margin:10px 0 2px;font-size:16px;color:var(--muted)}
+    .grpmap{margin:6px 0 0}.grpmap button{min-height:40px;padding:0 16px;font-size:15px}
+    .issues{list-style:none;margin:4px 0 8px;padding:0}
+    .issues li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:start;padding:8px 0;border-top:1px solid var(--line);margin:0;font-size:16px;line-height:1.4}
+    .issues li:last-child{border-bottom:1px solid var(--line)}
+    .issues .sev{margin:1px 0 0}
+    .issues .meta{display:block;font-size:14px}
+    .pinbtn{width:34px;height:34px;min-height:0;padding:0;border-radius:50%;display:grid;place-items:center;border-width:2px}
+    .pinbtn svg{width:18px;height:18px}
+    .wk{border-top:1px solid var(--line);padding:12px 0 4px}
+    .wk .wh{margin:0 0 6px}.wk .wh b{font-size:18px}
+    .wk .hits{margin:0 0 8px;padding-left:20px}.wk .hits li{margin:2px 0}
+    .wk .blk{margin:8px 0 2px}.wk .blocks{margin:0 0 10px;padding-left:20px;font-size:16px}
+    .legend{margin:14px 0 0}.legend p{margin:6px 0 0;font-size:15px;line-height:1.9}.legend span{display:inline-block;width:22px;height:5px;vertical-align:middle;margin:0 6px 0 0;border-radius:3px}
+
+    /* left panel: three sections that open with an arrow; choosing in one locks the other two until Start over */
+    .exlist{display:grid;gap:8px;padding-top:12px}
+    .ex{display:grid;grid-template-columns:1fr auto;gap:2px 10px;width:100%;text-align:left;border-radius:14px;min-height:44px;padding:10px 14px;margin:0;
+      font-weight:400;font-size:16px;line-height:1.35;background:transparent;color:var(--ink);border:2px solid var(--line)}
+    .ex:hover:not(:disabled){border-color:var(--ink);transform:none;background:rgba(36,20,10,.04)}
+    .ex b{font:400 18px "Young Serif",serif;grid-column:1}
+    .ex span{grid-column:1 / -1;grid-row:2}
+    .ex i{font-style:normal;font-size:13px;font-weight:700;letter-spacing:.02em;align-self:center;grid-column:2;grid-row:1;border-radius:999px;padding:1px 8px;border:1.5px solid currentColor;color:var(--muted)}
+    .ex[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+    .ex[aria-pressed=true] i{color:var(--bg)}
+    .ex[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+    .locknote{display:none;margin:-4px 0 12px;font-size:15px;color:var(--ink)}
+    .step label{display:block;margin-top:10px;font-size:15px;font-weight:700;color:var(--muted)}
+    .pair{display:grid;grid-template-columns:1fr 1.7fr;gap:10px}
+    /* step 5's fields use the panel's full width, centred under the step, in line with Start over */
+    #s5>label,#s5>.pair{margin-left:-42px}
+    .step select{display:block;width:100%;max-width:100%;box-sizing:border-box;margin:4px 0 0}
+    .step h3{font:700 17px/1.35 "Atkinson Hyperlegible",sans-serif;margin:4px 0 0}
+    .foot{position:sticky;bottom:-32px;margin:12px -24px -32px;padding:14px 24px 20px;border-radius:0 0 20px 20px;background:var(--bg);border-top:1px solid var(--line)}
+    .foot button{width:100%}
+    .foot #go{min-height:52px}
+    .resetrow{margin:18px 0 0}.resetrow button{width:100%}
+    #go.pressing{transform:scale(.96);transition:transform .12s var(--ease)}
+    #privacy{position:fixed;z-index:3;left:50%;bottom:16px;transform:translateX(-50%);max-width:min(44rem,calc(100vw - 2 * 31rem - 64px));margin:0;
+      padding:8px 16px;border-radius:14px;background:var(--bg);color:var(--muted);font-size:14px;line-height:1.4;text-align:center;box-shadow:0 1px 2px rgba(36,20,10,.18),0 8px 24px rgba(36,20,10,.2)}
+    @media(max-width:1400px){ #privacy{max-width:calc(100vw - 26rem - 31rem - 64px)}}
+    @media(max-width:899px){ #privacy{position:static;transform:none;max-width:none;margin:12px}}
+    /* left panel views: your own trip, then the examples behind two buttons, each with Back */
+    .sec{margin:0;border-top:1px solid var(--line)}
+    .vhead{padding:14px 0 6px}
+    .vhead h2{font-size:24px;margin:0}
+    .vhead .meta{margin:2px 0 0;font-size:15px}
+    .back{display:inline-flex;align-items:center;gap:4px;min-height:44px;padding:0 14px 0 8px;margin:0 0 8px;background:transparent;color:var(--ink);font-size:16px}
+    .back svg{width:20px;height:20px}
+    .back:hover:not(:disabled){background:var(--ink);color:var(--bg);transform:none}
+    .locknote{margin:10px 0 0;padding:8px 12px;border-radius:12px;background:rgba(36,20,10,.07);font-size:15px;text-align:center}
+    .locknote[hidden]{display:none}
+    .alt{margin:6px 0 0;padding:14px 0 4px;border-top:1px solid var(--line)}
+    .alt-t{margin:0 0 10px;font:400 19px "Young Serif",serif;text-align:center}
+    .altbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .altb{display:flex;align-items:center;justify-content:space-between;gap:6px;width:auto;min-height:64px;padding:10px 10px 10px 14px;border-radius:16px;text-align:left;background:transparent;color:var(--ink);border:2px solid var(--line)}
+    .altb:hover:not(:disabled){border-color:var(--ink);background:rgba(36,20,10,.04);transform:none}
+    .altb span{display:grid}.altb b{font:400 17px "Young Serif",serif}.altb small{font:400 13px/1.3 "Atkinson Hyperlegible",sans-serif;color:var(--muted)}
+    .altb svg{width:20px;height:20px;flex:none}
+    /* results: one verdict card per decision, then the trip as it is today */
+    #out{margin-top:8px}
+    .verdict{border-top:3px solid var(--ink);padding:18px 0 6px;margin:18px 0 0}
+    .verdict .status{display:inline-block;font:700 14px "Atkinson Hyperlegible",sans-serif;letter-spacing:.02em;border:2px solid var(--ink);border-radius:999px;padding:2px 10px;margin:0}
+    .verdict .status.sim{background:var(--ink);color:var(--bg)}
+    .verdict h2{font-size:24px;margin:10px 0 14px}
+    .v-what{font-weight:700;margin:0}
+    .v-fig{font-family:"Young Serif",serif;font-size:44px;line-height:1.1;margin:2px 0 0;font-variant-numeric:lining-nums tabular-nums}
+    .v-fig .was{color:var(--before)} .v-fig .now{color:var(--after)} .v-fig .arr{font-size:28px;color:var(--muted);margin:0 8px;vertical-align:.12em}
+    .v-fig small{font:700 18px "Atkinson Hyperlegible",sans-serif;margin-left:2px}
+    .v-say{margin:10px 0 0;font-size:19px;max-width:34ch}
+    .scale{position:relative;margin:34px 0 0;padding-bottom:24px}
+    .track{position:relative;height:16px;border-radius:999px;background:rgba(36,20,10,.12)}
+    .fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:var(--after);transform-origin:left}
+    .scale .wasmark{position:absolute;top:-5px;width:8px;height:26px;margin-left:-4px;border-radius:4px;background:var(--before);box-shadow:0 0 0 2px var(--bg)}
+    .scale .lim{position:absolute;top:-10px;bottom:14px;border-left:3px dashed var(--ink)}
+    .scale .lim span{position:absolute;bottom:100%;left:0;transform:translateX(-50%);white-space:nowrap;font-weight:700;font-size:15px;margin-bottom:2px}
+    .scale .ticks{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-between;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+    .chg{list-style:none;padding:0;margin:10px 0 0}
+    .chg li{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;padding:8px 0;border-top:1px solid var(--line)}
+    .chg b{grid-column:1 / -1}
+    .chg .k{font-size:14px;font-weight:700;border-radius:999px;padding:0 8px;height:22px;line-height:22px;align-self:start;margin-top:2px}
+    .chg .k.b{background:var(--before);color:var(--bg)} .chg .k.a{background:var(--after);color:var(--bg)}
+    .toggle{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 8px}
+    .toggle button{min-height:40px;padding:0 14px;font-size:15px}
+    .toggle .sw{display:inline-block;width:14px;height:4px;border-radius:2px;margin-right:6px;vertical-align:middle}
+    .findings{list-style:none;padding:0;margin:6px 0}.findings>li{border-top:1px solid var(--line);padding:8px 0}
+    .sev{display:inline-block;border-radius:999px;padding:0 9px;font-size:14px;font-weight:700;border:2px solid var(--ink);margin-right:6px}
+    .sev.barrier{background:var(--ink);color:var(--bg)}.sev.watch{border-color:var(--after);color:var(--after)}.sev.info{border-color:var(--line)}.sev.fixed{background:var(--before);border-color:var(--before);color:var(--bg)}
+    details{border:0;border-top:1px solid var(--line);border-radius:0;padding:8px 0;margin:6px 0}
+    details>summary{cursor:pointer;font-weight:700}
+    .compare{border:0;border-top:1px solid var(--line);border-radius:0;padding:4px 0;margin:16px 0}
+    .warn{border-left:3px solid var(--after);background:none;padding:2px 0 2px 12px}
+    #report,#reportOut:not(:empty){margin-top:16px}
+    #say{scroll-margin-top:16px}
+    textarea{background:#fffaf0;color:var(--ink);border:2px solid var(--ink);border-radius:10px;padding:10px}
+    .panel table{display:table;font-size:15px}
+
+    /* three pages, stepped with Back and Next */
+    .ptabs{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:0;margin:6px 0 4px}
+    .ptabs button{width:100%;min-height:52px;background:transparent;color:var(--muted);border:0;border-top:4px solid var(--line);border-radius:0;padding:6px 2px 0;
+      font-size:15px;line-height:1.2;text-align:left;display:flex;gap:6px;align-items:flex-start;transition:border-color .3s var(--ease),color .2s}
+    .ptabs button:hover{transform:none;color:var(--ink)}
+    .ptabs .n{flex:none;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;border:2px solid currentColor;font-size:13px}
+    .ptabs button.seen{border-top-color:var(--before);color:var(--ink)}
+    .ptabs button[aria-current]{border-top-color:var(--ink);color:var(--ink)}
+    .ptabs button[aria-current] .n{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+    .pnav{position:sticky;bottom:-32px;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:22px -24px -32px;padding:12px 24px 16px;
+      background:var(--bg);border-top:1px solid var(--line);border-radius:0 0 20px 20px}
+    .pnav #pgNext{margin-left:auto;min-height:48px} .pnav #pgBack{min-height:48px}
+    .pcount{font-size:15px;color:var(--muted);font-variant-numeric:tabular-nums}
+    .pnav #pgBack[hidden]+.pcount{margin-left:0}
+    .pg.in-fwd{animation:pgIn .34s var(--ease) both}.pg.in-back{animation:pgInB .34s var(--ease) both}
+    @keyframes pgIn{from{opacity:0;transform:translateX(26px)}} @keyframes pgInB{from{opacity:0;transform:translateX(-26px)}}
+    .vt{font-size:22px;margin:10px 0 12px}
+    .sub{font:700 17px "Atkinson Hyperlegible",sans-serif;margin:20px 0 6px}
+    .lede{margin:6px 0 0}
+    /* page 0: the trip as set up, drawn as a line of stops and walks */
+    .legs{list-style:none;padding:0;margin:16px 0 0}
+    .legs li{position:relative;padding:0 0 18px 34px;display:flex;flex-direction:column}
+    .legs li::before{content:"";position:absolute;left:3px;top:5px;width:12px;height:12px;border-radius:50%;border:3px solid var(--ink);background:var(--bg);z-index:1}
+    .legs li.transit::before{background:var(--before);border-color:var(--before)}
+    .legs li.end::before{background:var(--ink)}
+    .legs li:not(:last-child)::after{content:"";position:absolute;left:10px;top:20px;bottom:-4px;border-left:3px dotted var(--ink)}
+    .legs li.transit::after{border-left:4px solid var(--before)!important;left:9.5px!important}
+    .legs .meta{font-size:16px}
+    .found{font:400 20px/1.3 "Young Serif",serif;border-top:3px solid var(--ink);padding-top:12px;margin:18px 0 0}
+    #pg0.play .legs li{animation:rise .45s var(--ease) both;animation-delay:calc(var(--i,0) * 170ms + 100ms)}
+    #pg0.play .found{animation-delay:calc(var(--i,0) * 170ms + 300ms)}
+    /* page 1: the old length grows into the new one, the figure counts, then each change arrives in turn */
+    .pg.play .fill{animation:grow .9s var(--ease) .45s both}
+    @keyframes grow{from{transform:scaleX(var(--from,0))}}
+    .pg.play .chg li,.pg.play .pop{animation:rise .5s var(--ease) both;animation-delay:calc(var(--i,0) * 140ms + 1.1s)}
+    .pg.play .grp,#pg3.play .pop{animation-delay:calc(var(--i,0) * 120ms)}
+    @keyframes rise{from{opacity:0;transform:translateY(10px)}}
+    .aft{position:relative;justify-self:start}
+    .aft::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:3px;border-radius:2px;background:var(--after);transform:scaleX(0);transform-origin:left}
+    .pg.play .aft::after{animation:under .5s var(--ease) both;animation-delay:calc(var(--i,0) * 140ms + 1.45s)}
+    @keyframes under{to{transform:scaleX(1)}}
+    /* page 2: the checker's log, then each quote found on its page with a highlighter pass */
+    .trace{list-style:none;padding:0;margin:6px 0 4px}
+    .trace li{display:grid;grid-template-columns:22px 1fr;gap:0 10px;padding:6px 0;animation:rise .3s var(--ease) both}
+    .trace .t{font-weight:700} .trace .r{grid-column:2;color:var(--muted);font-size:16px}
+    .trace .r:empty{display:none}
+    .tick{width:22px;height:22px;border-radius:50%;border:2.5px solid var(--line);border-top-color:var(--ink);margin-top:1px;box-sizing:border-box}
+    .busy .tick{animation:spin .8s linear infinite}
+    .busy .t::after{content:"…"}
+    .ok .tick{border-color:var(--before);background:var(--before) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M6 12.5l4 4 8-9' fill='none' stroke='%23fbf1d8' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat;animation:stamp .35s var(--ease)}
+    .ok .r{color:var(--before);font-weight:700}
+    .miss .tick{border-color:var(--after)} .miss .r{color:var(--after);font-weight:700}
+    @keyframes spin{to{transform:rotate(360deg)}} @keyframes stamp{from{transform:scale(.4)}}
+    .cite{margin:12px 0 16px;animation:rise .45s var(--ease) both}
+    .cite blockquote{margin:0;font:400 16px/1.55 "Atkinson Hyperlegible",sans-serif;color:var(--muted)}
+    .cite .ctx{opacity:.85}
+    .cite mark{font:400 18px/1.5 "Young Serif",serif;color:var(--ink);padding:1px 2px;background:linear-gradient(#f0c04a,#f0c04a) no-repeat 0 0/0% 100%;
+      animation:hl 1.1s cubic-bezier(.45,.05,.25,1) .25s forwards;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+    .cite.b mark{background-image:linear-gradient(#cfd88f,#cfd88f)}
+    @keyframes hl{to{background-size:100% 100%}}
+    .cite figcaption{font-size:15px;margin-top:6px}
+    .aha{font:400 21px/1.3 "Young Serif",serif;color:var(--before);border-top:3px solid var(--before);padding-top:12px;margin:22px 0 0;animation:rise .5s var(--ease) both}
+    .say-box #mkReport{min-height:52px;margin:6px 0 4px}
+    .rp{margin-top:22px;border-top:1px solid var(--line);padding-top:10px}
+    .rp select{min-height:44px;font:inherit;font-size:16px;border:2px solid var(--ink);border-radius:10px;background:var(--bg);color:var(--ink);margin:4px 0 8px}
+    @media (prefers-reduced-motion:reduce){.pg.play .fill,.pg.play .chg li,.pg.play .pop,#pg0.play .legs li,#pg0.play .checks li,.pg.in-fwd,.pg.in-back,.trace li,.ok .tick,.cite,.aha{animation:none}
+      .busy .tick{animation:none;border-color:var(--ink)} .cite mark{animation:none;background-size:100% 100%} .pg.play .aft::after{animation:none;transform:scaleX(1)} button{transition:none}}
+  </style>
+</head>
+<body>
+<a class="skip" href="#panel">Skip to the trip panel</a>
+<p class="privacy" id="privacy"><strong>Privacy:</strong> the points you click go only to this computer. Map tiles come from OpenFreeMap, which can see the area you are viewing. Nothing is saved.</p>
+<div class="layers" role="group" aria-label="Show on the map">
+  <button type="button" id="lyChanges" aria-pressed="true"><span class="sw sw-c"></span>Street and transit changes</button>
+</div>
+<div class="mapwrap">
+  <div id="map" role="application" aria-label="3D map of Toronto. Click to place your start and destination. A text version is in the panel."></div>
+  <aside class="panel" id="panel" aria-label="Your trip">
+    <p class="top"><a href="/">Gait</a></p>
+    <h1>See what a City decision does to your trip</h1>
+    <section class="sec" id="secReal" hidden>
+      <div class="vhead"><button type="button" class="back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button><h2>Real examples</h2><p class="meta">City decisions, each shown for someone using a cane or walker</p><p class="locknote backlock" hidden>Press <strong>Start over</strong> below to go back.</p></div>
+      <div class="sec-b exlist" id="secRealB">
+        <button type="button" class="ex" data-s="bathurst"><b>7 Bathurst</b><span>A 2025 decision removed this stop</span></button>
+        <button type="button" class="ex" data-s="cosburn"><b>72 Pape at Cosburn</b><span>Station construction closed the sidewalk and moved the stop</span></button>
+        <button type="button" class="ex" data-s="harbord"><b>94 on Harbord</b><span>A bikeway moved stops and added bus/bike platforms</span></button>
+        <button type="button" class="ex" data-s="dufferin"><b>29 Dufferin</b><span>A 2025 decision removed the Croatia St stop</span></button>
+        <button type="button" class="ex" data-s="frontst"><b>114 at Union, late night</b><span>A 2025 decision adds a shelter</span></button>
+      </div>
+    </section>
+    <section class="sec" id="secOwn">
+      <div class="vhead"><h2>Check your own trip</h2><p class="meta" id="ownHint">Click your start and destination on the map</p></div>
+      <div class="sec-b" id="secOwnB" hidden>
+        <div class="steps">
+        <div class="step on" id="s1"><h3>Click your start on the map</h3><p id="s1t" class="meta">Not set</p></div>
+        <div class="step" id="s2"><h3>Click your destination</h3><p id="s2t" class="meta">Not set</p></div>
+        <div class="step" id="s3"><h3>Choose the bus or streetcar you take</h3>
+          <p class="meta">Routes with a stop within 800 m of both points, listed by number.</p><div class="routes" id="routes"></div></div>
+        <div class="step" id="s4"><h3>Click the red dots where you get on and off</h3>
+          <p id="s4t" class="meta">The red dots are the stops on your route.</p></div>
+        <div class="step" id="s5"><h3>Who is travelling, and when?</h3>
+          <label>Rider <select id="rider">{% for k, p in personas.items() %}<option value="{{ k }}">{{ p.label }}</option>{% endfor %}</select></label>
+<div class="pair">          <label>Day <select id="day">{% for k, n in days.items() %}<option value="{{ k }}">{{ n | capitalize }}</option>{% endfor %}</select></label>
+          <label>Time <select id="band">{% for k, n in bands.items() %}<option value="{{ k }}" {% if k == 'day' %}selected{% endif %}>{{ n }}</option>{% endfor %}</select></label></div></div>
+        </div>
+        <div class="alt">
+          <p class="alt-t">Or try out someone's situation</p>
+          <div class="altbtns">
+            <button type="button" class="altb" data-go="secReal"><span><b>Real examples</b><small>City decisions, one rider each</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button type="button" class="altb" data-go="secSim"><span><b>Simulations</b><small>Not real decisions</small></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+          <p class="locknote" id="altLock" hidden>Press <strong>Start over</strong> below to try an example instead.</p>
+        </div>
+        <p class="resetrow"><button id="reset" type="button" class="ghost">Start over</button></p>
+      </div>
+    </section>
+    <section class="sec" id="secSim" hidden>
+      <div class="vhead"><button type="button" class="back"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button><h2>Simulations</h2><p class="meta">Not real decisions. Each shows how Gait reports one kind of change, for someone using a cane or walker unless marked.</p><p class="locknote backlock" hidden>Press <strong>Start over</strong> below to go back.</p></div>
+      <div class="sec-b exlist" id="secSimB" hidden>
+        <button type="button" class="ex" data-s="queen"><b>501 Queen</b><span>Shelters removed</span></button>
+        <button type="button" class="ex" data-s="dundas"><b>505 Dundas</b><span>A stop moved further along</span></button>
+        <button type="button" class="ex" data-s="spadina"><b>127 on Spadina</b><span>Two stops closed for construction</span></button>
+        <button type="button" class="ex" data-s="late"><b>7 Bathurst late at night</b><span>Service cut</span><i>shift worker</i></button>
+      </div>
+    </section>
+    <section class="sec" id="secRes" hidden aria-live="polite">
+      <div class="vhead rtop"><button type="button" class="back rback" id="resBack"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Edit trip</button><button type="button" class="ghost rreset" id="reset2">Start over</button></div>
+      <h2 class="rhead">Your trip</h2>
+      <div class="sec-b" id="secResB" hidden><div id="out"></div></div>
+    </section>
+    <details class="legend"><summary>Map key</summary><p class="meta"><span style="background:#d62a1e;height:12px;width:12px;border-radius:50%;box-shadow:0 0 0 2px #fff"></span>stops on your route<br><span style="background:#1f6f69"></span>before (dashed: walking) <span style="background:#b5501b"></span>after the change<br><span style="background:#3c9c95;height:12px;width:12px;border-radius:50%"></span>311 requests <span style="background:#7a5032;height:12px;width:12px;border-radius:50%"></span>rider reports<br><span style="background:rgba(181,80,27,.25);border:2px dashed #b5501b;height:14px;width:20px;border-radius:7px"></span>where a decision lands (× a stop removed or closed; thick dashes a sidewalk or road closed)<br><span style="background:repeating-linear-gradient(90deg,#24140a 0 4px,transparent 4px 8px);height:4px;box-shadow:0 0 0 4px rgba(201,138,18,.4)"></span>City road or sidewalk works on your route</p></details>
+    <div class="foot"><button id="go" type="button" disabled>Show my trip</button></div>
+  </aside>
+</div>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const S = {a: null, b: null, ride: null, stops: null, board: null, alight: null, mA: null, mB: null, data: null};
+const map = new maplibregl.Map({container: 'map', style: 'https://tiles.openfreemap.org/styles/liberty',
+  center: [-79.40, 43.67], zoom: 12.5, pitch: 55, bearing: -17, maxPitch: 70});
+map.addControl(new maplibregl.NavigationControl({visualizePitch: true}));
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const CALM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let pulseOn = false;
+function pulse(t){
+  if (!pulseOn || !map.getLayer('stops-pulse')) return;
+  const k = (t % 1600) / 1600, z = map.getZoom(), base = z < 14 ? 6 : 9;          // one soft ring every 1.6 s
+  map.setPaintProperty('stops-pulse', 'circle-radius', base + k * 14);
+  map.setPaintProperty('stops-pulse', 'circle-stroke-opacity', 0.75 * (1 - k));
+  requestAnimationFrame(pulse);
+}
+function setPulse(on){
+  on = on && !CALM;
+  if (on === pulseOn) return; pulseOn = on;
+  if (on) requestAnimationFrame(pulse); else if (map.getLayer('stops-pulse')) map.setPaintProperty('stops-pulse', 'circle-stroke-opacity', 0);
+}
+function step(n){ setPulse(n === 4); for (let i=1;i<=5;i++) { $('s'+i).classList.toggle('on', i===n); $('s'+i).classList.toggle('done', i<n || (i === 2 && !!S.b && n < 3)); } }
+function src(id, data){ if (map.getSource(id)) map.getSource(id).setData(data); else map.addSource(id, {type:'geojson', data}); }
+const EMPTY = {type:'FeatureCollection', features:[]};
+function pin(cls, text, lngLat){ const el = document.createElement('div'); el.className = 'pin ' + cls; el.textContent = text;
+  return new maplibregl.Marker({element: el, anchor: 'bottom', offset: [0, -6]}).setLngLat(lngLat).addTo(map); }
+const PINS = [];
+function clearRidePins(){ while (PINS.length) PINS.pop().remove(); }
+
+function box(lon, lat, wm, hm, dx){ // small rectangle in metres, for 3D shelters and benches
+  const k = 111320, kx = k*Math.cos(lat*Math.PI/180), x = lon + dx/kx;
+  const w = wm/2/kx, h = hm/2/k;
+  return [[[x-w,lat-h],[x+w,lat-h],[x+w,lat+h],[x-w,lat+h],[x-w,lat-h]]];
+}
+function furniture(stops){
+  const f = [];
+  for (const s of stops.features){
+    const [lon, lat] = s.geometry.coordinates;
+    if (s.properties.shelter) f.push({type:'Feature', properties:{h:7, c:'#2563eb'}, geometry:{type:'Polygon', coordinates: box(lon, lat, 9, 3.5, 0)}});
+    if (s.properties.bench) f.push({type:'Feature', properties:{h:2, c:'#92400e'}, geometry:{type:'Polygon', coordinates: box(lon, lat, 4, 1.5, 7)}});
+  }
+  return {type:'FeatureCollection', features: f};
+}
+
+map.on('load', () => {
+  if (!map.getLayer('building-3d') && map.getSource('openmaptiles')) {
+    map.addLayer({id:'bld3d', type:'fill-extrusion', source:'openmaptiles', 'source-layer':'building', minzoom:13,
+      paint:{'fill-extrusion-color':'#d6dbe3', 'fill-extrusion-height':['coalesce',['get','render_height'],8],
+             'fill-extrusion-base':['coalesce',['get','render_min_height'],0], 'fill-extrusion-opacity':0.55}});
+  }
+  for (const id of ['routeline','stops','furn','before','after','removed','decisions','works','ridestops','evidence']) src(id, EMPTY);
+  map.addLayer({id:'routeline', type:'line', source:'routeline', paint:{'line-color':'#8a7a66','line-width':3,'line-opacity':0.7}});
+  map.addLayer({id:'furn', type:'fill-extrusion', source:'furn', paint:{'fill-extrusion-color':['get','c'],'fill-extrusion-height':['get','h'],'fill-extrusion-opacity':0.95}});
+  map.addLayer({id:'before-walk', type:'line', source:'before', filter:['==',['get','kind'],'walk'], paint:{'line-color':'#1f6f69','line-width':4,'line-dasharray':[1.2,1.2]}});
+  map.addLayer({id:'before-ride', type:'line', source:'before', filter:['==',['get','kind'],'transit'], paint:{'line-color':'#1f6f69','line-width':6}});
+  map.addLayer({id:'after-walk', type:'line', source:'after', filter:['==',['get','kind'],'walk'], paint:{'line-color':'#b5501b','line-width':4,'line-dasharray':[1.2,1.2]}});
+  map.addLayer({id:'after-ride', type:'line', source:'after', filter:['==',['get','kind'],'transit'], paint:{'line-color':'#b5501b','line-width':5,'line-offset':5}});
+  // the route's stops: bright red dots with a white ring, larger as you zoom in; a soft ring pulses from each while you pick stops
+  map.addLayer({id:'stops-pulse', type:'circle', source:'stops', paint:{'circle-radius':10,'circle-color':'rgba(0,0,0,0)',
+    'circle-stroke-width':3,'circle-stroke-color':'#d62a1e','circle-stroke-opacity':0}});
+  map.addLayer({id:'stops', type:'circle', source:'stops', paint:{
+    'circle-radius':['interpolate',['linear'],['zoom'],11,5,14,8,17,11],'circle-color':'#d62a1e',
+    'circle-stroke-width':['interpolate',['linear'],['zoom'],11,2,16,3],'circle-stroke-color':'#ffffff'}});
+  map.addLayer({id:'ridestops', type:'circle', source:'ridestops', paint:{'circle-radius':9,'circle-color':'#1f6f69','circle-stroke-color':'#fff','circle-stroke-width':2}});
+  map.addLayer({id:'ridestops-n', type:'symbol', source:'ridestops', layout:{'text-field':['get','n'],'text-size':11,'text-font':['Noto Sans Bold'],'text-allow-overlap':true},
+    paint:{'text-color':'#fff'}});
+  map.addLayer({id:'removed', type:'circle', source:'removed', paint:{'circle-radius':11,'circle-color':'rgba(0,0,0,0)','circle-stroke-width':3,'circle-stroke-color':'#b5501b'}});
+  map.addLayer({id:'decisions', type:'circle', source:'decisions', paint:{'circle-radius':9,'circle-color':['case',['get','upcoming'],'#dc2626','#6b7280'],'circle-stroke-color':'#fff','circle-stroke-width':2}});
+  map.addLayer({id:'works-band', type:'line', source:'works', layout:{'line-cap':'round','line-join':'round'}, paint:{'line-color':'#c98a12','line-width':['interpolate',['linear'],['zoom'],12,10,17,30],'line-opacity':0.4}});
+  map.addLayer({id:'works', type:'line', source:'works', layout:{'line-join':'round'}, paint:{'line-color':'#24140a','line-width':3,'line-dasharray':[1.2,1.2]}});
+  map.addLayer({id:'evidence', type:'circle', source:'evidence', paint:{'circle-radius':7,'circle-color':['case',['==',['get','src'],'rider'],'#7a5032','#3c9c95'],'circle-stroke-color':'#fff','circle-stroke-width':2}});
+  // where decisions land: a bubble round the area, the stops it removes or moves, the sidewalks and roads it closes.
+  // Real decisions always show; a simulation shows only when it is attached to the trip on screen.
+  const PHASE_C = ['match', ['get','phase'], 'proposed', '#b5501b', 'approved', '#b5501b', 'in effect', '#4e3220', '#6b625a'];
+  fetch('/api/decision_areas?include_sim=true').then(r => r.json()).then(fc => {
+    src('areas', fc);
+    const realOrShown = () => ['any', ['!=', ['get','phase'], 'simulation'], ['in', ['get','id'], ['literal', S.simShown || []]]];
+    map.addLayer({id:'area-fill', type:'fill', source:'areas', filter:['all', ['==',['get','kind'],'area'], realOrShown()],
+      paint:{'fill-color': PHASE_C, 'fill-opacity':['case',['==',['get','phase'],'proposed'],0.16,0.1]}}, 'before-walk');
+    map.addLayer({id:'area-edge', type:'line', source:'areas', filter:['all', ['==',['get','kind'],'area'], realOrShown()],
+      paint:{'line-color': PHASE_C, 'line-width':2.5, 'line-dasharray':[2,1.5], 'line-opacity':0.9}}, 'before-walk');
+    map.addLayer({id:'area-label', type:'symbol', source:'areas', minzoom:12, filter:['all', ['==',['get','kind'],'area'], realOrShown()],
+      layout:{'text-field':['concat', ['upcase',['get','phase']], '\n', ['get','title']], 'text-font':['Noto Sans Bold'], 'text-size':12, 'text-max-width':14,
+              'symbol-placement':'point', 'text-allow-overlap':false},
+      paint:{'text-color': PHASE_C, 'text-halo-color':'#fbf1d8', 'text-halo-width':2}});
+    map.addLayer({id:'area-lines', type:'line', source:'areas', filter:['all', ['==',['get','kind'],'line'], realOrShown()],
+      paint:{'line-color':['case',['==',['get','line'],'sidewalk'],'#b5501b','#24140a'], 'line-width':['case',['==',['get','line'],'sidewalk'],6,8],
+             'line-dasharray':[1,1], 'line-opacity':0.85}}, 'before-walk');
+    map.addLayer({id:'area-stops', type:'circle', source:'areas', filter:['all', ['==',['get','kind'],'stop'], realOrShown()],
+      paint:{'circle-radius':8, 'circle-color':['case',['get','gone'],'#fbf1d8','#5f6d22'], 'circle-stroke-width':3, 'circle-stroke-color': PHASE_C}});
+    map.addLayer({id:'area-stops-x', type:'symbol', source:'areas', filter:['all', ['==',['get','kind'],'stop'], ['get','gone'], realOrShown()],
+      layout:{'text-field':'×', 'text-font':['Noto Sans Bold'], 'text-size':16, 'text-allow-overlap':true, 'text-offset':[0,-0.05]},
+      paint:{'text-color': PHASE_C}});
+    S.areaFilter = () => { for (const [id, k] of [['area-fill','area'],['area-edge','area'],['area-label','area'],['area-lines','line'],['area-stops','stop']])
+      map.setFilter(id, ['all', ['==',['get','kind'],k], realOrShown()]);
+      map.setFilter('area-stops-x', ['all', ['==',['get','kind'],'stop'], ['get','gone'], realOrShown()]); };
+    const apop = new maplibregl.Popup({closeButton:false, closeOnClick:false, maxWidth:'320px'});
+    const show = e => {
+      const f = e.features[0], p = f.properties, all = fc.features.filter(x => x.properties.id === p.id);
+      const gone = all.filter(x => x.properties.kind === 'stop' && x.properties.gone).length, lines = all.filter(x => x.properties.kind === 'line').length;
+      const head = p.kind === 'stop' ? `<strong>${esc(p.name)}</strong>: ${esc(p.what)}<br>` : p.kind === 'line' ? `<strong>${esc(p.label)}</strong><br>` : '';
+      map.getCanvas().style.cursor = 'help';
+      apop.setLngLat(e.lngLat).setHTML(`<div style="font:15px/1.4 'Atkinson Hyperlegible',sans-serif;color:#24140a">${head}<span style="font-weight:700;text-transform:uppercase;font-size:12px;letter-spacing:.04em">${esc(p.phase)}</span><br>${esc(p.title)}<br>` +
+        `<span style="color:#4e3220">${[gone ? `${gone} stop${gone > 1 ? 's' : ''} removed or closed` : '', lines ? `${lines} sidewalk or road closure${lines > 1 ? 's' : ''}` : ''].filter(Boolean).join(' · ')}</span></div>`).addTo(map);
+    };
+    for (const id of ['area-stops','area-lines','area-fill']) {
+      map.on('mousemove', id, show);
+      map.on('mouseleave', id, () => { map.getCanvas().style.cursor = ''; apop.remove(); });
+    }
+  });
+  const LAYERS = {lyChanges: ['area-fill','area-edge','area-label','area-lines','area-stops','area-stops-x']};
+  for (const [btn, ids] of Object.entries(LAYERS)) $(btn).onclick = () => {
+    const on = $(btn).getAttribute('aria-pressed') !== 'true'; $(btn).setAttribute('aria-pressed', on);
+    for (const id of ids) if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', on ? 'visible' : 'none');
+  };
+  const pop = new maplibregl.Popup({closeButton:false, closeOnClick:false});
+  for (const id of ['stops','decisions','works','evidence']) {
+    map.on('mouseenter', id, e => { map.getCanvas().style.cursor = id === 'stops' && !editingTrip() ? 'help' : 'pointer'; const p = e.features[0].properties;
+      const html = id==='stops' ? `<strong>${esc(p.name)}</strong><br>Boarding: ${esc(p.boarding)}<br>Shelter listed: ${p.shelter?'yes':'no'} · Bench listed: ${p.bench?'yes':'no'}${p.removed_by?'<br><strong>Would be removed:</strong> '+esc(p.removed_by):''}`
+        : id==='evidence' ? esc(p.label) : id==='decisions' ? `<strong>Decision:</strong> ${esc(p.title)}<br>${esc(p.label)}` : `<strong>City works on your route:</strong> ${esc(p.project)}<br>${esc(p.street)} · ${esc(p.timeline)}`;
+      pop.setLngLat(e.lngLat).setHTML(html).addTo(map); });
+    map.on('mouseleave', id, () => { map.getCanvas().style.cursor = ''; pop.remove(); });
+  }
+  map.on('click', 'stops', e => {
+    e.preventDefault();                  // a stop click never places a start or destination
+    if (!S.stops || !editingTrip()) return;   // only while setting up your own trip, not on results or a filled-in example
+    S.only = null;                       // the rider is setting up their own trip: show every decision
+    const id = e.features[0].properties.id, order = S.stops.features.map(f => f.properties.id), name = e.features[0].properties.name;
+    if (!S.board || S.alight) { clearRidePins(); PINS.push(pin('on', 'Get on: ' + name, e.features[0].geometry.coordinates)); S.board = id; S.alight = null; $('s4t').innerHTML = `Get on: <strong>${esc(name)}</strong>. Now click the red dot where you get off.`; $('go').disabled = true; }
+    else if (order.indexOf(id) <= order.indexOf(S.board)) { $('s4t').innerHTML = `<span class="err">Pick a red dot further along, in the direction you travel.</span>`; }
+    else { PINS.push(pin('off', 'Get off: ' + name, e.features[0].geometry.coordinates)); S.alight = id; $('s4t').innerHTML += `<br>Get off: <strong>${esc(name)}</strong>.`; step(5); $('go').disabled = false; }
+  });
+});
+
+// the rider is setting up their own trip: the Check your own trip view, not results and not a filled-in example
+const editingTrip = () => $('panel').classList.contains('own') && !S.only;
+// a click places the start if there is none, otherwise the destination; the × beside each removes just that point
+const XBTN = what => `<button type="button" class="xbtn" data-x="${what}" aria-label="Remove the ${what}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg></button>`;
+function showPoints(){
+  $('s1t').innerHTML = S.a ? `<span>Start placed on the map</span>${S.only === undefined || !S.only ? XBTN('start') : ''}` : 'Not set';
+  $('s2t').innerHTML = S.b ? `<span>Destination placed on the map</span>${S.only === undefined || !S.only ? XBTN('destination') : ''}` : 'Not set';
+  document.querySelectorAll('.xbtn').forEach(x => x.onclick = () => removePoint(x.dataset.x));
+}
+function clearRide(){                      // anything chosen after the two points no longer applies once a point moves
+  Object.assign(S, {ride: null, stops: null, board: null, alight: null, data: null});
+  for (const id of ['routeline','stops','furn','before','after','removed','ridestops','evidence']) src(id, EMPTY);
+  clearRidePins(); $('routes').innerHTML = ''; $('out').innerHTML = ''; $('go').disabled = true;
+  $('s4t').textContent = 'The red dots are the stops on your route.';
+}
+const KEYS = {used: false};
+addEventListener('keydown', e => { if (e.key === 'Tab' || e.key === 'Enter' || e.key === ' ') KEYS.used = true; });
+addEventListener('pointerdown', () => KEYS.used = false);
+function removePoint(what){
+  if (what === 'start') { S.mA && S.mA.remove(); S.mA = null; S.a = null; } else { S.mB && S.mB.remove(); S.mB = null; S.b = null; }
+  clearRide(); showPoints(); step(!S.a ? 1 : 2);
+  if (!S.a && !S.b) unlockAll();                            // nothing placed: the examples open again
+  const h = (what === 'start' ? $('s1') : $('s2')).querySelector('h3'), kb = KEYS.used;   // the × is gone: keep focus on that step,
+  h.tabIndex = -1; h.focus({focusVisible: kb});                                                   // with a visible ring only for keyboard users
+}
+async function findRoutes(){
+  const r = await fetch(`/api/routes_near?alat=${S.a[0]}&alon=${S.a[1]}&blat=${S.b[0]}&blon=${S.b[1]}`).then(x => x.json());
+  $('routes').innerHTML = r.length ? r.map((x, i) => `<button type="button" data-i="${i}" aria-pressed="false">${esc(x.route)} ${esc(x.name)}<br><small>${esc(x.headsign)}</small></button>`).join('')
+    : '<p class="err">No single route has stops near both points. Try a start and destination closer to the same bus or streetcar route.</p>';
+  $('routes').querySelectorAll('button').forEach(btn => btn.onclick = () => pickRoute(r[+btn.dataset.i], btn));
+  return r;
+}
+map.on('click', async e => {
+  if (e.defaultPrevented || (S.a && S.b) || S.only) return;
+  const ll = [e.lngLat.lat, e.lngLat.lng];
+  lockTo('secOwn');
+  if (!S.a) { S.a = ll; S.mA = pin('a', 'Start', e.lngLat); }
+  else { S.b = ll; S.mB = pin('b', 'Destination', e.lngLat); }
+  showPoints();
+  if (S.a && S.b) { step(3); await findRoutes(); } else step(S.a ? 2 : 1);
+});
+
+async function pickRoute(rt, btn){
+  $('routes').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b === btn));
+  S.ride = rt; S.board = S.alight = null; S.only = null; $('go').disabled = true;
+  const d = await fetch(`/api/route_stops?route=${encodeURIComponent(rt.route)}&variant=${rt.variant}`).then(x => x.json());
+  S.stops = d.stops; src('routeline', d.line); src('stops', d.stops); src('furn', furniture(d.stops));
+  $('s4t').innerHTML = 'Click the red dot where you get on.'; step(4);
+}
+
+$('go').onclick = async () => {
+  showView('secRes'); $('out').innerHTML = '<p>Checking your trip…</p>';
+  const body = {a: S.a, b: S.b, rider: $('rider').value, day: $('day').value, band: $('band').value,
+                rides: [{route: S.ride.route, variant: S.ride.variant, board: S.board, alight: S.alight}], only: S.only || null};
+  const res = await fetch('/api/trip', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(body)});
+  const d = await res.json();
+  if (!res.ok) { $('out').innerHTML = `<p class="err">${esc(d.error)}</p>`; return; }
+  S.data = d; S.simShown = d.comparisons.filter(c => c.simulated).map(c => c.id); S.areaFilter && S.areaFilter(); src('evidence', d.evidence_pts); src('before', d.before); src('decisions', d.decisions); src('works', {type:'FeatureCollection', features:(d.works_on_trip || []).map(w => ({type:'Feature', geometry:w.geometry, properties:{project:w.project, street:w.street, timeline:w.timelines.join(', ')}}))}); map.moveLayer('works');
+  const c = d.comparisons[0];
+  src('after', c ? c.after : EMPTY); src('removed', c ? c.removed : EMPTY);
+  if (c) src('before', c.before);
+  const ids = S.stops.features.map(f => f.properties.id), i0 = ids.indexOf(S.board), i1 = ids.indexOf(S.alight);
+  src('ridestops', {type:'FeatureCollection', features: S.stops.features.slice(i0, i1 + 1).map((f, k) => ({...f, properties: {...f.properties, n: String(k + 1)}}))});
+  clearRidePins();
+  PINS.push(pin('on', 'Get on', S.stops.features[i0].geometry.coordinates), pin('off', 'Get off', S.stops.features[i1].geometry.coordinates));
+  // a pin only where the stop really changes (read from the before/after rows, not from line geometry)
+  // a pin only where the stop itself moves (not when only its shelter or bench changes)
+  if (c) { const changed = w => c.rows.some(r => r.what === w && r.before.split(' (')[0] !== r.after.split(' (')[0]), past = c.phase === 'implemented';
+    for (const [w, layer, k] of [['Get on at', past ? c.before : c.after, 0], ['Get off at', past ? c.before : c.after, -1]]) {
+      const f = layer.features.filter(f => f.properties.kind === 'transit')[0];
+      if (!f || !changed(w)) continue;
+      const m = pin(past ? 'was' : 'gone', (past ? 'Before: ' : 'After the change: ') + (k ? 'get off here' : 'get on here'), f.geometry.coordinates.at(k));
+      m.getElement().dataset.when = past ? 'before' : 'after';
+      if (past) PINS[k ? 1 : 0].getElement().dataset.when = 'after';    // today's stop is the "after" one
+      PINS.push(m);
+    } }
+  render(d);
+  const xs = d.before.features.flatMap(f => f.geometry.coordinates).concat(c ? c.after.features.flatMap(f => f.geometry.coordinates) : []);
+  const bb = xs.reduce((b, p) => [[Math.min(b[0][0],p[0]),Math.min(b[0][1],p[1])],[Math.max(b[1][0],p[0]),Math.max(b[1][1],p[1])]], [[180,90],[-180,-90]]);
+  const wide = innerWidth >= 900, pad = wide ? {top: 80, bottom: 80, left: $('panel').offsetWidth + 60, right: 60} : 60;
+  map.fitBounds(bb, {padding: pad, pitch: 50, duration: 800}); $('panel').scrollTop = 0;
+};
+
+function flagHTML(f, fixed, bare){ const lab = fixed || {barrier:'Limit', watch:'Worth knowing', info:'Info'}[f.severity];
+  if (bare) return `<li><span class="sev ${fixed ? 'fixed' : f.severity}">${lab}</span> ${esc(f.say || f.text)}</li>`;
+  return `<li><span class="sev ${fixed ? 'fixed' : f.severity}">${lab}</span> ${esc(f.text)}<details><summary>Evidence</summary>${f.evidence.map(e => `<blockquote class="official small">${esc(e)}</blockquote>`).join('')}</details></li>`; }
+
+const PHASE = c => c.simulated ? ['Simulation', 'sim'] : c.phase === 'implemented' ? ['In effect', ''] : /^approved/i.test(c.status) ? ['Approved', ''] : ['Proposed', ''];
+const who = d => { const t = d.persona.charAt(0).toLowerCase() + d.persona.slice(1); return /^(a|an|someone) /.test(t) ? t : (/^[aeiou]/.test(t) ? 'an ' : 'a ') + t; };
+function verdictHTML(c, d){
+  const v = c.headline;
+  if (!v) {
+    const bad = c.new_issues[0], good = (c.improvements || [])[0];
+    // name the improvement itself (from the before/after rows), not the old problem it removes
+    const gains = c.rows.filter(r => r.changed).flatMap(r => {
+      const stop = r.after.split(' (')[0], g = [];
+      if (/shelter not listed/.test(r.before) && /shelter listed/.test(r.after)) g.push(`A new shelter at your stop, ${stop}`);
+      if (/bench not listed/.test(r.before) && /bench listed/.test(r.after)) g.push(`A new bench at your stop, ${stop}`);
+      if (/platform/.test(r.after) && !/platform/.test(r.before)) g.push(`You board from a raised platform at ${stop}`);
+      return g; });
+    if (!bad && gains.length) return `<p class="v-what">Your walks stay the same</p><p class="v-fig" style="font-size:30px;color:var(--before)">${esc(gains.join('. '))}.</p>` +
+      (good ? `<p class="v-say meta">${esc(good.say || good.text)}</p>` : '');
+    const say = bad ? 'New for you: ' + (bad.say || bad.text) : good ? 'This change removes an issue Gait noted on your trip: ' + (good.say || good.text) : (c.notes[0] || 'This change does not touch your stops or walks.');
+    return `<p class="v-what">Your walks stay the same</p><p class="v-say">${esc(say)}</p>`;
+  }
+  const L = v.limit_m, diff = Math.abs(v.after_m - v.before_m);
+  const say = v.say ? v.say : v.after_m < v.before_m ? `About ${diff} m shorter. ${v.after_m > L ? `Still longer than the ${L} m limit we use for ${who(d)}.` : `Within the ${L} m limit we use for ${who(d)}.`}`
+    : v.after_m > L && v.before_m <= L ? `That is longer than the ${L} m limit we use for ${who(d)}. Before, it was within it.`
+    : v.after_m > L ? `Both are longer than the ${L} m limit we use for ${who(d)}; now about ${diff} m more.`
+    : `Still within the ${L} m limit we use for ${who(d)}, but about ${diff} m further.`;
+  const max = Math.ceil(Math.max(600, v.after_m, v.before_m, L) / 100) * 100, pc = m => (100 * m / max).toFixed(1) + '%';
+  const ticks = [0, 1, 2, 3, 4].map(k => Math.round(max * k / 4 / 50) * 50);
+  return `<p class="v-what">${esc(v.what)}${c.phase === 'implemented' ? ', before the decision and today' : ''}</p>
+    <p class="v-fig"><span class="was">${v.before_m}<small>m</small></span><span class="arr" aria-label="becomes">→</span><span class="now"><b data-from="${v.before_m}" data-to="${v.after_m}">${v.after_m}</b><small>m</small></span></p>
+    <div class="scale" aria-hidden="true"><div class="track"><div class="fill" style="width:${pc(v.after_m)};--from:${(v.before_m / Math.max(1, v.after_m)).toFixed(3)}"></div><div class="wasmark" style="left:${pc(v.before_m)}"></div>
+      <div class="lim" style="left:${pc(L)}"><span>limit ${L} m</span></div></div><div class="ticks">${ticks.map(t => `<span>${t}${t === max ? ' m' : ''}</span>`).join('')}</div></div>
+    <p class="v-say">${esc(say)}</p>`;
+}
+// The results are four pages the rider steps through with Back and Next (the trip as set up comes first):
+//   0. what changes for your trip (the verdict, the stops and walks before and after),
+//   1. what the City wrote (each quote is re-read on its page while you watch, then City works on your route),
+//   2. what people report on the new part, and writing a report.
+const ttl = c => { const t = c.title.replace(/^SIMULATED: /, ''); return t.charAt(0).toUpperCase() + t.slice(1); };
+const PAGES = ['Your trip', 'What changes for your trip', 'What the City wrote', 'What people report'];
+const TABS = ['Your trip', 'What changes', 'The City’s words', 'What people report'];
+let PG = 0, PLAYED = new Set(), RUN = 0;
+const wait = ms => new Promise(r => setTimeout(r, CALM ? 0 : ms));
+
+// page 0: the trip as the rider set it up, part by part, before any decision is shown
+function tripHTML(d){
+  const st = S.stops.features, ids = st.map(f => f.properties.id), nm = id => st[ids.indexOf(id)].properties.name;
+  // the trip as it was before the decision: for one already in effect that is the reconstructed past trip, otherwise the trip as set up
+  const c = d.comparisons[0], past = !!c && c.phase === 'implemented';
+  const parts = (c ? c.before : d.before).features.map(f => f.properties), walked = parts.filter(p => p.kind === 'walk').reduce((m, p) => m + p.length_m, 0);
+  const n = d.comparisons.length;
+  let h = `<section class="verdict">${past ? '<p class="status">Before the decision</p>' : ''}<h3 class="vt">${past ? `${esc(S.ride.route)} ${esc(S.ride.name)} to ${esc(nm(S.alight))}` : `${esc(S.ride.route)} ${esc(S.ride.name)}, from ${esc(nm(S.board))} to ${esc(nm(S.alight))}`}</h3>
+    <p class="meta lede">${esc(d.persona)}${$('band').value === 'late' ? ', travelling late at night' : ''}.${past ? ' This decision is already in effect, so this is your trip as it was before it, with the old stop placed where it used to be.' : ''}</p><ol class="legs">`;
+  h += `<li class="end" style="--i:0"><b>Start</b></li>`;
+  parts.forEach((p, k) => {
+    const how = p.kind === 'walk' ? (p.routed ? 'on sidewalks' : 'straight-line estimate') : `${esc(S.ride.headsign)}`;
+    h += `<li class="${p.kind}" style="--i:${k + 1}"><b>${p.kind === 'walk' ? esc(p.label) : 'Ride the ' + esc(p.label)}</b><span class="meta">about ${p.length_m} m · ${how}</span></li>`;
+  });
+  h += `<li class="end" style="--i:${parts.length + 1}"><b>Destination</b></li></ol>`;
+  h += `<p class="v-say">About ${walked} m of walking in all.</p>`;
+  // what Gait checked for this rider on this trip, passes included, so the rider choice visibly matters
+  if ((d.checks || []).length) {
+    const MARK = {ok: ['✓', 'OK'], warn: ['!', 'Worth knowing'], bad: ['✕', 'Past a limit']};
+    h += `<h4 class="sub">What Gait checked for ${esc(who(d))}</h4><ul class="checks">` +
+      d.checks.map((c, k) => `<li class="c-${c.state}" style="--i:${parts.length + 2 + k}"><span class="mk" aria-hidden="true">${MARK[c.state][0]}</span><span class="sr">${MARK[c.state][1]}: </span>${esc(c.text)}</li>`).join('') + '</ul>';
+  }
+  h += `<p class="found pop" style="--i:${parts.length + 3 + (d.checks || []).length}">${n ? `Gait found ${n === 1 ? 'one decision' : n + ' decisions'} that change${n === 1 ? 's' : ''} this trip.` : 'Gait found no recorded decision that changes this trip.'}</p></section>`;
+  return h;
+}
+function playTrip(){ $('pg0').classList.add('play'); }
+
+function changesHTML(c, d, i){
+  const [lab, cls] = PHASE(c);
+  let h = `<section class="verdict" aria-labelledby="v${i}"><p class="status ${cls}">${lab}</p><h3 class="vt" id="v${i}">${esc(ttl(c))}</h3>` + verdictHTML(c, d);
+  if (c.simulated) h += `<p class="warn"><strong>Not a real decision.</strong> Gait made this up to show what a change like it would do.</p>`;
+  h += `<h4 class="sub">Your trip, before and after</h4><div class="toggle" role="group" aria-label="Show on the map">
+      <button type="button" data-v="before" aria-pressed="false"><span class="sw" style="background:var(--before)"></span>Before</button>
+      <button type="button" data-v="after" aria-pressed="false"><span class="sw" style="background:var(--after)"></span>After</button>
+      <button type="button" data-v="both" aria-pressed="true">Both</button></div>`;
+  const ch = c.rows.filter(r => r.changed);
+  h += ch.length ? '<ul class="chg">' + ch.map((r, k) => `<li style="--i:${k}"><b>${esc(r.what)}</b><span class="k b">Before</span><span>${esc(r.before)}</span><span class="k a">After</span><span class="aft">${esc(r.after)}</span></li>`).join('') + '</ul>'
+    : '<p>Your stops and walks stay the same.</p>';
+  let k = ch.length;
+  const told = f => c.headline && /^walk_(over|near)_limit$/.test(f.code || '') && f.leg === c.headline.leg;   // the verdict above already says it
+  const ni = c.new_issues.filter(f => !told(f)), imp = (c.improvements || []).filter(f => !told(f));
+  if (ni.length) h += '<h4 class="sub">New for you</h4><ul class="findings">' + ni.map(f => flagHTML(f, null, true).replace('<li>', `<li class="pop" style="--i:${k++}">`)).join('') + '</ul>';
+  if (imp.length) h += '<h4 class="sub">No longer a problem</h4><ul class="findings">' + imp.map(f => flagHTML(f, 'Fixed', true).replace('<li>', `<li class="pop" style="--i:${k++}">`)).join('') + '</ul>';
+  return h + '</section>';
+}
+
+function cityHTML(d){
+  let h = '<p class="meta lede">Gait opens each source and finds the sentences again, word for word, on their page. Nothing here is reworded.</p>';
+  d.comparisons.forEach((c, i) => {
+    h += `<section class="verdict"><h3 class="vt">${esc(ttl(c))}</h3><ol class="trace" id="tr${i}"></ol><div class="cites" id="ct${i}"></div>`;
+    h += c.simulated ? `<div class="after-run" hidden><p class="meta">${esc(c.status_note)}</p></div>`
+      : `<details class="after-run" hidden><summary>About this source</summary><p class="meta">Status: ${esc(c.status)}. ${esc(c.status_note)}</p><p class="meta"><a href="${esc(c.source_url)}">Full report</a>${c.item_url ? ' · <a href="' + esc(c.item_url) + '">Council item</a>' : ''}${c.phase === 'implemented' ? ' · <a href="/research/' + esc(S.ride.route) + '">How this decision was found</a>' : ''}</p></details>`;
+    h += '</section>';
+  });
+  h += `<section class="verdict"><h3 class="vt">Other City plans on your route</h3><ol class="trace" id="trB"></ol><div class="cites" id="ctB"></div>
+    <p class="meta after-run" hidden>Only works whose street section meets your walks or stops, or runs along your ride, are listed. Dates and closures are the City's plan, in its words.</p></section>`;
+  h += `<p class="aha after-run" hidden role="status"></p>`;
+  h += `<section class="compare after-run" hidden><h3>Did we miss a decision?</h3>
+    <p><button type="button" id="askAgent" class="ghost">Search other City reports for the ${esc(S.ride.route)} ${esc(S.ride.name)}</button></p>
+    <p class="meta">${d.comparisons.length ? 'Gait has only the decisions shown above on file.' : 'Gait has no decision on file for this trip.'} This searches every indexed staff report that mentions your route, and an AI (Claude) picks out passages that may touch your stops. Each one is shown only if its quote is found on the page it cites. Your start and destination are not sent.</p><div id="agentOut"></div></section>`;
+  return h;
+}
+
+// how the reports are ordered, in the rider's terms
+const RIDER_WORDS = {senior_walker: 'use a cane or walker', wheelchair: 'use a wheelchair'};
+function peopleHTML(d){
+  const rw = RIDER_WORDS[$('rider').value];
+  const lead = d.comparisons.length ? 'On top of the change to your route, Gait looked for problems people have reported to the City along it.'
+    : 'No recorded decision changes this trip, but Gait looked for problems people have reported to the City along it.';
+  let h = `<p class="lede ppl">${lead} ${rw ? `Sidewalk, curb, crossing and snow reports come first, because they matter most if you ${rw}.` : 'The most reported problems come first.'}</p>`;
+  d.comparisons.forEach((c, i) => {
+    const past = c.phase === 'implemented';
+    h += `<section class="verdict"><h3 class="vt">${esc(ttl(c))}</h3>
+      <p class="meta lede">${past ? 'This change is already in effect. Gait searched around only the stops and walks that are new since it, not your old route.' : 'Gait searched around only the stops and walks this change adds to your trip.'}</p>
+      <ol class="trace" id="pt${i}"></ol><div class="cites" id="pc${i}"></div></section>`;
+  });
+  if (!d.comparisons.length) h += `<section class="verdict"><h3 class="vt">Along your trip today</h3><ol class="trace" id="ptT"></ol><div class="cites" id="pcT"></div></section>`;
+  h += `<p class="meta after-run" hidden>City 311 requests and rider reports show what people reported, not what is there today.</p>`;
+  h += `<section class="verdict say-box after-run" hidden><h3 class="vt">Have your say</h3><p class="meta">Gait drafts the facts; you add your own words and choose where to send it.</p>
+      <button type="button" id="mkReport">Write a report I can send</button><div id="reportOut"></div>
+      <div class="step rp"><h4 style="margin-top:0">Report a problem on this trip</h4><p class="meta">Pick a stop and a problem. Only the category, the stop location and today's date are saved: no text, no name, no account.</p>
+      <label>Where <select id="rpPlace"></select></label><br><label>Problem <select id="rpCat"></select></label> <button type="button" id="rpGo">Add report</button><p id="rpMsg" class="meta" role="status"></p></div></section>`;
+  h += '<p class="meta after-run" hidden>Walks follow the City pedestrian network where possible; curbs, slopes and snow are not checked. Only fixed rules mark a limit. Not an official City or TTC assessment.</p>';
+  return h;
+}
+
+function render(d){
+  RUN++; PLAYED = new Set(); PG = 0;
+  let p0 = d.comparisons.map((c, i) => changesHTML(c, d, i)).join('');
+  if (!d.comparisons.length) p0 = '<section class="verdict"><h3 class="vt">No recorded decision changes this trip</h3><p class="v-say">Gait checked the decisions it has on file. The next pages show other City plans on your route and what people have reported along your trip.</p></section>';
+  $('out').innerHTML = `<ol class="ptabs" aria-label="Pages">${TABS.map((t, k) => `<li><button type="button" data-p="${k}"><span class="n">${k + 1}</span>${t}</button></li>`).join('')}</ol>
+    <div class="pg" id="pg0">${tripHTML(d)}</div><div class="pg" id="pg1" hidden>${p0}</div><div class="pg" id="pg2" hidden>${cityHTML(d)}</div><div class="pg" id="pg3" hidden>${peopleHTML(d)}</div>
+    <nav class="pnav" aria-label="Pages"><button type="button" class="ghost" id="pgBack">Back</button><span class="pcount" aria-hidden="true"></span><button type="button" id="pgNext">Next</button></nav>`;
+  $('out').querySelectorAll('.ptabs button').forEach(b => b.onclick = () => goPage(+b.dataset.p));
+  $('pgBack').onclick = () => goPage(PG - 1);
+  $('pgNext').onclick = () => { if (PG < 3) return goPage(PG + 1);           // last page: the button writes the report
+    $('pg3').querySelectorAll('.after-run').forEach(e => e.hidden = false); makeReport();
+    $('reportOut').scrollIntoView({behavior: CALM ? 'auto' : 'smooth', block: 'start'}); $('repText').focus({preventScroll: true}); };
+  $('askAgent').onclick = askAgent; $('mkReport').onclick = makeReport;
+  wireReport();
+  $('out').querySelectorAll('.toggle button').forEach(b => b.onclick = () => {
+    $('out').querySelectorAll('.toggle button').forEach(x => x.setAttribute('aria-pressed', x.dataset.v === b.dataset.v));
+    mapView(b.dataset.v);
+  });
+  goPage(0, true);
+}
+
+// which trip the map draws: 'before', 'after' or 'both'. The first page shows only the trip before the change.
+function mapView(v){
+  const past = !!(S.data && S.data.comparisons[0] && S.data.comparisons[0].phase === 'implemented');
+  for (const id of ['before-walk','before-ride']) map.setLayoutProperty(id, 'visibility', v === 'after' ? 'none' : 'visible');
+  for (const id of ['after-walk','after-ride','removed']) map.setLayoutProperty(id, 'visibility', v === 'before' ? 'none' : 'visible');
+  // numbered stops are today's ride; for a decision already in effect that is the "after" trip
+  for (const id of ['ridestops','ridestops-n']) map.setLayoutProperty(id, 'visibility', past && v === 'before' ? 'none' : 'visible');
+  for (const m of PINS) { const w = m.getElement().dataset.when; m.getElement().hidden = (w === 'after' && v === 'before') || (w === 'before' && v === 'after'); }
+}
+function goPage(n, first){
+  if (n < 0 || n > 3 || !$('pg0')) return;
+  const dir = n >= PG ? 'fwd' : 'back'; PG = n;
+  for (let k = 0; k < 4; k++) { const p = $('pg' + k); p.hidden = k !== n; p.classList.remove('in-fwd', 'in-back'); }
+  const p = $('pg' + n); void p.offsetWidth; if (!first) p.classList.add('in-' + dir);
+  $('out').querySelectorAll('.ptabs button').forEach(b => { const k = +b.dataset.p; b.toggleAttribute('aria-current', k === n); if (k === n) b.setAttribute('aria-current', 'step'); b.classList.toggle('seen', k < n); });
+  document.querySelector('#panel .rhead').textContent = PAGES[n];
+  const pressed = $('out').querySelector('.toggle button[aria-pressed="true"]');
+  mapView(n === 0 ? 'before' : pressed ? pressed.dataset.v : 'both');
+  $('pgBack').hidden = n === 0;
+  $('pgNext').textContent = n < 3 ? 'Next: ' + PAGES[n + 1] : 'Write a report I can send';
+  $('out').querySelector('.pcount').textContent = `${n + 1} of 4`;
+  $('panel').scrollTop = 0;
+  if (!first && KEYS.used) { const h = document.querySelector('#panel .rhead'); h.tabIndex = -1; h.focus({focusVisible: true}); }
+  if (!PLAYED.has(n)) { PLAYED.add(n); [playTrip, playChanges, playCity, playPeople][n](S.data, RUN); }
+}
+
+function countUp(el, from, to, ms, delay){
+  if (CALM || from === to) { el.textContent = to; return; }
+  el.textContent = from;
+  setTimeout(() => { const t0 = performance.now(); const f = t => { const k = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - k, 3);
+    el.textContent = Math.round(from + (to - from) * e); if (k < 1) requestAnimationFrame(f); }; requestAnimationFrame(f); }, delay);
+}
+function playChanges(d){
+  $('pg1').classList.add('play');
+  $('pg1').querySelectorAll('.v-fig .now b').forEach(el => countUp(el, +el.dataset.from, +el.dataset.to, 900, 450));
+}
+
+// one line of the checker's log: a turning ring while it works, a tick and the result when it is done
+function logLine(ol, label){
+  const li = document.createElement('li'); li.className = 'busy';
+  li.innerHTML = `<span class="tick" aria-hidden="true"></span><span class="t">${esc(label)}</span><span class="r"></span>`;
+  ol.append(li); li.scrollIntoView({block: 'nearest', behavior: CALM ? 'auto' : 'smooth'}); return li;
+}
+function logDone(li, result, bad){ li.className = bad ? 'miss' : 'ok'; li.querySelector('.r').textContent = result; }
+function citeHTML(q, link, cls, web){
+  const where = web ? `<a href="${esc(link)}">The TTC web page</a>` : q.page ? `<a href="${esc(link)}#page=${q.page}">Page ${q.page}</a> of the report` : `<a href="${esc(link)}">The source</a>`;
+  if (!q.found) return `<figure class="cite ${cls || ''}"><blockquote>“${esc(q.text)}”</blockquote><figcaption><span class="warn">Not found again on its page just now; shown as Gait saved it.</span> ${where}</figcaption></figure>`;
+  return `<figure class="cite ${cls || ''}"><blockquote><span class="ctx">${esc(q.before)}</span> <mark>${esc(q.text)}</mark> <span class="ctx">${esc(q.after)}</span></blockquote><figcaption>${where}</figcaption></figure>`;
+}
+// a City works listing that meets the trip: which part of the trip, the City's own description, exactly which blocks
+function workHTML(w, k){
+  const kind = w.project.charAt(0) + w.project.slice(1).toLowerCase();
+  const hits = w.touches.map(t => t.part === 'ride' ? `Your ${esc(t.label)} ride runs along it for about ${t.along_m} m.`
+    : t.part === 'stop' ? `${t.role === 'board' ? 'You get on at' : 'You get off at'} ${esc(t.label)}, on this section.`
+    : t.along_m ? `Your ${esc(t.label.charAt(0).toLowerCase() + t.label.slice(1))} follows it for about ${t.along_m} m.` : `Your ${esc(t.label.charAt(0).toLowerCase() + t.label.slice(1))} crosses it.`);
+  const blocks = w.blocks.map(b => `<li>${b.from && b.to ? `${esc(b.from)} to ${esc(b.to)}` : esc(w.street)} <span class="meta">${esc(b.timeline)}</span></li>`).join('');
+  return `<div class="wk pop" style="--i:${k}"><p class="wh"><b>${esc(w.street)}</b> <span class="meta">${esc(kind)} · ${esc(w.timelines.join(', '))}</span></p>
+    <ul class="hits">${hits.map(x => `<li>${x}</li>`).join('')}</ul>
+    <figure class="cite"><blockquote>“${esc(w.details)}”</blockquote><figcaption>The City's description${w.web ? ` · <a href="${esc(w.web)}">City page</a>` : ''}</figcaption></figure>
+    <p class="blk"><span class="meta">${w.blocks.length === 1 ? 'The section' : `The ${w.blocks.length} sections`}, as the City lists ${w.blocks.length === 1 ? 'it' : 'them'}:</span></p><ul class="blocks">${blocks}</ul>
+    <p><button type="button" class="ghost onmap" data-k="${k}">Show on the map</button> <span class="meta">${esc(w.program)}, City open data, updated ${esc(w.updated)}</span></p></div>`;
+}
+function showWork(w){
+  const c = w.geometry.coordinates.flat(); if (!c.length) return;
+  const b = c.reduce((b, [x, y]) => [Math.min(b[0], x), Math.min(b[1], y), Math.max(b[2], x), Math.max(b[3], y)], [180, 90, -180, -90]);
+  map.fitBounds([[b[0], b[1]], [b[2], b[3]]], {padding: {top: 80, bottom: 80, left: ($('panel').offsetWidth || 0) + 60, right: 60}, maxZoom: 17, duration: CALM ? 0 : 900});
+}
+async function playCity(d, run){
+  const live = () => run === RUN && $('pg2');
+  const realOne = d.comparisons.find(c => !c.simulated);
+  const checks = await Promise.all(d.comparisons.map(c => c.simulated ? null : fetch(`/api/source_check?change=${encodeURIComponent(c.id)}`).then(x => x.json()).then(x => x.change)));
+  let total = 0, found = 0;
+  for (const [i, c] of d.comparisons.entries()) {
+    if (!live()) return;
+    const ol = $('tr' + i), cites = $('ct' + i);
+    let li = logLine(ol, 'Finding the decision that touches your trip'); await wait(700); if (!live()) return;
+    if (c.simulated) { logDone(li, 'A simulation, not a real decision'); cites.innerHTML = `<p class="warn"><strong>Not a real decision.</strong> There is no City text to check.</p>`; continue; }
+    const r = checks[i];
+    logDone(li, r.item ? `Council item ${r.item}` : 'A TTC web page');
+    li = logLine(ol, r.kind === 'web' ? 'Opening the TTC page, saved by Gait' : 'Opening the City staff report'); await wait(650); if (!live()) return;
+    logDone(li, r.kind === 'web' ? 'Opened' : `${r.n_pages} pages`);
+    for (const q of r.quotes) {
+      total++;
+      li = logLine(ol, q.page ? (r.kind === 'web' ? 'Reading the page for the sentence Gait quotes' : `Reading page ${q.page}`) : 'Looking for the sentence'); await wait(800); if (!live()) return;
+      logDone(li, q.found ? 'Found, word for word' : 'Not found', !q.found); if (q.found) found++;
+      cites.insertAdjacentHTML('beforeend', citeHTML(q, c.source_url, '', r.kind === 'web'));
+      await wait(500);
+    }
+    $('pg2').querySelectorAll(`#tr${i} ~ .after-run`).forEach(e => e.hidden = false);
+  }
+  if (!live()) return;
+  const wl = d.works_on_trip || [], ol = $('trB');
+  let li = logLine(ol, 'Checking City road and sidewalk works along your route'); await wait(750); if (!live()) return;
+  logDone(li, wl.length ? `${wl.length} on your route` : 'None on your route');
+  for (const [k, w] of wl.slice(0, 6).entries()) {
+    li = logLine(ol, `Reading the City listing for ${w.street}`); await wait(650); if (!live()) return;
+    logDone(li, `${w.project.charAt(0) + w.project.slice(1).toLowerCase()}, ${w.timelines.join(', ')}`);
+    $('ctB').insertAdjacentHTML('beforeend', workHTML(w, k));
+    await wait(350);
+  }
+  $('ctB').querySelectorAll('.wk .onmap').forEach(b => b.onclick = () => showWork(wl[+b.dataset.k]));
+  $('pg2').querySelectorAll('.after-run').forEach(e => e.hidden = false);
+  const aha = $('pg2').querySelector('.aha');
+  aha.textContent = total ? (found === total ? `All ${total} sentence${total > 1 ? 's' : ''} found again on ${total > 1 ? 'their pages' : 'its page'}, just now.` : `${found} of ${total} sentences found again on their pages just now.`) : (realOne ? '' : 'No City text to check on this page.');
+  aha.hidden = !aha.textContent;
+}
+
+// every report along the trip as one point each, with where it is and a small button that shows it on the map;
+// snow and ice come last, after a short winter note (said in full once)
+let ITEMS = [], WINTER_TOLD = false;
+const PIN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6.2-6.5-11a6.5 6.5 0 0 1 13 0c0 4.8-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.4" fill="currentColor"/></svg>';
+function placeWords(p){
+  const t = p.replace(/\s*\(\w+\)\s*$/, '');
+  let m;
+  if ((m = t.match(/^Boarding stop: (.*)$/))) return `at your boarding stop, ${m[1]}`;
+  if ((m = t.match(/^Exit stop: (.*)$/))) return `at your exit stop, ${m[1]}`;
+  if ((m = t.match(/^Walk to (.*)$/))) return `on your walk to ${m[1]}`;
+  return t;
+}
+function issuesHTML(j){
+  const all = j.groups.flatMap(g => [...g.s311.map(x => ({...x, src: x.winter ? 'Winter' : '311', where: placeWords(g.place), pts: x.pts || [[x.lon, x.lat]],
+      text: `${x.label}: ${x.count} request${x.count > 1 ? 's' : ''}, latest ${x.latest}${x.open ? `, ${x.open} still open` : ''}`})),
+    ...g.riders.map(x => ({src: 'Rider', careful: false, winter: false, where: placeWords(g.place), pts: [[x.lon, x.lat]], text: `${x.label} (${x.day})`}))]);
+  const li = (x, k) => { const n = ITEMS.push(x) - 1;
+    return `<li class="pop" style="--i:${k}"><span class="sev ${x.careful ? 'watch' : 'info'}">${x.src}</span><span class="itx">${esc(x.text)} <span class="meta">${esc(x.where)}</span></span>` +
+      `<button type="button" class="pinbtn ghost" data-n="${n}" aria-label="Show on the map: ${esc(x.text)}, ${esc(x.where)}" title="Show on the map">${PIN}</button></li>`; };
+  const now = all.filter(x => !x.winter), cold = all.filter(x => x.winter);
+  const head = j.whole ? 'Issues reported along your route' : j.past ? 'Issues reported along your new route' : 'Issues reported on the new part of your route';
+  let h = `<h4 class="sub">${head}</h4>`;
+  if (now.length) h += '<ul class="issues">' + now.map(li).join('') + '</ul>';
+  if (cold.length) {
+    const rw = RIDER_WORDS[$('rider').value];
+    h += `<p class="wnote">${WINTER_TOLD ? 'In winter, people also reported:' : `In winter, snow and ice on sidewalks, curb ramps and at stops can make a trip much harder${rw ? ` if you ${rw}` : ''}. People reported:`}</p>`;
+    WINTER_TOLD = true;
+    h += '<ul class="issues">' + cold.map((x, k) => li(x, now.length + k)).join('') + '</ul>';
+  }
+  return h;
+}
+// fly to some points and ring them, so the rider sees exactly where a report or a finding is
+function focusOn(pts, label){
+  if (!pts.length) return;
+  if (!map.getSource('focus')) {
+    map.addSource('focus', {type: 'geojson', data: EMPTY});
+    map.addLayer({id: 'focus-ring', type: 'circle', source: 'focus', paint: {'circle-radius': ['interpolate', ['linear'], ['zoom'], 12, 9, 17, 18],
+      'circle-color': 'rgba(181,80,27,.18)', 'circle-stroke-color': '#b5501b', 'circle-stroke-width': 3}});
+  }
+  map.getSource('focus').setData({type: 'FeatureCollection', features: pts.map(c => ({type: 'Feature', geometry: {type: 'Point', coordinates: c}, properties: {}}))});
+  const b = pts.reduce((b, [x, y]) => [Math.min(b[0], x), Math.min(b[1], y), Math.max(b[2], x), Math.max(b[3], y)], [180, 90, -180, -90]);
+  map.fitBounds([[b[0], b[1]], [b[2], b[3]]], {padding: {top: 90, bottom: 90, left: ($('panel').offsetWidth || 0) + 70, right: 70}, maxZoom: 17, duration: CALM ? 0 : 900});
+}
+async function playPeople(d, run){
+  const live = () => run === RUN && $('pg3');
+  const jobs = d.comparisons.length ? d.comparisons.map((c, i) => {
+      const past = c.phase === 'implemented', ce = c.changed_evidence || {groups: [], trace: []};
+      const trace = ce.trace, groups = ce.groups;           // only the stops and walks that are new, never the old route
+      return {ol: $('pt' + i), out: $('pc' + i), trace, groups, past};
+    }) : [{ol: $('ptT'), out: $('pcT'), trace: d.evidence.trace.filter(t => !/^Staff reports/.test(t)), groups: d.evidence.groups, past: true, whole: true}];
+  ITEMS = []; WINTER_TOLD = false;
+  for (const j of jobs) {
+    if (!j.trace.length) { const li = logLine(j.ol, 'Looking for parts of your trip this change adds'); await wait(600); if (!live()) return; logDone(li, 'None: your stops and walks stay where they are'); }
+    for (const t of j.trace) {
+      const m = t.match(/^(.*?): searched 311 requests within (\d+) m \((\d+) found\) and rider reports \((\d+) found\)/);
+      const li = logLine(j.ol, m ? m[1].replace(/ \(\w+\)$/, '') : t); await wait(550); if (!live()) return;
+      logDone(li, m ? `${m[3]} City 311 request${m[3] === '1' ? '' : 's'} within ${m[2]} m, ${m[4]} rider report${m[4] === '1' ? '' : 's'}` : '');
+    }
+    await wait(250); if (!live()) return;
+    j.out.innerHTML = j.groups.length ? issuesHTML(j)
+      : `<p class="pop">${j.whole ? 'No 311 requests or rider reports were found near your stops or walks.' : 'Nothing reported on the new part of your route.'}</p>`;
+    j.out.querySelectorAll('.pinbtn').forEach(b => b.onclick = () => { const it = ITEMS[+b.dataset.n]; focusOn(it.pts, it.text); });
+    $('pg3').classList.add('play');
+  }
+  $('pg3').querySelectorAll('.after-run').forEach(e => e.hidden = false);
+}
+
+function evidenceHTML(ev){
+  let h = '<section class="compare"><h3>On the ground: reports along your trip</h3>' +
+    '<p class="meta">Teal dots are 311 requests residents made to the City (open data, placed at the nearest intersection). Brown dots are rider reports. These show what people reported, not what is there today.</p>';
+  if (!ev.groups.length) h += '<p>No 311 requests or rider reports were found near your stops or walks.</p>';
+  for (const g of ev.groups) {
+    h += `<h4>${esc(g.place)}</h4><ul class="findings">`;
+    for (const x of g.s311) h += `<li><span class="sev ${x.careful?'watch':'info'}">311</span> ${esc(x.label)}: ${x.count} request${x.count>1?'s':''}, latest ${esc(x.latest)}${x.open?`, ${x.open} still open`:''} <span class="meta">(${esc(x.at.join('; '))})</span></li>`;
+    for (const x of g.riders) h += `<li><span class="sev watch">Rider report</span> ${esc(x.label)} <span class="meta">(${esc(x.day)})</span></li>`;
+    h += '</ul>';
+  }
+  if (ev.leads.length) {
+    h += '<details><summary>Leads from staff reports, not yet checked (' + ev.leads.length + ')</summary><p class="meta">Sentences the free search found in City staff reports about your route. A person has not reviewed them; only reviewed decisions change the before and after.</p><ul class="findings">' +
+      ev.leads.map(f => `<li><span class="sev info">${esc(f.change_type.replace(/_/g,' '))}</span>${f.at_your_stops.length?' <strong>names your stop\'s street</strong>':''}<blockquote class="official small">${esc(f.quote)}</blockquote><span class="meta">Item ${esc(f.item_id)} · <a href="${esc(f.document_url)}#page=${f.page}">page ${f.page}</a></span></li>`).join('') + '</ul></details>';
+  }
+  h += '<details><summary>How this was searched</summary><ol class="meta">' + ev.trace.map(t => `<li>${esc(t)}</li>`).join('') + '</ol></details>';
+  return h + '</section>';
+}
+async function wireReport(){
+  if (!$('rpGo')) return;
+  const cats = await fetch('/api/report_categories').then(x => x.json());
+  if (!$('rpCat') || !S.stops) return;              // Start over was pressed while this was loading
+  $('rpCat').innerHTML = Object.entries(cats).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('');
+  const ids = S.stops.features.map(f => f.properties.id);
+  const places = [S.board, S.alight].map(id => S.stops.features[ids.indexOf(id)]);
+  $('rpPlace').innerHTML = places.map((f, i) => `<option value="${i}">${i ? 'Exit' : 'Boarding'} stop: ${esc(f.properties.name)}</option>`).join('');
+  $('rpGo').onclick = async () => {
+    const f = places[+$('rpPlace').value], [lon, lat] = f.geometry.coordinates;
+    const r = await fetch('/api/report', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({cat: $('rpCat').value, lat, lon, stop_id: f.properties.id})});
+    const d = await r.json();
+    $('rpMsg').textContent = r.ok ? `Saved: ${d.label} (${d.day}). Show the trip again to see it.` : d.error;
+  };
+}
+
+let AGENT = null;
+async function askAgent(){
+  $('askAgent').disabled = true; $('agentOut').innerHTML = '<p>Searching City reports that mention your route, then asking Claude to read them… (about 10 seconds)</p>';
+  const body = {a: S.a, b: S.b, rider: $('rider').value, rides: [{route: S.ride.route, variant: S.ride.variant, board: S.board, alight: S.alight}]};
+  const r = await fetch('/api/research_trip', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(body)});
+  const d = await r.json(); $('askAgent').disabled = false;
+  if (!r.ok) { $('agentOut').innerHTML = `<p class="err">${esc(d.error)}</p>`; return; }
+  AGENT = d;
+  let h = '<div class="ai"><p><strong>AI-written, checked against the source.</strong> ' + (d.cached ? '(saved result)' : '') + '</p>';
+  h += d.kept.length ? '<ul class="findings">' + d.kept.map((f, k) => { const w = whereNamed(f);
+      return `<li><strong>${esc(f.summary)}</strong><br>${esc(f.why_it_matters)}<blockquote class="official small">${esc(f.quote)}</blockquote><span class="meta">Item ${esc(f.item_id)} · <a href="${esc(f.document_url)}#page=${f.page}">page ${f.page}</a></span>` +
+        (w ? `<p class="grpmap"><button type="button" class="ghost agmap" data-k="${k}">${esc(w.label)}</button></p>` : '') + '</li>'; }).join('') + '</ul>'
+    : '<p>The agent found nothing in the indexed reports that it could tie to this trip.</p>';
+  h += '<details><summary>How the agent worked</summary><ol class="meta">' + d.trace.map(t => `<li>${esc(t)}</li>`).join('') + '</ol>' +
+    (d.dropped.length ? '<p class="meta">Dropped by the checker:</p><ul class="meta">' + d.dropped.map(f => `<li>${esc(f.summary)} (${esc(f.reason)})</li>`).join('') + '</ul>' : '') + '</details></div>';
+  $('agentOut').innerHTML = h;
+  $('agentOut').querySelectorAll('.agmap').forEach(b => b.onclick = () => { const w = whereNamed(d.kept[+b.dataset.k]); if (w) focusOn(w.pts, w.label); });
+}
+// where a finding is on the map: the stops on this route whose cross street the passage names; failing that, your ride
+// if it names the route's own street. Nothing is placed when the passage names neither.
+const plainSt = t => t.replace(/\s*-.*$/, '').replace(/\(.*?\)/g, '').replace(/\b(North|South|East|West)\s+Side\b/g, '').trim();
+const core = t => { let x = plainSt(t), y; do { y = x; x = x.replace(/\s+(St|Ave|Rd|Blvd|Dr|Cres|Pl|Crt|Gdns|Pkwy|Sq|Lane|Way|West|East|North|South|W|E)\.?$/, '').trim(); } while (x !== y); return x; };
+function whereNamed(f){
+  if (!S.stops) return null;
+  const text = `${f.quote} ${f.summary}`.toLowerCase(), feats = S.stops.features;
+  const hits = feats.filter(x => { const c = core((x.properties.name.split(' at ')[1] || '')); return c.length >= 4 && text.includes(c.toLowerCase()); });
+  if (hits.length) {
+    const names = [...new Set(hits.map(x => plainSt(x.properties.name.split(' at ')[1])))];
+    return {pts: hits.map(x => x.geometry.coordinates), label: `Show ${names.slice(0, 2).join(' and ')}${names.length > 2 ? ' and more' : ''} on the map`};
+  }
+  const ids = feats.map(x => x.properties.id), i = ids.indexOf(S.board), j = ids.indexOf(S.alight);
+  const seg = i >= 0 && j > i ? feats.slice(i, j + 1) : feats;
+  const count = {};                                  // the street most of your ride's stops are on
+  seg.forEach(x => { const m = plainSt(x.properties.name.split(' at ')[0]); count[m] = (count[m] || 0) + 1; });
+  const street = Object.keys(count).sort((a, b) => count[b] - count[a])[0] || '', main = core(street);
+  if (main.length >= 4 && text.includes(main.toLowerCase()))
+    return {pts: seg.map(x => x.geometry.coordinates), label: `Show your ride on ${street}`};
+  return null;
+}
+
+// the report as a short plain letter in the rider's own voice; every fact comes from the checks above, word for word,
+// and the sources go at the bottom so the letter reads first
+const ME = {senior_walker: 'I use a cane or walker.', wheelchair: 'I use a wheelchair.',
+            shift_worker: 'I work shifts, so I often travel late at night or early in the morning.'};
+// the screen speaks to the rider ("you walk", "your stop"); the letter speaks as the rider ("I walk", "my stop")
+const firstPerson = t => t.replace(/ we use as a comfortable limit for /g, ' Gait uses as a comfortable limit for ')
+  .replace(/ Raised platforms can make boarding more level; check how the crossing is marked\./, '').replace(/ \((simulated new location|removed stop; location reconstructed)\)/g, '')
+  .replace(/\bYou\b/g, 'I').replace(/\byou\b/g, 'I').replace(/\bYour\b/g, 'My').replace(/\byour\b/g, 'my');
+const longDate = t => { const d = new Date(t + 'T12:00:00'); return isNaN(d) ? t : d.toLocaleDateString('en-CA', {year: 'numeric', month: 'long', day: 'numeric'}); };
+function reportLines(groups){
+  const L = [];
+  for (const g of groups) {
+    const where = placeWords(g.place);
+    g.s311.forEach(x => L.push(`- ${x.label}: ${x.count} ${x.count > 1 ? 'requests' : 'request'} to 311, most recently ${longDate(x.latest)}${x.open ? ` (${x.open} still open)` : ''}, ${firstPerson(where)}.`));
+    g.riders.forEach(x => L.push(`- A rider reported: ${x.label.charAt(0).toLowerCase() + x.label.slice(1)} (${longDate(x.day)}), ${firstPerson(where)}.`));
+  }
+  return L;
+}
+function reportText(d){
+  const L = [], st = S.stops.features, ids = st.map(f => f.properties.id), nm = id => st[ids.indexOf(id)].properties.name.split(' (')[0];
+  const dir = (S.ride.headsign.split(' - ')[0] || '').toLowerCase(), to = (S.ride.headsign.match(/towards (.+)$/) || [])[1];
+  const c = d.comparisons[0];
+  L.push('Hello,', '');
+  L.push(c ? `I am writing about a City decision that affects my regular trip: ${ttl(c).replace(/\.$/, '')}.` : 'I am writing about my regular transit trip.');
+  if (c && c.simulated) L.push('(Note: this is a simulated change used to show how Gait works. It is not a real decision.)');
+  L.push('', 'MY TRIP', `${ME[$('rider').value] || ''} I take the ${S.ride.route} ${S.ride.name}${dir ? ' ' + dir : ''}${to ? ' towards ' + to : ''}, getting on at ${nm(S.board)} and getting off at ${nm(S.alight)}.`.trim());
+  for (const c of d.comparisons) {
+    const told = f => c.headline && /^walk_(over|near)_limit$/.test(f.code || '') && f.leg === c.headline.leg;
+    const said = [c.headline && c.headline.say, ...c.new_issues.filter(f => !told(f)).map(f => f.say || f.text)].filter(Boolean);
+    const better = (c.improvements || []).filter(f => !told(f)).map(f => f.say || f.text);
+    L.push('', d.comparisons.length > 1 ? `WHAT CHANGES: ${ttl(c).toUpperCase()}` : 'WHAT CHANGES FOR ME');
+    if (said.length) said.forEach(t => L.push(`- ${firstPerson(t)}`)); else L.push('- My stops and walks stay the same.');
+    if (better.length) { L.push('', 'What gets better:'); better.forEach(t => L.push(`- ${firstPerson(t)}`)); }
+    const rep = reportLines((c.changed_evidence || {}).groups || []);
+    if (rep.length) { L.push('', c.phase === 'implemented' ? 'WHAT PEOPLE HAVE REPORTED AT MY NEW STOP AND WALK' : 'WHAT PEOPLE HAVE REPORTED WHERE I WOULD NOW WAIT AND WALK'); L.push(...rep); }
+  }
+  if (!d.comparisons.length) { const rep = reportLines(d.evidence.groups); if (rep.length) { L.push('', 'WHAT PEOPLE HAVE REPORTED ALONG MY TRIP'); L.push(...rep); } }
+  if (AGENT && AGENT.kept.length) { L.push('', 'RELATED CITY REPORTS'); AGENT.kept.forEach(f => L.push(`- ${f.summary} (item ${f.item_id}, page ${f.page})`)); }
+  L.push('', 'WHAT I AM ASKING', '[In your own words: how this affects you, and what you would like the City or TTC to do.]', '', 'Thank you,', '[Your name]');
+  L.push('', '---', `About these facts: prepared with Gait on ${longDate(new Date().toISOString().slice(0, 10))}. Facts are copied from public records or worked out by fixed rules. This is not an official City or TTC assessment. 311 requests show what people reported, not what is there today.`);
+  for (const c of d.comparisons) if (!c.simulated) {
+    L.push('', `Decision: ${ttl(c)}`, `Status: ${c.status}. ${c.status_note}`);
+    c.quotes.forEach(q => L.push(`The source says: "${q}"`));
+    L.push(`Source: ${c.source_url}`); if (c.item_url) L.push(`Council item: ${c.item_url}`);
+  }
+  if (AGENT && AGENT.kept.length) AGENT.kept.forEach(f => L.push(`Report passage: "${f.quote}" (${f.document_url}, page ${f.page})`));
+  if (d.wards.start) L.push(`My ward: ${d.wards.start}`);
+  return L.join('\n');
+}
+
+function makeReport(){
+  const d = S.data, txt = reportText(d), subj = `Trip impact: route ${S.ride.route}` + (d.comparisons[0] ? ` and ${d.comparisons[0].title}` : '');
+  const where = [];
+  for (const c of d.comparisons) if (c.item_url && !c.simulated)
+    where.push(`<li><strong>Council or committee:</strong> <a href="${esc(c.item_url)}">the item page</a>. If it is still upcoming, the page shows "Submit Comments" or "Request to Speak". Check the page for current options; this tool does not know deadlines.</li>`);
+  where.push(`<li><strong>Your councillor${d.wards.start ? ` (ward: ${esc(d.wards.start)})` : ''}:</strong> <a href="https://www.toronto.ca/city-government/council/members-of-council/">find your councillor</a> on the City site.</li>`);
+  if (d.evidence.groups.some(g => g.s311.length || g.riders.length))
+    where.push('<li><strong>Snow, ice, a broken sidewalk or curb:</strong> <a href="https://www.toronto.ca/home/311-toronto-at-your-service/">311 Toronto</a> (online, or call 311). Give the intersection listed above.</li>');
+  where.push('<li><strong>A stop, shelter or service problem:</strong> <a href="https://www.ttc.ca/customer-service">TTC Customer Service</a>.</li>');
+  $('reportOut').innerHTML = `<div id="report"><p class="meta">Read and edit before sending. Nothing is sent by this tool.</p>
+    <label for="repText">Your report</label><textarea id="repText" rows="20" style="width:100%;font:16px/1.55 'Atkinson Hyperlegible',sans-serif;padding:14px 16px;border:2px solid var(--ink);border-radius:12px;background:#fffaf0;color:var(--ink)">${esc(txt)}</textarea>
+    <p><button type="button" id="repCopy">Copy text</button> <button type="button" id="repMail">Open in email</button> <button type="button" id="repPrint">Print or save as PDF</button> <span id="repMsg" class="meta" role="status"></span></p>
+    <h4>Where you could send it</h4><ul>${where.join('')}</ul></div>`;
+  $('repCopy').onclick = async () => { try { await navigator.clipboard.writeText($('repText').value); $('repMsg').textContent = 'Copied.'; } catch { $('repText').select(); $('repMsg').textContent = 'Select all and copy.'; } };
+  $('repMail').onclick = () => { location.href = `mailto:?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent($('repText').value)}`; };
+  $('repPrint').onclick = () => { const w = window.open('', '_blank'); w.document.write(`<!doctype html><title>${esc(subj)}</title><pre style="white-space:pre-wrap;font:12pt/1.45 Georgia,serif;max-width:46rem;margin:2rem auto">${esc($('repText').value)}</pre>`); w.document.close(); w.print(); };
+}
+
+const SAMPLES = {   // each example shows only its own decision (`change`), so simulations never attach to a real example
+  cosburn:  {a: [43.68905, -79.3502], b: [43.6795, -79.3450], route: '72', variant: 1, board: '15149', alight: '15150', rider: 'senior_walker', change: 'ontario-line-cosburn-construction'},
+  bathurst: {a: [43.68897, -79.42036], b: [43.66554, -79.41166], route: '7', variant: 1, board: '107', alight: '14617', rider: 'senior_walker', change: 'rapidto-7-bathurst-stops'},
+  dufferin: {a: [43.65812, -79.43615], b: [43.64236, -79.42874], route: '29', variant: 2, board: '9341', alight: '15030', rider: 'senior_walker', change: 'rapidto-29-dufferin-stops'},
+  harbord:  {a: [43.66108, -79.4182], b: [43.66497, -79.38606], route: '94', variant: 1, board: '16829', alight: '8625', rider: 'senior_walker', change: 'past-94-harbord-bikeway-stops'},
+  frontst:  {a: [43.64661, -79.37812], b: [43.64429, -79.36849], route: '114', variant: 0, board: '16754', alight: '15320', rider: 'senior_walker', band: 'late', change: 'front-st-layby-shelter'},
+  queen:    {a: [43.64083, -79.43392], b: [43.65317, -79.39409], route: '501', variant: 1, board: '6835', alight: '6829', rider: 'senior_walker', change: 'sim-queen-shelters'},
+  dundas:   {a: [43.65004, -79.41348], b: [43.65482, -79.38731], route: '505', variant: 0, board: '10181', alight: '2153', rider: 'senior_walker', change: 'sim-505-relocate-grace'},
+  spadina:  {a: [43.6727, -79.40672], b: [43.66554, -79.41166], route: '127', variant: 0, board: '8117', alight: '14777', rider: 'senior_walker', change: 'sim-127-temporary-closure'},
+  late:     {a: [43.68897, -79.42036], b: [43.66554, -79.41166], route: '7', variant: 1, board: '107', alight: '14617', rider: 'shift_worker', band: 'late', change: 'sim-7-late-cut'},
+};
+// An example fills in "Check your own trip" step by step, as a rider would, then presses "Show my trip".
+// Its points stay fixed (no ×, map clicks ignored) until Start over.
+async function loadSample(key){
+  clearTrip();
+  const s = SAMPLES[key], name = document.querySelector(`.ex[data-s="${key}"] b`)?.textContent || 'an example', run = ++FILL;
+  const live = () => run === FILL;
+  lockTo('secOwn'); $('ownHint').textContent = `Filled in from the example “${name}”. Press Start over to set up your own.`;
+  S.only = s.change;
+  S.a = s.a; S.mA = pin('a', 'Start', [s.a[1], s.a[0]]); showPoints(); step(2);
+  await wait(380); if (!live()) return;
+  S.b = s.b; S.mB = pin('b', 'Destination', [s.b[1], s.b[0]]); showPoints(); step(3);
+  const r = await findRoutes(); if (!live()) return;
+  const i = r.findIndex(x => x.route === s.route && (s.variant === undefined ? x.headsign.includes(s.match) : x.variant === s.variant));
+  await wait(450); if (!live()) return;
+  await pickRoute(r[i], $('routes').querySelector(`button[data-i="${i}"]`)); if (!live()) return;
+  S.only = s.change;
+  await wait(380); if (!live()) return;
+  S.board = s.board; S.alight = s.alight; $('s4t').textContent = 'Stops set by the example.'; step(5);
+  $('rider').value = s.rider; $('band').value = s.band || 'day'; $('go').disabled = false;
+  await wait(450); if (!live()) return;
+  $('go').classList.add('pressing'); await wait(220); $('go').classList.remove('pressing'); if (!live()) return;
+  await $('go').onclick();
+}
+let FILL = 0;
+// three views: your own trip first; two buttons under it open the real examples or the simulations, each with a Back button.
+// Choosing in a view locks the way out of it (the example buttons, or Back) until Start over.
+const SECS = ['secReal', 'secOwn', 'secSim', 'secRes'];
+let secLocked = false, lockedTo = null;
+function showView(id){ for (const o of SECS) { $(o).hidden = o !== id; $(o + 'B').hidden = o !== id; }
+  const res = id === 'secRes'; $('panel').classList.toggle('res', res); $('panel').classList.toggle('own', id === 'secOwn');
+  const key = document.querySelector('.legend');                      // the map key sits under the results header, or above Start over
+  if (res) $('out').before(key); else document.querySelector('#panel .foot').before(key);
+  $('panel').scrollTop = 0; }
+function refreshLocks(){
+  const own = secLocked && lockedTo === 'secOwn', ex = secLocked && lockedTo !== 'secOwn';
+  document.querySelectorAll('.altb').forEach(b => b.disabled = own); $('altLock').hidden = !own;
+  document.querySelectorAll('.back:not(.rback)').forEach(b => b.disabled = ex); document.querySelectorAll('.backlock').forEach(p => p.hidden = !ex);
+}
+function lockTo(id){ secLocked = true; lockedTo = id; showView(id); refreshLocks(); }
+function unlockAll(){ secLocked = false; lockedTo = null; document.querySelectorAll('.ex').forEach(b => b.setAttribute('aria-pressed', 'false')); showView('secOwn'); refreshLocks(); }
+document.querySelectorAll('.altb').forEach(b => b.onclick = () => { showView(b.dataset.go); $(b.dataset.go).querySelector('.back').focus({focusVisible: KEYS.used}); });
+document.querySelectorAll('.back:not(.rback)').forEach(b => b.onclick = () => { showView('secOwn'); document.querySelector(`.altb[data-go="${b.closest('.sec').id}"]`).focus({focusVisible: KEYS.used}); });
+showView('secOwn');
+$('resBack').onclick = () => { showView('secOwn'); $('go').focus({focusVisible: KEYS.used}); };
+document.querySelectorAll('.ex').forEach(b => { b.setAttribute('aria-pressed', 'false'); b.onclick = () => {
+  document.querySelectorAll('.ex').forEach(x => x.setAttribute('aria-pressed', x === b));
+  loadSample(b.dataset.s); }; });
+const QS = new URLSearchParams(location.search).get('sample');
+if (QS && SAMPLES[QS]) { const b = document.querySelector(`.ex[data-s="${QS}"]`); if (b) b.setAttribute('aria-pressed', 'true');
+  if (map.loaded()) loadSample(QS); else map.once('load', () => loadSample(QS)); }
+
+function clearTrip(){
+  S.mA && S.mA.remove(); S.mB && S.mB.remove();
+  Object.assign(S, {a:null, b:null, ride:null, stops:null, board:null, alight:null, data:null, only:null, simShown:[]}); S.areaFilter && S.areaFilter();
+  for (const id of ['routeline','stops','furn','before','after','removed','decisions','works','ridestops','evidence']) src(id, EMPTY);
+  clearRidePins(); mapView('both');
+  $('routes').innerHTML = ''; $('out').innerHTML = ''; $('s1t').textContent = 'Not set'; $('s2t').textContent = 'Not set';
+  $('s4t').textContent = 'The red dots are the stops on your route.'; $('go').disabled = true; step(1);
+}
+$('reset').onclick = $('reset2').onclick = () => { FILL++; clearTrip(); unlockAll(); $('ownHint').textContent = 'Click your start and destination on the map'; };
+</script>
+</body>
+</html>

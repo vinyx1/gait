@@ -13,8 +13,8 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from triplens.parse_report import parse_report, report_to_dict  # noqa: E402
-from triplens.verify import quote_in_source  # noqa: E402
+from gait.parse_report import parse_report, report_to_dict  # noqa: E402
+from gait.verify import quote_in_source  # noqa: E402
 
 OUT = ROOT / "data/reports"
 MAX_BYTES = 12_000_000

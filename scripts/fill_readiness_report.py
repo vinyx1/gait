@@ -21,27 +21,27 @@ TEMPLATE = ROOT / "docs/_template.docx"
 URL = "https://fciprojects.ca/hackathons/2026-civic-hack/images/CIVIC-Hack_submission-template.docx"
 
 BOXES = {  # tag -> (limit in words or None, text; {name} is replaced by the project name)
-    "problem": (60, "Residents struggle to follow council decisions: reports run hundreds of pages, agendas change, and comment windows are easy to miss. "
-                    "We focused on three gaps: what is only recommended versus actually decided, whether residents can still comment, and how one decision "
-                    "affects people differently, such as wheelchair users, seniors using walkers, and shift workers."),
-    "solution": (60, "{name} explains Toronto council items in plain language: status, recommended versus decided wording, and open comment buttons, with AI rewrites "
-                     "software-checked against exact quotes. Residents also enter the bus or streetcar route they take and see decisions, works and stop access along it "
-                     "for a wheelchair user, senior or shift worker. Nothing is stored."),
-    "what_changes": (30, "Residents dig through PDFs and miss deadlines. {name} shows recommended versus decided text with exact quotes, and who is affected "
-                         "differently, before a vote. It suits similar agenda systems."),
-    "piloted": (40, "Ready: item explanations, quote checking, route check on TTC data. Mocked: live item loading (City site blocks scripts; needs a Clerk feed), "
-                    "real sidewalk paths, before/after comparisons, translation. Next: testing with accessibility groups, more items located, multilingual output."),
-    "scaling": (None, "Each city needs an agenda export or feed, a GTFS transit feed (a national standard), open address data, and its own participation rules, "
-                      "since notice rules differ by province. Replace the illustrative rider limits with advice from local accessibility groups. "
-                      "Pilot with one clerk's office first."),
+    "problem": (60, "Residents learn what a council decision means for them only after it happens: a stop disappears, a shelter goes, the walk gets longer. "
+                    "Reports run hundreds of pages and describe an average rider. We focused on how one decision lands differently on wheelchair users, "
+                    "seniors using walkers and shift workers, and on separating what staff recommended from what Council decided."),
+    "solution": (60, "{name} shows what Toronto council decisions did, or would do, to a resident's own trip. They pick a start, destination, route, stops and rider. "
+                     "{name} compares the walk and stops before and after each decision, shows the City's exact quotes with page numbers, adds 311 reports, "
+                     "and helps them write to their councillor, 311 or the TTC."),
+    "what_changes": (30, "Today residents dig through PDFs written for an average rider. {name} turns a decision into before-and-after facts for their own trip "
+                         "and needs, each checked against the source."),
+    "piloted": (40, "Ready: before-and-after for five real Council decisions, walks on the City sidewalk network, quote checking, 311 reports, plain-language "
+                    "item pages. Mocked: five labelled simulated changes; live item loading needs a Clerk feed. Next: accessibility-group testing, translation."),
+    "scaling": (None, "Each city needs an agenda feed from its clerk, a GTFS transit feed (a national standard), open address and sidewalk data, and its own "
+                      "participation rules, since notice rules differ by province. Change effects are entered from reports with exact quotes. Replace the "
+                      "illustrative rider limits with advice from local accessibility groups. Pilot with one clerk's office first."),
 }
 
 # Data sources and tools: the template provides a Dataset / Source table with four rows and a 60-word limit.
 TABLE = [
-    ("TTC schedules (GTFS); shelters; benches", "City of Toronto Open Data"),
-    ("Road and sidewalk works; address points", "City of Toronto Open Data"),
-    ("Council items, staff reports, winter maintenance report", "City Clerk meeting system, legdocs (public)"),
-    ("Claude (opus 5.5) rewrites, audit agents; Claude Code wrote code. Assumes walking = straight line x 1.3", "Anthropic; outputs software-checked, see repo docs"),
+    ("TTC schedules (GTFS); shelters; benches; 311 requests", "City of Toronto Open Data"),
+    ("Pedestrian network; address points; road and sidewalk works", "City of Toronto Open Data"),
+    ("Council items, staff reports", "City Clerk meeting system, legdocs (public)"),
+    ("Claude (Opus 5.5) rewrites and agents; Claude Code helped code. Rider walking limits are illustrative", "Anthropic; outputs checked against quotes"),
 ]
 TABLE_LIMIT = 60
 
@@ -88,7 +88,7 @@ def fill_table(xml: str, rows: list[tuple[str, str]]) -> str:
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--name", default="TripLens")
+    ap.add_argument("--name", default="Gait")
     ap.add_argument("--team", default="")
     ap.add_argument("--email", default="")
     ap.add_argument("--member", action="append", default=[], help="Name|School|Program")

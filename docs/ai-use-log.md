@@ -1,4 +1,4 @@
-# How AI was used in TripLens, and how it was checked
+# How AI was used in Gait, and how it was checked
 
 This project was built during CIVIC Hack 2026 (after the 7 pm hacking start on Nov 12, 2026) with AI assistance. This log is for the judges and for the team's own review.
 

@@ -1,10 +1,10 @@
-# TripLens: requirements, architecture and design rationale
+# Gait: requirements, architecture and design rationale
 
 ## 1. Requirements (traced to the challenge brief)
 
 | ID | Requirement | Source in brief | Where it is met |
 |---|---|---|---|
-| R1 | Show what is proposed and why, in plain language | "What success looks like" | `triplens/rewrite.py`, item page "In plain language" |
+| R1 | Show what is proposed and why, in plain language | "What success looks like" | `gait/rewrite.py`, item page "In plain language" |
 | R2 | Distinguish staff recommendation, committee decision and final Council decision | Constraints | `parse_item.py` stages, item page "Recommended and decided" |
 | R3 | Show who and where an item affects | Success criteria | wards from the item page; `access.py` rider view per location |
 | R4 | Show key dates and how to have a say, verified on the official item page, never inferred from a meeting date | Constraints | `app.open_window_note`, buttons read from the live page |
@@ -99,3 +99,14 @@ sequenceDiagram
 - Rider walking limits are illustrative and must be replaced with advice from local accessibility groups.
 - No before/after of a proposed network: schedule data for proposals is not published, and Transitland's archive needs a paid or credit-based key.
 - Translation and user testing with accessibility groups are not done.
+
+
+## Map overlays (added Nov 13)
+
+- **Where decisions land** (`app.decision_area`, `GET /api/decision_areas`): built from each change file's effects. Removed, closed or moved stops come from the GTFS stop list (or, for past decisions, the reconstructed stop, skipped where a stop still serves that direction); closed sidewalks come from the pedestrian network edges the closure blocks; `map_line` effects are display-only road closures typed from the report. Places within 450 m share one bubble (convex hull of 70 m circles).
+- **New buildings approved** (no longer shown on the map; kept for `/api/developments` and `source_check?bld=`; `scripts/build_developments.py`, `GET /api/developments`, `buildings` in `/api/trip`): from reports in the FTS index that recommend a rezoning "to permit a N-storey" building and whose item status says adopted. The address must match a City address point exactly; meeting-place addresses (City Hall, Metro Hall, civic centres) are skipped. Quotes are whole sentences copied from the page and re-checked; `tests/test_reports.py` verifies them against the index. Gait computes nothing from a building: the panel says so and shows the City's sentences.
+- **City works on your route** (`access.works_on_trip`, `works_on_trip` in `/api/trip`): the City road resurfacing and sidewalk construction programs (open data, already in `data/geo`). A listing is kept only if its own street section comes within 20 m of a walk, 30 m of a stop the rider uses, or runs at least 80 m along the ride, and the City's timeline has not ended. Blocks of one job are grouped. The panel shows which part of the trip each one meets, the City's description word for word ("Work may include the closure of individual lanes or the entire road"), and each section as listed; the map draws the exact sections. Nothing is predicted about the closure itself.
+
+### Map results in three pages
+
+There is one panel on `/map`, on the left. After "Show my trip" it switches from setting up the trip to the results ("Edit trip" goes back), which step through four pages with Back and Next: the trip as the rider set it up, what changes for the trip (the verdict and the before and after rows), what the City wrote, and what people report on the new part, with the report writer. On the City page the browser calls `GET /api/source_check?change=<id>`, which re-reads each quote on its cached source page (`source_pages_file`, `source_file`) and returns the page and the text around it. The log the rider sees is the result of that call, not a staged animation; a quote that is not found again is shown as "Not found". With reduced motion every step appears at once.

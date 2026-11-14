@@ -1,0 +1,68 @@
+{
+ "trip": {
+  "rider": "Senior using a cane or walker",
+  "rides": [
+   {
+    "route": "114",
+    "board": "1 Front St West - Union Station",
+    "alight": "Queens Quay East at Lower Jarvis St"
+   }
+  ]
+ },
+ "kept": [
+  {
+   "passage": 3,
+   "quote": "This space is proposed to have capacity for approximately five standard length buses to layover and a new bus stop marker and bus shelter would be provided.",
+   "summary": "The proposed Front Street West lay-by would get a new bus stop marker and a bus shelter.",
+   "why_it_matters": "A shelter at the boarding point could give this rider a place to wait out of the weather.",
+   "kind": "shelter_or_bench",
+   "item_id": "2025.EX21.4",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-253638.pdf",
+   "page": 8
+  },
+  {
+   "passage": 5,
+   "quote": "The eastbound interim priority bus lane is proposed to begin at Lower Jarvis Street after the Lower Jarvis bus stop island.",
+   "summary": "An eastbound priority bus lane is proposed to start at Lower Jarvis Street after the bus stop island there.",
+   "why_it_matters": "Lane changes right next to the Lower Jarvis stop island where this rider gets off may change traffic around the stop when stepping off and crossing.",
+   "kind": "sidewalk_or_crossing",
+   "item_id": "2025.EX21.4",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-253638.pdf",
+   "page": 23
+  },
+  {
+   "passage": 3,
+   "quote": "There are no proposed changes to existing curbs, and the existing transit stop islands at Freeland Street and Lower Jarvis Street in the eastbound direction would remain.",
+   "summary": "The report says curbs are not proposed to change and the eastbound stop islands at Freeland Street and Lower Jarvis Street would remain.",
+   "why_it_matters": "The eastbound Lower Jarvis stop island this rider may use to get off could stay as it is now.",
+   "kind": "stop_change",
+   "item_id": "2025.EX21.4",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-253638.pdf",
+   "page": 8
+  }
+ ],
+ "dropped": [
+  {
+   "passage": 3,
+   "quote": "This lay-by area is intended to be the end-of-line for buses operating on Queens Quay East and other downtown bus corridors and will facilitate better service reliability for routes while keeping buses out of active motor vehicle traffic lanes while buses are idle.",
+   "summary": "A bus-only lay-by on Front Street West between Bay Street and Yonge Street is proposed as the end-of-line for buses operating on Queens Quay East.",
+   "why_it_matters": "The place where this rider boards the 114 near Union Station could move to this new lay-by, which may change the walk to the stop.",
+   "kind": "stop_change",
+   "item_id": "2025.EX21.4",
+   "document_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-253638.pdf",
+   "page": 8,
+   "reason": "stronger wording than source: 'only'"
+  }
+ ],
+ "trace": [
+  "Retrieved 14 passages from the indexed staff reports for route 114 (6 name a street at your stops).",
+  "Claude (claude-opus-5-5) read them and proposed 4 finding(s).",
+  "The checker kept 3 and dropped 1 (quote must be on the cited page; no new numbers; no stronger wording)."
+ ],
+ "model": "claude-opus-5-5",
+ "generated_at": "2026-11-14T00:24:22+00:00",
+ "usage": {
+  "input": 7685,
+  "output": 705
+ }
+}

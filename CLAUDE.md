@@ -4,7 +4,7 @@ Read this whole file before changing anything. It records what the project is, t
 
 ## 1. What this project is
 
-**TripLens** (working name; the owner may rename it) is a web app built for **CIVIC Hack 2026** (Future Cities Institute, University of Waterloo), **Challenge 1: "Making municipal decisions easier to understand"**. The brief asks for a working proof of concept that helps residents understand a proposed municipal decision, how it could affect them, and when they can have a say. A municipal leader should be able to use it without the team present.
+**Gait** is a web app built for **CIVIC Hack 2026** (Future Cities Institute, University of Waterloo), **Challenge 1: "Making municipal decisions easier to understand"**. The brief asks for a working proof of concept that helps residents understand a proposed municipal decision, how it could affect them, and when they can have a say. A municipal leader should be able to use it without the team present.
 
 One-sentence pitch: *Council decisions in plain language, with every claim checked against its source, and a view of how the same decision lands on different riders (a wheelchair user, a senior with a cane or walker, a shift worker).*
 
@@ -15,15 +15,15 @@ The owner is **Vince** (University of Waterloo student). Work is for a hackathon
 2. **Rider access view** (`/access/<location>?persona=...`): for places linked to an item, compares transit access for three riders using open data, plus checked findings written by AI agents.
 3. **Route check** (`/route`): a resident enters a start address, a destination, the route(s) they take and the stops they use, a rider, a day and a time. The tool lists what the open data shows along that trip: decisions near it, works along it, how the stops work for that rider, and decisions that name their route.
 
-4. **Before and after a change** (on the route result page): a municipal change is stored as structured effects (remove stops, remove shelters or benches) in `data/changes/*.json`, each with exact quotes from saved source text. `triplens/changes.py` applies the change to the resident's trip (a removed stop moves them to the nearest remaining stop in their direction) and reruns the rider rules on both versions, then lists new accessibility issues. Real example: the TTC proposal to remove nine 512 St Clair stops (`/route/example/stclair-512`). Simulated example, labelled everywhere: shelter and bench removal at two 501 Queen stops.
+4. **Before and after a change** (on the route result page): a municipal change is stored as structured effects (remove stops, remove shelters or benches) in `data/changes/*.json`, each with exact quotes from saved source text. `gait/changes.py` applies the change to the resident's trip (a removed stop moves them to the nearest remaining stop in their direction) and reruns the rider rules on both versions, then lists new accessibility issues. Real examples are City Council decisions (e.g. RapidTO on 7 Bathurst, `/route/example/bathurst-7-past`). The TTC 512 St Clair proposal was retired on Nov 13 (`data/changes_retired/`): its March 2026 date had passed and could not be confirmed. Simulated example, labelled everywhere: shelter and bench removal at two 501 Queen stops.
 
 5. **3D map** (`/map`): MapLibre with OpenFreeMap tiles, tilted 3D buildings. Click start and destination, choose a route from those with stops within 800 m of both (listed by number, not ranked), click your boarding and exit stops, then see walking legs on the City pedestrian network, shelters (blue boxes) and benches (brown) in 3D, removed stops (red rings), and before (blue) vs after (orange) with a toggle. Privacy note: map tiles come from OpenFreeMap, which sees the area viewed; clicked points go only to the local server. JSON endpoints: `/api/routes_near`, `/api/route_stops`, `/api/trip`.
-6. **Walking on real sidewalks:** `triplens/walk.py` routes walks on the City Pedestrian Network (data/geo/pednet.csv to pednet_graph.pkl, both gitignored); wheelchair and walker riders avoid no-sidewalk segments; flags no-sidewalk metres and unsignalled crossings. Falls back to straight line times 1.3 when no path is found.
+6. **Walking on real sidewalks:** `gait/walk.py` routes walks on the City Pedestrian Network (data/geo/pednet.csv to pednet_graph.pkl, both gitignored); wheelchair and walker riders avoid no-sidewalk segments; flags no-sidewalk metres and unsignalled crossings. Falls back to straight line times 1.3 when no path is found.
 
-7. **Research agent for past decisions** (`triplens/research.py`, `scripts/run_research.py`, page `/research/<route>`): Claude with three tools (search the Voting Record and Report Request Log stored in `data/records/`, list documents of saved item pages, read passages from City legdocs PDFs) finds decisions that changed a route. Findings are kept only if the quote is on the cited page. A person turns findings into a change file. Found: RapidTO (item 2025.EX25.4, July 2025) removed 7 Bathurst stops at Dewbourne, Ardmore and Heathdale, and the 29 Dufferin stop at Croatia.
+7. **Research agent for past decisions** (`gait/research.py`, `scripts/run_research.py`, page `/research/<route>`): Claude with three tools (search the Voting Record and Report Request Log stored in `data/records/`, list documents of saved item pages, read passages from City legdocs PDFs) finds decisions that changed a route. Findings are kept only if the quote is on the cited page. A person turns findings into a change file. Found: RapidTO (item 2025.EX25.4, July 2025) removed 7 Bathurst stops at Dewbourne, Ardmore and Heathdale, and the 29 Dufferin stop at Croatia.
 8. **Past (implemented) changes:** change files with `"phase": "implemented"` and `restore_removed_stops` effects. The current schedule is "after"; "before" puts the removed stops back where the cross street meets the route line (`changes._reconstruct`, labelled "location reconstructed", shelter and bench unknown). Demo: `/route/example/bathurst-7-past` and the map sample "7 Bathurst" (senior with a walker at 1599 Bathurst St: about 62 m before, about 419 m today).
 
-9. **Free research (no AI):** `scripts/build_corpus.py` downloads the reports linked from 401 transit and street items (saved through a browser into `data/corpus/items_*.json`, 1,091 PDFs, gitignored) into a SQLite FTS5 index. `triplens/finder.py` searches it for each route's streets, keeps sentences matching change patterns, and names streets only if they meet the route (address points within 250 m). `scripts/run_free_research.py` runs all 230 routes in about 4 minutes; results in `data/research_free/`, shown on `/research/<route>` above any agent findings.
+9. **Free research (no AI):** `scripts/build_corpus.py` downloads the reports linked from 401 transit and street items (saved through a browser into `data/corpus/items_*.json`, 1,091 PDFs, gitignored) into a SQLite FTS5 index. `gait/finder.py` searches it for each route's streets, keeps sentences matching change patterns, and names streets only if they meet the route (address points within 250 m). `scripts/run_free_research.py` runs all 230 routes in about 4 minutes; results in `data/research_free/`, shown on `/research/<route>` above any agent findings.
 
 ### What it does NOT do (do not add without being asked)
 - It does **not** plan trips, time trips, or suggest routes, stops or alternatives. Before/after works only for changes entered as structured effects; it does not read schedules of proposed networks (none are published). The resident supplies their route and picks their own stops. (A "shortest walk" stop suggestion was added once without being asked and had to be removed.)
@@ -63,7 +63,7 @@ Everything the resident sees is exactly one of: (a) **copied verbatim** from an 
 Sources -> parse -> stored JSON/SQLite in data/ -> FastAPI app (server-rendered, no JavaScript)
 ```
 
-### Python package `triplens/`
+### Python package `gait/`
 | Module | Role |
 |---|---|
 | `app.py` | FastAPI routes: `/`, `/item/{id}`, `/access/{loc}`, `/route`, `/route/stops`, `/route/result`, `/route/example/{key}`; page assembly, caveats, examples |
@@ -122,7 +122,7 @@ python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
 .venv/bin/python scripts/consolidate_audits.py     # API, small
 .venv/bin/python scripts/fill_readiness_report.py --name "..." --team "..." --email ... --member "Name|School|Program"
 
-.venv/bin/uvicorn triplens.app:app --port 8765      # http://127.0.0.1:8765
+.venv/bin/uvicorn gait.app:app --port 8765      # http://127.0.0.1:8765
 .venv/bin/pytest -q                                 # 43 tests; run before saying anything is done
 ```
 
@@ -183,12 +183,14 @@ When changing any rule, update the test that guards it. If a stored AI file is r
 
 **Built:** explain layer; staff-report extraction; AI rewrites with checks (11 items); rider access page with three personas and 15 stored audits across 5 places; route check with four examples; local address lookup; tile-free drawing; privacy test; docs (`architecture.md`, `route-check-architecture.md`, `ai-use-log.md`, readiness draft and filled Word template).
 
-**Built (Nov 13):** before/after comparison for structured changes: real TTC 512 proposal; real past RapidTO removals on 7 Bathurst and 29 Dufferin; labelled simulations for shelter removal, stop relocation, temporary stop closure, late-service cut and sidewalk closure. A drop of 40% or more in departures at the rider's travel time is a new issue.
+**Built (Nov 13):** before/after comparison for structured changes: (TTC 512 proposal later retired); real past RapidTO removals on 7 Bathurst and 29 Dufferin; labelled simulations for shelter removal, stop relocation, temporary stop closure, late-service cut and sidewalk closure. A drop of 40% or more in departures at the rider's travel time is a new issue.
 
 **Built (Nov 13, later):** feature freeze after these.
-- `triplens/reports.py`: City 311 service requests (open data, `scripts/build_311.py`, placed at the nearest intersection; history, not current state) and rider reports (fixed categories only; stored as category, rounded point, stop id, date in `data/rider_reports.sqlite`, gitignored; temporary problems expire) near the rider's stops and walks, with a search trace and unchecked staff-report leads. This is the one place the app stores anything users submit.
-- `triplens/live_research.py` (`POST /api/research_trip`): opt-in live RAG. Retrieve passages from the FTS index (finder sentences plus pages naming the rider's own stop streets), Claude writes at most 4 findings, code verifies each (quote on the cited page, no new numbers, no stronger wording, banned words). Cached per trip in `data/research_live/`. Addresses are never sent. About 2 cents per new trip. This is the one place the running app calls an AI model (only when the button is pressed).
+- `gait/reports.py`: City 311 service requests (open data, `scripts/build_311.py`, placed at the nearest intersection; history, not current state) and rider reports (fixed categories only; stored as category, rounded point, stop id, date in `data/rider_reports.sqlite`, gitignored; temporary problems expire) near the rider's stops and walks, with a search trace and unchecked staff-report leads. This is the one place the app stores anything users submit.
+- `gait/live_research.py` (`POST /api/research_trip`): opt-in live RAG. Retrieve passages from the FTS index (finder sentences plus pages naming the rider's own stop streets), Claude writes at most 4 findings, code verifies each (quote on the cited page, no new numbers, no stronger wording, banned words). Cached per trip in `data/research_live/`. Addresses are never sent. About 2 cents per new trip. This is the one place the running app calls an AI model (only when the button is pressed).
 - Trip impact report on the map: plain-text report (facts, quotes, 311, checked agent findings, an "In my own words" blank), copy / email (mailto, nothing sent by the tool) / print, and where to send it (council item page, councillor via the City's lookup page plus ward from the nearest address point, 311, TTC Customer Service). No names of councillors (the term changes Nov 2026) and no deadlines.
+
+**Built (Nov 13, night):** on the map, where decisions land (`/api/decision_areas`: a dashed bubble per cluster of affected places, × on removed or closed stops, closed sidewalks and roads as thick dashes; real decisions always, simulations only with their trip) and new buildings approved (`scripts/build_developments.py` to `data/developments.json`: 47 rezonings from the indexed staff reports, exact address match only, quotes checked word for word on their page; shown as green bubbles and as "New buildings approved near your trip" within 300 m; nothing is computed from them). Two map toggles: "Street and transit changes" and "New buildings approved".
 
 **Not built:** trip timing; reroutes onto new streets (no stop data for them); automatic extraction of change effects from reports (effects are entered by hand with quotes); routing; AI-written reports for route-check examples; the return trip; transfers beyond two routes; translation; ingestion without a browser; Voting Record and Report Request Log integration; location data for most items (11 items located); user testing with accessibility groups.
 
@@ -215,7 +217,7 @@ When changing any rule, update the test that guards it. If a stored AI file is r
 
 **Change the AI rules:** edit `rewrite.py` or `agents.py`, add a failing test first, rerun the stored-file tests, update `docs/ai-use-log.md`.
 
-**Rename the project:** change the title in `triplens/templates/base.html`, the README and docs, `scripts/fill_readiness_report.py --name`, and the Devpost text.
+**Rename the project:** change the title in `gait/templates/base.html`, the README and docs, `scripts/fill_readiness_report.py --name`, and the Devpost text.
 
 ## 13. Glossary
 

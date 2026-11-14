@@ -44,7 +44,7 @@ def geocode(address: str):
 
 
 def main() -> None:
-    from triplens.access import load_stops
+    from gait.access import load_stops
     stops = load_stops()["stops"]
     locs = {}
     for p in sorted((ROOT / "data/items").glob("2027.PB1.*.json")):

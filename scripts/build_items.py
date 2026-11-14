@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from triplens.parse_item import parse_item, item_to_dict  # noqa: E402
+from gait.parse_item import parse_item, item_to_dict  # noqa: E402
 
 
 def main() -> None:

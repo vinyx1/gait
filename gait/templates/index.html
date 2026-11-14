@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}Decisions - TripLens{% endblock %}
+{% block title %}Decisions - Gait{% endblock %}
 {% block content %}
 <h1>Council and committee decisions</h1>
-<p class="privacy"><strong>New:</strong> <a href="/route">Check my route</a>. Enter the trip you make and see which decisions, works and stop conditions lie along it.</p>
 <p class="lede">Pick an item to see where it stands, what was recommended, what was decided, and how to take part.</p>
+<p>To see what a decision does to your own trip, <a href="/map">check it on the map</a>.</p>
 {% macro cards(rows) %}
 <ul class="cards">
   {% for r in rows %}

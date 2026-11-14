@@ -141,7 +141,9 @@ def edges_near(points: list[tuple[float, float]], radius_m: float = 20) -> froze
         return frozenset()
     out = set()
     for ei, e in enumerate(g["edges"]):
-        for (la, lo) in e[5]:
+        c = e[5]
+        # vertices and segment midpoints: a two-vertex sidewalk edge can be closed by a point at its middle
+        for (la, lo) in c + [((a[0] + b[0]) / 2, (a[1] + b[1]) / 2) for a, b in zip(c, c[1:])]:
             if any(_hav(la, lo, p[0], p[1]) <= radius_m for p in points):
                 out.add(ei)
                 break

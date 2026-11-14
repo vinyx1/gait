@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}What is along my route - TripLens{% endblock %}
+{% block title %}What is along my route - Gait{% endblock %}
 {% block content %}
 <p><a href="/route">&larr; Check another route</a>{% if example %} · <span class="meta">Example</span>{% endif %}</p>
 <h1>What is along your route</h1>
@@ -8,7 +8,7 @@
 
 {% for cmp in rep.comparisons %}
 <section aria-labelledby="cmp{{ loop.index }}" class="compare">
-  <h2 id="cmp{{ loop.index }}">Before and after: {{ cmp.change.title }}</h2>
+  {% set t = cmp.change.title | replace('SIMULATED: ', '') %}<h2 id="cmp{{ loop.index }}">Before and after: {{ t[0] | upper }}{{ t[1:] }}</h2>
   {% if cmp.change.phase == 'implemented' %}<p class="meta"><strong>Past decision.</strong> "Before" is the trip as it was; "after" is the trip today. Removed stops are placed where the cross street meets the route (reconstructed).</p>{% endif %}
   {% if cmp.change.simulated %}<p class="warn"><strong>Simulation.</strong> {{ cmp.change.status_note }}</p>
   {% else %}<p class="meta">Status: {{ cmp.change.status }} ({{ cmp.change.body }}). {{ cmp.change.status_note }} <a href="{{ cmp.change.source_url }}">Official source</a></p>
@@ -18,9 +18,9 @@
     <thead><tr><th scope="col">Part of trip</th><th scope="col">Before</th><th scope="col">After</th></tr></thead>
     <tbody>{% for r in cmp.rows %}<tr{% if r.changed %} class="changed"{% endif %}><th scope="row">{{ r.what }}</th><td>{{ r.before }}</td><td>{{ r.after }}{% if r.changed %} <strong>(changed)</strong>{% endif %}</td></tr>{% endfor %}</tbody></table>
   <h3>New accessibility issues after the change for {{ personas[persona].label | lower }}</h3>
-  {% if cmp.new_issues %}<ul class="findings">{% for f in cmp.new_issues %}<li><span class="sev {{ f.severity }}">{{ {'barrier': 'Limit', 'watch': 'Worth knowing', 'info': 'Info'}[f.severity] }}</span> {{ f.text }}</li>{% endfor %}</ul>
+  {% if cmp.new_issues %}<ul class="findings">{% for f in cmp.new_issues %}<li><span class="sev {{ f.severity }}">{{ {'barrier': 'Limit', 'watch': 'Worth knowing', 'info': 'Info'}[f.severity] }}</span> {{ f.say or f.text }}</li>{% endfor %}</ul>
   {% else %}<p>No new issues found by the fixed rules.</p>{% endif %}
-  {% if cmp.improvements %}<h3>Issues this change removes</h3><ul class="findings">{% for f in cmp.improvements %}<li><span class="sev info">Improves</span> {{ f.text }}</li>{% endfor %}</ul>{% endif %}
+  {% if cmp.improvements %}<h3>Issues this change removes</h3><ul class="findings">{% for f in cmp.improvements %}<li><span class="sev info">Improves</span> {{ f.say or f.text }}</li>{% endfor %}</ul>{% endif %}
 </section>
 {% endfor %}
 

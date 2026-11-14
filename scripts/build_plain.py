@@ -2,7 +2,7 @@
 
 Usage: python scripts/build_plain.py [item_id ...]
 Needs ANTHROPIC_API_KEY (read from .env). Rewrites cost a few cents in total for the demo items.
-Only sentences that pass triplens.rewrite.check_sentence are kept.
+Only sentences that pass gait.rewrite.check_sentence are kept.
 """
 import json
 import sys
@@ -14,7 +14,7 @@ import anthropic
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from triplens.rewrite import load_env, rewrite_passage, rewrite_to_dict  # noqa: E402
+from gait.rewrite import load_env, rewrite_passage, rewrite_to_dict  # noqa: E402
 
 OUT = ROOT / "data/plain"
 

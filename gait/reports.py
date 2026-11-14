@@ -39,6 +39,7 @@ RIDER_CATS = {
 
 # who each 311 category matters most for (wording stays neutral; this only orders the list)
 CAREFUL = {"stop_snow", "sidewalk_snow", "sidewalk_ice", "crossing_snow", "sidewalk_damaged", "curb_damaged"}
+WINTER = {"stop_snow", "sidewalk_snow", "sidewalk_ice", "crossing_snow"}      # shown after a short winter note
 
 
 @lru_cache(maxsize=1)
@@ -124,11 +125,11 @@ def council_candidates(legs, per_route: int = 4) -> list[dict]:
     return out
 
 
-def search(legs, today: date | None = None) -> dict:
+def _search_places(places, today: date | None = None, seen: set | None = None):
     trace, groups = [], []
     reqs, riders = load_311()["requests"], rider_reports(today)
-    seen = set()                                   # a request near a stop is not listed again for the walk beside it
-    for kind, name, pts, r in sorted(_places(legs), key=lambda p: p[0] != "stop"):
+    seen = set() if seen is None else seen         # a request near a stop is not listed again for the walk beside it
+    for kind, name, pts, r in sorted(places, key=lambda p: p[0] != "stop"):
         lat0 = sum(p[0] for p in pts) / len(pts)
         box = max(abs(p[0] - lat0) for p in pts) + r / 111320 + 1e-4
         near = [q for q in reqs if id(q) not in seen and abs(q["lat"] - lat0) <= box and _near_line(q["lat"], q["lon"], pts, r)]
@@ -139,12 +140,32 @@ def search(legs, today: date | None = None) -> dict:
         for q in near:
             by[q["label"]].append(q)
         s311 = [{"label": k, "count": len(v), "latest": max(x["date"] for x in v), "open": sum(x["status"] not in ("Completed", "Closed") for x in v),
-                 "at": sorted({x["at"] for x in v})[:3], "careful": v[0]["cat"] in CAREFUL, "lat": v[0]["lat"], "lon": v[0]["lon"]}
+                 "at": sorted({x["at"] for x in v})[:3], "careful": v[0]["cat"] in CAREFUL, "lat": v[0]["lat"], "lon": v[0]["lon"],
+                 "winter": v[0]["cat"] in WINTER, "pts": [[x["lon"], x["lat"]] for x in v][:60]}
                 for k, v in by.items()]
         s311.sort(key=lambda g: (-g["careful"], -g["count"]))
         trace.append(f"{name}: searched 311 requests within {r} m ({len(near)} found) and rider reports ({len(rr)} found).")
         if s311 or rr:
             groups.append({"place": name, "kind": kind, "radius_m": r, "s311": s311, "riders": rr})
+    return groups, trace, seen
+
+
+def changed_places(before_legs, after_legs):
+    """Stops and walks of the changed trip that the original trip did not have (moved stops, longer or detoured walks)."""
+    old = {(k, tuple(map(tuple, pts))) for k, _n, pts, _r in _places(before_legs)}
+    return [p for p in _places(after_legs) if (p[0], tuple(map(tuple, p[2]))) not in old]
+
+
+def search_changed(before_legs, after_legs, today: date | None = None) -> dict:
+    """311 and rider reports along only the parts a decision changes, leaving out anything already found on the trip
+    as entered (so each report is listed once)."""
+    _g, _t, seen = _search_places(_places(before_legs), today)
+    groups, trace, _ = _search_places(changed_places(before_legs, after_legs), today, seen)
+    return {"groups": groups, "trace": trace}
+
+
+def search(legs, today: date | None = None) -> dict:
+    groups, trace, _ = _search_places(_places(legs), today)
     leads = council_candidates(legs)
     routes = sorted({l.route for l in legs if l.kind == "transit"})
     trace.append(f"Staff reports: {len(leads)} unchecked sentences from the free search of indexed reports for route {', '.join(routes)}.")

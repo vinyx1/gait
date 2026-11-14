@@ -1,5 +1,5 @@
 [project]
-name = "triplens"
+name = "gait"
 version = "0.1.0"
 description = "Explain municipal decisions in plain language and show who they affect"
 requires-python = ">=3.11"
@@ -12,4 +12,4 @@ dev = ["pytest>=8", "httpx>=0.27"]
 testpaths = ["tests"]
 
 [tool.setuptools]
-packages = ["triplens"]
+packages = ["gait"]

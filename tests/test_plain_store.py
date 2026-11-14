@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from triplens.rewrite import check_sentence
+from gait.rewrite import check_sentence
 
 ROOT = Path(__file__).resolve().parent.parent
 

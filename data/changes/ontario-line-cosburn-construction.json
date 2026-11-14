@@ -1,0 +1,87 @@
+{
+  "id": "ontario-line-cosburn-construction",
+  "title": "Ontario Line Cosburn Station construction (2026 to 2030): Pape west sidewalk closed and the southbound stop at Cosburn moved",
+  "body": "City Council item 2025.EX27.3, adopted November 12 and 13, 2025",
+  "status": "decided and in effect",
+  "phase": "implemented",
+  "simulated": false,
+  "status_note": "City Council adopted the temporary road closures for the Ontario Line Cosburn Station on November 12 and 13, 2025 (item 2025.EX27.3). Construction runs from January 2026 to December 2030. The southbound 72 Pape stop at Cosburn Ave no longer appears in the November 2026 TTC schedule file; the 'before' stop is reconstructed where Cosburn Ave meets the route. The west sidewalk closure is placed along Pape Ave between Gamble Ave and Gowan Ave as the report describes. Found with the free staff-report search.",
+  "source_url": "https://www.toronto.ca/legdocs/mmis/2025/ex/bgrd/backgroundfile-259577.pdf",
+  "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.EX27.3",
+  "source_pages_file": "data/reports/cache/backgroundfile-259577.pages.json",
+  "source_pages": [
+    17,
+    22,
+    1
+  ],
+  "quotes": [
+    "Ongoing temporary closure of the west sidewalk between Gamble Avenue and Gowan Avenue, with pedestrians detoured to the available east sidewalk.",
+    "The southbound nearside transit stop on Pape Avenue at Cosburn Avenue will be temporarily relocated to south of Gowan Avenue."
+  ],
+  "effects": [
+    {
+      "type": "restore_removed_stops",
+      "route": "72",
+      "cross_streets": [
+        [
+          "Cosburn Ave",
+          "Pape Ave at Cosburn Ave"
+        ]
+      ],
+      "quote": null
+    },
+    {
+      "type": "close_sidewalk",
+      "side": "west",
+      "points": [
+        [
+          43.689919,
+          -79.349143
+        ],
+        [
+          43.688862,
+          -79.348737
+        ]
+      ],
+      "radius_m": 8,
+      "from": "January 2026",
+      "to": "December 2030"
+    },
+    {
+      "type": "map_line",
+      "kind": "road",
+      "label": "Pape Ave: west curb and median lanes closed, Gamble Ave to Gowan Ave",
+      "line": [
+        [
+          43.690386,
+          -79.349181
+        ],
+        [
+          43.689389,
+          -79.348816
+        ],
+        [
+          43.688447,
+          -79.348444
+        ]
+      ],
+      "page": 17
+    },
+    {
+      "type": "map_line",
+      "kind": "road",
+      "label": "Public laneway west of Pape, south of Cosburn: closed January 1, 2026 to December 31, 2030",
+      "line": [
+        [
+          43.689254,
+          -79.349345
+        ],
+        [
+          43.688328,
+          -79.349042
+        ]
+      ],
+      "page": 1
+    }
+  ]
+}

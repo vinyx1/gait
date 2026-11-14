@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Transit access near {{ loc.label }} - TripLens{% endblock %}
+{% block title %}Transit access near {{ loc.label }} - Gait{% endblock %}
 {% block content %}
 <p><a href="/decisions">&larr; All items</a>{% for i in loc.item_ids %} · <a href="/item/{{ i }}">Item {{ i }}</a>{% endfor %}</p>
 <h1>Who can reach transit near {{ loc.label }}?</h1>

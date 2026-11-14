@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "generatedAt": "2026-11-13T19:18:02+00:00",
-  "title": "Design System: TripLens",
+  "title": "Design System: Gait",
   "extensions": {
     "colorMeta": {
       "harvest-gold": {
@@ -253,7 +253,7 @@
       "kind": "nav",
       "refersTo": "button-primary-nav",
       "description": "Fixed bar in the current field colour: Young Serif wordmark with the platter mark left, a 52px pill right.",
-      "html": "<nav class=\"ds-nav\"><a class=\"ds-word\" href=\"#\"><svg viewBox=\"0 0 34 34\" width=\"34\" height=\"34\" aria-hidden=\"true\"><circle cx=\"17\" cy=\"17\" r=\"15\" fill=\"#4e3220\"/><circle cx=\"17\" cy=\"17\" r=\"15\" fill=\"none\" stroke=\"#fbf1d8\" stroke-width=\"3\" stroke-dasharray=\"2 4\"/><rect x=\"14\" y=\"5\" width=\"6\" height=\"9\" rx=\"3\" fill=\"#3c9c95\"/></svg>TripLens</a><a class=\"ds-navbtn\" href=\"#\">Check my bus trip <svg viewBox=\"0 0 24 24\" width=\"26\" height=\"26\" aria-hidden=\"true\"><path d=\"M4 12h14M13 6l6 6-6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a></nav>",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-word\" href=\"#\"><svg viewBox=\"0 0 34 34\" width=\"34\" height=\"34\" aria-hidden=\"true\"><circle cx=\"17\" cy=\"17\" r=\"15\" fill=\"#4e3220\"/><circle cx=\"17\" cy=\"17\" r=\"15\" fill=\"none\" stroke=\"#fbf1d8\" stroke-width=\"3\" stroke-dasharray=\"2 4\"/><rect x=\"14\" y=\"5\" width=\"6\" height=\"9\" rx=\"3\" fill=\"#3c9c95\"/></svg>Gait</a><a class=\"ds-navbtn\" href=\"#\">Check my bus trip <svg viewBox=\"0 0 24 24\" width=\"26\" height=\"26\" aria-hidden=\"true\"><path d=\"M4 12h14M13 6l6 6-6 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></a></nav>",
       "css": ".ds-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 32px;background:#e8b03a;color:#24140a} .ds-word{font-family:'Young Serif',Georgia,serif;font-size:30px;color:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:12px} .ds-navbtn{display:inline-flex;align-items:center;gap:14px;min-height:52px;padding:0 24px;border-radius:999px;background:#24140a;color:#e8b03a;font-family:'Atkinson Hyperlegible',Atkinson,system-ui,sans-serif;font-weight:700;font-size:18px;text-decoration:none;transition:transform .2s cubic-bezier(.22,.8,.24,1)} .ds-navbtn:hover{transform:translateY(-3px)} .ds-navbtn:focus-visible{outline:4px solid #24140a;outline-offset:4px}"
     },
     {
@@ -269,13 +269,13 @@
       "kind": "custom",
       "refersTo": "footer",
       "description": "Walnut course, cream ink; Young Serif links and honest small print.",
-      "html": "<footer class=\"ds-foot\"><div class=\"ds-links\"><a href=\"#\">Check my bus trip</a><a href=\"#\">Simple form</a><a href=\"#\">City decisions</a></div><p>TripLens is a working prototype. It is not an official City of Toronto or TTC service.</p></footer>",
+      "html": "<footer class=\"ds-foot\"><div class=\"ds-links\"><a href=\"#\">Check my bus trip</a><a href=\"#\">Simple form</a><a href=\"#\">City decisions</a></div><p>Gait is a working prototype. It is not an official City of Toronto or TTC service.</p></footer>",
       "css": ".ds-foot{background:#4e3220;color:#fbf1d8;padding:48px 32px;display:grid;gap:28px;font-family:'Atkinson Hyperlegible',Atkinson,system-ui,sans-serif;font-size:20px} .ds-links{display:grid;gap:8px} .ds-links a{font-family:'Young Serif',Georgia,serif;font-size:34px;color:inherit;text-decoration:none} .ds-links a:hover{text-decoration:underline} .ds-links a:focus-visible{outline:4px solid #fbf1d8;outline-offset:4px;border-radius:12px} .ds-foot p{margin:0;max-width:52ch}"
     }
   ],
   "narrative": {
     "northStar": "The Harvest Kitchen",
-    "overview": "TripLens tells City decisions the way they would be read aloud at a 1970s Toronto kitchen table. Each scene owns the whole screen in one flat colour from the kitchen (harvest gold, avocado, burnt orange, walnut, Pyrex turquoise), and the ink flips between dark coffee brown and cream so the words always sit on the field at body-text contrast. Nothing floats on a card; the page is a stack of full-width colour courses, and the background colour itself changes as the reader scrolls (0.9s cross-fade), so the scene change is the section break.\n\nThe world's one picture is a round stoneware platter of the neighbourhood: a walnut centre with wood rings, an avocado glaze edge, a dotted stoneware band, a turquoise dashed bus route, and flat, rounded houses, trees, stops and a cream bus standing on its rim. It turns like a lazy Susan, one scene per scroll. Drawings are flat fills with rounded corners and short dark-brown strokes, never outlines with gradients, never photographs.\n\nDensity is low and type is large: the body never drops below 20px, the display face is a warm, soft-shouldered serif, and every control is a chunky pill at 56px or taller. The register is warm and plain, never alarming.",
+    "overview": "Gait tells City decisions the way they would be read aloud at a 1970s Toronto kitchen table. Each scene owns the whole screen in one flat colour from the kitchen (harvest gold, avocado, burnt orange, walnut, Pyrex turquoise), and the ink flips between dark coffee brown and cream so the words always sit on the field at body-text contrast. Nothing floats on a card; the page is a stack of full-width colour courses, and the background colour itself changes as the reader scrolls (0.9s cross-fade), so the scene change is the section break.\n\nThe world's one picture is a round stoneware platter of the neighbourhood: a walnut centre with wood rings, an avocado glaze edge, a dotted stoneware band, a turquoise dashed bus route, and flat, rounded houses, trees, stops and a cream bus standing on its rim. It turns like a lazy Susan, one scene per scroll. Drawings are flat fills with rounded corners and short dark-brown strokes, never outlines with gradients, never photographs.\n\nDensity is low and type is large: the body never drops below 20px, the display face is a warm, soft-shouldered serif, and every control is a chunky pill at 56px or taller. The register is warm and plain, never alarming.",
     "keyCharacteristics": [
       "One colour field per scene; the field is the background of the whole viewport, nav included.",
       "Ink is either coffee brown or cream (teal ink on turquoise), chosen per field for contrast.",

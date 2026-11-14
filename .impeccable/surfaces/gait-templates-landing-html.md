@@ -1,7 +1,7 @@
 ---
 version: 1
-slug: "triplens-templates-landing-html"
-primary_target: "triplens/templates/landing.html"
+slug: "gait-templates-landing-html"
+primary_target: "gait/templates/landing.html"
 related_targets: []
 ---
 

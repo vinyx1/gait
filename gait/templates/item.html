@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ item.title }} - TripLens{% endblock %}
+{% block title %}{{ item.title }} - Gait{% endblock %}
 {% block content %}
 <p><a href="/decisions">&larr; All items</a></p>
 <h1>{{ item.title }}</h1>
@@ -32,7 +32,7 @@
 <section aria-labelledby="where-affected">
   <h2 id="where-affected">Who and where it affects</h2>
   {% if latest.wards %}<p>Wards listed on the official page: <strong>{{ latest.wards }}</strong></p>{% else %}<p>No ward is listed on the official page.</p>{% endif %}
-  {% for l in access_locs %}<p><a href="/access/{{ l.id }}">See how transit access differs for a wheelchair user, a senior with a walker and a shift worker near {{ l.label }}</a>. <span class="meta">Open data and AI checks, not a trip planner.</span></p>{% endfor %}
+  {% for l in access_locs %}<p><a href="/access/{{ l.id }}">See how transit access differs for a wheelchair user, someone with a walker and a shift worker near {{ l.label }}</a>. <span class="meta">Open data and AI checks, not a trip planner.</span></p>{% endfor %}
   {% if not access_locs %}<p class="meta">A rider-by-rider access view is not available for this item.</p>{% endif %}
 </section>
 

@@ -14,7 +14,7 @@ Secondary (they must be able to use it unaided, but design decisions favour the 
 
 ## Product Purpose
 
-TripLens shows a resident what a municipal decision did, or would do, to their own trip. They pick a start, a destination, a route and their own stops. TripLens then shows the trip before and after each relevant decision, lists new accessibility issues and the ones a decision removes, adds ground evidence (City 311 requests and rider reports near their stops and walks), and helps them write a report they can send to their councillor, 311 or the TTC.
+Gait shows a resident what a municipal decision did, or would do, to their own trip. They pick a start, a destination, a route and their own stops. Gait then shows the trip before and after each relevant decision, lists new accessibility issues and the ones a decision removes, adds ground evidence (City 311 requests and rider reports near their stops and walks), and helps them write a report they can send to their councillor, 311 or the TTC.
 
 Success: a rider understands in plain words what changed for them, can see where each fact came from, and knows where to have a say.
 
@@ -39,7 +39,7 @@ Checked facts. Every claim is one of three things: copied word for word from an 
 
 ## Brand Commitments
 
-- Name: TripLens (working name; the owner may rename it).
+- Name: Gait.
 - Voice: warm and plain. Encouraging, simple words a child or a senior can follow. Never alarming, never partisan, never advice. Estimates are labelled as estimates; what was not checked is said.
 - Wording reserved for fixed rules only: "limit" and "barrier". Never "safe", "accessible route", or deadlines the source does not state.
 - Not an official City of Toronto or TTC service; no City or TTC logos or branding.
@@ -47,9 +47,9 @@ Checked facts. Every claim is one of three things: copied word for word from an 
 ## Evidence on Hand
 
 - Real decisions with quotes: TTC 512 St Clair stop removals (proposed); RapidTO 7 Bathurst and 29 Dufferin stop removals (item 2025.EX25.4, implemented); Harbord bikeway stop shifts and bus/bike platforms (item 2024.IE10.2); Front St W lay-by shelter (item 2025.EX21.4).
-- Computed figures, e.g. 7 Bathurst for a senior with a walker: walk to the stop about 62 m before, about 419 m after (`triplens/landing.py`).
+- Computed figures, e.g. 7 Bathurst for a senior with a walker: walk to the stop about 62 m before, about 419 m after (`gait/landing.py`).
 - 1,033 indexed staff reports from 401 items; 12,834 located 311 requests for 2026.
-- Openly licensed photographs with credits in `triplens/static/img/credits.json`.
+- Openly licensed photographs with credits in `gait/static/img/credits.json`.
 - No testimonials, users, partners, endorsements or usage numbers exist. Do not invent any.
 
 ## Product Principles

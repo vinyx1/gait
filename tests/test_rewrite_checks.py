@@ -1,4 +1,4 @@
-from triplens.rewrite import check_sentence
+from gait.rewrite import check_sentence
 
 SRC = ("City Council request the General Manager, Transportation Services, to report to the Infrastructure and "
        "Environment Committee in the first quarter of 2027. The cost is $0.6M for 4,177 annual hours.")

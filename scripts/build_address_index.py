@@ -10,7 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from triplens.geocode import normalize, split_key  # noqa: E402
+from gait.geocode import normalize, split_key  # noqa: E402
 
 CSV = ROOT / "data/geo/address_points.csv"
 DB = ROOT / "data/geo/address.sqlite"

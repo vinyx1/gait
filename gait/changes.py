@@ -217,6 +217,23 @@ def apply(legs: list[Leg], change: dict, avoid_no_sidewalk: bool = False) -> tup
     return new, notes
 
 
+def close_sidewalks(legs: list[Leg], change: dict, avoid_no_sidewalk: bool = False) -> tuple[list[Leg], list[str]]:
+    """For a decision already in effect: today's walks go round its sidewalk closures (the City's network does not know them)."""
+    from . import walk as _walk
+    pts = [tuple(p) for e in change["effects"] if e["type"] == "close_sidewalk" for p in e["points"]]
+    if not pts:
+        return legs, []
+    rad = max(e.get("radius_m", 20) for e in change["effects"] if e["type"] == "close_sidewalk")
+    blocked, new, notes = _walk.edges_near(pts, rad), [copy.deepcopy(l) for l in legs], []
+    for k, l in enumerate(new):
+        if l.kind == "walk":
+            m = walk_estimate_m(l)
+            new[k] = walk_leg(l.points[0], l.points[-1], l.label, avoid_no_sidewalk, blocked)
+            if walk_estimate_m(new[k]) != m:
+                notes.append(f"{l.label}: the sidewalk closure{_dates(change)} changes this walk from about {m} m to about {walk_estimate_m(new[k])} m.")
+    return new, notes
+
+
 def restore(legs: list[Leg], change: dict, avoid_no_sidewalk: bool = False) -> tuple[list[Leg], list[str]]:
     """For a change that already happened: rebuild the trip as it was, using a removed stop when it gave a shorter walk."""
     notes, new = [], [copy.deepcopy(l) for l in legs]
@@ -261,15 +278,16 @@ def compare(legs: list[Leg], change: dict, rider: str, band: str, day: str) -> d
     if change.get("phase") == "implemented":
         before_legs, notes = restore(legs, change, careful)
         now_legs, n2 = apply_stop_attrs(legs, change)
-        notes = notes + n2
-        cmp = _compare(before_legs, now_legs, rider, band, day)
+        now_legs, n3 = close_sidewalks(now_legs, change, careful)
+        notes = notes + n2 + n3
+        cmp = _compare(before_legs, now_legs, rider, band, day, past=True)
         return {"change": change, "notes": notes or ["The removed stops were not nearer for this trip, so the decision did not change it."], **cmp}
     after_legs, notes = apply(legs, change, careful)
     after_legs, n2 = apply_stop_attrs(after_legs, change)
     return {"change": change, "notes": notes + n2, **_compare(legs, after_legs, rider, band, day)}
 
 
-def _compare(legs: list[Leg], after_legs: list[Leg], rider: str, band: str, day: str) -> dict:
+def _compare(legs: list[Leg], after_legs: list[Leg], rider: str, band: str, day: str, past: bool = False) -> dict:
     before = exposure.analyze(legs, rider, band, day, stop_override=_overrides(legs))
     after = exposure.analyze(after_legs, rider, band, day, stop_override=_overrides(after_legs))
     key = lambda f: (f.get("code") or f["text"], f.get("leg"))
@@ -284,6 +302,7 @@ def _compare(legs: list[Leg], after_legs: list[Leg], rider: str, band: str, day:
             na_, _ = exposure._band_count(la.board, day, band)
             if nb_ and na_ < 0.6 * nb_:
                 new_issues.append({"severity": "barrier" if na_ == 0 else "watch", "kind": "rule", "evidence": [access.stop_line(lb.board)],
+                                   "code": "fewer_departures", "data": {"stop": la.board["name"], "from": nb_, "to": na_, "day": day, "band": band},
                                    "text": f"{la.board['name']}: {exposure.DAYS[day]} departures in the {exposure.BANDS[band][0].lower()} drop from {nb_} to {na_}."})
     rows = []
     for lb, la in zip(legs, after_legs):
@@ -308,7 +327,155 @@ def _compare(legs: list[Leg], after_legs: list[Leg], rider: str, band: str, day:
     aset = {key(f) for f in after["flags"] if f["kind"] == "rule"}
     improvements = [f for f in before["flags"] if f["kind"] == "rule" and f["severity"] in ("barrier", "watch") and key(f) not in aset
                     and f.get("code") not in unknown]
+    # a stop with no shelter and a long wait: the shelter line already says it, so the "no shelter or bench" line is dropped
+    for lst in (new_issues, improvements):
+        if any(f.get("code") == "shelter_wait" for f in lst):
+            waits = {f["data"].get("stop") for f in lst if f.get("code") == "shelter_wait"}
+            lst[:] = [f for f in lst if not (f.get("code") == "no_seat" and f["data"].get("stop") in waits)]
+    for f in new_issues:
+        f["say"] = say(f, legs, after_legs, past, fixed=False)
+    for f in improvements:
+        f["say"] = say(f, legs, after_legs, past, fixed=True)
     return {"rows": rows, "new_issues": new_issues, "improvements": improvements, "after_legs": after_legs, "before_legs": legs}
+
+
+# ---------- each finding in plain words, before against after ----------
+# Fixed sentences filled from the same numbers as the finding (no AI), so nothing is added or softened.
+
+WHEN = {"early": "early in the morning (4:00 to 6:00)", "day": "during the day (6:00 to 20:00)",
+        "evening": "in the evening (20:00 to 23:00)", "late": "late at night (after 23:00)"}
+DAY = {"weekday": "weekday", "saturday": "Saturday", "sunday": "Sunday"}
+
+
+def _plain(name: str) -> str:
+    return name.split(" (")[0]                          # "(removed stop; location reconstructed)" is shown elsewhere
+
+
+def _dest(label: str) -> str:
+    """Where a walk goes, as words: "the stop at Pape Ave and Cosburn Ave", "your destination"."""
+    if not label.startswith("Walk to "):
+        return label.lower()
+    t = label[len("Walk to "):]
+    if t.startswith("your "):
+        return t
+    t = _plain(t)
+    return f"the stop at {t.replace(' at ', ' and ', 1)}" if " at " in t else f"the stop on {t}" if " of " in t else f"the {t} stop"
+
+
+def _a(who: str) -> str:
+    return who if who.startswith(("a ", "an ", "someone")) else ("an " if who[:1] in "aeiou" else "a ") + who
+
+
+def walk_change_say(before: list[Leg], after: list[Leg], k: int, limit: int, who: str, past: bool) -> str:
+    """The k-th walk before and after, in words, read against the rider's limit."""
+    wb, wa = [l for l in before if l.kind == "walk"], [l for l in after if l.kind == "walk"]
+    mb, ma = walk_estimate_m(wb[k]), walk_estimate_m(wa[k])
+    db, da = _dest(wb[k].label), _dest(wa[k].label)
+    then, now, will = ("Before the decision", "Now", "") if past else ("Today", "Under this plan", "would ")
+    s1 = f"{then}, you {'walked' if past else 'walk'} about {mb} m to {db}."
+    s2 = (f"{now}, you {will}walk about {ma} m to {da} instead." if db != da
+          else f"{now}, that walk {'is' if past else 'would be'} about {ma} m.")
+    who = _a(who)
+    if ma > limit and mb <= limit:
+        tail = f"That is more than the {limit} m we use as a comfortable limit for {who}."
+    elif ma > limit:
+        tail = f"Both are more than the {limit} m we use as a comfortable limit for {who}."
+    elif mb > limit:
+        tail = f"That brings it within the {limit} m we use as a comfortable limit for {who}."
+    else:
+        tail = f"Both are within the {limit} m we use as a comfortable limit for {who}."
+    return f"{s1} {s2} {tail}"
+
+
+def say(f: dict, before: list[Leg], after: list[Leg], past: bool, fixed: bool) -> str:
+    """One finding as plain sentences. `fixed`: the finding is in the trip before and gone after."""
+    d, code = f.get("data") or {}, (f.get("code") or "").split(":")[0]
+    then = "Before the decision" if past else "Today"
+    now = "Now" if past else "Under this plan"
+    will = "" if past else "would "                     # "you walk" / "you would walk"
+    is_ = "is" if past else "would be"
+    has = "has" if past else "would have"
+    mine, other = (before, after) if fixed else (after, before)
+    walks = lambda legs: [l for l in legs if l.kind == "walk"]
+    stops = lambda legs: [_plain(s["name"]) for l in legs if l.kind == "transit" for s in (l.board, l.alight)]
+
+    if code in ("walk_over_limit", "walk_near_limit", "no_sidewalk", "unsignalled") and f.get("leg") is not None:
+        wb, wa = walks(before), walks(after)
+        k = f["leg"]
+        if k >= len(wb) or k >= len(wa):
+            return f["text"]
+        mb, ma = walk_estimate_m(wb[k]), walk_estimate_m(wa[k])
+        db, da = _dest(wb[k].label), _dest(wa[k].label)
+        lim, who = d.get("limit"), _a(d.get("who", "this rider"))
+        if code in ("walk_over_limit", "walk_near_limit"):
+            then_s = f"{then}, you {'walked' if past else 'walk'} about {mb} m to {db}."
+            now_s = (f"{now}, you {will}walk about {ma} m to {da} instead." if db != da
+                     else f"{now}, that walk {'is' if past else 'would be'} about {ma} m.")
+            if fixed:
+                tail = f"That is within the {lim} m we use as a comfortable limit for {who}."
+                if code == "walk_over_limit":
+                    then_s = then_s[:-1] + f", more than the {lim} m limit."
+            elif code == "walk_over_limit":
+                tail = f"That is more than the {lim} m we use as a comfortable limit for {who}."
+            else:
+                tail = f"That is close to the {lim} m we use as a comfortable limit for {who}."
+            return f"{then_s} {now_s} {tail}"
+        if code == "no_sidewalk":
+            n = d.get("no_sidewalk_m")
+            if fixed:
+                return f"{then}, about {n} m of your walk to {db} {'was' if past else 'is'} on a street with no sidewalk in the City's data. {now}, the walk {'stays' if past else 'would stay'} on sidewalks."
+            return f"{now}, about {n} m of your walk to {da} {is_} on a street with no sidewalk in the City's data."
+        if code == "unsignalled":
+            n = d.get("n")
+            xs = "a street" if n == 1 else f"{n} streets"
+            if fixed:
+                return f"{then}, your walk to {db} {'crossed' if past else 'crosses'} {xs} where the City lists no traffic signal. {now}, it {'does' if past else 'would'} not."
+            return f"{now}, your walk to {da} {'crosses' if past else 'would cross'} {xs} where the City lists no traffic signal."
+
+    stop = _plain(d["stop"]) if d.get("stop") else None
+    if stop:
+        known = stop in stops(other)
+        if fixed:
+            yours = f"your stop, {stop}," if known else f"your old stop, {stop},"
+        else:
+            yours = f"your stop, {stop}," if known else f"your new stop, {stop},"
+        Yours = yours[0].upper() + yours[1:]
+        if code == "shelter_wait":
+            w = d.get("wait")
+            if fixed:
+                return (f"{then}, {yours} has no shelter listed, so you wait about {w} minutes outdoors on average. {now}, it {has} a shelter listed." if known
+                        else f"{then}, {yours} has no shelter listed, so you wait about {w} minutes outdoors on average. {now}, you {will}board at a stop with a shelter listed.")
+            if known:
+                return f"{now}, {yours} {has} no shelter listed. At your travel time you {will}wait about {w} minutes outdoors on average, in winter weather."
+            return f"{Yours} has no shelter listed. At your travel time you {will}wait about {w} minutes outdoors on average, in winter weather."
+        if code == "no_seat":
+            if fixed:
+                return f"{then}, {yours} has no shelter or bench listed in City data. {now}, {'it' if known else 'your stop'} {has} at least one."
+            if known:
+                return f"{now}, {yours} {has} no shelter or bench listed in City data."
+            return f"{Yours} has no shelter or bench listed in City data (the data may be incomplete)."
+        if code == "boarding_no":
+            if fixed:
+                return f"{then}, the TTC lists wheelchair boarding as not possible at {yours[:-1]}. {now}, that {'no longer applies' if past else 'would no longer apply'}."
+            return f"The TTC lists wheelchair boarding as not possible at {yours[:-1]}."
+        if code == "boarding_unknown":
+            if fixed:
+                return f"{then}, the TTC has no wheelchair boarding information for {yours[:-1]}. {now}, it does."
+            return f"The TTC has no wheelchair boarding information for {yours[:-1]}."
+        if code == "platform":
+            if fixed:
+                return f"{then}, at {yours} you board from a {d.get('platform')}, crossing the cycle track to reach it. {now}, you {will}not."
+            return f"At {yours} you {will}board from a {d.get('platform')}, crossing the cycle track to reach it. Raised platforms can make boarding more level; check how the crossing is marked."
+        if code == "no_service":
+            when = f"on a {DAY.get(d.get('day'), 'weekday')} {WHEN.get(d.get('band'), '')}".rstrip()
+            if fixed:
+                return f"{then}, no bus leaves {stop} {when} in the regular schedule. {now}, buses {'do' if past else 'would'}."
+            return f"{now}, no bus {'leaves' if past else 'would leave'} {stop} {when} in the regular schedule."
+        if code == "fewer_departures":
+            when = f"on a {DAY.get(d.get('day'), 'weekday')} {WHEN.get(d.get('band'), '')}".rstrip()
+            left = f"only {d['to']} {'do' if past else 'would'}" if d["to"] else f"none {'do' if past else 'would'}"
+            return f"Fewer buses at {stop}. {then}, {d['from']} {'buses leave' if d['from'] != 1 else 'bus leaves'} {when}. {now}, {left}."
+    return f["text"]
 
 
 def _overrides(legs: list[Leg]) -> dict:

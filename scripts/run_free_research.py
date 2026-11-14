@@ -6,8 +6,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from triplens import finder  # noqa: E402
-from triplens.trip import load_routes  # noqa: E402
+from gait import finder  # noqa: E402
+from gait.trip import load_routes  # noqa: E402
 
 
 def main():

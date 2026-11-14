@@ -1,10 +1,10 @@
-# TripLens — project brief (working title)
+# Gait — project brief
 
 **Event:** FCI CIVIC Hack 2026, Challenge 1: *Making municipal decisions easier to understand*
 **Status:** idea stage. Everything under "To verify" is untested.
 
 ## One-line pitch
-Existing tools tell an average rider how a proposed change affects their trip. TripLens tells the people averages hide (a senior with a walker, a wheelchair user in January, a shift worker at 11 pm) whether they are still served, with every claim linked to its source, and ties the result to the council process so they know when and how to respond.
+Existing tools tell an average rider how a proposed change affects their trip. Gait tells the people averages hide (a senior with a walker, a wheelchair user in January, a shift worker at 11 pm) whether they are still served, with every claim linked to its source, and ties the result to the council process so they know when and how to respond.
 
 ## The problem it answers
 - Residents learn about decisions after they are made. Example: in Sault Ste. Marie, a retired teacher timed the new Sault Loops routes herself. Her weekly trip to church went from about 5 to 49 minutes, and she worries about walking to other stops in winter ([SooToday, Jun 30 2026](https://www.sootoday.com/local-news/if-i-break-a-hip-its-game-over-senior-stages-protest-over-bus-route-changes-12491009)).
@@ -173,18 +173,18 @@ Transitland's sources disagree on whether a free key can download historical fee
 ## Build status (Nov 12, 2026)
 Scaffolded and running (Python 3.14, FastAPI, Jinja2, server-rendered, no JavaScript needed):
 - `data/raw/*_snapshot.json`: saved copies of official item pages (11 items: 5 decided/referred, 6 upcoming Preservation Board items), fetched with a real browser because plain scripted requests get HTTP 403.
-- `triplens/parse_item.py`: stages (body, date, status, wards), official wording copied verbatim, motions, vote totals, background documents, by-laws, upcoming flag, and the participation buttons seen on the page (Request to Speak / Submit Comments). Public communications are kept as counts and dates only.
-- `triplens/parse_report.py` + `scripts/build_reports.py`: downloads linked staff reports and member letters (skips files over 12 MB or 80 pages), extracts header, Summary, Recommendations, Financial impact and Decision history verbatim with page numbers.
-- `triplens/verify.py`: every extracted fact must appear in the PDF text (whitespace-insensitive) or it is dropped. No AI is used anywhere yet, so there is nothing to hallucinate; an AI plain-language rewriter would have to pass the same check.
-- `triplens/app.py` + templates: index (coming up / decided), item page with status, wards, "can you still have a say" (shows the buttons the official page lists, never a deadline), recommended vs decided side by side, report excerpts with page numbers, process timeline, caveats, sources. Plain-language status labels are a fixed lookup table.
+- `gait/parse_item.py`: stages (body, date, status, wards), official wording copied verbatim, motions, vote totals, background documents, by-laws, upcoming flag, and the participation buttons seen on the page (Request to Speak / Submit Comments). Public communications are kept as counts and dates only.
+- `gait/parse_report.py` + `scripts/build_reports.py`: downloads linked staff reports and member letters (skips files over 12 MB or 80 pages), extracts header, Summary, Recommendations, Financial impact and Decision history verbatim with page numbers.
+- `gait/verify.py`: every extracted fact must appear in the PDF text (whitespace-insensitive) or it is dropped. No AI is used anywhere yet, so there is nothing to hallucinate; an AI plain-language rewriter would have to pass the same check.
+- `gait/app.py` + templates: index (coming up / decided), item page with status, wards, "can you still have a say" (shows the buttons the official page lists, never a deadline), recommended vs decided side by side, report excerpts with page numbers, process timeline, caveats, sources. Plain-language status labels are a fixed lookup table.
 - Tests: 12 pass (verbatim checks, no names of letter writers, Dundas staff recommendation differs from the decision, upcoming items have no invented deadline).
 
-Run: `scripts/build_items.py`, then `scripts/build_reports.py`, then `.venv/bin/uvicorn triplens.app:app --port 8765` and open http://127.0.0.1:8765
+Run: `scripts/build_items.py`, then `scripts/build_reports.py`, then `.venv/bin/uvicorn gait.app:app --port 8765` and open http://127.0.0.1:8765
 
 Not built yet: address parsing and geocoding, the trip lens, audit agents, the staff view, translation, a "load a new item" flow for a clerk.
 
 ## AI plain-language layer (added Nov 12, 2026)
-- `triplens/rewrite.py` + `scripts/build_plain.py`: Claude (`claude-opus-5-5`, effort medium, structured output, server-side refusal fallback enabled) rewrites each Summary, Recommendation and Decision passage into 2 to 6 short sentences. Each sentence must carry an exact quote from the source. Software drops a sentence if (a) the quote is not in the source, (b) it contains a number, date or amount not in the source, or (c) it uses stronger wording than the quote ("must", "will", "only", "required", "all" and similar), which stops a "request" or "recommendation" turning into an obligation. Dropped sentences are stored with the reason.
+- `gait/rewrite.py` + `scripts/build_plain.py`: Claude (`claude-opus-5-5`, effort medium, structured output, server-side refusal fallback enabled) rewrites each Summary, Recommendation and Decision passage into 2 to 6 short sentences. Each sentence must carry an exact quote from the source. Software drops a sentence if (a) the quote is not in the source, (b) it contains a number, date or amount not in the source, or (c) it uses stronger wording than the quote ("must", "will", "only", "required", "all" and similar), which stops a "request" or "recommendation" turning into an obligation. Dropped sentences are stored with the reason.
 - Results are stored in `data/plain/` and shown on the item page in a labelled "Written by AI, then checked by software" box with the supporting quotes one click away. Long passages (over 4,000 characters, or more than 8 numbered parts) carry a warning that the sentences cover the main points only.
 - `data/notes/*.json`: hand-written notes about known problems in a source document (e.g. the Dundas report's impossible "November 15, 2026" date), shown under "What this page can't tell you".
 - The API key lives in `.env` (gitignored, mode 600). Run `scripts/build_plain.py` after `build_items.py` and `build_reports.py`.
@@ -194,14 +194,14 @@ Not built yet: address parsing and geocoding, the trip lens, audit agents, the s
 ## Rider access and audit agents (added Nov 12-13, 2026)
 - `scripts/build_access_data.py`: builds `data/geo/stops.json` from the TTC GTFS feed (base weekday, Saturday, Sunday patterns only) and the City's shelter and bench datasets. For each stop: wheelchair boarding flag, trip accessibility flags (accessible / not accessible / no information), shelter and bench listed, routes, first and last departures and departures per hour.
 - `scripts/build_locations.py`: places demo items on the map from the City's Address Points dataset or a clearly labelled representative point (`data/locations.json`).
-- `triplens/access.py`: three illustrative rider personas (wheelchair user 400 m, senior with a cane or walker 250 m, shift worker 600 m walking limits; straight-line distance times 1.3) and fixed rules that raise "barrier" or "worth knowing" flags. For a wheelchair user a stop only counts if boarding is listed as possible and some trips are flagged accessible.
-- `triplens/agents.py` + `scripts/run_audits.py`: three Claude agents (stops and boarding, walking and winter, service and schedule) per place and rider, using five local tools (nearby stops, stop detail, planned road and sidewalk works, exact winter-service sentences from the City's winter maintenance report). Findings are kept only if they cite exact tool text and their numbers match. Agents cannot assign a barrier label. `scripts/consolidate_audits.py` groups duplicate findings (groups only, no new text).
+- `gait/access.py`: three illustrative rider personas (wheelchair user 400 m, senior with a cane or walker 250 m, shift worker 600 m walking limits; straight-line distance times 1.3) and fixed rules that raise "barrier" or "worth knowing" flags. For a wheelchair user a stop only counts if boarding is listed as possible and some trips are flagged accessible.
+- `gait/agents.py` + `scripts/run_audits.py`: three Claude agents (stops and boarding, walking and winter, service and schedule) per place and rider, using five local tools (nearby stops, stop detail, planned road and sidewalk works, exact winter-service sentences from the City's winter maintenance report). Findings are kept only if they cite exact tool text and their numbers match. Agents cannot assign a barrier label. `scripts/consolidate_audits.py` groups duplicate findings (groups only, no new text).
 - Pages: `/access/<location id>?persona=...`, linked from each item that has a location.
 - Cost of the first run: 15 audits (5 places x 3 riders, 3 agents each) used roughly 20,000 to 36,000 input and 4,000 to 5,000 output tokens each, about $0.16 to $0.23 per audit at list prices, about $2.80 in all, plus a small consolidation pass.
 - Data finding: in the TTC feed every streetcar trip is flagged `wheelchair_accessible = 2` (not accessible) while bus and subway trips are flagged 1. A stop can therefore list boarding as possible while all its trips are flagged not accessible. The feed does not explain this; the page says so and tells readers to check the TTC.
 - Tests: 32 pass.
 
-Run order: `build_items.py`, `build_reports.py`, `build_plain.py`, `build_access_data.py`, `build_locations.py`, `run_audits.py`, `consolidate_audits.py`, then `uvicorn triplens.app:app --port 8765`.
+Run order: `build_items.py`, `build_reports.py`, `build_plain.py`, `build_access_data.py`, `build_locations.py`, `run_audits.py`, `consolidate_audits.py`, then `uvicorn gait.app:app --port 8765`.
 
 ## Deliverable drafts
 - `docs/readiness-report-draft.md`: text for the organizers' one-page Word template (word limits checked).
@@ -211,7 +211,7 @@ Run order: `build_items.py`, `build_reports.py`, `build_plain.py`, `build_access
 ## Route check (added Nov 13, 2026)
 The resident enters the trip they make (start, destination, bus/streetcar/subway route, rider, day and time of day). The tool shows what the open data lists along it. No routing, timing or recommendations.
 - Pages: `/route` (form), `/route/stops` (choose stops), `/route/result`, and examples at `/route/example/<key>`.
-- Modules: `triplens/geocode.py` (local address lookup), `trip.py` (real route line between chosen stops, straight-line walks), `exposure.py` (decisions within 150 m, works within 120 m, decisions that name the route, fixed rider rules), `svgmap.py` (tile-free drawing), `labels.py`.
+- Modules: `gait/geocode.py` (local address lookup), `trip.py` (real route line between chosen stops, straight-line walks), `exposure.py` (decisions within 150 m, works within 120 m, decisions that name the route, fixed rider rules), `svgmap.py` (tile-free drawing), `labels.py`.
 - Data builds: `scripts/build_route_data.py` (GTFS shapes and ordered stops into `data/geo/routes.json`) and `scripts/build_address_index.py` (City Address Points CSV into `data/geo/address.sqlite`). Download the CSV first: Toronto Open Data, "Address Points (Municipal) - Toronto One Address Repository", file "Address Points - 4326.csv", saved as `data/geo/address_points.csv` (about 180 MB, not committed).
 - Privacy: addresses are looked up locally, nothing is stored, no cookies, no map tiles, addresses are not in URLs. A test checks that no file is written.
 - Design doc: `docs/route-check-architecture.md`.
@@ -220,7 +220,8 @@ The resident enters the trip they make (start, destination, bus/streetcar/subway
 Run order now also includes: `build_access_data.py`, `build_route_data.py`, `build_address_index.py`.
 
 ## Before and after a change (added Nov 13, 2026)
-Changes live in `data/changes/*.json` as structured effects with exact quotes from saved source text (`data/raw/ttc_512_stclair.txt`). `triplens/changes.py` applies them to the resident's trip and reruns the rider rules, then the result page shows a before/after table and new accessibility issues.
-- Real: TTC proposal to remove nine 512 St Clair stops (status: proposed; stops still in the Nov 2026 schedule file). Example: `/route/example/stclair-512`.
+Changes live in `data/changes/*.json` as structured effects with exact quotes from saved source text (for City reports, the cached PDF pages). `gait/changes.py` applies them to the resident's trip and reruns the rider rules, then the result page shows a before/after table and new accessibility issues.
+- Real: five City Council decisions (Cosburn station closures, Harbord bikeway, RapidTO on 7 Bathurst and 29 Dufferin, Front St layby and shelter). Example: `/route/example/bathurst-7-past`.
+- Retired: the TTC proposal to remove nine 512 St Clair stops (`data/changes_retired/`): its March 2026 date passed and could not be confirmed, and it was not a Council decision.
 - Simulated (labelled): shelter and bench removal at two 501 Queen stops, shown on `/route/example/queen-beverley`.
 - Tests: 47 pass.

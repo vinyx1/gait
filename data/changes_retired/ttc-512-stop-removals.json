@@ -5,7 +5,7 @@
   "status": "proposed",
   "simulated": false,
   "status_note": "The TTC page calls this a proposal starting as early as March 15, 2026, with a survey that closed January 30, 2026. The stops are still in the November 2026 schedule file, so it may not have happened yet. Check with the TTC.",
-  "source_url": "https://www.ttc.ca/riding-the-ttc/Updates/Improving-transit-reliability-on-St-Clair",
+  "source_url": "https://pw.ttc.ca/riding-the-ttc/Updates/Improving-transit-reliability-on-St-Clair",
   "source_file": "data/raw/ttc_512_stclair.txt",
   "quotes": [
     "Starting as early as March 15, 2026, the TTC is proposing a plan to remove nine stops along the 512 St Clair route.",

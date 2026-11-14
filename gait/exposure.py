@@ -150,8 +150,8 @@ def analyze(legs: list[Leg], persona_key: str, band: str, day: str, today_year: 
     mentions = route_mentions([l.route for l in transit])
     flags: list[dict] = []
 
-    def flag(sev, text, evidence, kind="rule", code=None, leg=None):
-        flags.append({"severity": sev, "text": text, "evidence": evidence, "kind": kind, "code": code, "leg": leg})
+    def flag(sev, text, evidence, kind="rule", code=None, leg=None, data=None):
+        flags.append({"severity": sev, "text": text, "evidence": evidence, "kind": kind, "code": code, "leg": leg, "data": data or {}})
 
     # walking legs
     careful = persona_key in ("wheelchair", "senior_walker")
@@ -160,16 +160,17 @@ def analyze(legs: list[Leg], persona_key: str, band: str, day: str, today_year: 
         how = (f"{w.label}: about {est} m along the City's sidewalk network" if w.stats
                else f"{w.label}: {w.length_m} m straight line, times {access.DETOUR} = about {est} m of walking (no sidewalk path found)")
         ev = [how]
+        wd = {"m": est, "limit": p.max_walk_m, "who": p.label.lower(), "label": w.label}
         if est > p.max_walk_m:
             flag("barrier" if careful else "watch", code="walk_over_limit", leg=walks.index(w), text=
-                 f"{w.label}: about {est} m of walking, longer than the {p.max_walk_m} m assumed for a {p.label.lower()}.", evidence=ev)
+                 f"{w.label}: about {est} m of walking, longer than the {p.max_walk_m} m assumed for a {p.label.lower()}.", evidence=ev, data=wd)
         elif est > 0.8 * p.max_walk_m:
-            flag("watch", code="walk_near_limit", leg=walks.index(w), text=f"{w.label}: about {est} m of walking, close to the {p.max_walk_m} m assumed for a {p.label.lower()}.", evidence=ev)
+            flag("watch", code="walk_near_limit", leg=walks.index(w), text=f"{w.label}: about {est} m of walking, close to the {p.max_walk_m} m assumed for a {p.label.lower()}.", evidence=ev, data=wd)
         if w.stats and w.stats["no_sidewalk_m"] > 0:
             flag("barrier" if careful and w.stats["no_sidewalk_m"] >= 50 else "watch", code="no_sidewalk", leg=walks.index(w), text=
-                 f"{w.label}: about {w.stats['no_sidewalk_m']} m of the walk is on a street or laneway with no sidewalk in the City's data.", evidence=ev)
+                 f"{w.label}: about {w.stats['no_sidewalk_m']} m of the walk is on a street or laneway with no sidewalk in the City's data.", evidence=ev, data={**wd, "no_sidewalk_m": w.stats["no_sidewalk_m"]})
         if w.stats and w.stats["crossings"].get("no signal") and careful:
-            flag("watch", code="unsignalled", leg=walks.index(w), text=f"{w.label}: the path crosses at {w.stats['crossings']['no signal']} crossing(s) the City lists with no signal.", evidence=ev)
+            flag("watch", code="unsignalled", leg=walks.index(w), text=f"{w.label}: the path crosses at {w.stats['crossings']['no signal']} crossing(s) the City lists with no signal.", evidence=ev, data={**wd, "n": w.stats['crossings']['no signal']})
         if not w.stats:
             flag("info", code="straight", leg=walks.index(w), text=f"{w.label}: no sidewalk path was found in the City's network, so this walk is a straight-line estimate.", evidence=ev)
 
@@ -182,20 +183,20 @@ def analyze(legs: list[Leg], persona_key: str, band: str, day: str, today_year: 
             if persona_key == "wheelchair" and "wheelchair_boarding" in rec:
                 wb = rec["wheelchair_boarding"]
                 if wb == "2":
-                    flag("barrier", f"{role} {rec['name']}: boarding is listed as not possible.", [line], code="boarding_no:" + role)
+                    flag("barrier", f"{role} {rec['name']}: boarding is listed as not possible.", [line], code="boarding_no:" + role, data={"stop": rec["name"], "role": role})
                 elif wb == "0":
-                    flag("watch", f"{role} {rec['name']}: the TTC file has no wheelchair boarding information for this stop.", [line], code="boarding_unknown:" + role)
+                    flag("watch", f"{role} {rec['name']}: the TTC file has no wheelchair boarding information for this stop.", [line], code="boarding_unknown:" + role, data={"stop": rec["name"], "role": role})
             if careful and rec.get("platform"):
-                flag("watch", f"{role} {rec['name']}: you board from a {rec['platform']}, crossing the cycle track to reach it. Raised platforms can make boarding more level; check how the crossing is marked.", [line], code="platform:" + role)
+                flag("watch", f"{role} {rec['name']}: you board from a {rec['platform']}, crossing the cycle track to reach it. Raised platforms can make boarding more level; check how the crossing is marked.", [line], code="platform:" + role, data={"stop": rec["name"], "role": role, "platform": rec["platform"]})
             if careful and role == "Boarding" and "shelter_listed" in rec and not rec["shelter_listed"] and not rec.get("reconstructed") and rec.get("service"):
                 n_w, nh_w = _band_count(rec, day, band)
                 if n_w:
                     wait = round(60 * nh_w / n_w / 2)
                     if wait >= 4:
-                        flag("watch", f"{role} {rec['name']}: no shelter is listed, and the average wait at your travel time is about {wait} minutes, outdoors in winter weather.", [line], code="shelter_wait")
+                        flag("watch", f"{role} {rec['name']}: no shelter is listed, and the average wait at your travel time is about {wait} minutes, outdoors in winter weather.", [line], code="shelter_wait", data={"stop": rec["name"], "role": role, "wait": wait})
             if persona_key == "senior_walker" and role == "Boarding" and "shelter_listed" in rec and not rec.get("reconstructed") \
                     and not rec["shelter_listed"] and not rec["bench_listed"]:
-                flag("watch", f"{role} {rec['name']}: no shelter or bench is listed in City data (the data may be incomplete).", [line], code="no_seat")
+                flag("watch", f"{role} {rec['name']}: no shelter or bench is listed in City data (the data may be incomplete).", [line], code="no_seat", data={"stop": rec["name"], "role": role})
         tf = rt["trip_flags"]
         if persona_key == "wheelchair":
             ev = [f"route {t.route} {rt['long']}: trips flagged accessible {round(tf['accessible'] * 100)}%, "
@@ -211,7 +212,7 @@ def analyze(legs: list[Leg], persona_key: str, band: str, day: str, today_year: 
             n, nh = _band_count(b, day, band)
             ev = [access.stop_line(b)]
             if n == 0:
-                flag("barrier", code="no_service", evidence=ev, text=f"{b['name']}: no {DAYS[day]} departures in the {BANDS[band][0].lower()} in the base schedule.")
+                flag("barrier", code="no_service", evidence=ev, data={"stop": b["name"], "role": "Boarding", "day": day, "band": band}, text=f"{b['name']}: no {DAYS[day]} departures in the {BANDS[band][0].lower()} in the base schedule.")
             else:
                 gap = round(60 * nh / n)
                 flag("info", f"{b['name']}: {n} {DAYS[day]} departures in the {BANDS[band][0].lower()}, about one every {gap} minutes on average (all routes at the stop).", ev)
@@ -244,3 +245,89 @@ def analyze(legs: list[Leg], persona_key: str, band: str, day: str, today_year: 
     flags.sort(key=lambda f: (order[f["severity"]], f["kind"] != "act"))
     return {"persona": p.label, "band": BANDS[band][0], "day": DAYS[day], "flags": flags, "decisions": items, "works": works,
             "mentions": mentions, "walk_m": [w.length_m for w in walks], "legs": [(l.kind, l.label, l.length_m) for l in legs]}
+
+
+# ---------- what Gait checked for this rider, on this trip, as a short list ----------
+# The same fixed checks as analyze(), written as one line each, including the ones that pass,
+# so the rider can see what was looked at. "ok" passed, "warn" is worth knowing, "bad" is past a fixed limit.
+
+def _where(label: str) -> str:
+    if not label.startswith("Walk to "):
+        return label.lower()
+    t = label[len("Walk to "):]
+    if t.startswith("your "):
+        return t
+    t = t.split(" (")[0]
+    return f"the stop at {t.replace(' at ', ' and ', 1)}" if " at " in t else f"the {t} stop"
+
+
+def checklist(legs: list[Leg], persona_key: str, band: str, day: str, stop_override: dict | None = None) -> list[dict]:
+    p = access.PERSONAS[persona_key]
+    careful = persona_key in ("wheelchair", "senior_walker")
+    out = []
+    add = lambda state, text: out.append({"state": state, "text": text})
+    walks = [l for l in legs if l.kind == "walk"]
+    transit = [l for l in legs if l.kind == "transit"]
+    rec = lambda st: (stop_override or {}).get(st.get("stop_id")) or stop_records().get(st.get("stop_id"), st)
+
+    for w in walks:
+        m, where = walk_estimate_m(w), _where(w.label)
+        if m > p.max_walk_m:
+            add("bad", f"Walk to {where}: about {m} m, more than your {p.max_walk_m} m limit")
+        elif m > 0.8 * p.max_walk_m:
+            add("warn", f"Walk to {where}: about {m} m, close to your {p.max_walk_m} m limit")
+        else:
+            add("ok", f"Walk to {where}: about {m} m, within your {p.max_walk_m} m limit")
+
+    routed = [w for w in walks if w.stats]
+    if len(routed) < len(walks):
+        add("warn", "No sidewalk path was found for one walk, so its distance is a straight-line estimate")
+    no_sw = sum(w.stats["no_sidewalk_m"] for w in routed)
+    if routed:
+        add("ok", "Sidewalk the whole way, in the City's data") if no_sw == 0 else \
+            add("bad" if careful and no_sw >= 50 else "warn", f"About {no_sw} m of walking on streets with no sidewalk, in the City's data")
+    if careful and routed:
+        ns = sum(w.stats["crossings"].get("no signal", 0) for w in routed)
+        add("ok", "No crossings without a traffic signal") if ns == 0 else \
+            add("warn", f"{ns} crossing{'s' if ns > 1 else ''} with no traffic signal")
+
+    for t in transit:
+        b, a = rec(t.board), rec(t.alight)
+        bn = b["name"].split(" (")[0]
+        gone = " (the stop has since been removed)"
+        if careful:
+            if b.get("reconstructed") or "shelter_listed" not in b:
+                add("warn", f"Shelter and bench at {bn} are not known" + (gone if b.get("reconstructed") else ""))
+            elif b["shelter_listed"] and b.get("bench_listed"):
+                add("ok", f"Your stop, {bn}, has a shelter and a bench listed")
+            elif b["shelter_listed"]:
+                add("ok", f"Your stop, {bn}, has a shelter listed")
+            elif b.get("bench_listed"):
+                add("warn", f"Your stop, {bn}, has a bench but no shelter listed")
+            else:
+                add("warn", f"Your stop, {bn}, has no shelter or bench listed")
+            if b.get("platform"):
+                add("warn", f"At {bn} you board from a {b['platform']}, crossing the cycle track to reach it")
+        if persona_key == "wheelchair":
+            wb = [s.get("wheelchair_boarding") for s in (b, a)]
+            if b.get("reconstructed"):
+                add("warn", f"Wheelchair boarding at {bn} is not known{gone}")
+            elif "2" in wb:
+                add("bad", "The TTC lists wheelchair boarding as not possible at one of your stops")
+            elif "0" in wb or None in wb:
+                add("warn", "The TTC has no wheelchair boarding information for one of your stops")
+            else:
+                add("ok", "The TTC lists wheelchair boarding at both of your stops")
+            acc = load_routes()[t.route]["trip_flags"]["accessible"]
+            add("ok", f"All {t.route} trips are flagged wheelchair accessible") if acc >= 1 else \
+                add("bad" if acc == 0 else "warn", f"{round(acc * 100)}% of {t.route} trips are flagged wheelchair accessible in the TTC schedule file")
+        if b.get("reconstructed"):
+            add("warn", f"Bus times at {bn} are not in the current schedule{gone}")
+        elif b.get("service"):
+            n, nh = _band_count(b, day, band)
+            when = BANDS[band][0].split(" (")[0].lower()
+            if n == 0:
+                add("bad", f"No {DAYS[day]} buses leave {bn} in the {when}, in the regular schedule")
+            else:
+                add("ok" if 60 * nh / n <= 15 else "warn", f"About one departure every {round(60 * nh / n)} minutes from {bn} ({DAYS[day]}, {when}, all routes at the stop)")
+    return out

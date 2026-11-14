@@ -1,0 +1,922 @@
+{
+ "source": "City of Toronto staff reports (indexed), Council item status",
+ "items": [
+  {
+   "id": "2023.CC13.17",
+   "address": "975 Danforth Avenue",
+   "lat": 43.6801481150316,
+   "lon": -79.337427576914,
+   "ward": "Toronto-Danforth",
+   "storeys": 10,
+   "units": 57,
+   "quotes": [
+    {
+     "text": "On April 29, 2022, the City received a Zoning By-law Amendment application to permit a 10-storey mixed-use building with commercial uses on the ground floor and 57 dwelling units above.",
+     "page": 2
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2023/cc/bgrd/backgroundfile-241262.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2023.CC13.17",
+   "status": "City Council adopted this item on December 13, 14 and 15, 2023 without amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2023.CC13.23",
+   "address": "4174 Dundas Street West",
+   "lat": 43.6613430902897,
+   "lon": -79.509714873268,
+   "ward": "Etobicoke Centre",
+   "storeys": 15,
+   "units": null,
+   "quotes": [
+    {
+     "text": "On August 31, 2021, the applicant filed a Zoning By-law Amendment application to permit a 15-storey residential building at 4174 Dundas Street West.",
+     "page": 2
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2023/cc/bgrd/backgroundfile-241369.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2023.CC13.23",
+   "status": "City Council adopted this item on December 13, 14 and 15, 2023 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2023.DM12.1",
+   "address": "25 Old York Mills Road",
+   "lat": 43.7434039455178,
+   "lon": -79.4043124025676,
+   "ward": "Don Valley West",
+   "storeys": 12,
+   "units": null,
+   "quotes": [
+    {
+     "text": "On July 19, 2022, the Church submitted the Applications to permit a 12-storey mixed use building on the Subject Property, which proposed to include residential units, church and multifunction space, daycare space and community space . The Applications were deemed complete as of August 25, 2022 and on January 4, 2023, the Church appealed the Applications to the Tribunal for the City of Toronto’s (the “City”) failure to make a decision within the statutory timeframes (the “Appeals”).",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2023/dm/bgrd/backgroundfile-240334.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2023.DM12.1",
+   "status": "City Council adopted this item on November 8 and 9, 2023 without amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2023.EY5.1",
+   "address": "4500 Jane Street",
+   "lat": 43.7664600056008,
+   "lon": -79.5204717976801,
+   "ward": "Humber River-Black Creek",
+   "storeys": 14,
+   "units": null,
+   "quotes": [
+    {
+     "text": "The application to amend the Zoning By-law proposes to permit two six-storey mid-rise buildings fronting Gosford Boulevard and allow for the retention of the existing 14-storey rental apartment building at 4500 Jane Street.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2023/ey/bgrd/backgroundfile-236103.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2023.EY5.1",
+   "status": "City Council adopted this item on June 14 and 15, 2023 without amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2023.EY6.2",
+   "address": "2801 Jane Street",
+   "lat": 43.7502167978831,
+   "lon": -79.5151678308467,
+   "ward": "Humber River-Black Creek",
+   "storeys": 11,
+   "units": null,
+   "quotes": [
+    {
+     "text": "This application proposes to amend city-wide Zoning By-law 569-2013 for the property at 2801 Jane Street to permit an 11-storey apartment building (35.4 metres, plus a 5.5- metre mechanical penthouse and amenity floor) with a Gross Floor Area of 19,230 square metres.",
+     "page": 3
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2023/ey/bgrd/backgroundfile-236928.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2023.EY6.2",
+   "status": "City Council adopted this item on July 19 and 20, 2023 without amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2023.MM13.14",
+   "address": "8 Jopling Avenue South",
+   "lat": 43.6402614350874,
+   "lon": -79.5393900699303,
+   "ward": "Etobicoke-Lakeshore",
+   "storeys": 33,
+   "units": 688,
+   "quotes": [
+    {
+     "text": "Specific By-law 187-2022 zones the subject property to permit a mixed-use development consisting of two towers of 27-storeys (Tower A) and 33-storeys (Tower B) connected by a 4 to 6-storey base and providing a maximum of 688 dwelling units.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2023/mm/bgrd/backgroundfile-241412.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2023.MM13.14",
+   "status": "This item was considered by City Council on December 13, 14 and 15, 2023 and was not adopted",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2023.PB6.5",
+   "address": "1406 Yonge Street",
+   "lat": 43.6867379617244,
+   "lon": -79.3937822791772,
+   "ward": "Toronto-St. Paul's",
+   "storeys": 50,
+   "units": null,
+   "quotes": [
+    {
+     "text": "In July 2022, City Council approved an Official Plan and Zoning By-law Amendment to permit a 50-storey mixed-use building with commercial at grade at 1406-1420 Yonge Street.",
+     "page": 7
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2023/pb/bgrd/backgroundfile-236400.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2023.PB6.5",
+   "status": "This item was considered by Toronto Preservation Board on May 23, 2023 and was adopted without amendment",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2023.TE5.9",
+   "address": "880 Eastern Avenue",
+   "lat": 43.6627127518946,
+   "lon": -79.3260049217446,
+   "ward": "Toronto-Danforth",
+   "storeys": 12,
+   "units": 180,
+   "quotes": [
+    {
+     "text": "This report reviews and recommends approval of the application to amend the Zoning By-law to permit a 12-storey (47.5 metres including mechanical penthouse) mixed-use building containing 180 dwelling units.",
+     "page": 1
+    },
+    {
+     "text": "The development is estimated to generate up to 30 vehicular trips (inbound and outbound combined) in peak hours.",
+     "page": 6
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2023/te/bgrd/backgroundfile-236372.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2023.TE5.9",
+   "status": "City Council adopted this item on June 14 and 15, 2023 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2023.TE9.12",
+   "address": "822 Richmond Street West",
+   "lat": 43.6448841864164,
+   "lon": -79.4112153528434,
+   "ward": "Spadina-Fort York",
+   "storeys": 8,
+   "units": 26,
+   "quotes": [
+    {
+     "text": "This report reviews and recommends approval of the application to amend the Official Plan and Zoning By-law to permit an 8-storey (26.53 metres, including the mechanical penthouse) residential building with 26 rental dwelling units.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2023/te/bgrd/backgroundfile-240453.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2023.TE9.12",
+   "status": "City Council adopted this item on December 13, 14 and 15, 2023 without amendments and without debate",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.CC21.3",
+   "address": "70 Lynn Williams Street",
+   "lat": 43.6392923469053,
+   "lon": -79.4161793986369,
+   "ward": "Spadina-Fort York",
+   "storeys": 43,
+   "units": 588,
+   "quotes": [
+    {
+     "text": "On October 18, 2023, a Zoning By-law Amendment application was submitted for a development at 70-86 Lynn Williams Street to permit a 43-storey mixed-use building containing 588 rental units, demolishing the north half of the heritage building located on the 80-86 Lynn Williams Street portion of the site, and retaining the south half fronting onto Lynn Williams Street.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/cc/bgrd/backgroundfile-248112.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.CC21.3",
+   "status": "City Council adopted this item on September 5, 2024 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.EY18.6",
+   "address": "4875 Dundas Street West",
+   "lat": 43.6495383519881,
+   "lon": -79.5275292044268,
+   "ward": "Etobicoke-Lakeshore",
+   "storeys": 45,
+   "units": null,
+   "quotes": [
+    {
+     "text": "On May 7, 2024, a combined Official Plan Amendment and Zoning By-law Amendment application was submitted for a development at 4875 Dundas Street West to permit a 45-storey (150-metre high) mixed use building with a four-storey base building.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/ey/bgrd/backgroundfile-250620.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.EY18.6",
+   "status": "City Council adopted this item on December 17 and 18, 2024 without amendments and without debate",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.NY11.2",
+   "address": "72 Church Avenue",
+   "lat": 43.774790097253,
+   "lon": -79.4103241286315,
+   "ward": "Willowdale",
+   "storeys": 4,
+   "units": 14,
+   "quotes": [
+    {
+     "text": "This application proposes to permit a 4-storey rental residential building containing 14 units at a height of 13.9 metres.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/ny/bgrd/backgroundfile-242666.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.NY11.2",
+   "status": "City Council adopted this item on March 20 and 21, 2024 without amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.NY13.3",
+   "address": "824 Sheppard Avenue West",
+   "lat": 43.7532548801633,
+   "lon": -79.4512466125627,
+   "ward": "York Centre",
+   "storeys": 12,
+   "units": null,
+   "quotes": [
+    {
+     "text": "The application to amend the Zoning By-law proposes to amend the City of Toronto Zoning By-law 569- 2013 for the property at 824 Sheppard Avenue West, 177, 179 and 181 Cocksfield Avenue to permit a 12-storey mid-rise building with 19,932 square metres of GFA, including 459 square metres of retail space and a 373 square metre daycare, resulting in a Floor Space Index of 4.0.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/ny/bgrd/backgroundfile-245216.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.NY13.3",
+   "status": "City Council adopted this item on May 22 and 23, 2024 without amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.PB15.11",
+   "address": "625 Yonge Street",
+   "lat": 43.6673207824787,
+   "lon": -79.3853288617961,
+   "ward": "Toronto Centre",
+   "storeys": 57,
+   "units": null,
+   "quotes": [
+    {
+     "text": "Development Proposal and Conservation Strategy On December 14, 2021 Official Plan and Zoning By-law Amendment applications were submitted to permit a 57-storey mixed use building atop a 4-to-10-storey podium which anticipated the demolition of all the buildings on the site, including those at 625 Yonge Street.",
+     "page": 5
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/pb/bgrd/backgroundfile-243378.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.PB15.11",
+   "status": "This item was considered by Toronto Preservation Board on March 18, 2024 and was adopted without amendment",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.PH15.3",
+   "address": "35 Bellevue Avenue",
+   "lat": 43.6542484745274,
+   "lon": -79.4030706601977,
+   "ward": "University-Rosedale",
+   "storeys": 4,
+   "units": null,
+   "quotes": [
+    {
+     "text": "This report reviews and recommends approval of a City-initiated Zoning By-law amendment to permit a 4-storey residential apartment building with 78 new affordable rental dwelling units with supports at 35 Bellevue Avenue in the Kensington Market neighbourhood.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/ph/bgrd/backgroundfile-248674.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.PH15.3",
+   "status": "City Council adopted this item on October 9 and 10, 2024 without amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.SC10.3",
+   "address": "2031 Kennedy Road",
+   "lat": 43.7771427226659,
+   "lon": -79.2846347725376,
+   "ward": "Scarborough-Agincourt",
+   "storeys": 14,
+   "units": 1044,
+   "quotes": [
+    {
+     "text": "The subject lands and the lands to the east were rezoned Commercial/Residential (CR) to permit a multi-phased development consisting of: residential tower heights of 31, 34 and 40 storeys; 1,044 residential dwelling units, of which a minimum 59 are to be three or more bedroom units; an expansion of the existing 14-storey hotel; a publicly accessible urban plaza; a 9-storey office and retail building; and an above-grade vehicular parking structure.",
+     "page": 2
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-241932.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.SC10.3",
+   "status": "City Council adopted this item on February 6 and 7, 2024 without amendments and without debate",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.SC11.1",
+   "address": "2183 Lawrence Avenue East",
+   "lat": 43.7473540447201,
+   "lon": -79.2835073639135,
+   "ward": "Scarborough Centre",
+   "storeys": 24,
+   "units": null,
+   "quotes": [
+    {
+     "text": "Description: The application proposes to amend the Zoning By-law to permit a 24-storey building (Tower A) and a 21-storey building (Tower B), together with a 6-storey podium.",
+     "page": 3
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-242785.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.SC11.1",
+   "status": "City Council adopted this item on March 20 and 21, 2024 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.SC14.5",
+   "address": "4201 Kingston Road",
+   "lat": 43.7594128668945,
+   "lon": -79.1961321695288,
+   "ward": "Scarborough-Guildwood",
+   "storeys": 4,
+   "units": null,
+   "quotes": [
+    {
+     "text": "The applications proposes to amend Zoning By-law 569-2013 and Former City of Scarborough West Hill Community By-law 10327 for the lands at 4201 & 4203 Kingston Road and a portion of 120 Galloway Road to permit a 4-storey building with 68 affordable rental housing units with a total gross floor area of 4,847 square metres.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/sc/bgrd/backgroundfile-245889.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.SC14.5",
+   "status": "City Council adopted this item on June 26 and 27, 2024 without amendments and without debate",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.TE12.5",
+   "address": "171 Lowther Avenue",
+   "lat": 43.6681314227247,
+   "lon": -79.4069657450009,
+   "ward": "University-Rosedale",
+   "storeys": 11,
+   "units": 64,
+   "quotes": [
+    {
+     "text": "This report reviews and recommends approval of the application to amend the Official Plan and Zoning By-law to re-designate the lands from Neighbourhoods to Apartment Neighbourhoods, and to permit an 11-storey (39.5 metres excluding mechanical penthouse) residential building with 64 dwelling units.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/te/bgrd/backgroundfile-244106.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.TE12.5",
+   "status": "City Council adopted this item on April 17 and 18, 2024 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.TE13.6",
+   "address": "1095 Danforth Avenue",
+   "lat": 43.6806631066418,
+   "lon": -79.3347655045841,
+   "ward": "Toronto-Danforth",
+   "storeys": 13,
+   "units": null,
+   "quotes": [
+    {
+     "text": "The applications to amend the Zoning By-law proposes to permit a 13-storey mixed-use building for the properties at 1095 and 1111 Danforth Avenue.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/te/bgrd/backgroundfile-245194.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.TE13.6",
+   "status": "City Council adopted this item on May 22 and 23, 2024 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.TE13.8",
+   "address": "1400 Gerrard Street East",
+   "lat": 43.6720809552793,
+   "lon": -79.323593516471,
+   "ward": "Toronto-Danforth",
+   "storeys": 7,
+   "units": 19,
+   "quotes": [
+    {
+     "text": "Attachment 1: Application Data Sheet Municipal Address: 1400 GERRARD ST E Date Received: May 2, 2022 Application Number: 22 140740 STE 14 OZ Application Type: Rezoning Project Description: Rezoning to permit a 7-storey mixed-use building of 19 new residential dwelling units and 2 commercial units.",
+     "page": 11
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/te/bgrd/backgroundfile-245118.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.TE13.8",
+   "status": "City Council adopted this item on May 22 and 23, 2024 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.TE15.10",
+   "address": "400 Broadview Avenue",
+   "lat": 43.6664244740766,
+   "lon": -79.3534110359428,
+   "ward": "Toronto-Danforth",
+   "storeys": 20,
+   "units": null,
+   "quotes": [
+    {
+     "text": "Attachment 1: Application Data Sheet Municipal Address: 400 BROADVIEW Date Received: April 16, 2024 AVE Application Number: 24 135519 STE 14 OZ Application Type: Official Plan and Rezoning Project Description: Official Plan and Zoning by-law Amendment application to permit a 20-storey long-term care facility, with 392 beds.",
+     "page": 12
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/te/bgrd/backgroundfile-247040.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.TE15.10",
+   "status": "City Council adopted this item on July 24 and 25, 2024 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.TE16.5",
+   "address": "214 Sherbourne Street",
+   "lat": 43.6574147170911,
+   "lon": -79.370878014018,
+   "ward": "Toronto Centre",
+   "storeys": 46,
+   "units": null,
+   "quotes": [
+    {
+     "text": "This report reviews and recommends approval of the application to amend the Official Plan and Zoning By-law to permit a 46-storey (149.45 metres, including the mechanical penthouse) residential building with additional non-residential uses in the integrated heritage building being retained as part of the overall development proposal at 214-230 Sherbourne Street.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/te/bgrd/backgroundfile-248596.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.TE16.5",
+   "status": "City Council adopted this item on October 9 and 10, 2024 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2024.TE17.8",
+   "address": "985 Woodbine Avenue",
+   "lat": 43.6862325914249,
+   "lon": -79.3127815462673,
+   "ward": "Beaches-East York",
+   "storeys": 35,
+   "units": null,
+   "quotes": [
+    {
+     "text": "This application proposes to amend Zoning By-law 569-2013 for the lands municipally known as 985 Woodbine Avenue and 2078, 2086, 2100, 2102 and 2106 Danforth Avenue to permit a mixed-use development with a 10-storey residential building in the north-easterly portion of the site and a 35-storey tower in the south-westerly portion of the site, connected by non-residential uses in a shared base building.",
+     "page": 1
+    },
+    {
+     "text": "Regarding traffic impacts, the proposed development is projected to generate 50, 55, and 60 net new two-way vehicular trips during the morning, afternoon, and Saturday peak hours, respectively.",
+     "page": 16
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2024/te/bgrd/backgroundfile-249314.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2024.TE17.8",
+   "status": "City Council adopted this item on November 13 and 14, 2024 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2025.EY26.2",
+   "address": "1138 Islington Avenue",
+   "lat": 43.639158898302,
+   "lon": -79.5214826931383,
+   "ward": "Etobicoke-Lakeshore",
+   "storeys": 6,
+   "units": null,
+   "quotes": [
+    {
+     "text": "This report recommends approval of an application to amend the Zoning By-law to permit a 6-storey (19.3 metres, excluding mechanical penthouse) residential building with associated amenity space, landscaping, and surface parking accessed from Bering Avenue.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2025/ey/bgrd/backgroundfile-259023.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.EY26.2",
+   "status": "City Council adopted this item on November 12 and 13, 2025 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2025.EY26.4",
+   "address": "3418 Lake Shore Boulevard West",
+   "lat": 43.5958697837622,
+   "lon": -79.5286813596649,
+   "ward": "Etobicoke-Lakeshore",
+   "storeys": 12,
+   "units": 79,
+   "quotes": [
+    {
+     "text": "This report recommends approval of an application to amend the Official Plan and Zoning By-law to permit a 12-storey (41-metre, including mechanical penthouse and enclosed amenity area above the eleventh storey) mixed-use building with 79 dwelling units, and a minimum non-residential gross floor area of 95 square metres at 3418 Lake Shore Boulevard West, and associated surface level parking at 0 Skeens Lane.",
+     "page": 1
+    },
+    {
+     "text": "The current TIS states that the proposed development is expected to generate 18 two- way vehicle trips during the weekday morning and afternoon peak hours, respectively.",
+     "page": 10
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2025/ey/bgrd/backgroundfile-259002.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.EY26.4",
+   "status": "City Council adopted this item on November 12 and 13, 2025 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2025.EY26.5",
+   "address": "5280 Dundas Street West",
+   "lat": 43.6378258869505,
+   "lon": -79.539337725584,
+   "ward": "Etobicoke-Lakeshore",
+   "storeys": 42,
+   "units": null,
+   "quotes": [
+    {
+     "text": "The application to amend the Zoning By-law proposes to permit a 42-storey (137.8 metres, excluding mechanical penthouse) mixed use building, with a three -storey base, 29,135 square metres of Gross Floor Area consisting of 95 square metres of commercial space at grade and a 32 square metres privately-owned publicly accessible space for the property at 5280 Dundas Street West.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2025/ey/bgrd/backgroundfile-258650.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.EY26.5",
+   "status": "City Council adopted this item on November 12 and 13, 2025 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2025.NY21.2",
+   "address": "114 Finch Avenue East",
+   "lat": 43.7817765345376,
+   "lon": -79.4074659586775,
+   "ward": "Willowdale",
+   "storeys": 11,
+   "units": 201,
+   "quotes": [
+    {
+     "text": "This application proposes to amend the zoning by-law and the Official Plan to permit an 11-storey (36 metres excluding a 5.0 metre mechanical penthouse) mixed-use building with 201 residential units at 104 -114 Finch Avenue East.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2025/ny/bgrd/backgroundfile-252991.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.NY21.2",
+   "status": "City Council adopted this item on March 26 and 27, 2025 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2025.NY21.3",
+   "address": "2810 Bayview Avenue",
+   "lat": 43.7650127979401,
+   "lon": -79.3881281458294,
+   "ward": "Willowdale",
+   "storeys": 42,
+   "units": 540,
+   "quotes": [
+    {
+     "text": "This Report recommends approval of the application to amend the Official Plan and Zoning By-law to permit a 42-storey (133.23 metres plus mechanical penthouse) residential building containing 540 dwelling units at 2810-2816 Bayview Avenue.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2025/ny/bgrd/backgroundfile-252881.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.NY21.3",
+   "status": "City Council adopted this item on March 26 and 27, 2025 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2025.NY25.6",
+   "address": "2674 Yonge Street",
+   "lat": 43.7167960256239,
+   "lon": -79.4006926677483,
+   "ward": "Eglinton-Lawrence",
+   "storeys": 13,
+   "units": null,
+   "quotes": [
+    {
+     "text": "The report recommended approval of the draft Zoning By-law Amendment to permit a 13-storey (50.4 metres, plus 6.0 mechanical penthouse) seniors residence building providing independent residential suites, assisted living suites and memory care suites.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2025/cc/bgrd/backgroundfile-257550.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.NY25.6",
+   "status": "City Council adopted this item on July 23 and 24, 2025 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2025.NY25.8",
+   "address": "1410 Eglinton Avenue West",
+   "lat": 43.6982940170943,
+   "lon": -79.4389696719666,
+   "ward": "Eglinton-Lawrence",
+   "storeys": 43,
+   "units": 442,
+   "quotes": [
+    {
+     "text": "On January 24, 2025, a complete application for Zoning By-law Amendment was submitted at 1410 Eglinton Avenue West (the “subject lands”) to permit a 43-storey building (145.25 metres plus the mechanical penthouse) with 442 dwelling units totalling 29,438.3 square metres of residential gross floor area (GFA) and 184.4 square metres of retail space on the ground floor (the “proposal”).",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2025/ny/bgrd/backgroundfile-256273.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.NY25.8",
+   "status": "City Council adopted this item on July 23 and 24, 2025 without amendments and without debate",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2025.SC23.1",
+   "address": "2829 Eglinton Avenue East",
+   "lat": 43.7371979053605,
+   "lon": -79.2438352002671,
+   "ward": "Scarborough Southwest",
+   "storeys": 14,
+   "units": 190,
+   "quotes": [
+    {
+     "text": "The application proposes to amend the Zoning By-law for the lands at 2823 to 2829 Eglinton Avenue East to permit a 14-storey mixed use building with a total gross floor area of 15,231 square metres, containing 190 residential dwelling units and 672 square metres of commercial uses at grade.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-255699.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.SC23.1",
+   "status": "City Council adopted this item on June 25 and 26, 2025 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2025.SC24.1",
+   "address": "4610 Finch Avenue East",
+   "lat": 43.8062254688427,
+   "lon": -79.2770018833756,
+   "ward": "Scarborough North",
+   "storeys": 13,
+   "units": null,
+   "quotes": [
+    {
+     "text": "The application to amend the Zoning By-law proposes to permit a 40,020 square metre, 13-storey (53.2 metres), excluding the mechanical penthouse, building that will operate as a long-term care facility containing 378 beds, ambulance depot and medical office for the property at 4610 Finch Avenue East.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2025/sc/bgrd/backgroundfile-256239.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.SC24.1",
+   "status": "City Council adopted this item on July 23 and 24, 2025 without amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2025.TE23.3",
+   "address": "604 Bay Street",
+   "lat": 43.6561045631908,
+   "lon": -79.3842240601759,
+   "ward": "University-Rosedale",
+   "storeys": 43,
+   "units": null,
+   "quotes": [
+    {
+     "text": "The application to amend the Official Plan and Zoning By-law proposes to permit a 16-storey building at 604-610 Bay Street and a 43-storey building at 130 Elizabeth Street.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2025/te/bgrd/backgroundfile-255494.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2025.TE23.3",
+   "status": "City Council adopted this item on June 25 and 26, 2025 without amendments and without debate",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2026.CC39.9",
+   "address": "468 Eglinton Avenue West",
+   "lat": 43.7040497798402,
+   "lon": -79.4123678375616,
+   "ward": "Eglinton-Lawrence",
+   "storeys": 31,
+   "units": 322,
+   "quotes": [
+    {
+     "text": "The Revised Proposal sought to permit a 31-storey (105.6-metre, inclusive of mechanical penthouse) mixed-use building with 322 dwelling units and retail space on the ground floor, and incorporated the lands located at 468 Eglinton Avenue West given a change in ownership.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2026/cc/bgrd/backgroundfile-285103.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.CC39.9",
+   "status": "City Council adopted this item on March 25 and 26, 2026 without amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2026.EY30.1",
+   "address": "2775 Jane Street",
+   "lat": 43.748655871751,
+   "lon": -79.5146168627097,
+   "ward": "Humber River-Black Creek",
+   "storeys": 27,
+   "units": null,
+   "quotes": [
+    {
+     "text": "The application to amend the Zoning By-law proposes to permit a 27-storey (89.4 metres, excluding the mechanical penthouse) infill residential building north of the existing 17-storey apartment building at 2775 Jane Street.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2026/ey/bgrd/backgroundfile-285137.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.EY30.1",
+   "status": "City Council adopted this item on April 22 and 23, 2026 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2026.EY31.2",
+   "address": "4 Mendota Road",
+   "lat": 43.6247640357754,
+   "lon": -79.4951658375654,
+   "ward": "Etobicoke-Lakeshore",
+   "storeys": 4,
+   "units": null,
+   "quotes": [
+    {
+     "text": "This Report recommends approval of the application to amend the Official Plan and Zoning By-law at 2 to 4 Mendota Road to permit a 4-storey (14.63 metre) self-storage building with a gross floor area of 11,155 square metres, 31 at-grade parking spaces and 3 truck loading bays.",
+     "page": 1
+    },
+    {
+     "text": "Based on the submitted report, the proposed development is projected to generate approximately 29, 33 and 11 two-way vehicular trips during the weekday morning, afternoon, and Saturday midday peak hours respectively.",
+     "page": 6
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2026/ey/bgrd/backgroundfile-286064.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.EY31.2",
+   "status": "City Council adopted this item on May 20 and 21, 2026 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2026.EY31.3",
+   "address": "2915 Bloor Street West",
+   "lat": 43.6481779195526,
+   "lon": -79.5066532704467,
+   "ward": "Etobicoke-Lakeshore",
+   "storeys": 29,
+   "units": 423,
+   "quotes": [
+    {
+     "text": "On October 1, 2025, the City received an application to amend the Zoning By-law to permit a 29-storey mixed-use building, containing 423 dwelling units, including 7 rental replacement units, and 1,024 square metres of non-residential space at 2915, 2917, 2939, 2941 and 2943 Bloor Street West.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2026/ey/bgrd/backgroundfile-286079.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.EY31.3",
+   "status": "City Council adopted this item on May 20 and 21, 2026 without amendments and without debate",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2026.NY34.13",
+   "address": "537 Eglinton Avenue East",
+   "lat": 43.7103886693734,
+   "lon": -79.3793889958398,
+   "ward": "Don Valley West",
+   "storeys": 35,
+   "units": 383,
+   "quotes": [
+    {
+     "text": "This Report recommends approval of the application to amend the Official Plan and Zoning By-law to permit a 35-storey (111.95 metres, plus 6 metres mechanical penthouse for a total of 117.95 metres) mixed-use building with 383 dwelling units.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2026/ny/bgrd/backgroundfile-288018.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.NY34.13",
+   "status": "City Council adopted this item on July 29 and 30, 2026 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2026.NY34.25",
+   "address": "922 Millwood Road",
+   "lat": 43.7032205208049,
+   "lon": -79.3628665320929,
+   "ward": "Don Valley West",
+   "storeys": 7,
+   "units": null,
+   "quotes": [
+    {
+     "text": "Reasons for Application An Official Plan Amendment application is required to permit a 7-storey mixed-use building in a Neighbourhoods designation.",
+     "page": 4
+    },
+    {
+     "text": "The report estimates that the project will generate approximately 15 and 24 two-way vehicle trips during the morning and afternoon peak hours, respectively.",
+     "page": 11
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2026/ny/bgrd/backgroundfile-288278.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.NY34.25",
+   "status": "City Council adopted this item on July 29 and 30, 2026 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2026.PH27.2",
+   "address": "1631 Queen Street East",
+   "lat": 43.6663007100348,
+   "lon": -79.3155768721075,
+   "ward": "Beaches-East York",
+   "storeys": 18,
+   "units": null,
+   "quotes": [
+    {
+     "text": "Detailed project information including all plans and reports submitted as part of the application can be found on the City's Application Information Centre at www.toronto.ca/1631QueenStE Reasons for Amendments The City-initiated Official Plan Amendment is required to revise Site and Area Specific Policy (SASP) 466 to allow for a greater front wall height than permitted on Queen Street East, to permit indoor amenity space on the 7th (partial) storey, and to permit an 18-storey building facing Eastern Avenue.",
+     "page": 6
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2026/ph/bgrd/backgroundfile-261466.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.PH27.2",
+   "status": "City Council adopted this item on February 4, 2026 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2026.SC28.1",
+   "address": "1212 Kingston Road",
+   "lat": 43.6825861711764,
+   "lon": -79.2790008056918,
+   "ward": "Scarborough Southwest",
+   "storeys": 10,
+   "units": 200,
+   "quotes": [
+    {
+     "text": "The application proposes to amend the Zoning By-law for the lands at 1212-1238 Kingston Road to permit a 10-storey mixed use building with a total gross floor area of 13,276 square metres, containing 200 residential dwelling units and 596 square metres of commercial uses at grade.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2026/sc/bgrd/backgroundfile-261061.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.SC28.1",
+   "status": "City Council adopted this item on February 4, 2026 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2026.SC31.1",
+   "address": "3307 Ellesmere Road",
+   "lat": 43.7867437852984,
+   "lon": -79.1866016574407,
+   "ward": "Scarborough-Rouge Park",
+   "storeys": 11,
+   "units": null,
+   "quotes": [
+    {
+     "text": "The application to amend the Official Plan and Zoning By-law proposes to permit an 11-storey mixed-use building with a total gross floor area of 18,050 square metres, at 3307 and 3313 Ellesmere Road.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2026/sc/bgrd/backgroundfile-285765.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.SC31.1",
+   "status": "City Council adopted this item on May 20 and 21, 2026 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2026.TE28.12",
+   "address": "353 Sherbourne Street",
+   "lat": 43.6628827776456,
+   "lon": -79.3725666610618,
+   "ward": "Toronto Centre",
+   "storeys": 12,
+   "units": 101,
+   "quotes": [
+    {
+     "text": "At its meeting on June 29 and 30, 2022, Toronto and East York Community Council adopted Item 2022.TE34.49, to amend the Official Plan and Zoning By-law to permit a 12-storey (42-metre, excluding mechanical penthouse), mixed use-building containing 101 residential dwelling units, of which 30%, or 31 units, would be affordable housing.",
+     "page": 3
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-261269.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.TE28.12",
+   "status": "City Council adopted this item on February 4, 2026 without amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2026.TE29.12",
+   "address": "1684 Queen Street East",
+   "lat": 43.6674030421513,
+   "lon": -79.3134643975374,
+   "ward": "Beaches-East York",
+   "storeys": 10,
+   "units": null,
+   "quotes": [
+    {
+     "text": "This report reviews and recommends approval of the application to amend the Official Plan and Zoning By-law to permit a 10-storey mixed-use building at 1684, 1698, 1700 and 1702 Queen Street East.",
+     "page": 1
+    },
+    {
+     "text": "The proposed development is projected to generate a total of 54 and 81 vehicular trips during the morning and evening peak hours, respectively.",
+     "page": 12
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-264757.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.TE29.12",
+   "status": "City Council adopted this item on March 25 and 26, 2026 with amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2026.TE32.10",
+   "address": "17 Toronto Street",
+   "lat": 43.6993660590064,
+   "lon": -79.5521825175414,
+   "ward": "Etobicoke North",
+   "storeys": 91,
+   "units": 840,
+   "quotes": [
+    {
+     "text": "This report recommends approval of the application to amend the Zoning By-law, with a holding provision, to permit a 91-storey (300 metres, including mechanical penthouse) mixed use building, including 840 dwelling units and 7,920 square metres of non- residential space at 17-19, 23 and 25 Toronto Street and 55 and 57 Adelaide Street East.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-286057.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.TE32.10",
+   "status": "City Council adopted this item on May 20 and 21, 2026 without amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  },
+  {
+   "id": "2026.TE32.5",
+   "address": "1233 Yonge Street",
+   "lat": 43.6837650592316,
+   "lon": -79.3918185310466,
+   "ward": "University-Rosedale",
+   "storeys": 47,
+   "units": 730,
+   "quotes": [
+    {
+     "text": "This Report recommends approval of the application to amend the Official Plan and Zoning By-law to permit a 47-storey mixed-use building (155 metres, excluding mechanical penthouse), containing 730 dwelling units (including 40 replacement rental units) and 250 square metres of non-residential gross floor area.",
+     "page": 1
+    }
+   ],
+   "source_url": "https://www.toronto.ca/legdocs/mmis/2026/te/bgrd/backgroundfile-285854.pdf",
+   "item_url": "https://secure.toronto.ca/council/agenda-item.do?item=2026.TE32.5",
+   "status": "City Council adopted this item on May 20 and 21, 2026 without amendments",
+   "located_by": "City Address Points dataset (exact address match)"
+  }
+ ]
+}

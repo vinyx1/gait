@@ -1,5 +1,5 @@
 ---
-name: TripLens
+name: Gait
 description: City decisions told at the kitchen table, one colour field per scene.
 colors:
   harvest-gold: "#e8b03a"
@@ -92,15 +92,15 @@ components:
     padding: "72px {spacing.gutter} 48px"
 ---
 
-# Design System: TripLens
+# Design System: Gait
 
 ## Overview
 
 **Creative North Star: "The Harvest Kitchen"**
 
-TripLens tells City decisions the way they would be read aloud at a 1970s Toronto kitchen table. Each scene owns the whole screen in one flat colour from the kitchen (harvest gold, avocado, burnt orange, snow white, Pyrex turquoise; walnut for the footer), and the ink flips between dark coffee brown and cream so the words always sit on the field at body-text contrast. Nothing floats on a card; the page is a stack of full-width colour courses, and the background colour itself changes as the reader scrolls (0.9s cross-fade), so the scene change is the section break.
+Gait tells City decisions the way they would be read aloud at a 1970s Toronto kitchen table. Each scene owns the whole screen in one flat colour from the kitchen (harvest gold, avocado, burnt orange, snow white, Pyrex turquoise; walnut for the footer), and the ink flips between dark coffee brown and cream so the words always sit on the field at body-text contrast. Nothing floats on a card; the page is a stack of full-width colour courses, and the background colour itself changes as the reader scrolls (0.9s cross-fade), so the scene change is the section break.
 
-The world's one picture is a small earth with the neighbourhood standing on its rim: a teal ocean with faint stitched wave rings, and land sewn as a patchwork quilt of farm-field patches (avocado, olive, gold, burnt orange, some with furrows) joined by cream dashed stitches, an avocado glaze edge, a dotted stoneware band, a turquoise dashed bus route, and Toronto building types standing on its rim (bay-and-gable houses, main-street shops with striped awnings, mid-rise apartments with regular window rows) set in a repeating rhythm, round trees, stops and a cream bus, with a soft ink skyline and the CN Tower behind at 16% opacity. In the winter scene white snow caps appear on every roof. It turns like a lazy Susan, one scene per scroll. Drawings are fabric appliqué: one SVG filter (#fabric) gives every shape a woven warp-and-weft grain and softly displaced cut-cloth edges, each building is sewn on with a dashed stitch line just inside its walls, and the page fields carry a faint linen weave (body::before, multiply, 22%). Never gradients, never photographs.
+The world's one picture is a small earth sewn from fabric scraps, with the neighbourhood standing on its rim. The sea is turquoise chambray twill with wavy cream running stitches; the land is scissor-cut appliqué patches, each a different printed cotton (gold gingham, orange polka dot, avocado ticking stripe, rust plaid, cream calico, olive corduroy), hemmed with a dashed running stitch, with a couple of patches mended over others, sewing-button islands held on with a cross of thread, and a few cross-stitches. A striped walnut quilt binding with cream blanket stitches rings the earth, and the turquoise dashed bus route is sewn on top. Toronto building types stand on the rim (bay-and-gable houses, main-street shops with striped awnings, mid-rise apartments) in a repeating rhythm, with round trees, stops and a cream bus, and a soft ink skyline with the CN Tower behind at 16% opacity. In the winter scene white snow caps appear on every roof. It turns like a lazy Susan, one scene per scroll. One SVG filter (#fabric) gives the whole drawing a woven grain and softly cut edges. **Performance rule:** the static drawing is rasterised once into a canvas (at most 2048px) and only moved with a CSS transform; scene-state marks and snow caps sit on a light unfiltered overlay, and the bus orbits on its own zero-size layer by CSS animation. Never apply a filter to anything that changes per frame. The page fields carry a faint linen weave (body::before, 20%). Never gradients, never photographs.
 
 Density is low and type is large: the body never drops below 20px, the display face is a warm, soft-shouldered serif, and every control is a chunky pill at 56px or taller. The register is warm and plain, never alarming.
 
@@ -172,6 +172,9 @@ At 860px and below the grid collapses to one column, the text block takes the fi
 Vertical rhythm inside a scene: 26px between headline and paragraphs, 30px before a figure or quote, 38px before the action row; actions sit 26px apart; pills sit 10px apart.
 
 The footer is a walnut course on the same 12-column grid: link list in columns 1 to 5, small print in columns 7 to 12.
+
+### Reading pages
+The decisions list, item pages, the text-only route check, access and research pages (`gait/static/style.css`) use the map's calm register, not the colour fields: cream ground, coffee ink, a 50rem column. Young Serif headings sit under a 3px ink rule (h2), body is Atkinson 20px, notes 17px. Official quotations are Young Serif on stoneware with 12px corners and no side stripe. Lists of items are rows between hairline rules, never boxed cards. Warnings are a 2px burnt-orange outline, AI notes a 2px dashed ink outline, privacy notes a turquoise lead-in word. Rider tabs and buttons are ink pills; the footer is the walnut course.
 
 ## Elevation & Depth
 

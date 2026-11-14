@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Gait{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}?v=5">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+  <header class="site"><div class="in">
+    <a class="brand" href="/">Gait</a>
+    {% set here = request.url.path if request else '' %}
+    <nav aria-label="Main" class="mainnav">
+      <a href="/decisions"{% if here.startswith('/decisions') or here.startswith('/item') %} aria-current="page"{% endif %}>Decisions</a>
+      <a href="/route"{% if here.startswith('/route') %} aria-current="page"{% endif %}>Check my route</a>
+      <a href="/map"{% if here.startswith('/map') %} aria-current="page"{% endif %}>Map</a>
+    </nav>
+    <span class="tag">Working prototype. Not an official City of Toronto service.</span>
+  </div></header>
+  <main id="main">{% block content %}{% endblock %}</main>
+  <footer class="site"><div class="in">
+    <p>Content is copied from the official City of Toronto pages linked on each item. Check the official page before you act.</p>
+  </div></footer>
+</body>
+</html>

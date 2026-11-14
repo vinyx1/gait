@@ -4,7 +4,7 @@ from types import SimpleNamespace
 
 import pytest
 
-from triplens import geocode, live_research as L, trip
+from gait import geocode, live_research as L, trip
 
 LEGS = lambda: trip.build_trip((43.66012, -79.41720), (43.66497, -79.38606), [("94", 1, "16790", "8625")])
 QUOTE = "Raised bus/bike platforms at TTC bus stops are proposed for installation."

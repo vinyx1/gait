@@ -4,8 +4,8 @@ from pathlib import Path
 import pytest
 from fastapi.testclient import TestClient
 
-from triplens import geocode, trip, exposure
-from triplens.app import app, EXAMPLES, make_report
+from gait import geocode, trip, exposure
+from gait.app import app, EXAMPLES, make_report
 
 ROOT = Path(__file__).resolve().parent.parent
 pytestmark = pytest.mark.skipif(not geocode.available(), reason="run scripts/build_address_index.py first")
@@ -133,21 +133,22 @@ def test_tool_never_picks_stops_for_the_resident():
 
 
 def test_real_stop_removal_shows_before_and_after_and_new_issue():
-    from triplens.app import EXAMPLES
-    ex = EXAMPLES["stclair-512"]
+    from gait.app import EXAMPLES
+    ex = EXAMPLES["bathurst-7-past"]
     rep, errs = make_report(ex["origin"], ex["destination"], ex["rider"], ex["band"], ex["day"], ex["routes"], ex["stops"])
     assert not errs
-    cmp = next(c for c in rep["comparisons"] if c["change"]["id"] == "ttc-512-stop-removals")
-    assert any("is removed" in n for n in cmp["notes"])
+    cmp = next(c for c in rep["comparisons"] if c["change"]["id"] == "rapidto-7-bathurst-stops")
+    assert any("the stop is gone" in n for n in cmp["notes"])
     assert any(r["changed"] for r in cmp["rows"])
     assert any(f["severity"] == "barrier" and "walking" in f["text"] for f in cmp["new_issues"])
 
 
 def test_change_quotes_are_verbatim_from_saved_source():
-    from triplens import changes
+    from gait import changes
     changes.load_changes.cache_clear()
     cs = changes.load_changes()          # raises if any quote is not in the saved source text
-    assert not cs["ttc-512-stop-removals"]["simulated"] and cs["sim-queen-shelters"]["simulated"]
+    assert not cs["rapidto-7-bathurst-stops"]["simulated"] and cs["sim-queen-shelters"]["simulated"]
+    assert "ttc-512-stop-removals" not in cs           # retired: its March 2026 date passed and could not be confirmed
 
 
 def test_simulated_shelter_removal_is_labelled_and_reported():
@@ -159,7 +160,7 @@ def test_simulated_shelter_removal_is_labelled_and_reported():
 
 def test_change_does_not_touch_other_routes():
     rep, _ = make_report("1000 Dundas St W", "201 Dundas St W", "wheelchair", "day", "weekday", ["505"], [(0, "10181", "2153")])
-    assert [c["change"]["id"] for c in rep["comparisons"]] == ["sim-505-relocate-grace"]   # 512 and 7 changes do not apply
+    assert [c["change"]["id"] for c in rep["comparisons"]] == ["sim-505-relocate-grace"]   # the 7 and 94 changes do not apply
 
 
 def test_map_api_flow():
@@ -168,12 +169,12 @@ def test_map_api_flow():
     r = c.get("/api/routes_near", params=dict(alat=43.6862, alon=-79.4046, blat=43.6878, blon=-79.3944)).json()
     assert any(x["route"] == "512" for x in r)
     s = c.get("/api/route_stops", params=dict(route="512", variant=0)).json()
-    assert sum(1 for f in s["stops"]["features"] if f["properties"]["removed_by"]) == 5
+    assert s["stops"]["features"] and not any(f["properties"]["removed_by"] for f in s["stops"]["features"])   # no decision on file for the 512
     t = c.post("/api/trip", json={"a": [43.6862, -79.4046], "b": [43.6878, -79.3944], "rider": "senior_walker", "day": "weekday",
                                   "band": "day", "rides": [{"route": "512", "variant": 0, "board": "14351", "alight": "15305"}]}).json()
     walk = [f for f in t["before"]["features"] if f["properties"]["kind"] == "walk"]
     assert walk and all(f["properties"]["routed"] for f in walk)      # walks follow the sidewalk network
-    assert t["comparisons"] and t["comparisons"][0]["new_issues"]
+    assert t["comparisons"] == []                                      # no decision on file touches this 512 trip
     assert c.post("/api/trip", json={"a": [1, 2]}).status_code == 400
 
 
@@ -191,7 +192,7 @@ def test_past_decision_rebuilds_before_state_and_flags_new_limit():
 
 def test_research_findings_are_verbatim_and_page_exists():
     import json
-    from triplens import research
+    from gait import research
     for r in ("7", "29"):
         d = json.loads((ROOT / f"data/research/route-{r}.json").read_text())
         assert d["kept"]
@@ -213,10 +214,10 @@ def test_relocation_moves_stop_and_reroutes_walk():
 
 
 def test_temporary_closure_names_dates():
-    c = _cmp("250 Spadina Rd", "800 Bathurst St", "senior_walker", "day", ["127"], [(0, "7956", "14777")], "sim-127-temporary-closure")
+    c = _cmp("126 Spadina Rd", "800 Bathurst St", "senior_walker", "day", ["127"], [(0, "8117", "14777")], "sim-127-temporary-closure")
     assert any("March 1, 2027" in n for n in c["notes"]) and any(r["changed"] for r in c["rows"])
-    # the walk was already over the senior's limit before the closure, so it is not reported as a new issue
-    assert not any(f.get("code") == "walk_over_limit" for f in c["new_issues"])
+    # closing both neighbouring stops pushes a short walk past the senior's limit
+    assert any(f.get("code") == "walk_over_limit" for f in c["new_issues"])
 
 
 def test_service_cut_reported_for_late_traveller():
@@ -231,7 +232,7 @@ def test_sidewalk_closure_lengthens_walk():
 
 def test_free_finder_finds_real_removals_without_ai():
     import json, sqlite3
-    from triplens import finder
+    from gait import finder
     if not finder.DB.exists():
         pytest.skip("run scripts/build_corpus.py first")
     r7 = json.loads((ROOT / "data/research_free/route-7.json").read_text())
@@ -262,3 +263,42 @@ def test_new_shelter_shows_as_improvement():
               "rides": [{"route": "114", "variant": 0, "board": "16754", "alight": "15320"}]})
     c = next(x for x in d["comparisons"] if x["id"] == "front-st-layby-shelter")
     assert any(f.get("code") == "shelter_wait" for f in c["improvements"]) and not c["new_issues"]
+
+
+def test_source_check_finds_every_real_quote_on_its_page():
+    from gait import app, changes
+    for cid, c in changes.load_changes().items():
+        r = app.source_check(cid)["change"]
+        if c["simulated"]:
+            assert r is None
+            continue
+        assert all(q["found"] for q in r["quotes"]), cid
+    blds = app.developments()[:6]
+    r = app.source_check(None, ",".join(d["id"] for d in blds))
+    assert all(q["found"] for b in r["buildings"] for q in b["quotes"])
+
+
+def test_works_on_trip_only_lists_works_that_meet_the_trip():
+    from datetime import date
+    from gait import access
+    legs = trip.build_trip((43.7081, -79.3748), (43.7096, -79.3735), [("11", 0, "1869", "1721")], avoid_no_sidewalk=True)
+    found = access.works_on_trip(legs, today=date(2026, 11, 13))
+    bay = next(w for w in found if w["street"] == "Bayview Ave")
+    assert {t["part"] for t in bay["touches"]} >= {"ride", "stop"}
+    assert "closure of individual lanes or the entire road" in bay["details"]       # the City's words, as written
+    # a job whose City timeline has already ended is not listed
+    assert not access.works_on_trip(legs, today=date(2031, 1, 1))
+    # a trip far from any of these streets meets none of them
+    far = trip.build_trip((43.66108, -79.4182), (43.66497, -79.38606), [("94", 1, "16829", "8625")], avoid_no_sidewalk=True)
+    assert all(w["street"] != "Bayview Ave" for w in access.works_on_trip(far, today=date(2026, 11, 13)))
+
+
+def test_checklist_changes_with_the_rider():
+    """The first page lists what was checked for this rider, passes included; a wheelchair user gets boarding checks."""
+    legs = trip.build_trip((43.64083, -79.43392), (43.65317, -79.39409), [("501", 1, "6835", "6829")], avoid_no_sidewalk=True)
+    walker = exposure.checklist(legs, "senior_walker", "day", "weekday")
+    chair = exposure.checklist(legs, "wheelchair", "day", "weekday")
+    assert any(c["state"] == "ok" for c in walker)                                     # passes are shown, not only problems
+    assert any("250 m limit" in c["text"] for c in walker) and any("400 m limit" in c["text"] for c in chair)
+    assert any("wheelchair boarding" in c["text"] for c in chair) and not any("wheelchair boarding" in c["text"] for c in walker)
+    assert {c["state"] for c in walker + chair} <= {"ok", "warn", "bad"}

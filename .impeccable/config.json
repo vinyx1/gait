@@ -7,10 +7,25 @@
         "rule": "cream-palette",
         "value": "*",
         "files": [
-          "triplens/templates/landing.html"
+          "gait/templates/landing.html"
         ],
         "createdAt": "2026-11-13T17:49:05.113Z",
         "reason": "User asked for an earthy theme with warm, encouraging colours for this page (session request); the warm sky is that brief"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "hyperlegible\",system-ui,sans-serif",
+        "createdAt": "2026-11-13T20:11:31.525Z",
+        "reason": "false positive: Atkinson Hyperlegible is the body face declared in DESIGN.md typography; the detector parsed the CSS font stack fragment"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "gait/templates/map.html"
+        ],
+        "createdAt": "2026-11-13T20:11:31.546Z",
+        "reason": "user confirmed: chose the 'Warm and calm' cream panel option for the map page (DESIGN.md cream/coffee-ink palette)"
       }
     ]
   }

@@ -1,6 +1,6 @@
 [
  {
-  "file": "triplens/static/img/bathurst-street-toronto.jpg",
+  "file": "gait/static/img/bathurst-street-toronto.jpg",
   "media": "image",
   "ref": "commons:97047255",
   "title": "Bathurst Street, Toronto",
@@ -22,7 +22,7 @@
   "saved": "2026-11-13T17:09:22.020Z"
  },
  {
-  "file": "triplens/static/img/pcc-coming-back-up-to-street-level.jpg",
+  "file": "gait/static/img/pcc-coming-back-up-to-street-level.jpg",
   "media": "image",
   "ref": "openverse:85cff130-0475-444d-ab47-8a1709e61506",
   "title": "PCC coming back up to street level from the then-new underground stop at St Clair West subway stn, 1978",
@@ -46,7 +46,7 @@
   "saved": "2026-11-13T17:09:27.195Z"
  },
  {
-  "file": "triplens/static/img/rooftop-view-of-union-station-toronto-at.jpg",
+  "file": "gait/static/img/rooftop-view-of-union-station-toronto-at.jpg",
   "media": "image",
   "ref": "openverse:257b12fe-4d8b-4950-9525-56d45341e6f5",
   "title": "Rooftop view of Union Station, Toronto, at night",
@@ -68,7 +68,7 @@
   "saved": "2026-11-13T17:09:33.336Z"
  },
  {
-  "file": "triplens/static/img/toronto-city-hall-council-chamber.jpg",
+  "file": "gait/static/img/toronto-city-hall-council-chamber.jpg",
   "media": "image",
   "ref": "openverse:27dd67b0-154f-462d-86d3-f6b83bc9b2a6",
   "title": "Toronto City Hall Council Chamber",
@@ -90,7 +90,7 @@
   "saved": "2026-11-13T17:09:41.586Z"
  },
  {
-  "file": "triplens/static/img/bay-ttc-renewed-bus-shelter.jpg",
+  "file": "gait/static/img/bay-ttc-renewed-bus-shelter.jpg",
   "media": "image",
   "ref": "openverse:224e67ef-0611-4576-a0d4-f8d59c2d7b3c",
   "title": "Bay TTC renewed bus shelter",
@@ -114,7 +114,7 @@
   "saved": "2026-11-13T17:09:48.148Z"
  },
  {
-  "file": "triplens/static/img/sidewalk-snow-plow-31975535047.jpg",
+  "file": "gait/static/img/sidewalk-snow-plow-31975535047.jpg",
   "media": "image",
   "ref": "openverse:8dad7387-ac9e-436e-b46c-a58b6c643c60",
   "title": "Sidewalk snow plow (31975535047)",
@@ -138,7 +138,7 @@
   "saved": "2026-11-13T17:09:52.727Z"
  },
  {
-  "file": "triplens/static/img/sherbourne-cycletrack.jpg",
+  "file": "gait/static/img/sherbourne-cycletrack.jpg",
   "media": "image",
   "ref": "openverse:5a88b13b-085b-458d-8a60-e222e15e6b3d",
   "title": "Sherbourne cycletrack",

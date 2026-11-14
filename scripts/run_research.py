@@ -7,8 +7,8 @@ import anthropic
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
-from triplens import research  # noqa: E402
-from triplens.rewrite import load_env  # noqa: E402
+from gait import research  # noqa: E402
+from gait.rewrite import load_env  # noqa: E402
 
 ROUTES = {"7": ("Bathurst", ["Bathurst Street"]), "29": ("Dufferin", ["Dufferin Street"]), "505": ("Dundas", ["Dundas Street West"]),
           "512": ("St Clair", ["St Clair Avenue West"])}

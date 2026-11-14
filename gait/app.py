@@ -1,5 +1,7 @@
-"""TripLens web app: explain layer (v0). Server-rendered, text-first, no JavaScript required."""
+"""Gait web app: explain layer (v0). Server-rendered, text-first, no JavaScript required."""
 from __future__ import annotations
+
+from functools import lru_cache
 
 import json
 from pathlib import Path
@@ -13,7 +15,7 @@ from fastapi.templating import Jinja2Templates
 HERE = Path(__file__).resolve().parent
 DATA = HERE.parent / "data"
 
-app = FastAPI(title="TripLens")
+app = FastAPI(title="Gait")
 app.mount("/static", StaticFiles(directory=HERE / "static"), name="static")
 templates = Jinja2Templates(directory=HERE / "templates")
 
@@ -44,7 +46,7 @@ def load_reports() -> dict[str, dict]:
 
 
 def load_plain(item_id: str) -> list[dict]:
-    """Checked plain-language rewrites written by Claude. See triplens/rewrite.py for the checks."""
+    """Checked plain-language rewrites written by Claude. See gait/rewrite.py for the checks."""
     import re
     path = DATA / "plain" / f"{item_id}.json"
     if not path.exists():
@@ -119,7 +121,7 @@ def caveats(item: dict, reports: list[dict]) -> list[str]:
 @app.get("/", response_class=HTMLResponse)
 def landing_page(request: Request):
     from . import landing
-    cases = [landing.case(k) for k in ("bathurst", "stclair", "harbord", "frontst")]
+    cases = [landing.case(k) for k in ("bathurst", "harbord", "frontst")]
     return templates.TemplateResponse(request, "landing.html", {"hero": landing.hero(), "cases": cases, "counts": landing.counts(),
                                                                 "credits": landing.credits(), "torn": landing.torn,
                                                                 "sheet_clip": landing.sheet_clip(), "brush": landing.brush()})
@@ -207,15 +209,12 @@ EXAMPLES = {
     "dundas-505": {"title": "Along Dundas St W on the 505 streetcar (wheelchair user): a decision names this route", "origin": "1000 Dundas St W",
                    "destination": "201 Dundas St W", "rider": "wheelchair", "band": "day", "day": "weekday",
                    "routes": ["505"], "stops": [(0, "10181", "2153")]},
-    "spadina-127": {"title": "Spadina Rd to Bathurst St on the 127 bus (senior using a walker): a decided item and works nearby",
+    "spadina-127": {"title": "Spadina Rd to Bathurst St on the 127 bus (someone using a walker): a decided item and works nearby",
                     "origin": "250 Spadina Rd", "destination": "800 Bathurst St", "rider": "senior_walker", "band": "day", "day": "weekday",
                     "routes": ["127"], "stops": [(0, "7956", "14777")]},
-    "bathurst-7-past": {"title": "PAST DECISION: 7 Bathurst after RapidTO (July 2025) removed the Heathdale Rd stop (senior using a walker)",
+    "bathurst-7-past": {"title": "PAST DECISION: 7 Bathurst after RapidTO (July 2025) removed the Heathdale Rd stop (someone using a walker)",
                         "origin": "1599 Bathurst St", "destination": "800 Bathurst St", "rider": "senior_walker", "band": "day", "day": "weekday",
                         "routes": ["7"], "stops": [(1, "107", "14617")]},
-    "stclair-512": {"title": "BEFORE AND AFTER: St Clair Ave W on the 512 if the TTC removes nine stops (senior using a walker)",
-                    "origin": "5 Dunvegan Rd", "destination": "1 St Clair Ave W", "rider": "senior_walker", "band": "day", "day": "weekday",
-                    "routes": ["512"], "stops": [(0, "14351", "15305")]},
     "transfer-late": {"title": "Spadina Rd to Gerrard St E with a transfer, late night (shift worker)", "origin": "250 Spadina Rd",
                       "destination": "66 Gerrard St E", "rider": "shift_worker", "band": "late", "day": "weekday",
                       "routes": ["127", "506"], "stops": [(0, "7956", "14777"), (0, "14776", "751")]},
@@ -416,6 +415,147 @@ def route_stops_api(route: str, variant: int):
     return {"stops": {"type": "FeatureCollection", "features": feats}, "line": line, "route": route, "name": e["long"], "headsign": v["headsign"]}
 
 
+def _headline(cmp: dict, rider: str) -> dict | None:
+    """The one walk this decision changes most, for the verdict at the top of its card (None if no walk changes)."""
+    best, k = None, -1
+    for lb, la in zip(cmp["before_legs"], cmp["after_legs"]):
+        if lb.kind == "walk":
+            k += 1
+            b, a = tripmod.walk_estimate_m(lb), tripmod.walk_estimate_m(la)
+            if a != b and (best is None or abs(a - b) > abs(best["after_m"] - best["before_m"])):
+                best = {"what": "Your walk to the stop" if la is cmp["after_legs"][0] else "Your walk from the stop",
+                        "before_m": b, "after_m": a, "leg": k}
+    if best:
+        p = access.PERSONAS[rider]
+        best["limit_m"] = p.max_walk_m
+        # the same sentence the findings use: where you walk today, where you would walk, against the limit
+        best["say"] = changes.walk_change_say(cmp["before_legs"], cmp["after_legs"], best["leg"], p.max_walk_m, p.label.lower(),
+                                              cmp["change"].get("phase") == "implemented")
+    return best
+
+
+def _hull(pts: list[tuple[float, float]]) -> list[list[float]]:
+    """Convex hull (lon, lat) of the points, closed ring."""
+    pts = sorted(set(pts))
+    if len(pts) < 3:
+        return [list(p) for p in pts + pts[:1]]
+    cross = lambda o, a, b: (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+    lo, up = [], []
+    for p in pts:
+        while len(lo) >= 2 and cross(lo[-2], lo[-1], p) <= 0: lo.pop()
+        lo.append(p)
+    for p in reversed(pts):
+        while len(up) >= 2 and cross(up[-2], up[-1], p) <= 0: up.pop()
+        up.append(p)
+    ring = lo[:-1] + up[:-1]
+    return [list(p) for p in ring + ring[:1]]
+
+
+def _bubble(latlons: list[tuple[float, float]], pad_m: float = 70) -> list[list[float]]:
+    """A rounded area round the affected places: each point grown into a small circle, then wrapped."""
+    import math
+    out = []
+    for lat, lon in latlons:
+        k = 111320 * math.cos(math.radians(lat))
+        out += [(round(lon + pad_m * math.cos(a) / k, 6), round(lat + pad_m * math.sin(a) / 111320, 6))
+                for a in (i * math.pi / 8 for i in range(16))]
+    return _hull(out)
+
+
+@lru_cache(maxsize=None)
+def decision_area(cid: str) -> dict:
+    """Where a decision lands: its bubble, the stops it removes, closes, moves or changes, and the sidewalks and roads it closes."""
+    from . import walk
+    c = changes.load_changes()[cid]
+    routes, recs = tripmod.load_routes(), tripmod.stop_records()
+    stop_at = lambda route, sid: next(((s["lat"], s["lon"], s["name"]) for v in routes[route]["variants"] for s in v["stops"] if s["id"] == sid), None)
+    pts, stops, lines, seen = [], [], [], set()
+    verb = {"remove_stop": "would be removed" if c.get("phase") != "implemented" else "removed", "close_stop": "closed for a time",
+            "remove_shelter": "shelter removed", "remove_bench": "bench removed", "add_shelter": "new shelter", "bus_bike_platform": "bus/bike platform"}
+    for e in c["effects"]:
+        t = e["type"]
+        if t in verb:
+            for sid in e["stop_ids"]:
+                s = stop_at(e["route"], sid)
+                if s and (s[0], s[1], t) not in seen:
+                    seen.add((s[0], s[1], t)); pts.append(s[:2])
+                    stops.append({"lat": s[0], "lon": s[1], "name": s[2], "what": verb[t], "gone": t in ("remove_stop", "close_stop")})
+        elif t == "restore_removed_stops":
+            for r in changes.restored_stops(c, e["route"]):
+                still = any(access.haversine_m(r["lat"], r["lon"], s["lat"], s["lon"]) < 40 for s in routes[e["route"]]["variants"][r["variant"]]["stops"])
+                if still or any(access.haversine_m(r["lat"], r["lon"], x["lat"], x["lon"]) < 15 for x in stops):
+                    continue                     # a stop is still there in this direction (or already drawn): not removed here
+                pts.append((r["lat"], r["lon"]))
+                stops.append({"lat": r["lat"], "lon": r["lon"], "name": r["name"].split(" (")[0], "what": "removed (location reconstructed)", "gone": True})
+        elif t == "relocate_stop":
+            for sid in e["stop_ids"]:
+                s = stop_at(e["route"], sid)
+                if s:
+                    pts += [s[:2], (e["to"]["lat"], e["to"]["lon"])]
+                    stops.append({"lat": s[0], "lon": s[1], "name": s[2], "what": "moves away", "gone": True})
+                    stops.append({"lat": e["to"]["lat"], "lon": e["to"]["lon"], "name": e["to"]["name"], "what": "new spot", "gone": False})
+        elif t == "close_sidewalk":
+            g = walk.graph()
+            for ei in sorted(walk.edges_near([tuple(p) for p in e["points"]], e.get("radius_m", 20))):
+                ln = g["edges"][ei][5]; pts += ln
+                lines.append({"kind": "sidewalk", "label": "Sidewalk closed" + (f" ({e['from']} to {e['to']})" if e.get("from") else ""), "coords": [[lo, la] for la, lo in ln]})
+        elif t == "map_line":
+            pts += [tuple(p) for p in e["line"]]
+            lines.append({"kind": e.get("kind", "road"), "label": e["label"], "coords": [[lo, la] for la, lo in e["line"]]})
+    phase = "simulation" if c["simulated"] else "in effect" if c.get("phase") == "implemented" else "approved" if c["status"].lower().startswith("approved") else "proposed"
+    props = {"id": cid, "title": c["title"].replace("SIMULATED: ", ""), "phase": phase}
+    feats = []
+    # places close together share one bubble; a long corridor (nine stops over kilometres) gets one bubble per cluster
+    groups = []
+    for p in pts:
+        near = [g for g in groups if any(access.haversine_m(p[0], p[1], q[0], q[1]) < 450 for q in g)]
+        merged = [p] + [q for g in near for q in g]
+        groups = [g for g in groups if g not in near] + [merged]
+    for g in groups:
+        feats.append({"type": "Feature", "properties": {**props, "kind": "area"}, "geometry": {"type": "Polygon", "coordinates": [_bubble(g)]}})
+    feats += [{"type": "Feature", "properties": {**props, "kind": "line", "line": l["kind"], "label": l["label"]},
+               "geometry": {"type": "LineString", "coordinates": l["coords"]}} for l in lines]
+    feats += [{"type": "Feature", "properties": {**props, "kind": "stop", "name": s["name"], "what": s["what"], "gone": s["gone"]},
+               "geometry": {"type": "Point", "coordinates": [s["lon"], s["lat"]]}} for s in stops]
+    return {"type": "FeatureCollection", "features": feats}
+
+
+@app.get("/api/decision_areas")
+def decision_areas(include_sim: bool = False):
+    """Every decision on file drawn where it lands (simulations only on request)."""
+    feats = [f for cid, c in changes.load_changes().items() if include_sim or not c["simulated"] for f in decision_area(cid)["features"]]
+    return {"type": "FeatureCollection", "features": feats}
+
+
+@lru_cache(maxsize=1)
+def developments() -> list[dict]:
+    """New buildings the City approved (scripts/build_developments.py): site, storeys and the City's own sentences."""
+    p = DATA / "developments.json"
+    return json.loads(p.read_text())["items"] if p.exists() else []
+
+
+def _dev_feature(d: dict) -> dict:
+    return {"type": "Feature", "geometry": {"type": "Polygon", "coordinates": [_bubble([(d["lat"], d["lon"])], 55)]},
+            "properties": {"id": d["id"], "address": d["address"], "storeys": d["storeys"], "status": d["status"]}}
+
+
+@app.get("/api/developments")
+def developments_api():
+    return {"type": "FeatureCollection", "features": [_dev_feature(d) for d in developments()]}
+
+
+def developments_near(legs, radius_m: float = 300) -> list[dict]:
+    """Approved buildings within radius of the rider's stops and walks, nearest first. Nothing is computed from them."""
+    pts = [p for l in legs if l.kind == "walk" for p in l.points] + \
+          [(s["lat"], s["lon"]) for l in legs if l.kind == "transit" for s in (l.board, l.alight)]
+    out = []
+    for d in developments():
+        m = min((access.haversine_m(d["lat"], d["lon"], a, b) for a, b in pts), default=1e9)
+        if m <= radius_m:
+            out.append({**d, "distance_m": round(m / 10) * 10})
+    return sorted(out, key=lambda d: d["distance_m"])
+
+
 @app.post("/api/trip")
 async def trip_api(request: Request):
     body = await request.json()
@@ -429,9 +569,11 @@ async def trip_api(request: Request):
     except (KeyError, ValueError, TypeError) as e:
         return JSONResponse({"error": str(e) or "Please check your points, route and stops."}, status_code=400)
     res = exposure.analyze(legs, rider, band, day)
-    comps = []
-    for c in changes.affecting(legs):
+    comps, all_legs = [], list(legs)
+    only = body.get("only")                      # an example asks for its own decision only
+    for c in [c for c in changes.affecting(legs) if not only or c["id"] == only]:
         cmp = changes.compare(legs, c, rider, band, day)
+        all_legs += [l for l in cmp["after_legs"] if l not in legs]
         removed = [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [s["lon"], s["lat"]]}, "properties": {"name": s["name"]}}
                    for e in c["effects"] if e["type"] == "remove_stop"
                    for v in tripmod.load_routes()[e["route"]]["variants"] for s in v["stops"] if s["id"] in e["stop_ids"]]
@@ -442,7 +584,14 @@ async def trip_api(request: Request):
                       "phase": c.get("phase", "proposed"), "item_url": c.get("item_url"), "before": _legs_geojson(cmp["before_legs"]),
                       "source_url": c["source_url"], "quotes": c["quotes"], "notes": cmp["notes"], "rows": cmp["rows"],
                       "new_issues": cmp["new_issues"], "improvements": cmp["improvements"], "after": _legs_geojson(cmp["after_legs"]),
-                      "removed": {"type": "FeatureCollection", "features": removed}})
+                      "removed": {"type": "FeatureCollection", "features": removed},
+                      "pages": c.get("source_pages") or [], "headline": _headline(cmp, rider),
+                      # ground evidence on the stops and walks this decision changes (not already listed for the trip)
+                      "changed_evidence": reports.search_changed(cmp["before_legs"], cmp["after_legs"])})
+    # what Gait checked for this rider, on the trip the first page shows (for a decision already in effect, the trip before it)
+    first = next((c for c in changes.affecting(legs) if not only or c["id"] == only), None)
+    page0 = changes.compare(legs, first, rider, band, day)["before_legs"] if first and first.get("phase") == "implemented" else legs
+    checks = exposure.checklist(page0, rider, band, day, stop_override=changes._overrides(page0))
     pts = lambda items, kind: [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [i["lon"], i["lat"]]},
                                 "properties": {"kind": kind, **{k: i.get(k) for k in ("title", "label", "upcoming", "item_id", "project", "location", "timeline", "distance_m")}}}
                                for i in items]
@@ -453,7 +602,8 @@ async def trip_api(request: Request):
     ev_pts += [{"type": "Feature", "geometry": {"type": "Point", "coordinates": [x["lon"], x["lat"]]},
                 "properties": {"src": "rider", "label": f"Rider report: {x['label']} ({x['day']})"}}
                for g in ev["groups"] for x in g["riders"]]
-    return {"before": _legs_geojson(legs), "flags": res["flags"], "comparisons": comps, "persona": access.PERSONAS[rider].label,
+    return {"before": _legs_geojson(legs), "flags": res["flags"], "checks": checks, "comparisons": comps, "persona": access.PERSONAS[rider].label,
+            "works_on_trip": access.works_on_trip(all_legs),
             "evidence": ev, "evidence_pts": {"type": "FeatureCollection", "features": ev_pts},
             "wards": {"start": geocode.ward_near(*a), "destination": geocode.ward_near(*b)},
             "decisions": {"type": "FeatureCollection", "features": pts(res["decisions"], "decision")},
@@ -500,3 +650,54 @@ def research_page(request: Request, route: str):
     r = json.loads(pa.read_text()) if pa.exists() else None
     free = json.loads(pf.read_text()) if pf.exists() else None
     return templates.TemplateResponse(request, "research.html", {"r": r, "free": free, "route": route})
+
+
+def _norm(t: str) -> str:
+    return " ".join(t.split())
+
+
+def _find_on_pages(quote: str, pages: list[str], hint: int | None) -> dict:
+    """Look for `quote` word for word; try the cited page first. Returns the page and a little of the text around it."""
+    q = _norm(quote)
+    order = ([hint - 1] if hint and 0 < hint <= len(pages) else []) + [i for i in range(len(pages)) if i != (hint or 0) - 1]
+    for i in order:
+        t = _norm(pages[i])
+        k = t.find(q)
+        if k >= 0:
+            a, b = max(0, k - 140), k + len(q) + 140
+            return {"found": True, "page": i + 1, "before": ("…" if a else "") + t[a:k], "after": t[k + len(q):b] + ("…" if b < len(t) else "")}
+    return {"found": False, "page": hint}
+
+
+@app.get("/api/source_check")
+def source_check(change: str | None = None, bld: str = ""):
+    """Re-read each quote on its source page now, so the page can show the check as it happens. Nothing is written."""
+    out = {"change": None, "buildings": []}
+    c = changes.load_changes().get(change) if change else None
+    if c and not c.get("simulated"):
+        root = DATA.parent
+        if c.get("source_pages_file") and (root / c["source_pages_file"]).exists():
+            pages, kind = json.loads((root / c["source_pages_file"]).read_text()), "pdf"
+        elif c.get("source_file") and (root / c["source_file"]).exists():
+            pages, kind = [(root / c["source_file"]).read_text()], "web"
+        else:
+            pages, kind = [], None
+        hints = c.get("source_pages") or []
+        out["change"] = {"kind": kind, "n_pages": len(pages), "item": (c.get("item_url") or "").rsplit("=", 1)[-1] or None,
+                         "quotes": [{"text": q, **(_find_on_pages(q, pages, hints[k] if k < len(hints) else None) if pages else {"found": False})}
+                                    for k, q in enumerate(c.get("quotes", []))]}
+    ids = [x for x in bld.split(",") if x][:6]
+    if ids:
+        import sqlite3
+        con = sqlite3.connect(DATA / "corpus/index.sqlite")
+        for d in developments():
+            if d["id"] not in ids:
+                continue
+            rows = con.execute("SELECT page, text FROM pages WHERE url = ? ORDER BY CAST(page AS INTEGER)", (d["source_url"],)).fetchall()
+            pages = [""] * max((int(p) for p, _ in rows), default=0)
+            for p, t in rows:
+                pages[int(p) - 1] = t
+            out["buildings"].append({"id": d["id"], "n_pages": len(pages),
+                                     "quotes": [{"text": q["text"], **_find_on_pages(q["text"], pages, q["page"])} for q in d["quotes"]]})
+        con.close()
+    return out

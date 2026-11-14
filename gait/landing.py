@@ -15,12 +15,12 @@ CASES = {
     "bathurst": {"a": (43.68897, -79.42036), "b": (43.66554, -79.41166), "ride": ("7", 1, "107", "14617"), "rider": "senior_walker",
                  "change": "rapidto-7-bathurst-stops", "photo": "bathurst-street-toronto.jpg",
                  "photo_alt": "Bathurst Street, Toronto, in an early 1900s photograph", "title": "7 Bathurst"},
-    "stclair": {"a": (43.68626, -79.40464), "b": (43.68778, -79.39435), "ride": ("512", None, "14351", "15305"), "rider": "senior_walker",
-                "change": "ttc-512-stop-removals", "photo": "pcc-coming-back-up-to-street-level.jpg",
-                "photo_alt": "A red streetcar rising from the St Clair West station tunnel onto St Clair Avenue", "title": "512 St Clair"},
     "harbord": {"a": (43.66012, -79.41720), "b": (43.66497, -79.38606), "ride": ("94", 1, "16790", "8625"), "rider": "wheelchair",
                 "change": "past-94-harbord-bikeway-stops", "photo": "sherbourne-cycletrack.jpg",
                 "photo_alt": "A Toronto cycle track running beside the curb, separated from traffic", "title": "94 on Harbord"},
+    "cosburn": {"a": (43.68905, -79.3502), "b": (43.6795, -79.3450), "ride": ("72", 1, "15149", "15150"), "rider": "senior_walker",
+                "change": "ontario-line-cosburn-construction", "photo": "bathurst-street-toronto.jpg",
+                "photo_alt": "A Toronto main street", "title": "72 Pape at Cosburn"},
     "frontst": {"a": (43.64661, -79.37812), "b": (43.64429, -79.36849), "ride": ("114", 0, "16754", "15320"), "rider": "senior_walker",
                 "band": "late", "change": "front-st-layby-shelter", "photo": "rooftop-view-of-union-station-toronto-at.jpg",
                 "photo_alt": "Union Station on Front Street West at night, seen from a rooftop", "title": "114 at Union"},
@@ -59,7 +59,7 @@ def case(key: str, rider: str | None = None) -> dict:
 
 
 def hero() -> dict:
-    return {r: case("bathurst", r) for r in ("senior_walker", "wheelchair", "shift_worker")}
+    return {r: case("cosburn", r) for r in ("senior_walker", "wheelchair", "shift_worker")}
 
 
 def torn(seed: int, w: int = 1440, h: int = 40, step: int = 6, rough: float = 0.35, top: bool = True) -> str:
@@ -76,7 +76,7 @@ def torn(seed: int, w: int = 1440, h: int = 40, step: int = 6, rough: float = 0.
 
 @lru_cache(maxsize=1)
 def credits() -> list[dict]:
-    p = ROOT / "triplens/static/img/credits.json"
+    p = ROOT / "gait/static/img/credits.json"
     return json.loads(p.read_text()) if p.exists() else []
 
 
