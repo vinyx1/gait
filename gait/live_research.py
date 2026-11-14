@@ -130,8 +130,16 @@ def run(legs, rider_label: str, client=None) -> dict:
         path.write_text(json.dumps(res))
         return res
     if client is None:
+        import os
         import anthropic
+        from . import limits
         load_env(ROOT / ".env")
+        if not os.environ.get("ANTHROPIC_API_KEY"):    # not cached, so it runs if a key is added later
+            return {"trip": trip, "kept": [], "dropped": [], "usage": None,
+                    "trace": trace + ["Live AI research is turned off on this server (no API key), so the AI was not called."]}
+        if not limits.take_ai_call():
+            return {"trip": trip, "kept": [], "dropped": [], "usage": None,
+                    "trace": trace + ["Today's limit for live AI research on this server has been reached, so the AI was not called. Try again tomorrow."]}
         client = anthropic.Anthropic()
     text = "\n\n".join(f"[{i}] item {p['item_id']}, page {p['page']}:\n{_window(p['page_text'], p['quote'])}" for i, p in enumerate(passages, 1))
     msg = client.messages.create(model=MODEL, max_tokens=4000, system=SYSTEM,

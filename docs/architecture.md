@@ -110,3 +110,12 @@ sequenceDiagram
 ### Map results in three pages
 
 There is one panel on `/map`, on the left. After "Show my trip" it switches from setting up the trip to the results ("Edit trip" goes back), which step through four pages with Back and Next: the trip as the rider set it up, what changes for the trip (the verdict and the before and after rows), what the City wrote, and what people report on the new part, with the report writer. On the City page the browser calls `GET /api/source_check?change=<id>`, which re-reads each quote on its cached source page (`source_pages_file`, `source_file`) and returns the page and the text around it. The log the rider sees is the result of that call, not a staged animation; a quote that is not found again is shown as "Not found". With reduced motion every step appears at once.
+
+## Limits for a public deployment (added Nov 14)
+
+`gait/limits.py`, applied to every request by one middleware in `app.py`. Counters live in memory and reset on restart; nothing about a visitor is stored.
+- **Per-visitor rates** (by IP, from `X-Forwarded-For` behind a proxy): live AI research 3 per hour, trip calculations 20 per minute, other map lookups 120 per minute, pages 120 per minute, static files 600 per minute. Over the limit, the visitor gets HTTP 429 with a plain "please wait N seconds" message.
+- **Request size:** bodies over 64 KB are refused (413).
+- **Daily AI budget:** at most 25 new Claude calls per day across all visitors (`GAIT_AI_PER_DAY`). Cached answers are free. With no API key set, the live research button explains that it is turned off instead of failing.
+- The rider report endpoint (`/api/report`) was removed, so the public site accepts no stored submissions.
+- Tests: `tests/test_limits.py`.

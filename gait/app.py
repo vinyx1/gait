@@ -16,6 +16,22 @@ HERE = Path(__file__).resolve().parent
 DATA = HERE.parent / "data"
 
 app = FastAPI(title="Gait")
+
+
+@app.middleware("http")
+async def abuse_limits(request: Request, call_next):
+    """Refuse oversized bodies and visitors sending too many requests (see limits.py)."""
+    from . import limits
+    if int(request.headers.get("content-length") or 0) > limits.MAX_BODY:
+        return JSONResponse({"error": "Request too large."}, status_code=413)
+    ip = limits.client_ip(request.headers, request.client.host if request.client else "?")
+    ok, wait = limits.allow(ip, request.url.path)
+    if not ok:
+        msg = f"Too many requests. Please wait {wait} seconds and try again."
+        if request.url.path.startswith("/api/"):
+            return JSONResponse({"error": msg}, status_code=429, headers={"Retry-After": str(wait)})
+        return HTMLResponse(f"<!doctype html><title>Please wait</title><p>{msg}</p>", status_code=429, headers={"Retry-After": str(wait)})
+    return await call_next(request)
 app.mount("/static", StaticFiles(directory=HERE / "static"), name="static")
 templates = Jinja2Templates(directory=HERE / "templates")
 
@@ -624,22 +640,6 @@ async def research_trip_api(request: Request):
         return JSONResponse({"error": str(e) or "Please check the trip."}, status_code=400)
     except Exception as e:  # API or network problem: say so plainly
         return JSONResponse({"error": f"The research agent could not run: {type(e).__name__}."}, status_code=502)
-
-
-@app.get("/api/report_categories")
-def report_categories():
-    return {k: v[0] for k, v in reports.RIDER_CATS.items()}
-
-
-@app.post("/api/report")
-async def report_api(request: Request):
-    """A rider adds one fixed-category report at a place. Stored: category, rounded point, stop id, date. Nothing else."""
-    body = await request.json()
-    try:
-        r = reports.add_report(str(body["cat"]), float(body["lat"]), float(body["lon"]), body.get("stop_id"))
-    except (KeyError, ValueError, TypeError) as e:
-        return JSONResponse({"error": str(e) or "Please check the report."}, status_code=400)
-    return r
 
 
 @app.get("/research/{route}", response_class=HTMLResponse)

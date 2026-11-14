@@ -40,15 +40,13 @@ def test_rider_report_rejects_free_text_and_far_places(tmpdb):
         reports.add_report("no_seat", 45.0, -75.0)
 
 
-def test_report_api_stores_only_category_place_and_date(tmpdb):
+def test_report_api_is_not_public():
+    """The report form was removed; nobody can write to the server through it."""
     from fastapi.testclient import TestClient
     from gait.app import app
     c = TestClient(app)
-    assert c.post("/api/report", json={"cat": "no_seat", "lat": 43.66, "lon": -79.41, "stop_id": "16790", "name": "x"}).status_code == 200
-    import sqlite3
-    cols = [r[1] for r in sqlite3.connect(reports.DB).execute("PRAGMA table_info(r)")]
-    assert cols == ["cat", "lat", "lon", "stop_id", "day"]
-    assert c.post("/api/report", json={"cat": "bad", "lat": 43.66, "lon": -79.41}).status_code == 400
+    assert c.post("/api/report", json={"cat": "no_seat", "lat": 43.66, "lon": -79.41}).status_code in (404, 405)
+    assert c.get("/api/report_categories").status_code == 404
 
 
 def test_staff_report_leads_are_labelled_unchecked_and_quoted():
