@@ -8,13 +8,10 @@ data/gtfs/
 data/reports/*.pdf
 docs/_template.docx
 data/geo/address_points.csv
-data/geo/address.sqlite
 *.egg-info/
 data/geo/pednet.csv
-data/geo/pednet_graph.pkl
 data/reports/cache/*.pdf
 data/corpus/pdf/
-data/corpus/index.sqlite
 data/rider_reports.sqlite
 data/raw/311/
 .taste-skill/

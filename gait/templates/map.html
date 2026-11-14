@@ -180,6 +180,9 @@
     .compare{border:0;border-top:1px solid var(--line);border-radius:0;padding:4px 0;margin:16px 0}
     .warn{border-left:3px solid var(--after);background:none;padding:2px 0 2px 12px}
     #report,#reportOut:not(:empty){margin-top:16px}
+    .rep-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+    .rep-actions button{flex:1 1 auto;margin:0;white-space:nowrap}
+    #repMsg:empty{display:none}
     #say{scroll-margin-top:16px}
     textarea{background:#fffaf0;color:var(--ink);border:2px solid var(--ink);border-radius:10px;padding:10px}
     .panel table{display:table;font-size:15px}
@@ -247,8 +250,6 @@
     .cite figcaption{font-size:15px;margin-top:6px}
     .aha{font:400 21px/1.3 "Young Serif",serif;color:var(--before);border-top:3px solid var(--before);padding-top:12px;margin:22px 0 0;animation:rise .5s var(--ease) both}
     .say-box #mkReport{min-height:52px;margin:6px 0 4px}
-    .rp{margin-top:22px;border-top:1px solid var(--line);padding-top:10px}
-    .rp select{min-height:44px;font:inherit;font-size:16px;border:2px solid var(--ink);border-radius:10px;background:var(--bg);color:var(--ink);margin:4px 0 8px}
     @media (prefers-reduced-motion:reduce){.pg.play .fill,.pg.play .chg li,.pg.play .pop,#pg0.play .legs li,#pg0.play .checks li,.pg.in-fwd,.pg.in-back,.trace li,.ok .tick,.cite,.aha{animation:none}
       .busy .tick{animation:none;border-color:var(--ink)} .cite mark{animation:none;background-size:100% 100%} .pg.play .aft::after{animation:none;transform:scaleX(1)} button{transition:none}}
   </style>
@@ -660,9 +661,7 @@ function peopleHTML(d){
   if (!d.comparisons.length) h += `<section class="verdict"><h3 class="vt">Along your trip today</h3><ol class="trace" id="ptT"></ol><div class="cites" id="pcT"></div></section>`;
   h += `<p class="meta after-run" hidden>City 311 requests and rider reports show what people reported, not what is there today.</p>`;
   h += `<section class="verdict say-box after-run" hidden><h3 class="vt">Have your say</h3><p class="meta">Gait drafts the facts; you add your own words and choose where to send it.</p>
-      <button type="button" id="mkReport">Write a report I can send</button><div id="reportOut"></div>
-      <div class="step rp"><h4 style="margin-top:0">Report a problem on this trip</h4><p class="meta">Pick a stop and a problem. Only the category, the stop location and today's date are saved: no text, no name, no account.</p>
-      <label>Where <select id="rpPlace"></select></label><br><label>Problem <select id="rpCat"></select></label> <button type="button" id="rpGo">Add report</button><p id="rpMsg" class="meta" role="status"></p></div></section>`;
+      <button type="button" id="mkReport">Write a report I can send</button><div id="reportOut"></div></section>`;
   h += '<p class="meta after-run" hidden>Walks follow the City pedestrian network where possible; curbs, slopes and snow are not checked. Only fixed rules mark a limit. Not an official City or TTC assessment.</p>';
   return h;
 }
@@ -680,7 +679,6 @@ function render(d){
     $('pg3').querySelectorAll('.after-run').forEach(e => e.hidden = false); makeReport();
     $('reportOut').scrollIntoView({behavior: CALM ? 'auto' : 'smooth', block: 'start'}); $('repText').focus({preventScroll: true}); };
   $('askAgent').onclick = askAgent; $('mkReport').onclick = makeReport;
-  wireReport();
   $('out').querySelectorAll('.toggle button').forEach(b => b.onclick = () => {
     $('out').querySelectorAll('.toggle button').forEach(x => x.setAttribute('aria-pressed', x.dataset.v === b.dataset.v));
     mapView(b.dataset.v);
@@ -879,21 +877,6 @@ function evidenceHTML(ev){
   h += '<details><summary>How this was searched</summary><ol class="meta">' + ev.trace.map(t => `<li>${esc(t)}</li>`).join('') + '</ol></details>';
   return h + '</section>';
 }
-async function wireReport(){
-  if (!$('rpGo')) return;
-  const cats = await fetch('/api/report_categories').then(x => x.json());
-  if (!$('rpCat') || !S.stops) return;              // Start over was pressed while this was loading
-  $('rpCat').innerHTML = Object.entries(cats).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('');
-  const ids = S.stops.features.map(f => f.properties.id);
-  const places = [S.board, S.alight].map(id => S.stops.features[ids.indexOf(id)]);
-  $('rpPlace').innerHTML = places.map((f, i) => `<option value="${i}">${i ? 'Exit' : 'Boarding'} stop: ${esc(f.properties.name)}</option>`).join('');
-  $('rpGo').onclick = async () => {
-    const f = places[+$('rpPlace').value], [lon, lat] = f.geometry.coordinates;
-    const r = await fetch('/api/report', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({cat: $('rpCat').value, lat, lon, stop_id: f.properties.id})});
-    const d = await r.json();
-    $('rpMsg').textContent = r.ok ? `Saved: ${d.label} (${d.day}). Show the trip again to see it.` : d.error;
-  };
-}
 
 let AGENT = null;
 async function askAgent(){
@@ -996,7 +979,7 @@ function makeReport(){
   where.push('<li><strong>A stop, shelter or service problem:</strong> <a href="https://www.ttc.ca/customer-service">TTC Customer Service</a>.</li>');
   $('reportOut').innerHTML = `<div id="report"><p class="meta">Read and edit before sending. Nothing is sent by this tool.</p>
     <label for="repText">Your report</label><textarea id="repText" rows="20" style="width:100%;font:16px/1.55 'Atkinson Hyperlegible',sans-serif;padding:14px 16px;border:2px solid var(--ink);border-radius:12px;background:#fffaf0;color:var(--ink)">${esc(txt)}</textarea>
-    <p><button type="button" id="repCopy">Copy text</button> <button type="button" id="repMail">Open in email</button> <button type="button" id="repPrint">Print or save as PDF</button> <span id="repMsg" class="meta" role="status"></span></p>
+    <div class="rep-actions"><button type="button" id="repCopy">Copy text</button><button type="button" id="repMail">Open in email</button><button type="button" id="repPrint">Print or save as PDF</button></div><p id="repMsg" class="meta" role="status"></p>
     <h4>Where you could send it</h4><ul>${where.join('')}</ul></div>`;
   $('repCopy').onclick = async () => { try { await navigator.clipboard.writeText($('repText').value); $('repMsg').textContent = 'Copied.'; } catch { $('repText').select(); $('repMsg').textContent = 'Select all and copy.'; } };
   $('repMail').onclick = () => { location.href = `mailto:?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent($('repText').value)}`; };

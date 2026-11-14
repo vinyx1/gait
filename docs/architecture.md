@@ -14,9 +14,9 @@
 | R8 | Think about who the tool leaves out | Success criteria | riders with different needs; plain language; no JavaScript required; printable |
 | R9 | Test on two or three real agenda items | Success criteria | 11 real items, 5 decided/referred and 6 upcoming |
 | R10 | Municipal use without the team present | Brief | partly met: needs a Clerk feed (see readiness report) |
-| R11 | Make data limitations visible | Datasets | limits section on each page, README research log |
+| R11 | Make data limitations visible | Datasets | limits section on each page, `docs/research-notes.md` |
 | N1 | AI use must be explained and checked | Judging | `docs/ai-use-log.md`, tests in `tests/` |
-| N2 | Public, open data only | Rules | all inputs listed in the README and readiness report |
+| N2 | Public, open data only | Rules | all inputs listed in `docs/research-notes.md` and the readiness report |
 
 ## 2. Architecture
 
