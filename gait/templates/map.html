@@ -72,11 +72,12 @@
     .pin.a{background:#24140a}.pin.b{background:#5f6d22}.pin.on{background:#1f6f69}.pin.off{background:#4e3220}.pin.gone{background:#b5501b}.pin.was{background:#1f6f69;border-style:dashed}
     .layers{position:fixed;z-index:3;top:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px;padding:6px;border-radius:999px;background:var(--bg);
       box-shadow:0 1px 2px rgba(36,20,10,.18),0 8px 24px rgba(36,20,10,.2)}
-    .layers button{background:transparent;color:var(--ink);min-height:44px;font-size:16px;padding:0 16px;border-color:transparent}
+    .layers button{background:transparent;color:var(--ink);min-height:44px;font-size:16px;padding:0 16px;border-color:transparent;white-space:nowrap}
     .layers button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
     .layers .sw{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:8px;vertical-align:-2px;border:2px dashed #b5501b;background:rgba(181,80,27,.25)}
     .layers button[aria-pressed=true] .sw{border-color:var(--bg)}
     @media(max-width:899px){.layers{position:absolute;top:12px}}
+    @media(min-width:900px){.layers{left:calc(50% + 16rem)}}   /* centred over the map, beside the 31rem panel */
     .checks{list-style:none;margin:6px 0 14px;padding:0}
     .checks li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:7px 0;border-top:1px solid var(--line);margin:0;font-size:17px;line-height:1.4}
     .checks li:last-child{border-bottom:1px solid var(--line)}
@@ -127,7 +128,7 @@
     #go.pressing{transform:scale(.96);transition:transform .12s var(--ease)}
     #privacy{position:fixed;z-index:3;left:50%;bottom:16px;transform:translateX(-50%);max-width:min(44rem,calc(100vw - 2 * 31rem - 64px));margin:0;
       padding:8px 16px;border-radius:14px;background:var(--bg);color:var(--muted);font-size:14px;line-height:1.4;text-align:center;box-shadow:0 1px 2px rgba(36,20,10,.18),0 8px 24px rgba(36,20,10,.2)}
-    @media(max-width:1400px){ #privacy{max-width:calc(100vw - 26rem - 31rem - 64px)}}
+    @media(min-width:900px) and (max-width:1400px){ #privacy{left:auto;right:16px;bottom:44px;transform:none;text-align:left;max-width:min(36rem,calc(100vw - 31rem - 64px))}}
     @media(max-width:899px){ #privacy{position:static;transform:none;max-width:none;margin:12px}}
     /* left panel views: your own trip, then the examples behind two buttons, each with Back */
     .sec{margin:0;border-top:1px solid var(--line)}
